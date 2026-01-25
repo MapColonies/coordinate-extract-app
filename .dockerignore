@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+.gitignore
+.env
+.env.production
+README.md
+.github
+.vscode
+coverage
+*.log
+.DS_Store

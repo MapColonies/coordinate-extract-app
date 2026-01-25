@@ -1,0 +1,13 @@
+[template]
+src = "production.tmpl"
+dest = "public/env-config.js"
+keys = [
+  "/configuration/access/token/attribute/name",
+  "/configuration/access/token/injection/type",
+  "/configuration/public/url",
+  "/configuration/language",
+  "/configuration/map/center",
+  "/configuration/map/zoom",
+  "/configuration/base/maps",
+  "/configuration/csw/3d/url",
+]

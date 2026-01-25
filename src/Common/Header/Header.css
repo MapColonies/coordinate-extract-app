@@ -1,0 +1,4 @@
+.Header .Title {
+  text-align: center;
+  color: var(--mdc-theme-on-primary);
+}

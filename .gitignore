@@ -1,0 +1,53 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# confd
+confd/**
+!confd/*.js
+!confd/*.tmpl
+!confd/*.toml
+public/env-config.js
+public/[cC]esium
+public/ua-parser
+public/fonts/*
+!public/assets/scripts/
+!public/assets/pages/
+public/assets/img/*
+!public/assets/img/app
+!public/fonts/material-icons
+
+# Build artifacts
+build/
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db

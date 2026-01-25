@@ -1,0 +1,561 @@
+@font-face {
+  font-family: 'MC-icons';
+  src:  url('fonts/MC-icons.eot?lzbuky');
+  src:  url('fonts/MC-icons.eot?lzbuky#iefix') format('embedded-opentype'),
+    url('fonts/MC-icons.ttf?lzbuky') format('truetype'),
+    url('fonts/MC-icons.woff?lzbuky') format('woff'),
+    url('fonts/MC-icons.svg?lzbuky#MC-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="mc-icon-"], [class*=" mc-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'MC-icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mc-icon-Arrow-Left:before {
+  content: "\e919";
+}
+.mc-icon-Arrow-Right:before {
+  content: "\e91a";
+}
+.mc-icon-Move-Row:before {
+  content: "\e91b";
+}
+.mc-icon-AppIcon-Colored .path1:before {
+  content: "\e902";
+  color: rgb(102, 160, 255);
+}
+.mc-icon-AppIcon-Colored .path2:before {
+  content: "\e934";
+  margin-left: -1em;
+  color: rgb(61, 175, 118);
+}
+.mc-icon-AppIcon-Colored .path3:before {
+  content: "\e938";
+  margin-left: -1em;
+  color: rgb(172, 101, 64);
+}
+.mc-icon-AppIcon-Colored .path4:before {
+  content: "\e93b";
+  margin-left: -1em;
+  color: rgb(255, 234, 128);
+}
+.mc-icon-AppIcon-Colored .path5:before {
+  content: "\e93c";
+  margin-left: -1em;
+  color: rgb(85, 180, 132);
+}
+.mc-icon-AppIcon-Colored .path6:before {
+  content: "\e93d";
+  margin-left: -1em;
+  color: rgb(191, 115, 75);
+}
+.mc-icon-AppIcon-Colored .path7:before {
+  content: "\e93e";
+  margin-left: -1em;
+  color: rgb(112, 165, 252);
+}
+.mc-icon-AppIcon:before {
+  content: "\e92e";
+}
+.mc-icon-Status-Approves:before {
+  content: "\e90c";
+}
+.mc-icon-Status-Downloads:before {
+  content: "\e90f";
+}
+.mc-icon-Status-Messages:before {
+  content: "\e910";
+}
+.mc-icon-Status-Warnings:before {
+  content: "\e918";
+}
+.mc-icon-Catalog:before {
+  content: "\e903";
+}
+.mc-icon-Bests:before {
+  content: "\e904";
+}
+.mc-icon-Search-History:before {
+  content: "\e905";
+}
+.mc-icon-Add:before {
+  content: "\e986";
+}
+.mc-icon-Plus:before {
+  content: "\e91d";
+}
+.mc-icon-Save:before {
+  content: "\e90a";
+}
+.mc-icon-Delete:before {
+  content: "\e913";
+}
+.mc-icon-Edit:before {
+  content: "\e91e";
+}
+.mc-icon-Edit1:before {
+  content: "\e93f";
+}
+.mc-icon-Update:before {
+  content: "\e940";
+}
+.mc-icon-Refresh:before {
+  content: "\e90b";
+}
+.mc-icon-Copy:before {
+  content: "\e91f";
+}
+.mc-icon-Copy1:before {
+  content: "\e996";
+}
+.mc-icon-Export-Left:before {
+  content: "\e997";
+}
+.mc-icon-Export:before {
+  content: "\e998";
+}
+.mc-icon-Job-Management:before {
+  content: "\e91c";
+}
+.mc-icon-Info:before {
+  content: "\e94a";
+}
+.mc-icon-System-Info:before {
+  content: "\e97f";
+}
+.mc-icon-Tools:before {
+  content: "\e980";
+}
+.mc-icon-Geojson_File:before {
+  content: "\e981";
+}
+.mc-icon-Fly-to:before {
+  content: "\e941";
+}
+.mc-icon-Save-Metadata:before {
+  content: "\e942";
+}
+.mc-icon-LinkManagement:before {
+  content: "\e943";
+}
+.mc-icon-Show:before {
+  content: "\e920";
+}
+.mc-icon-Hide:before {
+  content: "\e921";
+}
+.mc-icon-Publish:before {
+  content: "\e939";
+}
+.mc-icon-Unpublish:before {
+  content: "\e93a";
+}
+.mc-icon-Filter:before {
+  content: "\e900";
+}
+.mc-icon-Filter-On:before {
+  content: "\e901";
+}
+.mc-icon-Help:before {
+  content: "\e937";
+}
+.mc-icon-Ok:before {
+  content: "\e922";
+}
+.mc-icon-Warning:before {
+  content: "\e923";
+}
+.mc-icon-Search:before {
+  content: "\e911";
+}
+.mc-icon-POI:before {
+  content: "\e906";
+}
+.mc-icon-Coordinates:before {
+  content: "\e924";
+}
+.mc-icon-Ellipse:before {
+  content: "\e907";
+}
+.mc-icon-Rectangle:before {
+  content: "\e908";
+}
+.mc-icon-Polygon:before {
+  content: "\e909";
+}
+.mc-icon-Location:before {
+  content: "\e944";
+}
+.mc-icon-Location-Full:before {
+  content: "\e945";
+}
+.mc-icon-Height:before {
+  content: "\e946";
+}
+.mc-icon-Height-DTM:before {
+  content: "\e947";
+}
+.mc-icon-Height-DSM:before {
+  content: "\e948";
+}
+.mc-icon-Buildings-Full:before {
+  content: "\e949";
+}
+.mc-icon-Buildings:before {
+  content: "\e982";
+}
+.mc-icon-Roads:before {
+  content: "\e94b";
+}
+.mc-icon-Map-Heatmap:before {
+  content: "\e94c";
+}
+.mc-icon-Predefined-AOIs:before {
+  content: "\e987";
+}
+.mc-icon-POI1:before {
+  content: "\e988";
+}
+.mc-icon-Multi-POI-2:before {
+  content: "\e989";
+}
+.mc-icon-Multi-POI-3:before {
+  content: "\e98a";
+}
+.mc-icon-Earth-full:before {
+  content: "\e958";
+}
+.mc-icon-Earth:before {
+  content: "\e98b";
+}
+.mc-icon-Map-Vector:before {
+  content: "\e925";
+}
+.mc-icon-Map-3D:before {
+  content: "\e926";
+}
+.mc-icon-Map-DTM:before {
+  content: "\e927";
+}
+.mc-icon-Map-DSM:before {
+  content: "\e92f";
+}
+.mc-icon-Map-Orthophoto:before {
+  content: "\e928";
+}
+.mc-icon-Map-Raster:before {
+  content: "\e929";
+}
+.mc-icon-Map-RasterAid:before {
+  content: "\e930";
+}
+.mc-icon-Map-Qmesh:before {
+  content: "\e933";
+}
+.mc-icon-Map-QMesh-DTM:before {
+  content: "\e97d";
+}
+.mc-icon-Map-QMesh-DSM:before {
+  content: "\e97e";
+}
+.mc-icon-Map-Best-Orthophoto:before {
+  content: "\e92b";
+}
+.mc-icon-Map-Best-Raster:before {
+  content: "\e92a";
+}
+.mc-icon-Map-Best-RasterAid:before {
+  content: "\e931";
+}
+.mc-icon-Map-Best-Qmash:before {
+  content: "\e932";
+}
+.mc-icon-Map-Slopes:before {
+  content: "\e94e";
+}
+.mc-icon-Map-HillShade:before {
+  content: "\e94d";
+}
+.mc-icon-Map-Contour:before {
+  content: "\e94f";
+}
+.mc-icon-Map-Heatmap1:before {
+  content: "\e950";
+}
+.mc-icon-Map-Heatmap-Color .path1:before {
+  content: "\e951";
+  color: rgb(175, 191, 218);
+  opacity: 0.4;
+}
+.mc-icon-Map-Heatmap-Color .path2:before {
+  content: "\e952";
+  margin-left: -1.0419921875em;
+  color: rgb(175, 191, 218);
+  opacity: 0.64;
+}
+.mc-icon-Map-Heatmap-Color .path3:before {
+  content: "\e953";
+  margin-left: -1.0419921875em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Map-Heatmap-Color .path4:before {
+  content: "\e954";
+  margin-left: -1.0419921875em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Close:before {
+  content: "\e90d";
+}
+.mc-icon-Arrows-Left:before {
+  content: "\e90e";
+}
+.mc-icon-Arrows-Right:before {
+  content: "\e912";
+}
+.mc-icon-Back:before {
+  content: "\e92c";
+}
+.mc-icon-Next:before {
+  content: "\e92d";
+}
+.mc-icon-Move-Up:before {
+  content: "\e956";
+}
+.mc-icon-Move-Down:before {
+  content: "\e957";
+}
+.mc-icon-Upload:before {
+  content: "\e983";
+}
+.mc-icon-Download:before {
+  content: "\e984";
+}
+.mc-icon-More:before {
+  content: "\e985";
+}
+.mc-icon-Index:before {
+  content: "\e935";
+}
+.mc-icon-Map-Settings:before {
+  content: "\e936";
+}
+.mc-icon-Expand-Panel:before {
+  content: "\e914";
+}
+.mc-icon-Collapce-Panel:before {
+  content: "\e915";
+}
+.mc-icon-Table-Fill-Off:before {
+  content: "\e916";
+}
+.mc-icon-Table-Fill-On:before {
+  content: "\e917";
+}
+.mc-icon-Job-Resume:before {
+  content: "\e959";
+}
+.mc-icon-Job-Abort:before {
+  content: "\e95a";
+}
+.mc-icon-Job-Resume-Green .path1:before {
+  content: "\e95b";
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Job-Resume-Green .path2:before {
+  content: "\e95c";
+  margin-left: -1em;
+  color: rgb(0, 180, 90);
+}
+.mc-icon-Job-Abort-Red .path1:before {
+  content: "\e95d";
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Job-Abort-Red .path2:before {
+  content: "\e95e";
+  margin-left: -1em;
+  color: rgb(204, 22, 22);
+}
+.mc-icon-Priority-Highest-Monochrome:before {
+  content: "\e955";
+}
+.mc-icon-Priority-High-Monochrome:before {
+  content: "\e99b";
+}
+.mc-icon-Priority-Normal-Monochrome:before {
+  content: "\e99c";
+}
+.mc-icon-Priority-Low-Monochrome:before {
+  content: "\e99d";
+}
+.mc-icon-Priority-Lowest-Monochrome:before {
+  content: "\e99e";
+}
+.mc-icon-Priority-Highest .path1:before {
+  content: "\e95f";
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Highest .path2:before {
+  content: "\e960";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Highest .path3:before {
+  content: "\e961";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Highest .path4:before {
+  content: "\e962";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Highest .path5:before {
+  content: "\e963";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Highest .path6:before {
+  content: "\e964";
+  margin-left: -1em;
+  color: rgb(204, 22, 22);
+}
+.mc-icon-Priority-High .path1:before {
+  content: "\e965";
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-High .path2:before {
+  content: "\e966";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-High .path3:before {
+  content: "\e967";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-High .path4:before {
+  content: "\e968";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-High .path5:before {
+  content: "\e969";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-High .path6:before {
+  content: "\e96a";
+  margin-left: -1em;
+  color: rgb(254, 104, 20);
+}
+.mc-icon-Priority-Normal .path1:before {
+  content: "\e96b";
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Normal .path2:before {
+  content: "\e96c";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Normal .path3:before {
+  content: "\e96d";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Normal .path4:before {
+  content: "\e96e";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Normal .path5:before {
+  content: "\e96f";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Normal .path6:before {
+  content: "\e970";
+  margin-left: -1em;
+  color: rgb(0, 180, 90);
+}
+.mc-icon-Priority-Low .path1:before {
+  content: "\e971";
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Low .path2:before {
+  content: "\e972";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Low .path3:before {
+  content: "\e973";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Low .path4:before {
+  content: "\e974";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Low .path5:before {
+  content: "\e975";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Low .path6:before {
+  content: "\e976";
+  margin-left: -1em;
+  color: rgb(255, 185, 50);
+}
+.mc-icon-Priority-Lowest .path1:before {
+  content: "\e977";
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Lowest .path2:before {
+  content: "\e978";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Lowest .path3:before {
+  content: "\e979";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Lowest .path4:before {
+  content: "\e97a";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+  opacity: 0.3;
+}
+.mc-icon-Priority-Lowest .path5:before {
+  content: "\e97b";
+  margin-left: -1em;
+  color: rgb(175, 191, 218);
+}
+.mc-icon-Priority-Lowest .path6:before {
+  content: "\e97c";
+  margin-left: -1em;
+  color: rgb(0, 181, 238);
+}

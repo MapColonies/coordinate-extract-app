@@ -1,0 +1,17 @@
+.PageNotFound {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  color: var(--mdc-theme-on-primary);
+}
+
+.PageNotFound .Description {
+  font-size: 24px;
+}
+
+.PageNotFound .Title {
+  text-align: center;
+  font-size: 120px;
+  font-weight: bold;
+  margin-top: 40px;
+}
