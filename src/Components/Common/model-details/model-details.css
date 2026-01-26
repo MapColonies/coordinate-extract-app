@@ -1,0 +1,31 @@
+.detailsContainer {
+  height: 200px;
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #020817;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  column-gap: 200px;
+  row-gap: 12px;
+}
+
+.metadataRow {
+  width: 400px;
+}
+
+.metadataLabel {
+  text-align: right;
+  font-weight: bold;
+  padding-right: 10px;
+  opacity: 0.7;
+}
+
+.metadataRow span {
+  word-break: break-word;
+}
+
+.metadataValue {
+  text-overflow: ellipsis;
+}
