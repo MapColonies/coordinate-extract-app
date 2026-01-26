@@ -4,7 +4,7 @@
 
 ### Features
 
-* Created comprehensive MapColonies app boilerplate with:
+* Created from MapColonies app boilerplate with:
   * React + TypeScript setup
   * React Router for client-side routing
   * i18n support for Hebrew and English

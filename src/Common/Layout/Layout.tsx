@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { RMWCProvider, ThemeProvider as RMWCThemeProvider, Themes } from '@map-colonies/react-core';
+import { useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
+import { RMWCProvider, ThemeProvider as RMWCThemeProvider, Themes } from '@map-colonies/react-core';
 import version from '../../../package.json';
 import { useI18n } from '../../i18n/I18nProvider';
 import Footer from '../Footer/Footer';
@@ -11,9 +12,10 @@ import './Layout.css';
 
 const Layout: React.FC = (): JSX.Element => {
   const { locale } = useI18n();
+  const intl = useIntl();
 
   useEffect(() => {
-    document.title = `MapColonies App - v${version.version}`;
+    document.title = intl.formatMessage({ id: 'app.title' }, { version: version.version });
   }, []);
 
   const camelize = (value: string): string => {

@@ -1,6 +1,6 @@
-# MapColonies App Boilerplate
+# Coordinate Extract App
 
-A comprehensive boilerplate template for MapColonies applications built with React, TypeScript and i18n support.
+Based on MapColonies boilerplate template for applications built with React, TypeScript and i18n support.
 
 ## Features
 
@@ -23,8 +23,8 @@ A comprehensive boilerplate template for MapColonies applications built with Rea
 
 ```bash
 # Clone the repository
-git clone https://github.com/MapColonies/app-boilerplate.git
-cd app-boilerplate
+git clone https://github.com/MapColonies/coordinate-extract-app.git
+cd coordinate-extract-app
 
 # Install dependencies
 yarn
@@ -62,12 +62,12 @@ yarn prettier:fix
 
 ```bash
 # Build Docker image
-docker build -t app-boilerplate .
+docker build -t coordinate-extract-app .
 
 # Run container
 docker run -p 3000:8080 \
   -e CONFIGURATION_LANGUAGE=en \
-  app-boilerplate
+  coordinate-extract-app
 ```
 
 ## Kubernetes Deployment
@@ -76,16 +76,16 @@ docker run -p 3000:8080 \
 
 ```bash
 # Install the Helm chart
-helm install app-boilerplate ./helm \
-  --set image.repository=your-registry/app-boilerplate \
+helm install coordinate-extract-app ./helm \
+  --set image.repository=your-registry/coordinate-extract-app \
   --set image.tag=latest \
   --set env.language=en
 
 # Upgrade the deployment
-helm upgrade app-boilerplate ./helm
+helm upgrade coordinate-extract-app ./helm
 
 # Uninstall
-helm uninstall app-boilerplate
+helm uninstall coordinate-extract-app
 ```
 
 ## Internationalization
@@ -102,7 +102,7 @@ import { useIntl } from 'react-intl';
 
 const Component = () => {
   const intl = useIntl();
-  return <h1>{intl.formatMessage({ id: 'home.title' })}</h1>;
+  return <h1>{intl.formatMessage({ id: 'app.title' })}</h1>;
 };
 ```
 
@@ -141,14 +141,6 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 - `fix:` - Bug fixes
 - `docs:` - Documentation changes
 - `chore:` - Maintenance tasks
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes using conventional commits
-4. Push to the branch
-5. Create a Pull Request
 
 ## License
 

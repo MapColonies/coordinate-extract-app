@@ -1,10 +1,10 @@
 {
-  "name": "app-boilerplate",
+  "name": "coordinate-extract-app",
   "version": "1.0.0",
-  "description": "MapColonies React TypeScript boilerplate with i18n, routing, and Helm",
+  "description": "Based on MapColonies React TypeScript boilerplate",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MapColonies/app-boilerplate.git"
+    "url": "https://github.com/MapColonies/coordinate-extract-app.git"
   },
   "license": "MIT",
   "husky": {
@@ -33,8 +33,8 @@
     "copyassets:components": "copyfiles -u 4 \"./node_modules/@map-colonies/react-components/dist/assets/**/*\" \"./public\"",
     "helm-update": "helm dependency update helm",
     "helm-assets": "npm run helm-update && tar -xzvf ./helm/charts/helm-common*.tgz --strip-components=1 helm-common/schemas",
-    "helm-install": "npm run helm-update && helm install -f 'helm/global.yaml' -f 'helm/values.yaml' app-boilerplate helm",
-    "helm-uninstall": "helm uninstall app-boilerplate"
+    "helm-install": "npm run helm-update && helm install -f 'helm/global.yaml' -f 'helm/values.yaml' coordinate-extract-app helm",
+    "helm-uninstall": "helm uninstall coordinate-extract-app"
   },
   "jest": {
     "transformIgnorePatterns": [

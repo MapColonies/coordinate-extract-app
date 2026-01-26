@@ -1,6 +1,6 @@
 {
-  "app.title": "MapColonies App",
-  "app.welcome": "Welcome to the MapColonies App Boilerplate!",
+  "app.title": "Coordinate Extract App",
+  "app.welcome": "Welcome to the Coordinate Extract App!",
 
   "footer.back": "Back",
   "footer.next": "Next"

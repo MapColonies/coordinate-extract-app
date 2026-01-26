@@ -18,7 +18,7 @@ do
 done
 
 if [ $ENTERYPOINT -eq 1 ]; then
-	docker run --rm -it --entrypoint /bin/sh -p 3000:8080 --name app-boilerplate-container app-boilerplate:latest
+	docker run --rm -it --entrypoint /bin/sh -p 3000:8080 --name coordinate-extract-app-container coordinate-extract-app:latest
 else
-	docker run --rm -p 3000:8080 --name app-boilerplate-container app-boilerplate:latest &
+	docker run --rm -p 3000:8080 --name coordinate-extract-app-container coordinate-extract-app:latest &
 fi

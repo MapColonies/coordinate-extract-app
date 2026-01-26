@@ -6,7 +6,7 @@ global:
     - my-registry
   deploymentFlavor: openshift
   tlsCertificates:
-    - hostname: app.mapcolonies.net
+    - hostname: coordinate-extract-app.mapcolonies.net
       certificate:
       key:
       caCertificate:

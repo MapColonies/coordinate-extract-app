@@ -2,13 +2,13 @@ version: '3'
 
 services:
 
-  app-boilerplate-service: 
+  coordinate-extract-app-service: 
 
-    image: app-boilerplate
+    image: coordinate-extract-app:latest
 
     build: .
 
-    container_name: app-boilerplate-container
+    container_name: coordinate-extract-app-container
 
     ports:
       - 3000:8080

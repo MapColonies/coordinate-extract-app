@@ -40,7 +40,7 @@ configValues:
     enabled: false
   # ----------- containers ------------
   image:
-    repository: app-boilerplate
+    repository: coordinate-extract-app
     tag: v1.0.0
     pullPolicy: Always
     debug: false
