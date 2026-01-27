@@ -5,6 +5,8 @@
   "title.tree": "Catalog Tree",
   "title.map": "Catalog Map",
 
+  "details.placeholder": "Select a catalog item to view its footprint and details",
+
   "footer.back": "Back",
   "footer.next": "Next"
 }

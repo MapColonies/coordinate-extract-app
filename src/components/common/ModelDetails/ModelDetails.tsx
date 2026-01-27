@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl';
 import { isEmpty } from 'lodash';
 import { Box } from '@map-colonies/react-components';
+import { Typography } from '@map-colonies/react-core';
 import { AutoDirectionBox } from '../utils/AutoDirectionBox';
 
 import './ModelDetails.css';
@@ -15,54 +17,48 @@ export const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
     const isObject =
       typeof value === "object" &&
       value !== null;
-    // !Array.isArray(value);
 
     const isArray = Array.isArray(value);
 
     return (
-      <>
-        <Box
-          className="metadataRow"
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr", // שני עמודות
-            // gap: "8px",
-            padding: "8px 12px",
-            // borderBottom: "1px solid #eee",
-          }}
-        >
-          <AutoDirectionBox className="metadataLabel">{label}</AutoDirectionBox>
-
-          {!isObject ? (
-            // <AutoDirectionBox className="metadataValue">
-            <span>
-              {String(value)}
-            </span>
-            // </AutoDirectionBox>
-          ) : (
-            isObject && !isArray ?
-              // <span style={{ color: "#888" }}>Object</span>
-              Object.entries(value as Record<string, unknown>).map(
-                ([childKey, childValue]) => (
-                  <MetadataRow
-                    key={childKey}
-                    label={childKey}
-                    value={childValue}
-                  />
-                )
-              ) :
-              <>
-                {value.join(', ')}
-              </>
-          )
-          }
-        </Box>
-      </>
+      <Box
+        className="metadataRow"
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr", // שני עמודות
+          // gap: "8px",
+          padding: "8px 12px",
+          // borderBottom: "1px solid #eee",
+        }}
+      >
+        <AutoDirectionBox className="metadataLabel">{label}</AutoDirectionBox>
+        {
+          !isObject ? (
+              <Typography tag="span">
+                {String(value)}
+              </Typography>
+            ) : (
+              isObject && !isArray ?
+                Object.entries(value as Record<string, unknown>).map(
+                  ([childKey, childValue]) => (
+                    <MetadataRow
+                      key={childKey}
+                      label={childKey}
+                      value={childValue}
+                    />
+                  )
+                ) :
+                <>
+                  {value.join(', ')}
+                </>
+            )
+        }
+      </Box>
     );
   };
 
   if (isEmpty(props.metadata)) {
-    return <Box className="detailsPlaceholder">Select a catalog item to view its footprint and details</Box>;
+    return <Box className="detailsPlaceholder"><FormattedMessage id="details.placeholder" /></Box>;
   }
 
   return (
