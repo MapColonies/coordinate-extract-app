@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import Layout from './Common/Layout/Layout';
+import Layout from './common/Layout/Layout';
 import { I18nProvider } from './i18n/I18nProvider';
 import reportWebVitals from './reportWebVitals';
-import appConfig from './Utils/Config';
+import appConfig from './utils/Config';
 
 import './index.css';
 

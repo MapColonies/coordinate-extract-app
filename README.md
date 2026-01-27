@@ -16,7 +16,7 @@ Based on MapColonies boilerplate template for applications built with React, Typ
 
 ### Prerequisites
 
-- Node.js 16
+- Node.js 20
 - yarn
 
 ### Installation

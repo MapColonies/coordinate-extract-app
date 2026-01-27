@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import { IntlProvider } from 'react-intl';
-import appConfig from '../Utils/Config';
+import appConfig from '../utils/Config';
 import enMessages from './locales/en.json';
 import heMessages from './locales/he.json';
 
