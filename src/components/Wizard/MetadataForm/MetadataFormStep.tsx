@@ -155,7 +155,7 @@ export const MetadataFormStep: React.FC<WizardStepProps> = ({ onPrevious, data }
           type="submit"
           className="btn btn-primary"
         >
-          Save Metadata
+          Next
         </button>
       </Box>
     </Box>
