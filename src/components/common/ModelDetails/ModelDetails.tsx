@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { Box } from '@map-colonies/react-components';
 import { AutoDirectionBox } from '../utils/AutoDirectionBox';
 
@@ -59,6 +60,10 @@ export const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
       </>
     );
   };
+
+  if (isEmpty(props.metadata)) {
+    return <Box className="detailsPlaceholder">Select a catalog item to view its footprint and details</Box>;
+  }
 
   return (
     <Box className="detailsContainer">

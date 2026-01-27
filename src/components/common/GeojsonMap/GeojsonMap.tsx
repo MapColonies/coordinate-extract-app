@@ -85,10 +85,6 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
   }, [geometry]);
 
   const renderFootprintInfo = () => {
-    // if (!geometry) {
-    //   return <Box className="map-placeholder">Select a catalog item to view its footprint and details</Box>;
-    // }
-
     return (
       <Map>
         {previewBaseMap}
@@ -123,7 +119,7 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
   };
 
   return (
-    <Box className="geojson-map-component" style={style}>
+    <Box className="geojsonMap" style={style}>
       {renderFootprintInfo()}
     </Box>
   );

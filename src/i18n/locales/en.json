@@ -2,6 +2,9 @@
   "app.title": "Coordinate Extract App",
   "app.welcome": "Welcome to the Coordinate Extract App!",
 
+  "title.tree": "Catalog Tree",
+  "title.map": "Catalog Map",
+
   "footer.back": "Back",
   "footer.next": "Next"
 }
