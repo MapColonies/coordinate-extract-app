@@ -6,8 +6,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getDescendantCount, getDepth } from 'react-sortable-tree';
 import { Tooltip } from '@map-colonies/react-core';
+
 import './node-content-renderer.css';
-// import TooltippedValue from '../../form/tooltipped.value';
 
 function isDescendant(older, younger) {
   return (
