@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@map-colonies/react-components';
-import { WizardStepProps, CatalogTreeNode } from '../Wizard.types';
+import { WizardStepProps } from '../Wizard.types';
 import { GeojsonMap } from '../../common/GeojsonMap/GeojsonMap';
 
 import './MetadataFormStep.css';
 
-export const MetadataFormStep: React.FC<WizardStepProps> = ({ onPrevious, data }) => {
-  const selectedItem = data as CatalogTreeNode;
+export const MetadataFormStep: React.FC<WizardStepProps> = ({ selectedItem }) => {
   const [formData, setFormData] = useState({
     title: '',
     type: '',
@@ -142,21 +141,6 @@ export const MetadataFormStep: React.FC<WizardStepProps> = ({ onPrevious, data }
             />
           </Box>
         </form>
-      </Box>
-      <Box className="form-actions">
-        <button
-          type="button"
-          onClick={onPrevious}
-          className="btn btn-secondary"
-        >
-          Previous
-        </button>
-        <button
-          type="submit"
-          className="btn btn-primary"
-        >
-          Next
-        </button>
       </Box>
     </Box>
   );

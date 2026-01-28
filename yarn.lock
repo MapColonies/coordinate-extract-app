@@ -14355,6 +14355,18 @@ react-fast-compare@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.2.tgz#929a97a532304ce9fee4bcae44234f1ce2c21d49"
   integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
 
+react-form-wizard-component@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/react-form-wizard-component/-/react-form-wizard-component-0.1.9.tgz#35d403e4cf199372b5b65b222e8efc2eea1a2af0"
+  integrity sha512-JYU1UAMv5llvMOet0gdJfMaYrnJ0rxQYOiL8wE1t1bkIIm4rf0iZ54P+cuTI/gPqvzbS4MSUdBF6M6JDq5JVeQ==
+
+react-form-wizard-component@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/react-form-wizard-component/-/react-form-wizard-component-0.2.7.tgz#64e659b4f248415491d27dc6e4f06bed927b940d"
+  integrity sha512-MWDK5RdkieqCY/mExPlg7vcwYZ0caM2hBdR+7o3LjgjPKGrPiZN8uk1LL/Ej0UYx951IYPBQmtH1/+5YoNNgQA==
+  dependencies:
+    react-form-wizard-component "^0.1.9"
+
 react-intl@5.7.1:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-5.7.1.tgz#d3599285ca5eab68620cdd14fbc8c09a264a12b2"

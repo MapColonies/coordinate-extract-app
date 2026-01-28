@@ -94,7 +94,7 @@ const Layout: React.FC = (): JSX.Element => {
           </main>
 
           <footer>
-            <Footer />
+            {/* <Footer /> */}
           </footer>
 
         </Box>

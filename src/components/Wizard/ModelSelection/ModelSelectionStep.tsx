@@ -10,14 +10,7 @@ import { WizardStepProps, CatalogTreeNode } from '../Wizard.types';
 
 import './ModelSelectionStep.css';
 
-export const CatalogTreeStep: React.FC<WizardStepProps> = ({ onNext }) => {
-  const [selectedNode, setSelectedNode] = useState<CatalogTreeNode | null>();
-
-  const handleNext = () => {
-    if (selectedNode && onNext) {
-      onNext(selectedNode);
-    }
-  };
+export const CatalogTreeStep: React.FC<WizardStepProps> = ({ selectedItem, setSelectedItem }) => {
 
   const treeTheme = {
     "--rst-selected-background-color": '#f8fafc33',
@@ -28,7 +21,7 @@ export const CatalogTreeStep: React.FC<WizardStepProps> = ({ onNext }) => {
   };
 
   //@ts-ignore
-  const { footprint, links, ...rest } = selectedNode?.metadata || {};
+  const { footprint, links, ...rest } = selectedItem?.metadata || {};
 
   return (
     <Box id='modelSelection'>
@@ -40,7 +33,7 @@ export const CatalogTreeStep: React.FC<WizardStepProps> = ({ onNext }) => {
           <Box style={treeTheme as React.CSSProperties} className="treeContent">
             <CatalogTree
               treeData={mockCatalogData as unknown as CatalogTreeNode[]}
-              onSelectedNode={(node) => setSelectedNode(node)}
+              onSelectedNode={(node) => setSelectedItem(node)}
             />
           </Box>
         </Box>
@@ -49,29 +42,12 @@ export const CatalogTreeStep: React.FC<WizardStepProps> = ({ onNext }) => {
             <FormattedMessage id="title.map"/>
           </Typography>
           <GeojsonMap
-            geometry={selectedNode?.metadata?.footprint}
+            geometry={selectedItem?.metadata?.footprint}
             style={{ width: '100%', height: '100%' }}
           />
         </Box>
       </Box>
       <ModelDetails metadata={rest} />
-
-      <Box className="stepActions">
-        <button
-          className="btn btn-primary"
-          onClick={handleNext}
-          disabled={!selectedNode}
-        >
-          Next: Edit Metadata
-        </button>
-
-        {
-          selectedNode && (
-          <Box>
-            Selected: {selectedNode.title}
-          </Box>
-        )}
-      </Box>
     </Box>
   );
 };

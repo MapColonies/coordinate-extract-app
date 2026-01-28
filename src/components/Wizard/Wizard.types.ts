@@ -19,7 +19,6 @@ export interface CatalogTreeNode extends TreeItem {
 }
 
 export interface WizardStepProps {
-  onNext?: (data?: CatalogTreeNode) => void;
-  onPrevious?: () => void;
-  data?: CatalogTreeNode;
+  selectedItem: CatalogTreeNode | null;
+  setSelectedItem: (item: CatalogTreeNode | null) => void;
 }

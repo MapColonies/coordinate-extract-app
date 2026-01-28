@@ -1,63 +1,28 @@
-.wizard-container {
+#wizardWrapper {
+  width: 1100px;
+  height: 800px;
+  margin: 0 auto;
+  /* background: #fafafa; */
+  border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  color: white;
 }
 
-.wizard-header {
-  padding: 20px;
-  border-bottom: 1px solid #e0e0e0;
+body[dir='rtl'] .wizard-card-footer.clearfix .wizard-footer-right {
+  float: left;
 }
 
-.wizard-steps {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
+body[dir='rtl'] .wizard-card-footer.clearfix .wizard-footer-left {
+  float: right;
 }
 
-.wizard-step {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #999;
-  font-weight: 500;
+.wizard-disabled-next .wizard-footer-right button {
+  background-color: rgba(33, 150, 243, 0.4);
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
-.wizard-step.active {
-  color: #1976d2;
-}
-
-.wizard-step.completed {
-  color: #4caf50;
-}
-
-.step-number {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #e0e0e0;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.wizard-step.active .step-number {
-  background-color: #1976d2;
-}
-
-.wizard-step.completed .step-number {
-  background-color: #4caf50;
-}
-
-.step-title {
-  font-size: 14px;
-}
-
-.wizard-content {
-  flex: 1;
-  overflow: hidden;
+.react-form-wizard .wizard-tab-content {
+  text-align: unset;
 }
