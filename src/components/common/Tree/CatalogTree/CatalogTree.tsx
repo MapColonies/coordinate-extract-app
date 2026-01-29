@@ -8,7 +8,7 @@ import { useTree } from './tree.hook';
 
 interface CatalogTreeProps extends ReactSortableTreeProps {
   treeData: CatalogTreeNode[];
-  onSelectedNode: (selectedNode: CatalogTreeNode | null) => void;
+  onSelectedNode: (selectedNode: CatalogTreeNode | null, updatedTreeData: CatalogTreeNode[]) => void;
 }
 
 export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props) => {
@@ -23,8 +23,12 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
   const { locale } = useI18n();
 
   useEffect(() => {
-    props.onSelectedNode(selectedNode);
+    props.onSelectedNode(selectedNode, treeData);
   }, [selectedNode]);
+
+  useEffect(() => {
+    setTreeData(props.treeData);
+  }, [props.treeData])
 
   return (
     <SortableTree

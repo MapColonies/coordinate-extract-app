@@ -10,13 +10,13 @@ import './BaseStep.css';
 
 
 interface BaseStepProps {
-  data: CatalogTreeNode | null;
+  metadata?: Metadata;
   titleMap?: string;
   title?: string;
 };
 
-export const BaseStep: React.FC<PropsWithChildren<BaseStepProps>> = ({ children, data, title, titleMap }) => {
-  const { footprint, links, ...rest } = (data?.metadata ?? {}) as Metadata;
+export const BaseStep: React.FC<PropsWithChildren<BaseStepProps>> = ({ children, metadata, title, titleMap }) => {
+  const { footprint, links, ...rest } = (metadata ?? {}) as Metadata;
 
   return (
     <Box id='baseStep'>
@@ -41,7 +41,7 @@ export const BaseStep: React.FC<PropsWithChildren<BaseStepProps>> = ({ children,
             </Typography>
           }
           <GeojsonMap
-            geometry={data?.metadata?.footprint}
+            geometry={metadata?.footprint}
             style={{ width: '100%', height: '100%' }}
           />
         </Box>

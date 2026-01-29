@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
@@ -10,15 +10,36 @@ import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelectionStep.css';
 
-export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({ selectedItem, setSelectedItem, setIsNextBtnDisabled }) => {
+export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
+  catalogTreeData,
+  setCatalogTreeData,
+  selectedItem,
+  setSelectedItem,
+  setIsNextBtnDisabled
+}) => {
 
   useEffect(() => {
-    setIsNextBtnDisabled(true);
+    if (!selectedItem) {
+      setIsNextBtnDisabled(true);
+    } else {
+      setIsNextBtnDisabled(false);
+    }
   }, []);
 
-  const handleSelectedItem = (node: CatalogTreeNode | null) => {
-    setSelectedItem?.(node);
+  useEffect(() => {
+    if (!catalogTreeData) {
+      setTimeout(() => {
+        setCatalogTreeData(mockCatalogData as unknown as CatalogTreeNode[]);
+      }, 500);
+    }
+  }, []);
+
+  const handleSelectedItem = (node: CatalogTreeNode | null, updatedTreeData: CatalogTreeNode[]) => {
+    if (updatedTreeData) {
+      setCatalogTreeData(updatedTreeData);
+    }
     if (node) {
+      setSelectedItem?.(node);
       setIsNextBtnDisabled(false);
     } else {
       setIsNextBtnDisabled(true);
@@ -45,7 +66,7 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({ selectedIte
           </Box>
           <Box style={treeTheme as React.CSSProperties} className="treeContent">
             <CatalogTree
-              treeData={mockCatalogData as unknown as CatalogTreeNode[]}
+              treeData={catalogTreeData ?? {} as CatalogTreeNode[]}
               onSelectedNode={handleSelectedItem}
             />
           </Box>

@@ -7,6 +7,7 @@ export const mockCatalogData = [
       {
         "subtitle": "kuku",
         "title": "ella",
+        "isSelected": false,
         "metadata": {
           "__typename": "Layer3DRecord",
           "type": "RECORD_3D",
@@ -88,8 +89,7 @@ export const mockCatalogData = [
           ],
           "footprintShown": false,
           "order": null,
-          "layerImageShown": false,
-          "isSelected": false
+          "layerImageShown": false
         }
       },
       {
@@ -190,6 +190,7 @@ export const mockCatalogData = [
       {
         "subtitle": "kuku",
         "title": "laya",
+        "isSelected": false,
         "metadata": {
 
           "__typename": "LayerDemRecord",
@@ -269,13 +270,13 @@ export const mockCatalogData = [
           "footprintShown": false,
           "order": null,
           "layerImageShown": false,
-          "title": "aza",
-          "isSelected": false
+          "title": "aza"
         }
       },
       {
         "subtitle": "kuku",
         "title": "daniel",
+        "isSelected": false,
         "metadata": {
           "__typename": "LayerDemRecord",
           "type": "RECORD_DEM",
@@ -354,8 +355,7 @@ export const mockCatalogData = [
           "footprintShown": false,
           "order": null,
           "layerImageShown": false,
-          "title": "aza_ai_2022",
-          "isSelected": false
+          "title": "aza_ai_2022"
         }
       }
     ]
