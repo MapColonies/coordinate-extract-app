@@ -56,10 +56,6 @@ export const MetadataFormStep: React.FC<WizardStepProps> = ({ selectedItem }) =>
 
   return (
     <Box className="metadata-form-step">
-      <GeojsonMap
-        geometry={selectedItem.metadata?.footprint}
-        style={{ width: '50%', height: '100%' }}
-      />
       <Box className="form-container">
         <Box className="form-header">
           <h2>Edit Metadata</h2>

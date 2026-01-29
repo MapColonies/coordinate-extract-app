@@ -1,5 +1,5 @@
-import { PropsWithChildren, useState } from "react";
-import { CatalogTreeNode, Metadata } from "../../Wizard/Wizard.types";
+import { PropsWithChildren } from "react";
+import { CatalogTreeNode, Metadata, WizardStepProps } from "../../Wizard/Wizard.types";
 import { Box } from "@map-colonies/react-components";
 import { FormattedMessage } from "react-intl";
 import { Typography } from "@map-colonies/react-core";
@@ -8,7 +8,8 @@ import { ModelDetails } from "../ModelDetails/ModelDetails";
 
 import './BaseStep.css';
 
-type BaseStepProps = {
+
+interface BaseStepProps {
   data: CatalogTreeNode | null;
   titleMap?: string;
   title?: string;

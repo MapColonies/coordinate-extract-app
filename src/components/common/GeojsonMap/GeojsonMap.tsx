@@ -17,6 +17,7 @@ import {
   VectorLayer,
   VectorSource
 } from '@map-colonies/react-components';
+import appConfig from '../../../utils/Config';
 import { getMarker } from '../utils/utils';
 
 import './GeojsonMap.css';
@@ -36,7 +37,7 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
 
   const previewBaseMap = useMemo(() => {
     const olBaseMap: JSX.Element[] = [];
-    let baseMap: IBaseMap = JSON.parse('{"maps":[{"id":"1st","title":"1st Map","isForPreview":true,"thumbnail":"https://mt1.google.com/vt/lyrs=s&x=6&y=4&z=3","baseRasterLayers":[{"id":"GOOGLE_TERRAIN","type":"XYZ_LAYER","opacity":1,"zIndex":0,"options":{"url":"https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}","layers":"","credit":"GOOGLE"}},{"id":"INFRARED_RASTER","type":"WMS_LAYER","opacity":0.6,"zIndex":1,"options":{"url":"https://mesonet.agron.iastate.edu/cgi-bin/wms/goes/conus_ir.cgi?","layers":"goes_conus_ir","credit":"Infrared data courtesy Iowa Environmental Mesonet","parameters":{"transparent":"true","format":"image/png"}}}]}]}').maps.find((map: IBaseMap) => map.isForPreview);
+    let baseMap = appConfig.baseMaps.maps.find((map: IBaseMap) => map.isCurrent);
     if (!baseMap) {
       return;
     }
