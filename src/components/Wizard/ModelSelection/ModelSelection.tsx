@@ -1,17 +1,26 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Box, CesiumMap, CesiumSceneMode } from '@map-colonies/react-components';
+import { Geometry } from 'geojson';
+import {
+  Box,
+  Cesium3DTileset,
+  CesiumColor,
+  CesiumConstantProperty,
+  CesiumGeojsonLayer,
+  CesiumMap,
+  CesiumSceneMode
+} from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
+import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
-import { fetchCatalog } from '../../../common/Services/CatalogService';
-import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
-import { ModelDetails } from '../../common/ModelDetails/ModelDetails';
 // import { mockCatalogData } from '../../common/CatalogMockData';
+import { fetchCatalog } from '../../../common/services/CatalogService';
+import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
 
-import './ModelSelectionStep.css';
+import './ModelSelection.css';
 
-export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
+export const ModelSelection: React.FC<WizardSelectionProps> = ({
   catalogTreeData,
   setCatalogTreeData,
   selectedItem,
@@ -25,9 +34,7 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
     } else {
       setIsNextBtnDisabled(false);
     }
-  }, []);
 
-  useEffect(() => {
     // if (!catalogTreeData) {
     //   setTimeout(() => {
     //     setCatalogTreeData(mockCatalogData as unknown as CatalogTreeNode[]);
@@ -65,11 +72,13 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
     "--rst-expander-size": '30px',
   };
 
-  //@ts-ignore
-  const { ["mc:footprint"]: footprint, ["mc:links"]: links, ...rest } = selectedItem || {};
+  /* eslint-disable no-useless-computed-key */
+  // @ts-ignore
+  const { ["mc:footprint"]: footprint, ["mc:links"]: links, ...metadata } = selectedItem || {};
+  /* eslint-enable no-useless-computed-key */
 
   return (
-    <Box id='modelSelection'>
+    <Box className="modelSelection">
       <Box className="viewArea">
         <Box className="treeMapContainer">
           <Box className="panelHeader">
@@ -77,7 +86,7 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
           </Box>
           <Box style={treeTheme as React.CSSProperties} className="treeContent">
             <CatalogTree
-              treeData={catalogTreeData ?? {} as CatalogTreeNode[]}
+              treeData={catalogTreeData ?? []}
               onSelectedNode={handleSelectedItem}
             />
           </Box>
@@ -87,34 +96,29 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
             <FormattedMessage id="title.map" />
           </Typography>
           <CesiumMap
-            style={{ position: 'relative', height: '450px' }}
             center={JSON.parse(appConfig.mapCenter)}
             zoom={+appConfig.mapZoom}
             sceneMode={CesiumSceneMode.SCENE3D}
             baseMaps={appConfig.baseMaps}
+            showActiveLayersTool={false}
           >
-            {/* {models.map((model) => {
-              let links = model["mc:links"] as any;
-              if (Array.isArray(links)) {
-                links = links.find((link) => link["@_scheme"] === LinkType.THREE_D_LAYER || link["@_scheme"] === LinkType.THREE_D_TILES);
-              }
-              return (
-                <Cesium3DTileset
-                  maximumScreenSpaceError={CONFIG.THREE_D_LAYER.MAXIMUM_SCREEN_SPACE_ERROR}
-                  cullRequestsWhileMovingMultiplier={CONFIG.THREE_D_LAYER.CULL_REQUESTS_WHILE_MOVING_MULTIPLIER}
-                  preloadFlightDestinations
-                  preferLeaves
-                  skipLevelOfDetail
-                  key={layer.id}
-                  url={getTokenResource(layerLink.url as string, (layer as Layer3DRecordModelType).productVersion as string)}
-                />
-              );
-            })}
-
-            {shouldShowExtent && (
+            {
+              metadata && links &&
+              <Cesium3DTileset
+                maximumScreenSpaceError={5}
+                cullRequestsWhileMovingMultiplier={120}
+                preloadFlightDestinations
+                preferLeaves
+                skipLevelOfDetail
+                url={getTokenResource(links["#text"])}
+                isZoomTo={true}
+              />
+            }
+            {
+              footprint &&
               <CesiumGeojsonLayer
                 clampToGround={true}
-                data={getFootprintsCollection(footprints, true)}
+                data={JSON.parse(footprint) as Geometry}
                 onLoad={(geojsonDataSource) => {
                   geojsonDataSource.entities.values.forEach((item) => {
                     if (item.polyline) {
@@ -126,11 +130,10 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
                   });
                 }}
               />
-            )} */}
+            }
           </CesiumMap>
         </Box>
       </Box>
-      <ModelDetails metadata={rest} />
     </Box>
   );
 };

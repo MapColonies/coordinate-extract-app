@@ -9,7 +9,7 @@ const Header: React.FC = (): JSX.Element => {
   return (
     <Box className="Header">
       <Typography tag="h3" className="Title">
-        <FormattedMessage id='app.title' />
+        <FormattedMessage id="app.title" />
       </Typography>
     </Box>
   );

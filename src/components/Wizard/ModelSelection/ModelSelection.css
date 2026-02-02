@@ -1,4 +1,4 @@
-#modelSelection {
+.modelSelection {
   width: 100%;
   height: 69vh;
   margin: 0 auto;
@@ -8,33 +8,34 @@
   flex-direction: column;
 }
 
-#modelSelection .viewArea {
+.modelSelection .viewArea {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
 }
 
-#modelSelection .mapPanel {
+.modelSelection .mapPanel {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-#modelSelection .treeMapContainer {
+.modelSelection .treeMapContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
   max-width: 30%;
 }
 
-#modelSelection .treeContent {
+.modelSelection .treeContent {
   height: 100%;
   padding: 10px;
   overflow: auto;
   background: #020817;
 }
 
-#modelSelection .panelHeader {
+.modelSelection .panelHeader {
   height: 48px;
   padding: 0 16px;
   display: flex;
@@ -43,7 +44,7 @@
   background-color: var(--mdc-theme-background);
 }
 
-#modelSelection .stepActions {
+.modelSelection .stepActions {
   height: 64px;
   padding: 0 20px;
   background: var(--mdc-theme-background);
@@ -51,4 +52,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.modelSelection .cesium-viewer-toolbar > .cesium-toolbar-button.cesium-button:last-child {
+  display: none;
 }
