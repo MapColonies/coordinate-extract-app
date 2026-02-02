@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Box } from '@map-colonies/react-components';
+import { Box, CesiumMap, CesiumSceneMode } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
-import { GeojsonMap } from '../../common/GeojsonMap/GeojsonMap';
+import appConfig from '../../../utils/Config';
+import { fetchCatalog } from '../../../common/Services/CatalogService';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { ModelDetails } from '../../common/ModelDetails/ModelDetails';
-import { mockCatalogData } from '../../common/CatalogMockData';
+// import { mockCatalogData } from '../../common/CatalogMockData';
 import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelectionStep.css';
@@ -27,11 +28,21 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
   }, []);
 
   useEffect(() => {
-    if (!catalogTreeData) {
-      setTimeout(() => {
-        setCatalogTreeData(mockCatalogData as unknown as CatalogTreeNode[]);
-      }, 500);
-    }
+    // if (!catalogTreeData) {
+    //   setTimeout(() => {
+    //     setCatalogTreeData(mockCatalogData as unknown as CatalogTreeNode[]);
+    //   }, 500);
+    // }
+
+    (async () => {
+      try {
+        const treeData = await fetchCatalog();
+        //@ts-ignore
+        setCatalogTreeData(treeData.children);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    })();
   }, []);
 
   const handleSelectedItem = (node: CatalogTreeNode | null, updatedTreeData: CatalogTreeNode[]) => {
@@ -55,7 +66,7 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
   };
 
   //@ts-ignore
-  const { footprint, links, ...rest } = selectedItem?.metadata || {};
+  const { ["mc:footprint"]: footprint, ["mc:links"]: links, ...rest } = selectedItem || {};
 
   return (
     <Box id='modelSelection'>
@@ -75,10 +86,48 @@ export const ModelSelectionStep: React.FC<WizardSelectionProps> = ({
           <Typography className="panelHeader">
             <FormattedMessage id="title.map" />
           </Typography>
-          <GeojsonMap
-            geometry={selectedItem?.metadata?.footprint}
-            style={{ width: '100%', height: '100%' }}
-          />
+          <CesiumMap
+            style={{ position: 'relative', height: '450px' }}
+            center={JSON.parse(appConfig.mapCenter)}
+            zoom={+appConfig.mapZoom}
+            sceneMode={CesiumSceneMode.SCENE3D}
+            baseMaps={appConfig.baseMaps}
+          >
+            {/* {models.map((model) => {
+              let links = model["mc:links"] as any;
+              if (Array.isArray(links)) {
+                links = links.find((link) => link["@_scheme"] === LinkType.THREE_D_LAYER || link["@_scheme"] === LinkType.THREE_D_TILES);
+              }
+              return (
+                <Cesium3DTileset
+                  maximumScreenSpaceError={CONFIG.THREE_D_LAYER.MAXIMUM_SCREEN_SPACE_ERROR}
+                  cullRequestsWhileMovingMultiplier={CONFIG.THREE_D_LAYER.CULL_REQUESTS_WHILE_MOVING_MULTIPLIER}
+                  preloadFlightDestinations
+                  preferLeaves
+                  skipLevelOfDetail
+                  key={layer.id}
+                  url={getTokenResource(layerLink.url as string, (layer as Layer3DRecordModelType).productVersion as string)}
+                />
+              );
+            })}
+
+            {shouldShowExtent && (
+              <CesiumGeojsonLayer
+                clampToGround={true}
+                data={getFootprintsCollection(footprints, true)}
+                onLoad={(geojsonDataSource) => {
+                  geojsonDataSource.entities.values.forEach((item) => {
+                    if (item.polyline) {
+                      const color = CesiumColor.CYAN;
+                      (item.polyline.width as CesiumConstantProperty).setValue(5);
+                      // @ts-ignore
+                      item.polyline.material = color;
+                    }
+                  });
+                }}
+              />
+            )} */}
+          </CesiumMap>
         </Box>
       </Box>
       <ModelDetails metadata={rest} />

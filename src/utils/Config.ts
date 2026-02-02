@@ -3,6 +3,7 @@ import { LinkType } from './Const';
 
 const ACCESS_TOKEN_INJECTION_TYPE = (window as any)._env_.ACCESS_TOKEN_INJECTION_TYPE;
 const ACCESS_TOKEN_ATTRIBUTE_NAME = (window as any)._env_.ACCESS_TOKEN_ATTRIBUTE_NAME;
+const ACCESS_TOKEN_VALUE = (window as any)._env_.ACCESS_TOKEN_VALUE;
 const PUBLIC_URL = (window as any)._env_.PUBLIC_URL;
 const LANGUAGE = (window as any)._env_.LANGUAGE;
 const MAP_CENTER = (window as any)._env_.MAP_CENTER;
@@ -32,6 +33,7 @@ const enrichBaseMaps = (baseMaps: IBaseMaps): IBaseMaps => {
 class Config {
   public tokenInjectionType = ACCESS_TOKEN_INJECTION_TYPE;
   public tokenAttributeName = ACCESS_TOKEN_ATTRIBUTE_NAME;
+  public tokenValue = ACCESS_TOKEN_VALUE;
   public publicUrl = PUBLIC_URL || '.';
   public language = LANGUAGE || 'he';
   public mapCenter = MAP_CENTER || '[34.817, 31.911]';

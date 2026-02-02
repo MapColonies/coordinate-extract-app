@@ -12,7 +12,6 @@ export interface Metadata {
 }
 
 export interface CatalogTreeNode extends TreeItem {
-  id: string;
   title: string;
   isGroup?: boolean;
   metadata?: Metadata;

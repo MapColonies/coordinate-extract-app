@@ -33,7 +33,7 @@ export const BaseStep: React.FC<PropsWithChildren<BaseStepProps>> = ({ children,
             {children}
           </Box>
         </Box>
-        <Box className="panel">
+        <Box className="panel small">
           {
             titleMap &&
             <Typography className="panelHeader">

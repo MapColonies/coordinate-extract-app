@@ -4,6 +4,7 @@ dest = "public/env-config.js"
 keys = [
   "/configuration/access/token/attribute/name",
   "/configuration/access/token/injection/type",
+  "/configuration/access/token/value",
   "/configuration/public/url",
   "/configuration/language",
   "/configuration/map/center",
