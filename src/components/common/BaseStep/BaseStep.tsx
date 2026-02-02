@@ -1,13 +1,12 @@
-import { PropsWithChildren } from "react";
-import { CatalogTreeNode, Metadata, WizardStepProps } from "../../Wizard/Wizard.types";
-import { Box } from "@map-colonies/react-components";
-import { FormattedMessage } from "react-intl";
-import { Typography } from "@map-colonies/react-core";
-import { GeojsonMap } from "../GeojsonMap/GeojsonMap";
-import { ModelDetails } from "../ModelDetails/ModelDetails";
+import { PropsWithChildren } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Box } from '@map-colonies/react-components';
+import { Typography } from '@map-colonies/react-core';
+import { Metadata } from '../../Wizard/Wizard.types';
+import { GeojsonMap } from '../GeojsonMap/GeojsonMap';
+import { ModelDetails } from '../ModelDetails/ModelDetails';
 
 import './BaseStep.css';
-
 
 interface BaseStepProps {
   metadata?: Metadata;
@@ -48,4 +47,4 @@ export const BaseStep: React.FC<PropsWithChildren<BaseStepProps>> = ({ children,
       </Box>
     </Box>
   );
-}
+};

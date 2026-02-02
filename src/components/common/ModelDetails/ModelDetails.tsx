@@ -71,4 +71,4 @@ export const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
       }
     </Box>
   );
-}
+};

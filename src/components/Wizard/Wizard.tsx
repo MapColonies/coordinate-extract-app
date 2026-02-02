@@ -1,20 +1,19 @@
 import { useState } from 'react';
-import FormWizard from "react-form-wizard-component";
+import FormWizard from 'react-form-wizard-component';
 import { Box } from '@map-colonies/react-components';
-import { CatalogTreeNode } from './Wizard.types';
-import { ModelSelectionStep } from './ModelSelection/ModelSelectionStep';
 import { BaseStep } from '../common/BaseStep/BaseStep';
 import { ModelHistory } from '../common/ModelHistory/ModelHistory';
 import { MetadataFormStep } from './MetadataForm/MetadataFormStep';
+import { ModelSelectionStep } from './ModelSelection/ModelSelectionStep';
+import { CatalogTreeNode } from './Wizard.types';
 
-import "react-form-wizard-component/dist/style.css";
+import 'react-form-wizard-component/dist/style.css';
 import './Wizard.css';
 
 export const Wizard: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<CatalogTreeNode | undefined>(undefined);
   const [disabled, setDisabled] = useState<boolean>(true);
   const [catalogTree, setCatalogTree] = useState<CatalogTreeNode[] | undefined>(undefined);
-
 
   return (
     <Box id='wizardWrapper' className={disabled ? 'wizardDisabledNext' : ''}>

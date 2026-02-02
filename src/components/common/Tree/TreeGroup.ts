@@ -1,6 +1,6 @@
-import { get } from "lodash";
-import { TreeItem } from "react-sortable-tree";
-import { CatalogTreeNode } from "../../Wizard/Wizard.types";
+import { get } from 'lodash';
+import { TreeItem } from 'react-sortable-tree';
+import { CatalogTreeNode } from '../../Wizard/Wizard.types';
 
 export interface KeyPredicate {
   name: string;

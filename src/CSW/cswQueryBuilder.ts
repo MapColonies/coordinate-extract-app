@@ -33,5 +33,4 @@ export const parseQueryResults = (xml: string, recordType: string): Record<strin
     return records;
   }
   return [records];
-
-} 
+};
