@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@map-colonies/react-components';
 import { WizardStepProps } from '../Wizard.types';
-import { GeojsonMap } from '../../common/GeojsonMap/GeojsonMap';
 
-import './MetadataFormStep.css';
+import './MetadataForm.css';
 
-export const MetadataFormStep: React.FC<WizardStepProps> = ({ selectedItem }) => {
+export const MetadataForm: React.FC<WizardStepProps> = ({ selectedItem }) => {
   const [formData, setFormData] = useState({
     title: '',
     type: '',

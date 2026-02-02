@@ -4,8 +4,6 @@ import { Box } from '@map-colonies/react-components';
 import { RMWCProvider, ThemeProvider as RMWCThemeProvider, Themes } from '@map-colonies/react-core';
 import version from '../../../package.json';
 import { useI18n } from '../../i18n/I18nProvider';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
 import Routing from '../Routing/Routing';
 
 import './Layout.css';
@@ -86,7 +84,6 @@ const Layout: React.FC = (): JSX.Element => {
         <Box className="Layout">
 
           <header>
-            <Header />
           </header>
 
           <main>
@@ -94,7 +91,6 @@ const Layout: React.FC = (): JSX.Element => {
           </main>
 
           <footer>
-            {/* <Footer /> */}
           </footer>
 
         </Box>

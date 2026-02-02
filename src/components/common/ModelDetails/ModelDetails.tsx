@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import { isEmpty } from 'lodash';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
-import { AutoDirectionBox } from '../utils/AutoDirectionBox';
+import { AutoDirectionBox } from '../../../common/AutoDirectionBox/AutoDirectionBox';
 
 import './ModelDetails.css';
 

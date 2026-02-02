@@ -10,10 +10,10 @@ const Footer: React.FC = (): JSX.Element => {
   
   return (
     <Box className="Footer">
-      <Tooltip content={intl.formatMessage({ id: 'footer.next' })}>
+      <Tooltip content={intl.formatMessage({ id: 'button.next' })}>
         <IconButton className="icon mc-icon-Back" onClick={(e): void => { e.preventDefault(); e.stopPropagation(); }} />
       </Tooltip>
-      <Tooltip content={intl.formatMessage({ id: 'footer.back' })}>
+      <Tooltip content={intl.formatMessage({ id: 'button.back' })}>
         <IconButton className="icon mc-icon-Next" onClick={(e): void => { e.preventDefault(); e.stopPropagation(); }} />
       </Tooltip>
     </Box>

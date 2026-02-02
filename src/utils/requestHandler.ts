@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
-import appConfig from '../../utils/Config';
+import appConfig from './Config';
 
 interface IResource {
   url: string;

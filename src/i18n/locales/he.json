@@ -2,11 +2,21 @@
   "app.title": "אפליקציית אישור מודל לחילוץ נ.צ.",
   "app.welcome": "ברוכים הבאים לאפליקציית אישור מודל לחילוץ נ.צ.",
 
-  "title.tree": "בחירת מודל לניהול",
+  "title.tree": "בחירת מודל",
   "title.map": "תצוגה מקדימה",
+  "title.footprint": "תיחום גאוגרפי",
+  "title.history": "היסטוריית אישורים",
+  "title.updater": "פרטי מבצע",
+  "title.confirm": "אימות זהות",
 
   "details.placeholder": "בחר פריט קטלוגי כדי לצפות בו",
 
-  "footer.back": "חזור",
-  "footer.next": "הבא"
+  "step.selection": "בחירה",
+  "step.details": "פרטים",
+  "step.update": "עדכון",
+  "step.confirm": "אישור",
+
+  "button.back": "חזרה",
+  "button.next": "הבא",
+  "button.finish": "סיום"
 }
