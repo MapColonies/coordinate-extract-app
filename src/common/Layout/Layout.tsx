@@ -59,6 +59,7 @@ const Layout: React.FC = (): JSX.Element => {
     background: '#000',
     surface: '#000',
     alternativeSurface: '#121212',
+    border: '#1e293b',
     ...(Object.fromEntries(Object.entries(CustomTheme.darkTheme).map(([key, value]) => [camelize(key), value])))
   };
 

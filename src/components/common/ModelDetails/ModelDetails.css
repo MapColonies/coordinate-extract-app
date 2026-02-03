@@ -3,7 +3,9 @@
   padding: 10px;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #020817;
+  background: var(--mdc-theme-background);
+  border: 1px solid var(--mdc-theme-border);
+  border-radius: 8px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;

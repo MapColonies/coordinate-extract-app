@@ -1,17 +1,17 @@
 .step {
   width: 100%;
-  height: 650px;
+  height: 745px;
   margin: 0 auto;
-  background: #fafafa;
-  border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .step .viewArea {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
 .step .panelHeader {
@@ -21,6 +21,8 @@
   align-items: center;
   font-weight: 600;
   background-color: var(--mdc-theme-background);
+  border-radius: 8px;
+  background: transparent;
 }
 
 .step .children {
@@ -35,6 +37,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--mdc-theme-border);
+  border-radius: 8px;
 }
 
 .step .small {
