@@ -35,11 +35,7 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ selectedItem }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Integrate with actual backend API for saving metadata
-    // For now, just log the data
     console.log('Form submitted:', formData);
-
-    // In production, replace with proper notification system
     alert('Metadata saved successfully!');
   };
 
@@ -73,55 +69,6 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ selectedItem }) => {
               required
               className="form-control"
             />
-          </Box>
-
-          <Box className="form-group">
-            <label htmlFor="type">Type *</label>
-            <select
-              id="type"
-              name="type"
-              value={formData.type}
-              onChange={handleChange}
-              required
-              className="form-control"
-            >
-              <option value="">Select type...</option>
-              <option value="building">Building</option>
-              <option value="terrain">Terrain</option>
-              <option value="infrastructure">Infrastructure</option>
-              <option value="vegetation">Vegetation</option>
-              <option value="other">Other</option>
-            </select>
-          </Box>
-
-          <Box className="form-row">
-            <Box className="form-group">
-              <label htmlFor="created">Created Date</label>
-              <input
-                type="date"
-                id="created"
-                name="created"
-                value={formData.created}
-                onChange={handleChange}
-                className="form-control"
-              />
-            </Box>
-
-            <Box className="form-group">
-              <label htmlFor="quality">Quality</label>
-              <select
-                id="quality"
-                name="quality"
-                value={formData.quality}
-                onChange={handleChange}
-                className="form-control"
-              >
-                <option value="">Select quality...</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-              </select>
-            </Box>
           </Box>
 
           <Box className="form-group">

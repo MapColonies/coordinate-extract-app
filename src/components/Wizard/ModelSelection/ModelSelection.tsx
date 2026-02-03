@@ -10,7 +10,6 @@ import {
   CesiumMap,
   CesiumSceneMode
 } from '@map-colonies/react-components';
-import { Typography } from '@map-colonies/react-core';
 import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
 // import { mockCatalogData } from '../../common/CatalogMockData';
@@ -84,7 +83,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           <Box className="panelHeader">
             <FormattedMessage id="title.tree" />
           </Box>
-          <Box style={treeTheme as React.CSSProperties} className="treeContent">
+          <Box style={treeTheme as React.CSSProperties} className="tree">
             <CatalogTree
               treeData={catalogTreeData ?? []}
               onSelectedNode={handleSelectedItem}
@@ -92,9 +91,9 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           </Box>
         </Box>
         <Box className="mapPanel">
-          <Typography className="panelHeader">
+          <Box className="panelHeader">
             <FormattedMessage id="title.map" />
-          </Typography>
+          </Box>
           <CesiumMap
             center={JSON.parse(appConfig.mapCenter)}
             zoom={+appConfig.mapZoom}
