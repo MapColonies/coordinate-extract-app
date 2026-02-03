@@ -33,3 +33,7 @@ body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left 
 .wizardWrapper .react-form-wizard .wizard-nav {
   padding: 0 40px;
 }
+
+.wizardWrapper .react-form-wizard .wizard-tab-content {
+  padding: 10px 20px;
+}
