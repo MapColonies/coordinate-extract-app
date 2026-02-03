@@ -16,7 +16,7 @@ body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left 
   float: right;
 }
 
-.wizardWrapper .wizardDisabledNext .wizard-footer-right button {
+.wizardWrapper.wizardDisabledNext .wizard-footer-right button {
   background-color: rgba(23, 24, 23, 0.4);
   pointer-events: none;
   cursor: not-allowed;

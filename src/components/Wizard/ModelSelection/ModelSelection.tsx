@@ -40,6 +40,10 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
     //   }, 500);
     // }
 
+    if (catalogTreeData) {
+      return;
+    }
+
     (async () => {
       try {
         const treeData = await fetchCatalog();
@@ -71,10 +75,11 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
     "--rst-expander-size": '30px',
   };
 
-  /* eslint-disable no-useless-computed-key */
-  // @ts-ignore
-  const { ["mc:footprint"]: footprint, ["mc:links"]: links, ...metadata } = selectedItem || {};
-  /* eslint-enable no-useless-computed-key */
+  const {
+    "mc:footprint": footprint,
+    "mc:links": links,
+    ...metadata
+  } = (selectedItem || {}) as CatalogTreeNode;
 
   return (
     <Box className="modelSelection">
@@ -102,14 +107,9 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
             showActiveLayersTool={false}
           >
             {
-              metadata && links &&
+              links &&
               <Cesium3DTileset
-                maximumScreenSpaceError={5}
-                cullRequestsWhileMovingMultiplier={120}
-                preloadFlightDestinations
-                preferLeaves
-                skipLevelOfDetail
-                url={getTokenResource(links["#text"])}
+                url={getTokenResource(links["#text"] as string)}
                 isZoomTo={true}
               />
             }
@@ -130,6 +130,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
                 }}
               />
             }
+            {/* <Terrain/> */}
           </CesiumMap>
         </Box>
       </Box>
