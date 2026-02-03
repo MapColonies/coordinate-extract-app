@@ -18,9 +18,6 @@ export const Wizard: React.FC = () => {
   return (
     <Box id='wizardWrapper' className={disabled ? 'wizardDisabledNext' : ''}>
       <FormWizard stepSize='xs' color='#1976d2' >
-        {/* <FormWizard.TabContent title='Login'>
-          <Login />
-        </FormWizard.TabContent> */}
         <FormWizard.TabContent title='Select Model'>
           <ModelSelectionStep
             catalogTreeData={catalogTree}

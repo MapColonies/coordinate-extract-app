@@ -4,7 +4,10 @@ import Layout from './common/Layout/Layout';
 import { I18nProvider } from './i18n/I18nProvider';
 import reportWebVitals from './reportWebVitals';
 import appConfig from './utils/Config';
+import { AuthProvider } from './common/Routing/Login/auth-context';
 
+import '@map-colonies/react-core/dist/textfield/styles';
+import './dark-theme.css';
 import './index.css';
 
 const container = document.getElementById('root');
@@ -12,9 +15,11 @@ const root = createRoot(container!);
 
 root.render(
   <BrowserRouter basename={appConfig.publicUrl}>
-    <I18nProvider>
-      <Layout />
-    </I18nProvider>
+    <AuthProvider>
+      <I18nProvider>
+        <Layout />
+      </I18nProvider>
+    </AuthProvider>
   </BrowserRouter>
 );
 

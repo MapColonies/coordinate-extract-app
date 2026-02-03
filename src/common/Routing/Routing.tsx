@@ -5,6 +5,8 @@ import Main from '../../components/Main/Main';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 import './Routing.css';
+import ProtectedRoute from './Login/protected-route';
+import Login from './Login/login';
 
 const Routing: React.FC = (): JSX.Element => {
 
@@ -13,14 +15,13 @@ const Routing: React.FC = (): JSX.Element => {
 
       <Switch>
 
-        {/* Default Route */}
-        <Route path="/" exact>
-          <Redirect to="/index" />
-        </Route>
+        <Route path="/login" component={Login} />
 
-        <Route path="/index">
-          <Main />
-        </Route>
+        <ProtectedRoute  path="/" exact component={Main}>
+        </ProtectedRoute >
+
+        <ProtectedRoute path="/index" component={Main}>
+        </ProtectedRoute>
 
         <Route path="*">
           <PageNotFound />
