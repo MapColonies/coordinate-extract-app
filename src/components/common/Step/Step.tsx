@@ -15,10 +15,11 @@ interface StepProps {
 }
 
 export const Step: React.FC<PropsWithChildren<StepProps>> = ({ children, selectedItem, title }) => {
-  /* eslint-disable no-useless-computed-key */
-  // @ts-ignore
-  const { ["mc:footprint"]: footprint, ["mc:links"]: links, ...metadata } = selectedItem || {};
-  /* eslint-enable no-useless-computed-key */
+  const {
+    "mc:footprint": footprint,
+    "mc:links": links,
+    ...metadata
+  } = (selectedItem || {}) as CatalogTreeNode;
 
   return (
     <Box className="step">
@@ -35,7 +36,7 @@ export const Step: React.FC<PropsWithChildren<StepProps>> = ({ children, selecte
             {children}
           </Box>
         </Box>
-        <Box className="panel small">
+        <Box className="panel">
           <Typography className="panelHeader">
             <FormattedMessage id="title.footprint" />
           </Typography>

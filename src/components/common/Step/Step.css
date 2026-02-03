@@ -40,7 +40,3 @@
   border: 1px solid var(--mdc-theme-border);
   border-radius: 8px;
 }
-
-.step .small {
-  max-width: 50%;
-}

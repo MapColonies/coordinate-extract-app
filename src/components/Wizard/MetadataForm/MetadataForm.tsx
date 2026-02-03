@@ -15,13 +15,10 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ selectedItem }) => {
 
   useEffect(() => {
     if (selectedItem) {
-      setFormData({
-        title: selectedItem.title || '',
-        type: selectedItem.metadata?.type || '',
-        created: selectedItem.metadata?.created || '',
-        quality: selectedItem.metadata?.quality || '',
-        description: String(selectedItem.subtitle) || ''
-      });
+      // setFormData({
+      //   title: '',
+      //   description: ''
+      // });
     }
   }, [selectedItem]);
 
@@ -54,7 +51,6 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ selectedItem }) => {
       <Box className="form-container">
         <Box className="form-header">
           <h2>Edit Metadata</h2>
-          <p className="selected-item-info">Editing: {selectedItem.title}</p>
         </Box>
 
         <form onSubmit={handleSubmit} className="metadata-form">
