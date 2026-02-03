@@ -28,7 +28,7 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
 
   useEffect(() => {
     setTreeData(props.treeData);
-  }, [props.treeData])
+  }, [props.treeData]);
 
   return (
     <SortableTree

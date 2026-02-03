@@ -1,20 +1,10 @@
-import { Geometry } from 'geojson';
 import { TreeItem } from 'react-sortable-tree';
 
-export interface Footprint {
-  type: string;
-  coordinates: number[][][];
-}
-
-export interface Metadata {
-  footprint: Geometry;
-  [key: string]: any;
-}
-
 export interface CatalogTreeNode extends TreeItem {
-  title: string;
   isGroup?: boolean;
-  metadata?: Metadata;
+  "mc:footprint"?: string;
+  "mc:links"?: Record<string, unknown>;
+  [key: string]: unknown;
 }
 
 export interface WizardStepProps {
@@ -25,5 +15,5 @@ export interface WizardStepProps {
 export interface WizardSelectionProps extends WizardStepProps {
   setCatalogTreeData: (data: CatalogTreeNode[]) => void;
   catalogTreeData?: CatalogTreeNode[];
-  setSelectedItem?: (item: CatalogTreeNode | undefined) => void;
+  setSelectedItem?: (item?: CatalogTreeNode) => void;
 }

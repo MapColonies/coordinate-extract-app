@@ -1,29 +1,31 @@
-#baseStep {
+.step {
   width: 100%;
-  height: 650px;
+  height: 745px;
   margin: 0 auto;
-  background: #fafafa;
-  border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
-#baseStep .viewArea {
+.step .viewArea {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
-#baseStep .panelHeader {
+.step .panelHeader {
   height: 48px;
   padding: 0 16px;
   display: flex;
   align-items: center;
   font-weight: 600;
   background-color: var(--mdc-theme-background);
+  border-radius: 8px;
+  background: transparent;
 }
 
-#baseStep .children {
+.step .children {
   flex: 1;
   display: flex !important;
   flex-direction: column;
@@ -31,12 +33,10 @@
   height: 100%;
 }
 
-#baseStep .panel {
+.step .panel {
   flex: 1;
   display: flex;
   flex-direction: column;
-}
-
-#baseStep .small {
-  max-width: 50%;
+  border: 1px solid var(--mdc-theme-border);
+  border-radius: 8px;
 }

@@ -18,7 +18,7 @@ import {
   VectorSource
 } from '@map-colonies/react-components';
 import appConfig from '../../../utils/Config';
-import { getMarker } from '../utils/utils';
+import { getMarker } from '../../../utils/geojson';
 
 import './GeojsonMap.css';
 

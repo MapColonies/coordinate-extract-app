@@ -28,8 +28,8 @@ export const LayerImageIconRenderer: React.FC<any> = (props) => {
         // className={modelShown ? 'mc-icon-Show imageChecked' : 'mc-icon-Hide iconNotAllowed'}
         className={props.className}
         style={{
-          width: "20px",
-          height: "20px",
+          width: '20px',
+          height: '20px',
           background: 'red',
           margin: '2px',
         }}

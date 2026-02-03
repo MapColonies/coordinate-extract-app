@@ -1,26 +1,39 @@
-#wizardWrapper {
-  width: 90%;
+.wizardWrapper {
+  width: 70%;
   margin: 0 auto;
-  border: 1px solid #ddd;
+  border: 1px solid var(--mdc-theme-border);
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-body[dir='rtl'] .wizard-card-footer.clearfix .wizard-footer-right {
+body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-right {
   float: left;
 }
 
-body[dir='rtl'] .wizard-card-footer.clearfix .wizard-footer-left {
+body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left {
   float: right;
 }
 
-.wizardDisabledNext .wizard-footer-right button {
+.wizardWrapper.wizardDisabledNext .wizard-footer-right button {
   background-color: rgba(23, 24, 23, 0.4);
   pointer-events: none;
   cursor: not-allowed;
 }
 
-.react-form-wizard .wizard-tab-content {
+.wizardWrapper .react-form-wizard .wizard-tab-content {
   text-align: unset;
+}
+
+.wizardWrapper .react-form-wizard .wizard-header {
+  padding: 0 15px;
+}
+
+.wizardWrapper .react-form-wizard .wizard-nav {
+  padding: 0 40px;
+}
+
+.wizardWrapper .react-form-wizard .wizard-tab-content {
+  padding: 10px 20px;
 }

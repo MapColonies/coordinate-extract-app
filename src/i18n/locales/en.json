@@ -4,9 +4,19 @@
 
   "title.tree": "Catalog Tree",
   "title.map": "Catalog Map",
+  "title.footprint": "Footprint",
+  "title.history": "History",
+  "title.updater": "Updater",
+  "title.confirm": "Confirm",
 
   "details.placeholder": "Select a catalog item to view its footprint and details",
 
-  "footer.back": "Back",
-  "footer.next": "Next"
+  "step.selection": "Selection",
+  "step.details": "Details",
+  "step.update": "Update",
+  "step.confirm": "Confirm",
+
+  "button.back": "Back",
+  "button.next": "Next",
+  "button.finish": "Finish"
 }
