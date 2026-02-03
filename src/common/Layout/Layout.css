@@ -1,11 +1,12 @@
 .Layout {
   height: 100vh;
   box-sizing: border-box;
-  display: grid;
+  /* display: grid; */
   grid-template-rows: 5% 90% 5%;
   grid-template-columns: repeat(3, 1fr);
   background-color: var(--mdc-theme-background);
   color: var(--mdc-theme-on-primary);
+  padding-top: 20px;
 }
 
 .Layout > header,
