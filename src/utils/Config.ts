@@ -9,7 +9,9 @@ const LANGUAGE = (window as any)._env_.LANGUAGE;
 const MAP_CENTER = (window as any)._env_.MAP_CENTER;
 const MAP_ZOOM = (window as any)._env_.MAP_ZOOM;
 const BASE_MAPS = JSON.parse((window as any)._env_.BASE_MAPS);
+const DEFAULT_TERRAIN_PROVIDER_URL = (window as any)._env_.DEFAULT_TERRAIN_PROVIDER_URL;
 const CSW_3D_URL = (window as any)._env_.CSW_3D_URL;
+const EXTRACTABLE_MANAGER_URL = (window as any)._env_.EXTRACTABLE_MANAGER_URL;
 
 const enrichBaseMaps = (baseMaps: IBaseMaps): IBaseMaps => {
   return {
@@ -39,7 +41,9 @@ class Config {
   public mapCenter = MAP_CENTER || '[34.817, 31.911]';
   public mapZoom = MAP_ZOOM || '14';
   public baseMaps = enrichBaseMaps(BASE_MAPS);
+  public defaultTerrainProviderUrl = DEFAULT_TERRAIN_PROVIDER_URL;
   public csw3dUrl = CSW_3D_URL;
+  public extractableManagerUrl = EXTRACTABLE_MANAGER_URL;
 }
 
 const appConfig = new Config(); // Singleton

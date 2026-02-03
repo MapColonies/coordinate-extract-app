@@ -10,5 +10,7 @@ keys = [
   "/configuration/map/center",
   "/configuration/map/zoom",
   "/configuration/base/maps",
+  "/configuration/default/terrain/provider/url",
   "/configuration/csw/3d/url",
+  "/configuration/extractable/manager/url"
 ]
