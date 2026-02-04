@@ -13,6 +13,7 @@ import {
 import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
 import { useDebounce } from '../../../hooks/useDebounce';
+import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { useTreeCatalogData } from '../../common/Tree/hooks/treeCatalogData.hook';
 import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
@@ -101,9 +102,6 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           </Box>
         </Box>
         <Box className="mapPanel">
-          <Box className="panelHeader">
-            <FormattedMessage id="title.map" />
-          </Box>
           <CesiumMap
             center={JSON.parse(appConfig.mapCenter)}
             zoom={+appConfig.mapZoom}
@@ -135,7 +133,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
                 }}
               />
             }
-            {/* <Terrain/> */}
+            <Terrain/>
           </CesiumMap>
         </Box>
       </Box>
