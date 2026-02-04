@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { WizardStepProps } from '../Wizard.types';
 
 import './MetadataForm.css';
 
-export const MetadataForm: React.FC<WizardStepProps> = ({ selectedItem }) => {
+export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
+  const intl = useIntl();
+  
   const [formData, setFormData] = useState({
-    title: '',
-    type: '',
-    created: '',
-    quality: '',
-    description: ''
+    approver: '',
+    additionalInfo: ''
   });
 
   useEffect(() => {
-    if (selectedItem) {
-      // setFormData({
-      //   title: '',
-      //   description: ''
-      // });
-    }
-  }, [selectedItem]);
+    console.log('Form data updated:', formData);
+  }, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -36,46 +31,41 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ selectedItem }) => {
     alert('Metadata saved successfully!');
   };
 
-  if (!selectedItem) {
-    return (
-      <Box className="metadata-form-step">
-        <Box className="no-selection">
-          No item selected. Please go back and select an item.
-        </Box>
-      </Box>
-    );
-  }
-
   return (
-    <Box className="metadata-form-step">
-      <Box className="form-container">
-        <Box className="form-header">
-          <h2>Edit Metadata</h2>
+    <Box className="metadataForm">
+      <Box className="formContainer">
+        <Box className="formHeader">
+          <FormattedMessage id={`${selectedItem?.isApproved ? 'form.message.reject' : 'form.message.approve'}`} />
         </Box>
 
-        <form onSubmit={handleSubmit} className="metadata-form">
-          <Box className="form-group">
-            <label htmlFor="title">Title *</label>
+        <form onSubmit={handleSubmit} className="form">
+          <Box className="formGroup">
+            <label htmlFor="approver">
+              <FormattedMessage id="form.approver.label" />
+            </label>
             <input
               type="text"
-              id="title"
-              name="title"
-              value={formData.title}
+              id="approver"
+              name="approver"
+              value={formData.approver}
               onChange={handleChange}
               required
-              className="form-control"
+              className="formControl"
+              placeholder={intl.formatMessage({ id: 'form.approver.placeholder' })}
             />
           </Box>
-
-          <Box className="form-group">
-            <label htmlFor="description">Description</label>
+          <Box className="formGroup">
+            <label htmlFor="additionalInfo">
+              <FormattedMessage id="form.additionalInfo.label" />
+            </label>
             <textarea
-              id="description"
-              name="description"
-              value={formData.description}
+              id="additionalInfo"
+              name="additionalInfo"
+              value={formData.additionalInfo}
               onChange={handleChange}
               rows={4}
-              className="form-control"
+              className="formControl"
+              placeholder={intl.formatMessage({ id: 'form.additionalInfo.placeholder' })}
             />
           </Box>
         </form>
