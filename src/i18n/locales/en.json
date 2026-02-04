@@ -11,6 +11,13 @@
 
   "details.placeholder": "Select a catalog item to view its footprint and details",
 
+  "form.message.approve": "Approval of the model will expose it to operational factors for coordinate extraction",
+  "form.message.reject": "Rejecting the approval will remove the model from exposure to operational factors",
+  "form.approver.label": "Approver full name *",
+  "form.approver.placeholder": "Enter your full name",
+  "form.additionalInfo.label": "Comments (optional)",
+  "form.additionalInfo.placeholder": "Add comments here...",
+
   "step.selection": "Selection",
   "step.details": "Details",
   "step.update": "Update",
