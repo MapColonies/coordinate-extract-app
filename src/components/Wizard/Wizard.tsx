@@ -21,9 +21,9 @@ const selectionSvg = (props?: SVGProps<SVGSVGElement>) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-search w-4 h-4"
       {...props}
     >
@@ -42,9 +42,9 @@ const detailsSvg = (props?: SVGProps<SVGSVGElement>) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-search w-4 h-4"
       {...props}
     >
@@ -66,9 +66,9 @@ const updateSvg = (props?: SVGProps<SVGSVGElement>) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-search w-4 h-4"
       {...props}
     >
@@ -87,9 +87,9 @@ const confirmSvg = (props?: SVGProps<SVGSVGElement>) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-search w-4 h-4"
       {...props}
     >
