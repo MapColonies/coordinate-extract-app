@@ -54,6 +54,10 @@
   border-radius: 8px;
 }
 
-.modelSelection .cesium-viewer-toolbar > .cesium-toolbar-button.cesium-button:last-child {
+.modelSelection .cesium-viewer .cesium-viewer-toolbar > .cesium-toolbar-button.cesium-button:last-child {
   display: none;
+}
+
+.modelSelection .cesium-viewer .compass-outer-ring-background.compass-outer-ring-background {
+  box-sizing: content-box;
 }
