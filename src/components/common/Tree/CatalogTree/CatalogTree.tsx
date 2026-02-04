@@ -4,7 +4,7 @@ import { useI18n } from '../../../../i18n/I18nProvider';
 import { CatalogTreeNode } from '../../../Wizard/Wizard.types';
 import { LayerImageIconRenderer } from '../../LayerImageIconRenderer/LayerImageIconRenderer';
 import CatalogTheme from '../renderers/index';
-import { useTree } from './tree.hook';
+import { useTree } from '../hooks/tree.hook';
 
 interface CatalogTreeProps extends ReactSortableTreeProps {
   treeData: CatalogTreeNode[];

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Geometry } from 'geojson';
 import {
@@ -12,9 +12,9 @@ import {
 } from '@map-colonies/react-components';
 import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
-// import { mockCatalogData } from '../../common/CatalogMockData';
-import { fetchCatalog } from '../../../common/services/CatalogService';
+import { useDebounce } from '../../../hooks/useDebounce';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
+import { useTreeCatalogData } from '../../common/Tree/hooks/treeCatalogData.hook';
 import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelection.css';
@@ -26,6 +26,17 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
   setSelectedItem,
   setIsNextBtnDisabled
 }) => {
+  const [searchText, setSearchText] = useState("");
+
+  const debouncedSearch = useDebounce((value: string) => {
+    setSearchText(value);
+  }, 300);
+
+  const { treeData } = useTreeCatalogData({
+    catalogTreeData,
+    setCatalogTreeData,
+    filterSearchText: searchText
+  });
 
   useEffect(() => {
     if (!selectedItem) {
@@ -33,26 +44,6 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
     } else {
       setIsNextBtnDisabled(false);
     }
-
-    // if (!catalogTreeData) {
-    //   setTimeout(() => {
-    //     setCatalogTreeData(mockCatalogData as unknown as CatalogTreeNode[]);
-    //   }, 500);
-    // }
-
-    if (catalogTreeData) {
-      return;
-    }
-
-    (async () => {
-      try {
-        const treeData = await fetchCatalog();
-        //@ts-ignore
-        setCatalogTreeData(treeData.children);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    })();
   }, []);
 
   const handleSelectedItem = (node: CatalogTreeNode | null, updatedTreeData: CatalogTreeNode[]) => {
@@ -88,9 +79,23 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           <Box className="panelHeader">
             <FormattedMessage id="title.tree" />
           </Box>
+
+          <Box className="form-group">
+            <input
+              type="text"
+              id="title"
+              name="title"
+              onChange={(e) => {
+                const value = e.target.value;
+                debouncedSearch(value);
+              }}
+              required
+              className="form-control"
+            />
+          </Box>
           <Box style={treeTheme as React.CSSProperties} className="tree">
             <CatalogTree
-              treeData={catalogTreeData ?? []}
+              treeData={treeData as CatalogTreeNode[]}
               onSelectedNode={handleSelectedItem}
             />
           </Box>
