@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/MapColonies/coordinate-extract-app/compare/v1.0.0...v1.1.0) (2026-02-04)
+
+
+### Features
+
+* step 3 metadata form ([da40523](https://github.com/MapColonies/coordinate-extract-app/commit/da405230c4dbd92e80e088d2349b4cb181f96eee))
+
 ## 1.0.0 (2026-02-04)
 
 
