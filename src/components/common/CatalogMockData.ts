@@ -361,3 +361,46 @@ export const mockCatalogData = [
     ]
   }
 ];
+
+export const ExtractableRecords = [
+  {
+    "id": "f9e55c08-b1ed-4bc8-90f4-f8ea04790999",
+    "recordName": "e051n36_S",
+    "authorizedBy": "Admin",
+    "data": {
+      "description": "Metadata for record A"
+    }
+  },
+  // {
+  //   "id": "bcc9985f-50eb-4545-84ae-f668b5172681",
+  //   "recordName": "עזה",
+  //   "authorizedBy": "System",
+  //   "data": {
+  //     "description": "Metadata for record B"
+  //   }
+  // },
+  {
+    "id": "33333333-3333-3333-3333-333333333333",
+    "recordName": "srtm100",
+    "authorizedBy": "User123",
+    "data": {
+      "description": "Metadata for record C"
+    }
+  },
+  {
+    "id": "c8785c83-0a08-4b15-b1ae-864025e01f48",
+    "recordName": "SR_South_20022025_draco_elbit",
+    "authorizedBy": "ServiceAccount",
+    "data": {
+      "description": "Metadata for record D"
+    }
+  },
+  {
+    "id": "3a8672c7-faa0-45f7-8ae7-bc08d21f667a",
+    "recordName": "מעגן_דגניה_בית זרע_אפיקים 23_06",
+    "authorizedBy": "Admin",
+    "data": {
+      "description": "Metadata for record E"
+    }
+  }
+]

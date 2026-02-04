@@ -1,23 +1,35 @@
 import { TreeItem } from "react-sortable-tree";
 import { CatalogTreeNode } from "../../../Wizard/Wizard.types";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { fetchCatalog } from "../../../../common/services/CatalogService";
+
+export type FilterOpt =
+  | {
+    type: 'text'
+    text: string
+  }
+  | {
+    type: 'field'
+    fieldName: string
+    fieldValue: string
+  } | {
+    type: 'none'
+  }
+
+export interface Summery {
+  all: number,
+  extractable: number,
+  notExtractable: number
+}
 
 interface UseTreeCatalogDataProps {
   setCatalogTreeData: (data: CatalogTreeNode[]) => void;
   catalogTreeData?: CatalogTreeNode[];
-  filterSearchText?: string;
+  filter?: FilterOpt;
+  setSummeryCount?: (summery: Summery) => void;
 }
 
 export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
-  const [searchText, setSearchText] = useState("");
-
-  useEffect(() => {
-    if (props.filterSearchText !== undefined) {
-      setSearchText(props.filterSearchText);
-    }
-  }, [props.filterSearchText]);
-
   useEffect(() => {
     // if (!catalogTreeData) {
     //   setTimeout(() => {
@@ -32,21 +44,22 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
     (async () => {
       try {
         const treeData = await fetchCatalog();
-        props.setCatalogTreeData(treeData.children as CatalogTreeNode[]);
+        props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
+        props.setSummeryCount?.({
+          all: treeData.sumAll,
+          extractable: treeData.sumExt,
+          notExtractable: treeData.sumNExt
+        })
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     })();
   }, []);
 
-  const filterCatalogData = (catalogTreeData: CatalogTreeNode[], value: string) => {
-    if (value === '') {
-      return catalogTreeData;
-    }
-
+  const filterByPredicate = (catalogTreeData: CatalogTreeNode[], filterBy: (treeItem: TreeItem) => boolean) => {
     const filteredCatalog = catalogTreeData?.map((tree) => {
       const matchedChildren = (tree.children as TreeItem[])?.filter((child) => {
-        return (child.title as string).includes(value);
+        return filterBy(child);
       });
 
       if (!matchedChildren || matchedChildren.length === 0) {
@@ -57,22 +70,40 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
         ...tree,
         children: matchedChildren,
       };
-    })
-      .filter(Boolean);
+    }).filter(Boolean);
 
     return filteredCatalog;
+  }
+
+  const filterCatalogByTitle = (value: string) => {
+    if (value === '' || !props.catalogTreeData) {
+      return props.catalogTreeData;
+    }
+
+    return filterByPredicate(props.catalogTreeData, (treeItem) => {
+      return !!(treeItem.title)?.toString().includes(value);
+    });
   };
+
+  const filterByField = (fieldName: string, fieldValue: string) => {
+    if (!props.catalogTreeData) {
+      return;
+    }
+    return filterByPredicate(props.catalogTreeData, (treeItem) => {
+      return treeItem[fieldName]?.toString().includes(fieldValue);
+    });
+  }
 
   const treeData = useMemo(() => {
     if (!props.catalogTreeData) {
       return [];
     }
-    if (searchText === undefined || searchText === '') {
-      return props.catalogTreeData;
+    switch (props.filter?.type) {
+      case 'text': return filterCatalogByTitle(props.filter.text);
+      case "field": return filterByField(props.filter.fieldName, props.filter.fieldValue);
+      case "none": return props.catalogTreeData;
     }
-    const filtered = filterCatalogData(props.catalogTreeData, searchText);
-    return filtered ?? [];
-  }, [props.catalogTreeData, searchText]);
+  }, [props.catalogTreeData, props.filter]);
 
   return {
     treeData

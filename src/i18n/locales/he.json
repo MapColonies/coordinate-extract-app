@@ -3,6 +3,9 @@
   "app.welcome": "ברוכים הבאים לאפליקציית אישור מודל לחילוץ נ.צ.",
 
   "title.tree": "בחירת מודל",
+  "tree.filter.all": "הכול ({sum})",
+  "tree.filter.approved": "מאושר ({sum})",
+  "tree.filter.not-approved": "לא מאושר ({sum})",
   "title.map": "תצוגה מקדימה",
   "title.footprint": "תיחום גאוגרפי",
   "title.history": "היסטוריית אישורים",

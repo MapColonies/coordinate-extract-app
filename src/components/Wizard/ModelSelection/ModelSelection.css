@@ -57,3 +57,18 @@
 .modelSelection .cesium-viewer-toolbar > .cesium-toolbar-button.cesium-button:last-child {
   display: none;
 }
+
+.modelSelection .filterBtnsContainer {
+  padding: 15px;
+  display: flex;
+  justify-content: space-around
+}
+
+.modelSelection .filterBtn {
+  border: 1px solid var(--mdc-theme-border);
+  color: white;
+}
+
+.modelSelection .filterBtn:hover {
+  background-color: #1e293b80;
+}

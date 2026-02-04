@@ -10,12 +10,13 @@ import {
   CesiumMap,
   CesiumSceneMode
 } from '@map-colonies/react-components';
+import { Button } from '@map-colonies/react-core';
 import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
-import { useTreeCatalogData } from '../../common/Tree/hooks/treeCatalogData.hook';
+import { FilterOpt, Summery, useTreeCatalogData } from '../../common/Tree/hooks/treeCatalogData.hook';
 import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelection.css';
@@ -27,16 +28,20 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
   setSelectedItem,
   setIsNextBtnDisabled
 }) => {
-  const [searchText, setSearchText] = useState("");
+  const [filterOptions, setFilterBy] = useState<FilterOpt>({ type: 'text', text: '' });
+  const [summery, setSummery] = useState<Summery | undefined>(undefined);
 
   const debouncedSearch = useDebounce((value: string) => {
-    setSearchText(value);
+    setFilterBy({ type: 'text', text: value });
   }, 300);
 
   const { treeData } = useTreeCatalogData({
     catalogTreeData,
     setCatalogTreeData,
-    filterSearchText: searchText
+    filter: filterOptions,
+    setSummeryCount: (sum) => {
+      setSummery(sum);
+    }
   });
 
   useEffect(() => {
@@ -47,10 +52,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
     }
   }, []);
 
-  const handleSelectedItem = (node: CatalogTreeNode | null, updatedTreeData: CatalogTreeNode[]) => {
-    if (updatedTreeData) {
-      setCatalogTreeData(updatedTreeData);
-    }
+  const handleSelectedItem = (node: CatalogTreeNode | null) => {
     if (node) {
       setSelectedItem?.(node);
       setIsNextBtnDisabled(false);
@@ -81,7 +83,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
             <FormattedMessage id="title.tree" />
           </Box>
 
-          <Box className="form-group">
+          <Box className="filter">
             <input
               type="text"
               id="title"
@@ -93,6 +95,28 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
               required
               className="form-control"
             />
+            <Box className='filterBtnsContainer'>
+              <Button className='filterBtn'
+                onClick={() => setFilterBy({ type: 'none' })}>
+                <FormattedMessage id="tree.filter.all" values={{ sum: summery?.all }} />
+              </Button>
+              <Button className='filterBtn'
+                onClick={() => setFilterBy({
+                  type: 'field',
+                  fieldName: 'isApproved',
+                  fieldValue: 'true'
+                })}>
+                <FormattedMessage id="tree.filter.approved" values={{ sum: summery?.extractable }} />
+              </Button>
+              <Button className='filterBtn'
+                onClick={() => setFilterBy({
+                  type: 'field',
+                  fieldName: 'isApproved',
+                  fieldValue: 'false'
+                })}>
+                <FormattedMessage id="tree.filter.not-approved" values={{ sum: summery?.notExtractable }} />
+              </Button>
+            </Box>
           </Box>
           <Box style={treeTheme as React.CSSProperties} className="tree">
             <CatalogTree
@@ -133,7 +157,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
                 }}
               />
             }
-            <Terrain/>
+            <Terrain />
           </CesiumMap>
         </Box>
       </Box>

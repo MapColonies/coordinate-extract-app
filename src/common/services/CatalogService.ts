@@ -1,3 +1,4 @@
+import { ExtractableRecords } from '../../components/common/CatalogMockData';
 import { createCatalogTree } from '../../components/common/Tree/TreeGroup';
 import appConfig from '../../utils/Config';
 import { getRecordsXML, parseQueryResults } from '../../utils/cswQueryBuilder';
@@ -14,5 +15,29 @@ export const fetchCatalog = async () => {
   });
   const parsed = parseQueryResults(res.data, 'mc:MC3DRecord') as Record<string, unknown>[];
 
-  return createCatalogTree(parsed);
+  const getExtractableRecords = ExtractableRecords;
+  const enriched = enrichRecords(parsed, getExtractableRecords);
+
+  return {
+    data: createCatalogTree(enriched),
+    sumAll: parsed.length,
+    sumExt: getExtractableRecords.length,
+    sumNExt: parsed.length - getExtractableRecords.length
+  };
+};
+
+const enrichRecords = (
+  records: Record<string, unknown>[],
+  extraFields: Record<string, unknown>[]
+): Record<string, unknown>[] => {
+  return records.map((record) => {
+    const isMatched = extraFields.some(
+      (ext) => record["mc:id"] === ext.id
+    );
+
+    return {
+      ...record,
+      isApproved: isMatched
+    };
+  });
 };

@@ -23,16 +23,10 @@ export const LayerImageIconRenderer: React.FC<any> = (props) => {
   // }, [(props.data as unknown as Record<string, unknown>)?.productStatus]);
 
   return (
-    <Box>
+    <Box id='LayerImageIconRenderer'>
       <IconButton
         // className={modelShown ? 'mc-icon-Show imageChecked' : 'mc-icon-Hide iconNotAllowed'}
-        className={props.className}
-        style={{
-          width: '20px',
-          height: '20px',
-          background: 'red',
-          margin: '2px',
-        }}
+        className={'icon mc-icon-Show'}
         label="LAYER IMAGE SHOWN ICON"
         onClick={
           (evt: React.MouseEvent<HTMLButtonElement>): void => {
