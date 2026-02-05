@@ -17,6 +17,8 @@
   "form.approver.placeholder": "Enter your full name",
   "form.additionalInfo.label": "Comments (optional)",
   "form.additionalInfo.placeholder": "Add comments here...",
+  "form.password.label": "Password",
+  "form.password.placeholder": "Re-enter password for confirmation",
 
   "step.selection": "Selection",
   "step.details": "Details",

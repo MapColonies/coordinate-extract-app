@@ -1,0 +1,53 @@
+.metadataConfirm {
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+  background-color: var(--mdc-theme-background);
+  border-radius: 8px;
+  color: var(--mdc-theme-text-primary-on-background);
+}
+
+.metadataConfirm .formContainer {
+  margin: 0 auto;
+  padding: 20px 20px;
+}
+
+.metadataConfirm .form {
+  background-color: var(--mdc-theme-surface); 
+  padding: 20px;
+  border-radius: var(--mdc-theme-gc-border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.metadataConfirm .formGroup {
+  margin-bottom: 20px;
+}
+
+.metadataConfirm .formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--mdc-theme-text-secondary-on-background);
+  font-size: var(--mdc-theme-gc-font-size);
+}
+
+.metadataConfirm .formControl {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: var(--mdc-theme-gc-alternative-surface); 
+  color: var(--mdc-theme-text-primary-on-background);
+  border: 1px solid var(--mdc-theme-text-hint-on-background);
+  border-radius: var(--mdc-theme-gc-border-radius);
+  font-size: var(--mdc-theme-gc-font-size);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.metadataConfirm .formControl::placeholder {
+  color: var(--mdc-theme-gc-disabled-background);
+}
+
+.metadataConfirm .formControl:focus {
+  outline: none;
+  border-color: var(--mdc-theme-gc-primary);
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
