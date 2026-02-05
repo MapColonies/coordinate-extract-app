@@ -53,3 +53,8 @@
   color: var(--mdc-theme-text-icon-on-dark);
   cursor: pointer;
 }
+
+.mdc-text-field__input .StretchTextField {
+  height: 34px;
+  width: 100%;
+}

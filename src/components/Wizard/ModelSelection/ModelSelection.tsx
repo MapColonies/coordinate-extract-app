@@ -88,13 +88,11 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           <Box className="filter">
             <TextField
               type="text"
-              id="title"
-              name="title"
+              className='StretchTextField'
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
                 debouncedSearch(value);
               }}
-              className="form-control"
               style={{ height: '34px', width: '100%' }}
             />
             <Box className='filterBtnsContainer'>
