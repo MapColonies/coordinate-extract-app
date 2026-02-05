@@ -71,8 +71,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
 
   const {
     "mc:footprint": footprint,
-    "mc:links": links,
-    ...metadata
+    "mc:links": links
   } = (selectedItem || {}) as CatalogTreeNode;
 
   return (

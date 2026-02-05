@@ -11,7 +11,7 @@
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--mdc-theme-gc-gap);
 }
 
 .modelSelection .panelHeader {
@@ -19,10 +19,11 @@
   padding: 0 16px;
   display: flex;
   align-items: center;
+  font-size: var(--mdc-theme-gc-title-font-size);
   font-weight: 600;
   background-color: var(--mdc-theme-background);
   background: transparent;
-  border-radius: 8px;
+  border-radius: var(--mdc-theme-gc-border-radius);
   z-index: 1;
 }
 
@@ -32,7 +33,7 @@
   flex-direction: column;
   max-width: 35%;
   border: 1px solid var(--mdc-theme-border);
-  border-radius: 8px;
+  border-radius: var(--mdc-theme-gc-border-radius);
 }
 
 .modelSelection .tree {
@@ -47,11 +48,11 @@
   flex-direction: column;
   position: relative;
   border: 1px solid var(--mdc-theme-border);
-  border-radius: 8px;
+  border-radius: var(--mdc-theme-gc-border-radius);
 }
 
 .modelSelection .cesium-viewer {
-  border-radius: 8px;
+  border-radius: var(--mdc-theme-gc-border-radius);
 }
 
 .modelSelection .cesium-viewer .cesium-viewer-toolbar > .cesium-toolbar-button.cesium-button:last-child {

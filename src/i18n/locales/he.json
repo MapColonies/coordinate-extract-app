@@ -14,6 +14,15 @@
 
   "details.placeholder": "בחר פריט קטלוגי כדי לצפות בו",
 
+  "form.message.approve": "אישור המודל יחשוף אותו לגורמים מבצעיים לחילוץ קואורדינטות",
+  "form.message.reject": "ביטול האישור יסיר את המודל מחשיפה לגורמים מבצעיים",
+  "form.approver.label": "שם מלא של המבצע *",
+  "form.approver.placeholder": "הזן את שמך המלא",
+  "form.additionalInfo.label": "הערות (אופציונלי)",
+  "form.additionalInfo.placeholder": "הוסף הערות לתיעוד...",
+  "form.password.label": "סיסמה",
+  "form.password.placeholder": "הזן סיסמה שנית לאימות",
+
   "step.selection": "בחירה",
   "step.details": "פרטים",
   "step.update": "עדכון",

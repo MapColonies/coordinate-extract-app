@@ -20,17 +20,17 @@
 }
 
 .dark-theme .mdc-dialog .mdc-dialog__surface {
-  background-color: var(--mdc-theme-alternative-surface, #fff);
-  border-radius: 8px;
+  background-color: var(--mdc-theme-gc-alternative-surface);
+  border-radius: var(--mdc-theme-gc-border-radius);
 }
 
 .dark-theme .mdc-dialog .mdc-dialog__title {
   background: linear-gradient(
       90deg,
-      var(--mdc-theme-gc-selection-background, #fff) 16.15%,
+      var(--mdc-theme-gc-selection-background) 16.15%,
       rgba(69, 85, 112, 0.3) 100%
     ),
-    var(--mdc-theme-alternative-surface, #fff);
+    var(--mdc-theme-gc-alternative-surface);
   padding-bottom: 0;
   line-height: initial;
   display: flex;
