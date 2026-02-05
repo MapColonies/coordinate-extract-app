@@ -1,10 +1,10 @@
-import { SVGProps, useState } from 'react';
+import { useState } from 'react';
 import FormWizard from 'react-form-wizard-component';
 import { useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
-import Header from '../../common/Header/Header';
-import { ModelHistory } from '../common/ModelHistory/ModelHistory';
+import { MetadataHistory } from './MetadataHistory/MetadataHistory';
 import { Step } from '../common/Step/Step';
+import { MetadataConfirm } from './MetadataConfirm/MetadataConfirm';
 import { MetadataForm } from './MetadataForm/MetadataForm';
 import { ModelSelection } from './ModelSelection/ModelSelection';
 import { CatalogTreeNode } from './Wizard.types';
@@ -15,8 +15,6 @@ import { ConfirmSVGIcon } from '../../common/Icons/Svg/confirm';
 
 import 'react-form-wizard-component/dist/style.css';
 import './Wizard.css';
-
-
 
 export const Wizard: React.FC = () => {
   const [catalogTree, setCatalogTree] = useState<CatalogTreeNode[] | undefined>(undefined);
@@ -34,8 +32,7 @@ export const Wizard: React.FC = () => {
     <Box className={`wizardWrapper ${disabled ? 'wizardDisabledNext' : ''}`}>
       <FormWizard
         stepSize='xs'
-        color='#1976d2'
-        // title={<Header />}
+        color='var(--mdc-theme-gc-primary)'
         backButtonText={intl.formatMessage({ id: 'button.back' })}
         nextButtonText={intl.formatMessage({ id: 'button.next' })}
         finishButtonText={intl.formatMessage({ id: 'button.finish' })}
@@ -52,16 +49,17 @@ export const Wizard: React.FC = () => {
         </FormWizard.TabContent>
         <FormWizard.TabContent title={intl.formatMessage({ id: 'step.details' })} icon={<DetaisSVGIcon color="currentColor"/>}>
           <Step selectedItem={selectedItem} title="title.history">
-            <ModelHistory selectedItem={selectedItem} setIsNextBtnDisabled={(val) => { setDisabled(val) }} />
+            <MetadataHistory setIsNextBtnDisabled={(val) => { setDisabled(val) }} selectedItem={selectedItem} />
           </Step>
         </FormWizard.TabContent>
         <FormWizard.TabContent title={intl.formatMessage({ id: 'step.update' })} icon={<UpdateSVGIcon color="currentColor"/>}>
           <Step selectedItem={selectedItem} title="title.updater">
-            <MetadataForm selectedItem={selectedItem} setIsNextBtnDisabled={(val) => { setDisabled(val) }} />
+            <MetadataForm setIsNextBtnDisabled={(val) => { setDisabled(val) }} selectedItem={selectedItem} />
           </Step>
         </FormWizard.TabContent>
         <FormWizard.TabContent title={intl.formatMessage({ id: 'step.confirm' })} icon={<ConfirmSVGIcon color="currentColor"/>}>
           <Step selectedItem={selectedItem} title="title.confirm">
+            <MetadataConfirm setIsNextBtnDisabled={(val) => { setDisabled(val) }} selectedItem={selectedItem} />
           </Step>
         </FormWizard.TabContent>
       </FormWizard >

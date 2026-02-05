@@ -25,10 +25,8 @@ export const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
         className="metadataRow"
         sx={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr", // שני עמודות
-          // gap: "8px",
+          gridTemplateColumns: "1fr 1fr",
           padding: "8px 12px",
-          // borderBottom: "1px solid #eee",
         }}
       >
         <AutoDirectionBox className="metadataLabel">{label}</AutoDirectionBox>
