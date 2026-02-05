@@ -1,44 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IconButton } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 
 import './LayerImageIconRenderer.css';
 
-// interface ILayerImageCellRendererParams {
-//   onClick: (data: ILayerImage, isShown: boolean) => void;
-//   data: ILayerImage;
-// }
+interface ILayerImageCellRendererParams {
+  data: Record<string, unknown>;
+  onClick: (data: Record<string, unknown>, isShown: boolean) => void;
+}
 
-export const LayerImageIconRenderer: React.FC<any> = (props) => {
-  const [modelShown, setModelShown] = useState<boolean>(false);
-
-  useEffect(() => {
-    setModelShown(props.data.layerImageShown as boolean);
-  }, [props.data.layerImageShown]);
-
-  // useEffect(() => {
-  //   if ('productStatus' in props.data && layerImageShown && isBeingDeleted(props.data)) {
-  //     props.onClick(props.data, false);
-  //   }
-  // }, [(props.data as unknown as Record<string, unknown>)?.productStatus]);
-
+export const LayerImageIconRenderer: React.FC<ILayerImageCellRendererParams> = (props) => {
   return (
-    <Box>
+    <Box id='LayerImageIconRenderer'>
       <IconButton
-        // className={modelShown ? 'mc-icon-Show imageChecked' : 'mc-icon-Hide iconNotAllowed'}
-        className={props.className}
-        style={{
-          width: '20px',
-          height: '20px',
-          background: 'red',
-          margin: '2px',
-        }}
+        className={props.data.isShown ? 'icon mc-icon-Show' : 'icon mc-icon-Hide'}
         label="LAYER IMAGE SHOWN ICON"
         onClick={
           (evt: React.MouseEvent<HTMLButtonElement>): void => {
-            const val = !modelShown;
+            const val = !props.data.isShown;
             evt.stopPropagation();
-            setModelShown(val);
             props.onClick(props.data, val);
           }
         }

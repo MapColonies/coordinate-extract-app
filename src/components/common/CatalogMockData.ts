@@ -361,3 +361,46 @@ export const mockCatalogData = [
     ]
   }
 ];
+
+export const mockExtractableRecords = [
+  {
+    "id": "1",
+    "recordName": "e051n36_S",
+    "authorizedBy": "Admin",
+    "data": {
+      "description": "Metadata for record A"
+    }
+  },
+  {
+    "id": "2",
+    "recordName": "srtm100",
+    "authorizedBy": "System",
+    "data": {
+      "description": "Metadata for record B"
+    }
+  },
+  {
+    "id": "3",
+    "recordName": "srtm100",
+    "authorizedBy": "User123",
+    "data": {
+      "description": "Metadata for record C"
+    }
+  },
+  {
+    "id": "4",
+    "recordName": "SR_South_20022025_draco_elbit",
+    "authorizedBy": "ServiceAccount",
+    "data": {
+      "description": "Metadata for record D"
+    }
+  },
+  {
+    "id": "5",
+    "recordName": "מעגן_דגניה_בית זרע_אפיקים 23_06",
+    "authorizedBy": "Admin",
+    "data": {
+      "description": "Metadata for record E"
+    }
+  }
+]

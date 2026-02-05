@@ -4,11 +4,11 @@ import { useI18n } from '../../../../i18n/I18nProvider';
 import { CatalogTreeNode } from '../../../Wizard/Wizard.types';
 import { LayerImageIconRenderer } from '../../LayerImageIconRenderer/LayerImageIconRenderer';
 import CatalogTheme from '../renderers/index';
-import { useTree } from './tree.hook';
+import { useTree } from '../hooks/tree.hook';
 
 interface CatalogTreeProps extends ReactSortableTreeProps {
   treeData: CatalogTreeNode[];
-  onSelectedNode: (selectedNode: CatalogTreeNode | null, updatedTreeData: CatalogTreeNode[]) => void;
+  onSelectedNode: (selectedNode: CatalogTreeNode | null) => void;
 }
 
 export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props) => {
@@ -23,7 +23,7 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
   const { locale } = useI18n();
 
   useEffect(() => {
-    props.onSelectedNode(selectedNode, treeData);
+    props.onSelectedNode(selectedNode);
   }, [selectedNode]);
 
   useEffect(() => {
@@ -69,13 +69,7 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
                 onClick={() => {
                   console.log('clicked');
                 }}
-              />,
-              <LayerImageIconRenderer
-                data={(rowInfo.node as any)}
-                onClick={() => {
-                  console.log('clicked');
-                }}
-              />,
+              />
             ],
         };
       }}

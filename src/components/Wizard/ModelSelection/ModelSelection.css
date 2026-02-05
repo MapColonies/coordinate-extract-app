@@ -55,10 +55,21 @@
   border-radius: var(--mdc-theme-gc-border-radius);
 }
 
-.modelSelection .cesium-viewer .cesium-viewer-toolbar > .cesium-toolbar-button.cesium-button:last-child {
+.modelSelection .cesium-viewer .cesium-viewer-toolbar>.cesium-toolbar-button.cesium-button:last-child {
   display: none;
 }
 
 .modelSelection .cesium-viewer .compass-outer-ring-background.compass-outer-ring-background {
   box-sizing: content-box;
+}
+
+.modelSelection .filterBtnsContainer {
+  padding: 15px;
+  display: flex;
+  justify-content: space-around
+}
+
+.modelSelection .filterBtn {
+  border: 1px solid var(--mdc-theme-border);
+  color: var(--mdc-theme-on-surface);
 }

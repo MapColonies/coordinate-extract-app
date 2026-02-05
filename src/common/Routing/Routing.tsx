@@ -1,12 +1,12 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Box } from '@map-colonies/react-components';
 import Main from '../../components/Main/Main';
 import PageNotFound from '../PageNotFound/PageNotFound';
-
-import './Routing.css';
 import ProtectedRoute from './Login/protected-route';
 import Login from './Login/login';
+
+import './Routing.css';
 
 const Routing: React.FC = (): JSX.Element => {
 

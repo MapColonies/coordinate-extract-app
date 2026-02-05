@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Geometry } from 'geojson';
 import {
@@ -10,15 +10,19 @@ import {
   CesiumMap,
   CesiumSceneMode
 } from '@map-colonies/react-components';
+import { Button, TextField } from '@map-colonies/react-core';
 import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
-// import { mockCatalogData } from '../../common/CatalogMockData';
-import { fetchCatalog } from '../../../common/services/CatalogService';
+import { useDebounce } from '../../../hooks/useDebounce';
 import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
-import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
+import { FilterOpt, ISummary, useTreeCatalogData } from '../../common/Tree/hooks/treeCatalogData.hook';
+import { CatalogTreeNode, IDENTIFIER_FIELD, MAIN_FIELD, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelection.css';
+
+const FILTER_BY_DATA_FIELD = IDENTIFIER_FIELD;
+const QUICK_FILTER_BY_DATA_FIELD = MAIN_FIELD;
 
 export const ModelSelection: React.FC<WizardSelectionProps> = ({
   catalogTreeData,
@@ -27,6 +31,21 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
   setSelectedItem,
   setIsNextBtnDisabled
 }) => {
+  const [filterOptions, setFilterBy] = useState<FilterOpt>({ type: 'field', fieldName: FILTER_BY_DATA_FIELD, fieldValue: '' });
+  const [summary, setSummary] = useState<ISummary | undefined>(undefined);
+
+  const debouncedSearch = useDebounce((value: string) => {
+    setFilterBy({ type: 'field', fieldName: FILTER_BY_DATA_FIELD, fieldValue: value });
+  }, 300);
+
+  const { treeData } = useTreeCatalogData({
+    catalogTreeData,
+    setCatalogTreeData,
+    filter: filterOptions,
+    setSummaryCount: (sum) => {
+      setSummary(sum);
+    }
+  });
 
   useEffect(() => {
     if (!selectedItem) {
@@ -34,32 +53,9 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
     } else {
       setIsNextBtnDisabled(false);
     }
-
-    // if (!catalogTreeData) {
-    //   setTimeout(() => {
-    //     setCatalogTreeData(mockCatalogData as unknown as CatalogTreeNode[]);
-    //   }, 500);
-    // }
-
-    if (catalogTreeData) {
-      return;
-    }
-
-    (async () => {
-      try {
-        const treeData = await fetchCatalog();
-        //@ts-ignore
-        setCatalogTreeData(treeData.children);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    })();
   }, []);
 
-  const handleSelectedItem = (node: CatalogTreeNode | null, updatedTreeData: CatalogTreeNode[]) => {
-    if (updatedTreeData) {
-      setCatalogTreeData(updatedTreeData);
-    }
+  const handleSelectedItem = (node: CatalogTreeNode | null) => {
     if (node) {
       setSelectedItem?.(node);
       setIsNextBtnDisabled(false);
@@ -88,9 +84,42 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           <Box className="panelHeader">
             <FormattedMessage id="title.tree" />
           </Box>
+
+          <Box className="filter">
+            <TextField
+              type="text"
+              className='stretchTextField'
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const value = e.target.value;
+                debouncedSearch(value);
+              }}
+            />
+            <Box className='filterBtnsContainer'>
+              <Button className='filterBtn'
+                onClick={() => setFilterBy({ type: 'none' })}>
+                <FormattedMessage id="tree.filter.all" values={{ sum: summary?.all }} />
+              </Button>
+              <Button className='filterBtn'
+                onClick={() => setFilterBy({
+                  type: 'field',
+                  fieldName: QUICK_FILTER_BY_DATA_FIELD,
+                  fieldValue: true
+                })}>
+                <FormattedMessage id="tree.filter.approved" values={{ sum: summary?.extractable }} />
+              </Button>
+              <Button className='filterBtn'
+                onClick={() => setFilterBy({
+                  type: 'field',
+                  fieldName: QUICK_FILTER_BY_DATA_FIELD,
+                  fieldValue: false
+                })}>
+                <FormattedMessage id="tree.filter.not-approved" values={{ sum: summary?.notExtractable }} />
+              </Button>
+            </Box>
+          </Box>
           <Box style={treeTheme as React.CSSProperties} className="tree">
             <CatalogTree
-              treeData={catalogTreeData ?? []}
+              treeData={treeData as CatalogTreeNode[]}
               onSelectedNode={handleSelectedItem}
             />
           </Box>
