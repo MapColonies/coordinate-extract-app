@@ -1,6 +1,6 @@
 .modelSelection {
   width: 100%;
-  height: 69vh;
+  height: var(--mdc-theme-gc-step-height);
   margin: 0 auto;
   background: var(--mdc-theme-background);
   display: flex;

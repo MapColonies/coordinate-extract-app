@@ -212,7 +212,6 @@ class FileThemeNodeContentRenderer extends Component {
                       dir=''
                       className={styles.rowLabel} 
                       tag={"div"} 
-                      customTooltipText={tooltipText}
                     >
                       <span className={styles.rowTitle}>
                        {tooltipText}

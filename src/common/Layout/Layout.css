@@ -3,11 +3,11 @@
   box-sizing: border-box;
   background-color: var(--mdc-theme-background);
   color: var(--mdc-theme-on-primary);
-  padding-top: 20px;
 }
 
 .Layout > header {
   height: 60px;
+  border-bottom: 1px solid var(--mdc-theme-border);
 }
 
 .Layout > footer {
@@ -15,9 +15,9 @@
 }
 
 .Layout > main {
-  height: 100%;
+  height: calc(100% - 60px - 10px);
+  overflow-y: auto;
 }
-
 .dark-theme .mdc-dialog .mdc-dialog__surface {
   background-color: var(--mdc-theme-gc-alternative-surface);
   border-radius: var(--mdc-theme-gc-border-radius);
