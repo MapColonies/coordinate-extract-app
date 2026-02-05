@@ -48,7 +48,7 @@ export const Wizard: React.FC = () => {
           />
         </FormWizard.TabContent>
         <FormWizard.TabContent title={intl.formatMessage({ id: 'step.details' })} icon={<DetaisSVGIcon color="currentColor"/>}>
-          <Step selectedItem={selectedItem} title="title.history">
+          <Step selectedItem={selectedItem} title="panel.history.title">
             <MetadataHistory
               setIsNextBtnDisabled={(val) => { setDisabled(val) }}
               selectedItem={selectedItem}
@@ -56,7 +56,7 @@ export const Wizard: React.FC = () => {
           </Step>
         </FormWizard.TabContent>
         <FormWizard.TabContent title={intl.formatMessage({ id: 'step.update' })} icon={<UpdateSVGIcon color="currentColor"/>}>
-          <Step selectedItem={selectedItem} title="title.updater">
+          <Step selectedItem={selectedItem} title="panel.updater.title">
             <MetadataForm
               setIsNextBtnDisabled={(val) => { setDisabled(val) }}
               selectedItem={selectedItem}
@@ -65,7 +65,7 @@ export const Wizard: React.FC = () => {
           </Step>
         </FormWizard.TabContent>
         <FormWizard.TabContent title={intl.formatMessage({ id: 'step.confirm' })} icon={<ConfirmSVGIcon color="currentColor"/>}>
-          <Step selectedItem={selectedItem} title="title.confirm">
+          <Step selectedItem={selectedItem} title="panel.confirm.title">
             {
               selectedItem &&
               <MetadataConfirm

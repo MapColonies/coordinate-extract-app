@@ -1,0 +1,71 @@
+.historyContainer {
+  padding: 20px;
+  height: 100%;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.historyCard {
+  background-color: var(--mdc-theme-surface, #1e1e1e);
+  border: 1px solid var(--mdc-theme-text-hint-on-background, #444);
+  border-radius: 8px;
+  padding: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.historyCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border-color: var(--mdc-theme-primary, #2196f3);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.recordName {
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.authorizedBy {
+  background-color: rgba(33, 150, 243, 0.15);
+  color: var(--mdc-theme-primary, #2196f3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.cardContent .description {
+  color: var(--mdc-theme-text-secondary-on-background, #b0b0b0);
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.cardFooter {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.recordId {
+  color: var(--mdc-theme-text-hint-on-background, #757575);
+  font-size: 11px;
+}
+
+.historyLoading, .noData {
+  text-align: center;
+  padding: 40px;
+  color: var(--mdc-theme-text-secondary-on-background);
+}

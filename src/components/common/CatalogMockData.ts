@@ -403,4 +403,4 @@ export const mockExtractableRecords = [
       "description": "Metadata for record E"
     }
   }
-]
+];

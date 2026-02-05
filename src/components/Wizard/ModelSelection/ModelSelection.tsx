@@ -82,9 +82,8 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
       <Box className="viewArea">
         <Box className="treeMapContainer">
           <Box className="panelHeader">
-            <FormattedMessage id="title.tree" />
+            <FormattedMessage id="tree.title" />
           </Box>
-
           <Box className="filter">
             <TextField
               type="text"
