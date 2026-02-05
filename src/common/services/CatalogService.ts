@@ -1,4 +1,4 @@
-import { ExtractableRecords } from '../../components/common/CatalogMockData';
+import { mockExtractableRecords } from '../../components/common/CatalogMockData';
 import { createCatalogTree } from '../../components/common/Tree/TreeGroup';
 import { IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
 import appConfig from '../../utils/Config';
@@ -16,7 +16,7 @@ export const fetchCatalog = async () => {
   });
   const parsed = parseQueryResults(res.data, 'mc:MC3DRecord') as Record<string, unknown>[];
 
-  const getExtractableRecords = ExtractableRecords;
+  const getExtractableRecords = mockExtractableRecords;
   const enriched = enrichRecords(parsed, getExtractableRecords);
 
   return {

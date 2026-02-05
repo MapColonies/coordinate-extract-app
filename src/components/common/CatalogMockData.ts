@@ -362,7 +362,7 @@ export const mockCatalogData = [
   }
 ];
 
-export const ExtractableRecords = [
+export const mockExtractableRecords = [
   {
     "id": "1",
     "recordName": "e051n36_S",
