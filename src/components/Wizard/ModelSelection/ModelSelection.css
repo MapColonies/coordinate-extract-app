@@ -19,6 +19,7 @@
   padding: 0 16px;
   display: flex;
   align-items: center;
+  font-size: var(--mdc-theme-gc-title-font-size);
   font-weight: 600;
   background-color: var(--mdc-theme-background);
   background: transparent;
