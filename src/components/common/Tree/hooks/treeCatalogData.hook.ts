@@ -1,7 +1,7 @@
-import { TreeItem } from "react-sortable-tree";
-import { useEffect, useMemo } from "react";
-import { fetchCatalog } from "../../../../common/services/CatalogService";
-import { CatalogTreeNode } from "../../../Wizard/Wizard.types";
+import { useEffect, useMemo } from 'react';
+import { TreeItem } from 'react-sortable-tree';
+import { fetchCatalog } from '../../../../common/services/CatalogService';
+import { CatalogTreeNode } from '../../../Wizard/Wizard.types';
 
 export type FilterOpt =
   | {
@@ -13,9 +13,9 @@ export type FilterOpt =
   }
 
 export interface ISummary {
-  all: number,
-  extractable: number,
-  notExtractable: number
+  all: number;
+  extractable:number;
+  notExtractable: number;
 }
 
 interface UseTreeCatalogDataProps {
@@ -69,7 +69,7 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
     }).filter(Boolean);
 
     return filteredCatalog;
-  }
+  };
 
   const filterByField = (fieldName: string, fieldValue: unknown) => {
     if (!props.catalogTreeData) {
@@ -78,7 +78,7 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
     return filterByPredicate(props.catalogTreeData, (treeItem) => {
       return treeItem[fieldName]?.toString().includes(String(fieldValue));
     });
-  }
+  };
 
   const treeData = useMemo(() => {
     if (!props.catalogTreeData) {
@@ -92,5 +92,5 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
 
   return {
     treeData
-  }
-}
+  };
+};

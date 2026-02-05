@@ -63,10 +63,6 @@
   box-sizing: content-box;
 }
 
-.modelSelection .cesium-viewer .compass-outer-ring-background.compass-outer-ring-background {
-  box-sizing: content-box;
-}
-
 .modelSelection .filterBtnsContainer {
   padding: 15px;
   display: flex;
