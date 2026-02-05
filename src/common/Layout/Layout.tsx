@@ -5,6 +5,7 @@ import { RMWCProvider, ThemeProvider as RMWCThemeProvider, Themes } from '@map-c
 import version from '../../../package.json';
 import { useI18n } from '../../i18n/I18nProvider';
 import Routing from '../Routing/Routing';
+import Header from '../Header/Header';
 
 import './Layout.css';
 
@@ -81,17 +82,12 @@ const Layout: React.FC = (): JSX.Element => {
       <RMWCThemeProvider className={`${theme.type}-theme`} options={theme}>
 
         <Box className="Layout">
-
           <header>
+            <Header />
           </header>
-
           <main>
             <Routing />
           </main>
-
-          <footer>
-          </footer>
-
         </Box>
 
       </RMWCThemeProvider>
