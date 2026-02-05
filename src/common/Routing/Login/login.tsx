@@ -3,15 +3,17 @@ import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "./auth-context";
 import { Box } from "@map-colonies/react-components";
-import { TextField } from "@map-colonies/react-core";
+import { Button, TextField } from "@map-colonies/react-core";
 import { head } from "lodash";
 
 import "./login.css";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Login: React.FC = () => {
   const { login } = useAuth();
   const history = useHistory();
   const location = useLocation<{ from?: string }>();
+  const intl = useIntl();
   const from = location.state?.from || "/";
 
   const handleLogin = () => {
@@ -21,13 +23,14 @@ const Login: React.FC = () => {
 
   //   return <button onClick={handleLogin}>Login</button>;
   return (
+    <Box className="centerContainer">
       <Box className="loginContainer">
         <TextField
           // invalid={!isPasswordValid}
-          className="passwordInput"
-          label="User name"/*{intl.formatMessage({
-            id: 'user-role.dialog.password.input.placeholder',
-          })}*/
+          className="loginControl"
+          label={intl.formatMessage({
+            id: 'auth.fields.user-name.label',
+          })}
           type="text"
           // onChange={(e: React.FormEvent<HTMLInputElement>): void => {
           //   setPassword(e.currentTarget.value.trim());
@@ -42,10 +45,10 @@ const Login: React.FC = () => {
         />
         <TextField
           // invalid={!isPasswordValid}
-          className="passwordInput"
-          // label={intl.formatMessage({
-          //   id: 'user-role.dialog.password.input.placeholder',
-          // })}
+          className="loginControl"
+          label={intl.formatMessage({
+            id: 'auth.fields.user-pwd.label',
+          })}
           type="password"
           // onChange={(e: React.FormEvent<HTMLInputElement>): void => {
           //   setPassword(e.currentTarget.value.trim());
@@ -58,7 +61,11 @@ const Login: React.FC = () => {
           // }}
           // value={password}
         />
+        <Button raised onClick={handleLogin} style={{width: '100%'}}>
+          <FormattedMessage id="auth.login.btn"/>
+        </Button>
       </Box>
+    </Box>
   );
 };
 

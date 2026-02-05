@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import appConfig from './utils/Config';
 import { AuthProvider } from './common/Routing/Login/auth-context';
 
+import '@map-colonies/react-core/dist/button/styles';
 import '@map-colonies/react-core/dist/textfield/styles';
 import './dark-theme.css';
 import './index.css';

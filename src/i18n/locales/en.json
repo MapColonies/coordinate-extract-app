@@ -18,5 +18,11 @@
 
   "button.back": "Back",
   "button.next": "Next",
-  "button.finish": "Finish"
+  "button.finish": "Finish",
+
+  "auth.login.btn": "Login",
+  "auth.logout.btn": "Logout",
+
+  "auth.fields.user-name.label": "User name",
+  "auth.fields.user-pwd.label": "Password"
 }

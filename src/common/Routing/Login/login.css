@@ -1,3 +1,15 @@
+.centerContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .loginContainer {
   border: 2px solid red;
+}
+
+.loginControl {
+  display: block;
+  margin: 20px;
 }
