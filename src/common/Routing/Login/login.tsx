@@ -1,13 +1,12 @@
 // login.tsx
 import React from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useHistory, useLocation } from "react-router-dom";
-import { useAuth } from "./auth-context";
 import { Box } from "@map-colonies/react-components";
 import { Button, TextField } from "@map-colonies/react-core";
-import { head } from "lodash";
+import { useAuth } from "./auth-context";
 
 import "./login.css";
-import { FormattedMessage, useIntl } from "react-intl";
 
 const Login: React.FC = () => {
   const { login } = useAuth();
