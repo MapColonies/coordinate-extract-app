@@ -93,7 +93,6 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
                 const value = e.target.value;
                 debouncedSearch(value);
               }}
-              style={{ height: '34px', width: '100%' }}
             />
             <Box className='filterBtnsContainer'>
               <Button className='filterBtn'

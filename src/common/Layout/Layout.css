@@ -54,7 +54,7 @@
   cursor: pointer;
 }
 
-.mdc-text-field__input .StretchTextField {
+.Layout .StretchTextField.mdc-text-field {
   height: 34px;
   width: 100%;
 }
