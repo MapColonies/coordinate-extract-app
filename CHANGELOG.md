@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.0](https://github.com/MapColonies/coordinate-extract-app/compare/v1.0.0...v1.1.0) (2026-02-05)
+
+
+### Features
+
+* step 3 metadata form ([da40523](https://github.com/MapColonies/coordinate-extract-app/commit/da405230c4dbd92e80e088d2349b4cb181f96eee))
+* step 4 metadata confirm ([ab389ec](https://github.com/MapColonies/coordinate-extract-app/commit/ab389ec170efb50724ca82aaf8ddbf22005b02ec))
+
+
+### Bug Fixes
+
+* layout and svgs ([70690c6](https://github.com/MapColonies/coordinate-extract-app/commit/70690c6361e17e6afd4cd672e15f5e1d604d88bc))
+* metadata form ([c54244f](https://github.com/MapColonies/coordinate-extract-app/commit/c54244f99b9f59e87a5158cc469bf6af88149e17))
+* titles ([f3530b2](https://github.com/MapColonies/coordinate-extract-app/commit/f3530b2e1338794f7ab16cd48a6f3404621939ec))
+
 ## 1.0.0 (2026-02-04)
 
 
