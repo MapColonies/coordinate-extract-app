@@ -1,4 +1,32 @@
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
 .Header .Title {
   text-align: center;
   color: var(--mdc-theme-on-primary);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  display: flex;
+  gap: 8px;
+}
+
+.Header .Title .Logo {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--mdc-theme-text-icon-on-background);
+  border-radius: 0.5rem;
+}
+
+.Header .userInfo {
+  margin-inline-start: auto;
+  display: flex;
+  gap: 8px;
 }

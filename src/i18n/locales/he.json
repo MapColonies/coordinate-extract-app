@@ -1,5 +1,5 @@
 {
-  "app.title": "אפליקציית אישור מודל לחילוץ נ.צ.",
+  "app.title": "אישור מודל לחילוץ נ.צ.",
   "app.welcome": "ברוכים הבאים לאפליקציית אישור מודל לחילוץ נ.צ.",
 
   "title.tree": "בחירת מודל",
@@ -27,5 +27,11 @@
 
   "button.back": "חזרה",
   "button.next": "הבא",
-  "button.finish": "סיום"
+  "button.finish": "סיום",
+
+  "auth.login.btn": "התחבר",
+  "auth.logout.btn": "התנתק",
+
+  "auth.fields.user-name.label": "שם משתמש",
+  "auth.fields.user-pwd.label": "סיסמה"
 }

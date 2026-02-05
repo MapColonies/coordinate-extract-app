@@ -1,0 +1,37 @@
+/* INPUT CUSTOMIZATION */
+
+.dark-theme .mdc-text-field {
+  background-color: transparent;
+  border: 1px solid var(--mdc-theme-gc-selection-background, #fff);
+  border-radius: 0;
+  color: #fff;
+  /* height: 24px;
+  width: 100%; */
+}
+
+.dark-theme label.mdc-text-field.mdc-text-field--disabled {
+  opacity: 0.3;
+  background-color: var(--mdc-theme-text-disabled-on-light);
+}
+
+.dark-theme .mdc-form-field > label {
+  color: var(--mdc-theme-text-primary-on-dark);
+}
+
+.dark-theme .mdc-text-field--invalid .mdc-text-field__input {
+  color: var(--mdc-theme-gc-error-high, red) !important;
+}
+  
+.dark-theme .mdc-text-field__input {
+  color: var(--mdc-theme-text-primary-on-dark, #fff) !important;
+}
+
+.dark-theme .mdc-text-field__input::placeholder {
+  color: var(--mdc-theme-text-hint-on-dark, #fff) !important;
+  opacity: 0.5;
+}
+
+.dark-theme .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  /* color: var(--mdc-theme-text-icon-on-background); */
+  color: var(--mdc-theme-primary);
+}
