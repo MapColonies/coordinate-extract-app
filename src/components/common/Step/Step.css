@@ -4,14 +4,14 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--mdc-theme-gc-gap);
 }
 
 .step .viewArea {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--mdc-theme-gc-gap);
 }
 
 .step .panelHeader {
@@ -21,7 +21,7 @@
   align-items: center;
   font-weight: 600;
   background-color: var(--mdc-theme-background);
-  border-radius: 8px;
+  border-radius: var(--mdc-theme-gc-border-radius);
   background: transparent;
 }
 
@@ -38,5 +38,5 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--mdc-theme-border);
-  border-radius: 8px;
+  border-radius: var(--mdc-theme-gc-border-radius);
 }

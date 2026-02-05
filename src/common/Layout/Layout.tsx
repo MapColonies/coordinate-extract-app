@@ -29,28 +29,26 @@ const Layout: React.FC = (): JSX.Element => {
   const CustomTheme = {
     lightTheme: {},
     darkTheme: {
-      GC_BUTTON_DISABLED_BACKGROUND: '#45557080',
-
+      GC_PRIMARY: '#1976D2',
+      GC_ALTERNATIVE_SURFACE: '#121212',
       GC_TAB_ACTIVE_BACKGROUND: '#455570',
-      GC_ALTERNATIVE_SURFACE: '#2D3748',
-
       GC_SELECTION_BACKGROUND: '#455570',
-      GC_HOVER_BACKGROUND: 'rgba(33, 150, 243, 0.1)',
+      GC_HOVERED_BACKGROUND: 'rgba(33, 150, 243, 0.1)',
+      GC_DISABLED_BACKGROUND: '#45557080',
 
-      GC_WARNING_HIGH: '#FFA032', /* Orange */
-      GC_WARNING_MEDIUM: '#FFEB87', /* Yellow */
       GC_SUCCESS: 'green',
-      GC_ERROR_HIGH: '#CC1616', /* Dark Red */
-      GC_ERROR_MEDIUM: '#FF3636', /* Red */
+      GC_WARNING: '#FFA032',
+      GC_ERROR: '#CC1616',
 
-      GC_PRIORITY_HIGHEST: '#FF3636', /* Dark Red */
-      GC_PRIORITY_HIGH: '#FE6814', /* Orange */
-      GC_PRIORITY_NORMAL: '#00B45A', /* Green */
-      GC_PRIORITY_LOW: '#FFB932', /* Yellow */
-      GC_PRIORITY_LOWEST: '#00B6EE', /* Light Blue */
+      GC_PRIORITY_HIGHEST: '#FF3636',
+      GC_PRIORITY_HIGH: '#FE6814',
+      GC_PRIORITY_NORMAL: '#00B45A',
+      GC_PRIORITY_LOW: '#FFB932',
+      GC_PRIORITY_LOWEST: '#00B6EE',
 
-      GC_MENU_ITEM_HEIGHT: '32px',
-      GC_CONTEXT_MENU_WIDTH: '260px',
+      GC_BORDER_RADIUS: '8px',
+      GC_GAP: '12px',
+      GC_FONT_SIZE: '14px',
     },
   };
 
@@ -58,7 +56,6 @@ const Layout: React.FC = (): JSX.Element => {
     ...Themes.darkTheme,
     background: '#000',
     surface: '#000',
-    alternativeSurface: '#121212',
     border: '#1e293b',
     ...(Object.fromEntries(Object.entries(CustomTheme.darkTheme).map(([key, value]) => [camelize(key), value])))
   };

@@ -2,7 +2,7 @@
   width: 70%;
   margin: 0 auto;
   border: 1px solid var(--mdc-theme-border);
-  border-radius: 8px;
+  border-radius: var(--mdc-theme-gc-border-radius);
   display: flex;
   flex-direction: column;
   overflow: hidden;
