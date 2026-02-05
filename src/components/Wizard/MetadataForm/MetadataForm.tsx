@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
@@ -6,7 +6,7 @@ import { WizardStepProps } from '../Wizard.types';
 
 import './MetadataForm.css';
 
-export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
+export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem, setSelectedItem }) => {
   const intl = useIntl();
 
   const [formData, setFormData] = useState({
@@ -14,12 +14,31 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
     additionalInfo: ''
   });
 
+  useEffect(() => {
+    setIsNextBtnDisabled(true);
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    setSelectedItem?.({
+      ...selectedItem,
+       [name]: value
+    });
+    if (name === 'approver') {
+      if (value.trim() === '') {
+        setIsNextBtnDisabled(true);
+      } else {
+        setIsNextBtnDisabled(false);
+      }
+    } else if (formData.approver.trim() === '') {
+      setIsNextBtnDisabled(true);
+    } else {
+      setIsNextBtnDisabled(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
