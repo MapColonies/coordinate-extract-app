@@ -1,8 +1,6 @@
 .wizardWrapper {
   width: 70%;
   margin: 0 auto;
-  border: 1px solid var(--mdc-theme-border);
-  border-radius: var(--mdc-theme-gc-border-radius);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -31,7 +29,7 @@ body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left 
 }
 
 .wizardWrapper .react-form-wizard .wizard-nav {
-  padding: 0 40px;
+  padding: 8px 40px 0px 40px;
 }
 
 .wizardWrapper .react-form-wizard .wizard-tab-content {

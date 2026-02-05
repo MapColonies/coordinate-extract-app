@@ -51,6 +51,8 @@ const Layout: React.FC = (): JSX.Element => {
       GC_GAP: '12px',
       GC_FONT_SIZE: '14px',
       GC_TITLE_FONT_SIZE: '15px',
+
+      GC_STEP_HEIGHT: '690px',
     },
   };
 
