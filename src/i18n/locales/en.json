@@ -1,16 +1,27 @@
 {
   "app.title": "Coordinate Extract App",
-  "app.welcome": "Welcome to the Coordinate Extract App!",
 
-  "title.tree": "Catalog Tree",
+  "step.selection": "Selection",
+  "step.details": "Details",
+  "step.update": "Update",
+  "step.confirm": "Confirm",
+
+  "button.back": "Back",
+  "button.next": "Next",
+  "button.finish": "Finish",
+
+  "general.loading": "Loading...",
+  "general.noData": "Empty",
+
+  "tree.title": "Catalog Tree",
   "tree.filter.all": "All ({sum})",
   "tree.filter.approved": "Approved ({sum})",
   "tree.filter.not-approved": "Not Approved ({sum})",
-  "title.map": "Catalog Map",
-  "title.footprint": "Footprint",
-  "title.history": "History",
-  "title.updater": "Updater",
-  "title.confirm": "Confirm",
+
+  "panel.footprint.title": "Footprint",
+  "panel.history.title": "History",
+  "panel.updater.title": "Updater",
+  "panel.confirm.title": "Confirm",
 
   "details.placeholder": "Select a catalog item to view its footprint and details",
 
@@ -28,15 +39,6 @@
   "form.additionalInfo.placeholder": "Add comments here...",
   "form.password.label": "Password",
   "form.password.placeholder": "Re-enter password for confirmation to proceed with the action",
-
-  "step.selection": "Selection",
-  "step.details": "Details",
-  "step.update": "Update",
-  "step.confirm": "Confirm",
-
-  "button.back": "Back",
-  "button.next": "Next",
-  "button.finish": "Finish",
 
   "auth.login.btn": "Login",
   "auth.logout.btn": "Logout",

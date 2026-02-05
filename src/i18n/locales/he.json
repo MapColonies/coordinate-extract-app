@@ -1,16 +1,27 @@
 {
   "app.title": "אישור מודל לחילוץ נ.צ.",
-  "app.welcome": "ברוכים הבאים לאפליקציית אישור מודל לחילוץ נ.צ.",
 
-  "title.tree": "בחירת מודל",
+  "step.selection": "בחירה",
+  "step.details": "פרטים",
+  "step.update": "עדכון",
+  "step.confirm": "אישור",
+
+  "button.back": "חזרה",
+  "button.next": "הבא",
+  "button.finish": "סיום",
+
+  "general.loading": "בטעינה...",
+  "general.noData": "אין נתונים להצגה",
+
+  "tree.title": "בחירת מודל",
   "tree.filter.all": "הכול ({sum})",
   "tree.filter.approved": "מאושר ({sum})",
   "tree.filter.not-approved": "לא מאושר ({sum})",
-  "title.map": "תצוגה מקדימה",
-  "title.footprint": "תיחום גאוגרפי",
-  "title.history": "היסטוריית אישורים",
-  "title.updater": "פרטי מבצע",
-  "title.confirm": "אימות זהות",
+
+  "panel.footprint.title": "תיחום גאוגרפי",
+  "panel.history.title": "היסטוריית אישורים",
+  "panel.updater.title": "פרטי מבצע",
+  "panel.confirm.title": "אימות זהות",
 
   "details.placeholder": "בחר פריט קטלוגי כדי לצפות בו",
 
@@ -28,15 +39,6 @@
   "form.additionalInfo.placeholder": "הוסף הערות לתיעוד...",
   "form.password.label": "סיסמה",
   "form.password.placeholder": "הזן סיסמה שנית לאימות וביצוע הפעולה",
-
-  "step.selection": "בחירה",
-  "step.details": "פרטים",
-  "step.update": "עדכון",
-  "step.confirm": "אישור",
-
-  "button.back": "חזרה",
-  "button.next": "הבא",
-  "button.finish": "סיום",
 
   "auth.login.btn": "התחבר",
   "auth.logout.btn": "התנתק",

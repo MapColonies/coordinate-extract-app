@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
@@ -13,12 +13,21 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
     password: ''
   });
 
+  useEffect(() => {
+    setIsNextBtnDisabled(true);
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    if (value.trim() === '') {
+      setIsNextBtnDisabled(true);
+    } else {
+      setIsNextBtnDisabled(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {

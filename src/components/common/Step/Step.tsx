@@ -38,7 +38,7 @@ export const Step: React.FC<PropsWithChildren<StepProps>> = ({ children, selecte
         </Box>
         <Box className="panel">
           <Typography className="panelHeader">
-            <FormattedMessage id="title.footprint" />
+            <FormattedMessage id="panel.footprint.title" />
           </Typography>
           {
             footprint &&
