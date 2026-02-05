@@ -10,6 +10,7 @@ export interface CatalogTreeNode extends TreeItem {
 export interface WizardStepProps {
   setIsNextBtnDisabled: (val: boolean) => void;
   selectedItem?: CatalogTreeNode;
+  setSelectedItem?: (item?: CatalogTreeNode) => void;
 }
 
 export interface WizardSelectionProps extends WizardStepProps {
