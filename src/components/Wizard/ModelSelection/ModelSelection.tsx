@@ -88,7 +88,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           <Box className="filter">
             <TextField
               type="text"
-              className='StretchTextField'
+              className='stretchTextField'
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
                 debouncedSearch(value);

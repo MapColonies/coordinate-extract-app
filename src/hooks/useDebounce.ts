@@ -1,5 +1,5 @@
-import { debounce } from "lodash";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from 'react';
+import { debounce } from 'lodash';
 
 export const useDebounce = (onUpdate: (value: string) => void, debounceTime: number = 500) => {
   const debouncedSearch = useMemo(() =>
@@ -12,4 +12,4 @@ export const useDebounce = (onUpdate: (value: string) => void, debounceTime: num
   }, [debouncedSearch]);
 
   return debouncedSearch
-}
+};
