@@ -4,7 +4,7 @@ import Layout from './common/Layout/Layout';
 import { I18nProvider } from './i18n/I18nProvider';
 import reportWebVitals from './reportWebVitals';
 import appConfig from './utils/Config';
-import { AuthProvider } from './common/Routing/Login/auth-context';
+import { AuthProvider } from './common/Routing/Login/AuthContext';
 
 import '@map-colonies/react-core/dist/button/styles';
 import '@map-colonies/react-core/dist/textfield/styles';

@@ -10,7 +10,7 @@ export type FilterOpt =
     fieldValue: unknown
   } | {
     type: 'none'
-  }
+  };
 
 export interface ISummary {
   all: number;

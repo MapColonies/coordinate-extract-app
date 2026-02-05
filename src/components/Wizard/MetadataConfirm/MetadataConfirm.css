@@ -51,3 +51,29 @@
   border-color: var(--mdc-theme-gc-primary);
   box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
 }
+
+.metadataConfirm .formHeader {
+  border-left: 4px solid var(--mdc-theme-gc-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  margin: 20px 20px 60px;
+}
+
+body[dir='rtl'] .metadataConfirm .formHeader {
+  border-left: none;
+  border-right: 4px solid var(--mdc-theme-gc-primary);
+}
+
+.metadataConfirm .formHeader .title {
+  color: var(--mdc-theme-gc-primary);
+  font-size: var(--mdc-theme-gc-title-font-size);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.metadataConfirm .formHeader .line {
+  color: var(--mdc-theme-text-primary-on-background);
+  font-size: var(--mdc-theme-gc-font-size);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
