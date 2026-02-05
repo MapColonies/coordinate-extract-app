@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Button, Icon } from '@map-colonies/react-core';
-import { useAuth } from '../Routing/Login/auth-context';
+import { useAuth } from '../Routing/Login/AuthContext';
 import { ExitSVGIcon } from '../Icons/Svg/exit';
 import { LogoSVGIcon } from '../Icons/Svg/logo';
 

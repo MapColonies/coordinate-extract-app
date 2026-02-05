@@ -59,7 +59,7 @@ export const Wizard: React.FC = () => {
         </FormWizard.TabContent>
         <FormWizard.TabContent title={intl.formatMessage({ id: 'step.confirm' })} icon={<ConfirmSVGIcon color="currentColor"/>}>
           <Step selectedItem={selectedItem} title="title.confirm">
-            <MetadataConfirm setIsNextBtnDisabled={(val) => { setDisabled(val) }} selectedItem={selectedItem} />
+            {selectedItem && <MetadataConfirm setIsNextBtnDisabled={(val) => { setDisabled(val) }} selectedItem={selectedItem} />}
           </Step>
         </FormWizard.TabContent>
       </FormWizard >

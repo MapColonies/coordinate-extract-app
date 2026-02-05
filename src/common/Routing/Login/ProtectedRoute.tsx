@@ -1,6 +1,6 @@
-import React from "react";
-import { Route, Redirect, RouteProps } from "react-router-dom";
-import { useAuth } from "./auth-context";
+import React from 'react';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 interface ProtectedRouteProps extends RouteProps {
   component: React.ComponentType<any>;

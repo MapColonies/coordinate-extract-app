@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import { Box } from '@map-colonies/react-components';
 import Main from '../../components/Main/Main';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import ProtectedRoute from './Login/protected-route';
-import Login from './Login/login';
+import Login from './Login/Login';
+import ProtectedRoute from './Login/ProtectedRoute';
 
 import './Routing.css';
 
