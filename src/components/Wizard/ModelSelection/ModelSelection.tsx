@@ -10,16 +10,19 @@ import {
   CesiumMap,
   CesiumSceneMode
 } from '@map-colonies/react-components';
-import { Button } from '@map-colonies/react-core';
+import { Button, TextField } from '@map-colonies/react-core';
 import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
-import { FilterOpt, Summery, useTreeCatalogData } from '../../common/Tree/hooks/treeCatalogData.hook';
-import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
+import { FilterOpt, ISummary, useTreeCatalogData } from '../../common/Tree/hooks/treeCatalogData.hook';
+import { CatalogTreeNode, IDENTIFIER_FIELD, MAIN_FIELD, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelection.css';
+
+const FILTER_BY_DATA_FIELD = IDENTIFIER_FIELD;
+const QUICK_FILTER_BY_DATA_FIELD = MAIN_FIELD;
 
 export const ModelSelection: React.FC<WizardSelectionProps> = ({
   catalogTreeData,
@@ -28,19 +31,19 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
   setSelectedItem,
   setIsNextBtnDisabled
 }) => {
-  const [filterOptions, setFilterBy] = useState<FilterOpt>({ type: 'text', text: '' });
-  const [summery, setSummery] = useState<Summery | undefined>(undefined);
+  const [filterOptions, setFilterBy] = useState<FilterOpt>({ type: 'field', fieldName: FILTER_BY_DATA_FIELD, fieldValue: '' });
+  const [summary, setSummary] = useState<ISummary | undefined>(undefined);
 
   const debouncedSearch = useDebounce((value: string) => {
-    setFilterBy({ type: 'text', text: value });
+    setFilterBy({ type: 'field', fieldName: FILTER_BY_DATA_FIELD, fieldValue: value });
   }, 300);
 
   const { treeData } = useTreeCatalogData({
     catalogTreeData,
     setCatalogTreeData,
     filter: filterOptions,
-    setSummeryCount: (sum) => {
-      setSummery(sum);
+    setSummaryCount: (sum) => {
+      setSummary(sum);
     }
   });
 
@@ -83,37 +86,37 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           </Box>
 
           <Box className="filter">
-            <input
+            <TextField
               type="text"
               id="title"
               name="title"
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
                 debouncedSearch(value);
               }}
-              required
               className="form-control"
+              style={{ height: '34px', width: '100%' }}
             />
             <Box className='filterBtnsContainer'>
               <Button className='filterBtn'
                 onClick={() => setFilterBy({ type: 'none' })}>
-                <FormattedMessage id="tree.filter.all" values={{ sum: summery?.all }} />
+                <FormattedMessage id="tree.filter.all" values={{ sum: summary?.all }} />
               </Button>
               <Button className='filterBtn'
                 onClick={() => setFilterBy({
                   type: 'field',
-                  fieldName: 'isApproved',
-                  fieldValue: 'true'
+                  fieldName: QUICK_FILTER_BY_DATA_FIELD,
+                  fieldValue: true
                 })}>
-                <FormattedMessage id="tree.filter.approved" values={{ sum: summery?.extractable }} />
+                <FormattedMessage id="tree.filter.approved" values={{ sum: summary?.extractable }} />
               </Button>
               <Button className='filterBtn'
                 onClick={() => setFilterBy({
                   type: 'field',
-                  fieldName: 'isApproved',
-                  fieldValue: 'false'
+                  fieldName: QUICK_FILTER_BY_DATA_FIELD,
+                  fieldValue: false
                 })}>
-                <FormattedMessage id="tree.filter.not-approved" values={{ sum: summery?.notExtractable }} />
+                <FormattedMessage id="tree.filter.not-approved" values={{ sum: summary?.notExtractable }} />
               </Button>
             </Box>
           </Box>

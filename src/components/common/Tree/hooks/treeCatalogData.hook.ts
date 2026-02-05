@@ -1,22 +1,18 @@
 import { TreeItem } from "react-sortable-tree";
-import { CatalogTreeNode } from "../../../Wizard/Wizard.types";
 import { useEffect, useMemo } from "react";
 import { fetchCatalog } from "../../../../common/services/CatalogService";
+import { CatalogTreeNode } from "../../../Wizard/Wizard.types";
 
 export type FilterOpt =
   | {
-    type: 'text'
-    text: string
-  }
-  | {
     type: 'field'
     fieldName: string
-    fieldValue: string
+    fieldValue: unknown
   } | {
     type: 'none'
   }
 
-export interface Summery {
+export interface ISummary {
   all: number,
   extractable: number,
   notExtractable: number
@@ -26,7 +22,7 @@ interface UseTreeCatalogDataProps {
   setCatalogTreeData: (data: CatalogTreeNode[]) => void;
   catalogTreeData?: CatalogTreeNode[];
   filter?: FilterOpt;
-  setSummeryCount?: (summery: Summery) => void;
+  setSummaryCount?: (summary: ISummary) => void;
 }
 
 export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
@@ -45,11 +41,11 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
       try {
         const treeData = await fetchCatalog();
         props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
-        props.setSummeryCount?.({
+        props.setSummaryCount?.({
           all: treeData.sumAll,
           extractable: treeData.sumExt,
           notExtractable: treeData.sumNExt
-        })
+        });
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -75,22 +71,12 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
     return filteredCatalog;
   }
 
-  const filterCatalogByTitle = (value: string) => {
-    if (value === '' || !props.catalogTreeData) {
-      return props.catalogTreeData;
-    }
-
-    return filterByPredicate(props.catalogTreeData, (treeItem) => {
-      return !!(treeItem.title)?.toString().includes(value);
-    });
-  };
-
-  const filterByField = (fieldName: string, fieldValue: string) => {
+  const filterByField = (fieldName: string, fieldValue: unknown) => {
     if (!props.catalogTreeData) {
       return;
     }
     return filterByPredicate(props.catalogTreeData, (treeItem) => {
-      return treeItem[fieldName]?.toString().includes(fieldValue);
+      return treeItem[fieldName]?.toString().includes(String(fieldValue));
     });
   }
 
@@ -99,7 +85,6 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
       return [];
     }
     switch (props.filter?.type) {
-      case 'text': return filterCatalogByTitle(props.filter.text);
       case "field": return filterByField(props.filter.fieldName, props.filter.fieldValue);
       case "none": return props.catalogTreeData;
     }

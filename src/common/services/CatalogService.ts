@@ -1,5 +1,6 @@
 import { ExtractableRecords } from '../../components/common/CatalogMockData';
 import { createCatalogTree } from '../../components/common/Tree/TreeGroup';
+import { IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
 import appConfig from '../../utils/Config';
 import { getRecordsXML, parseQueryResults } from '../../utils/cswQueryBuilder';
 import { requestExecutor } from '../../utils/requestHandler';
@@ -32,12 +33,13 @@ const enrichRecords = (
 ): Record<string, unknown>[] => {
   return records.map((record) => {
     const isMatched = extraFields.some(
-      (ext) => record["mc:id"] === ext.id
+      (ext) => record[IDENTIFIER_FIELD] === ext.recordName
     );
 
     return {
       ...record,
-      isApproved: isMatched
+      isApproved: isMatched,
+      isShown: false
     };
   });
 };

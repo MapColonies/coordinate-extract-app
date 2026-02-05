@@ -17,3 +17,6 @@ export interface WizardSelectionProps extends WizardStepProps {
   catalogTreeData?: CatalogTreeNode[];
   setSelectedItem?: (item?: CatalogTreeNode) => void;
 }
+
+export const IDENTIFIER_FIELD = 'mc:productName';
+export const MAIN_FIELD = 'isApproved';

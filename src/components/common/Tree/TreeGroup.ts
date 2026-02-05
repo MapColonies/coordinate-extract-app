@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { TreeItem } from 'react-sortable-tree';
-import { CatalogTreeNode } from '../../Wizard/Wizard.types';
+import { CatalogTreeNode, IDENTIFIER_FIELD } from '../../Wizard/Wizard.types';
 
 export interface KeyPredicate {
   name: string;
@@ -20,7 +20,7 @@ export interface GroupBy {
 }
 
 const TOP_LEVEL_GROUP_BY_FIELD = 'mc:region';
-const TITLE_PROPERTY = 'mc:productName';
+const TITLE_PROPERTY = IDENTIFIER_FIELD;
 
 export const createCatalogTree = (layersList: Record<string, unknown>[], expanded: boolean = false): CatalogTreeNode => {
   const parentCatalog = buildParentTreeNode(
