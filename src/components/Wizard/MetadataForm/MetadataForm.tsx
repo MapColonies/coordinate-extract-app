@@ -8,7 +8,7 @@ import './MetadataForm.css';
 
 export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
   const intl = useIntl();
-  
+
   const [formData, setFormData] = useState({
     approver: '',
     additionalInfo: ''
