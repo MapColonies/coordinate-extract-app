@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.1.0](https://github.com/MapColonies/coordinate-extract-app/compare/v1.0.0...v1.1.0) (2026-02-05)
+
+
+### Features
+
+* step 3 metadata form ([da40523](https://github.com/MapColonies/coordinate-extract-app/commit/da405230c4dbd92e80e088d2349b4cb181f96eee))
+* step 4 metadata confirm ([ab389ec](https://github.com/MapColonies/coordinate-extract-app/commit/ab389ec170efb50724ca82aaf8ddbf22005b02ec))
+
+
+### Bug Fixes
+
+* add approved summery, and filtered buttons ([19e29f3](https://github.com/MapColonies/coordinate-extract-app/commit/19e29f3d495ef9edebf3783d6996901cd2dfd605))
+* eslint ([4646eea](https://github.com/MapColonies/coordinate-extract-app/commit/4646eea1910eefdaf255404527ee24bc99b63d13))
+* eslint and imports order ([4df6dbd](https://github.com/MapColonies/coordinate-extract-app/commit/4df6dbd23af4b24fd4e41faa185dc063d878d866))
+* layout and svgs ([70690c6](https://github.com/MapColonies/coordinate-extract-app/commit/70690c6361e17e6afd4cd672e15f5e1d604d88bc))
+* layout css related ([0f43d4e](https://github.com/MapColonies/coordinate-extract-app/commit/0f43d4e7ac2e81ff9f8c57e816060b76b28fb04f))
+* lint ([431318a](https://github.com/MapColonies/coordinate-extract-app/commit/431318a0af668ace4d93b5c2cb9af75c99654843))
+* metadata form ([c54244f](https://github.com/MapColonies/coordinate-extract-app/commit/c54244f99b9f59e87a5158cc469bf6af88149e17))
+* pr ([2dde2d3](https://github.com/MapColonies/coordinate-extract-app/commit/2dde2d3ef84d13e65614735adafed64a28284625))
+* pr ([e3ff48d](https://github.com/MapColonies/coordinate-extract-app/commit/e3ff48d6f90c5f6a14e79052388884360bbc4812))
+* pr ([39f7f90](https://github.com/MapColonies/coordinate-extract-app/commit/39f7f90b8eeee8758c35a23acb1d6e57f5fbc22d))
+* pr ([4f6e594](https://github.com/MapColonies/coordinate-extract-app/commit/4f6e594458f9349ac43d80e25d2b81bb8893a788))
+* pr ([05d0e40](https://github.com/MapColonies/coordinate-extract-app/commit/05d0e404421f63252c295829e6f9578257b8af0f))
+* pr ([d7d724e](https://github.com/MapColonies/coordinate-extract-app/commit/d7d724ea06d11c37ee192027c70d540e0ee286cd))
+* pr ([f5f71b0](https://github.com/MapColonies/coordinate-extract-app/commit/f5f71b08706c96520754cd2699c1254a6126eb7f))
+* titles ([f3530b2](https://github.com/MapColonies/coordinate-extract-app/commit/f3530b2e1338794f7ab16cd48a6f3404621939ec))
+
 ## 1.0.0 (2026-02-04)
 
 
