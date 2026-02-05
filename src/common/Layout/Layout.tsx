@@ -49,6 +49,7 @@ const Layout: React.FC = (): JSX.Element => {
       GC_BORDER_RADIUS: '8px',
       GC_GAP: '12px',
       GC_FONT_SIZE: '14px',
+      GC_TITLE_FONT_SIZE: '15px',
     },
   };
 
