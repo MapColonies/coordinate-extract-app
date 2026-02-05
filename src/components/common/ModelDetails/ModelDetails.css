@@ -5,7 +5,7 @@
   overflow-x: hidden;
   background: var(--mdc-theme-background);
   border: 1px solid var(--mdc-theme-border);
-  border-radius: 8px;
+  border-radius: var(--mdc-theme-gc-border-radius);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
@@ -38,7 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: var(--mdc-theme-gc-font-size);
   text-align: center;
   background-color: var(--mdc-theme-background);
 }
