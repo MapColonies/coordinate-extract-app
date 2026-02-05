@@ -55,7 +55,7 @@
   border-radius: var(--mdc-theme-gc-border-radius);
 }
 
-.modelSelection .cesium-viewer .cesium-viewer-toolbar > .cesium-toolbar-button.cesium-button:last-child {
+.modelSelection .cesium-viewer .cesium-viewer-toolbar>.cesium-toolbar-button.cesium-button:last-child {
   display: none;
 }
 
@@ -75,9 +75,5 @@
 
 .modelSelection .filterBtn {
   border: 1px solid var(--mdc-theme-border);
-  color: white;
-}
-
-.modelSelection .filterBtn:hover {
-  background-color: #1e293b80;
+  color: var(--mdc-theme-on-surface);
 }
