@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Geometry } from 'geojson';
 import {
   Box,
@@ -33,6 +33,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
 }) => {
   const [filterOptions, setFilterBy] = useState<FilterOpt>({ type: 'field', fieldName: FILTER_BY_DATA_FIELD, fieldValue: '' });
   const [summary, setSummary] = useState<ISummary | undefined>(undefined);
+  const intl = useIntl();
 
   const debouncedSearch = useDebounce((value: string) => {
     setFilterBy({ type: 'field', fieldName: FILTER_BY_DATA_FIELD, fieldValue: value });
@@ -92,6 +93,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
                 const value = e.target.value;
                 debouncedSearch(value);
               }}
+              placeholder={intl.formatMessage({ id: 'tree.filter.placeholder' })}
             />
             <Box className="filterBtnsContainer">
               <Button className="filterBtn"
