@@ -87,7 +87,6 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
               onChange={handleChange}
               textarea={true}
               rows={4}
-              className="textField"
               placeholder={intl.formatMessage({ id: 'form.additionalInfo.placeholder' })}
             />
           </Box>
