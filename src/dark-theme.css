@@ -2,11 +2,9 @@
 
 .dark-theme .mdc-text-field {
   background-color: transparent;
-  border: 1px solid var(--mdc-theme-gc-selection-background, #fff);
-  border-radius: 0;
-  color: #fff;
-  /* height: 24px;
-  width: 100%; */
+  border: 1px solid var(--mdc-theme-gc-selection-background);
+  border-radius: var(--mdc-theme-gc-border-radius);
+  color: var(--mdc-theme-text-primary-on-dark);
 }
 
 .dark-theme label.mdc-text-field.mdc-text-field--disabled {
@@ -19,19 +17,18 @@
 }
 
 .dark-theme .mdc-text-field--invalid .mdc-text-field__input {
-  color: var(--mdc-theme-gc-error-high, red) !important;
+  color: var(--mdc-theme-gc-error-high) !important;
 }
   
 .dark-theme .mdc-text-field__input {
-  color: var(--mdc-theme-text-primary-on-dark, #fff) !important;
+  color: var(--mdc-theme-text-primary-on-dark) !important;
 }
 
 .dark-theme .mdc-text-field__input::placeholder {
-  color: var(--mdc-theme-text-hint-on-dark, #fff) !important;
+  color: var(--mdc-theme-text-hint-on-dark) !important;
   opacity: 0.5;
 }
 
 .dark-theme .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
-  /* color: var(--mdc-theme-text-icon-on-background); */
   color: var(--mdc-theme-primary);
 }

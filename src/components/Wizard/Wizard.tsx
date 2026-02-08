@@ -32,7 +32,7 @@ export const Wizard: React.FC = () => {
     <Box className={`wizardWrapper ${disabled ? 'wizardDisabledNext' : ''}`}>
       <FormWizard
         stepSize='xs'
-        color='var(--mdc-theme-gc-primary)'
+        color='var(--mdc-theme-primary)'
         backButtonText={intl.formatMessage({ id: 'button.back' })}
         nextButtonText={intl.formatMessage({ id: 'button.next' })}
         finishButtonText={intl.formatMessage({ id: 'button.finish' })}

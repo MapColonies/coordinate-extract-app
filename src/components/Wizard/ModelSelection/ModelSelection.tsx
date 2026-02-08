@@ -87,18 +87,18 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
           <Box className="filter">
             <TextField
               type="text"
-              className='stretchTextField'
+              className="textField"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
                 debouncedSearch(value);
               }}
             />
-            <Box className='filterBtnsContainer'>
-              <Button className='filterBtn'
+            <Box className="filterBtnsContainer">
+              <Button className="filterBtn"
                 onClick={() => setFilterBy({ type: 'none' })}>
                 <FormattedMessage id="tree.filter.all" values={{ sum: summary?.all }} />
               </Button>
-              <Button className='filterBtn'
+              <Button className="filterBtn"
                 onClick={() => setFilterBy({
                   type: 'field',
                   fieldName: QUICK_FILTER_BY_DATA_FIELD,
@@ -106,7 +106,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
                 })}>
                 <FormattedMessage id="tree.filter.approved" values={{ sum: summary?.extractable }} />
               </Button>
-              <Button className='filterBtn'
+              <Button className="filterBtn"
                 onClick={() => setFilterBy({
                   type: 'field',
                   fieldName: QUICK_FILTER_BY_DATA_FIELD,
