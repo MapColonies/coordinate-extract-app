@@ -14,6 +14,7 @@
   "general.noData": "אין נתונים להצגה",
 
   "tree.title": "בחירת מודל",
+  "tree.filter.placeholder": "סינון לפי שם מודל...",
   "tree.filter.all": "הכול ({sum})",
   "tree.filter.approved": "מאושר ({sum})",
   "tree.filter.not-approved": "לא מאושר ({sum})",
