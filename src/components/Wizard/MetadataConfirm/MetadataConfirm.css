@@ -31,29 +31,8 @@
   font-size: var(--mdc-theme-gc-font-size);
 }
 
-.metadataConfirm .formControl {
-  width: 100%;
-  padding: 10px 12px;
-  background-color: var(--mdc-theme-gc-alternative-surface); 
-  color: var(--mdc-theme-text-primary-on-background);
-  border: 1px solid var(--mdc-theme-text-hint-on-background);
-  border-radius: var(--mdc-theme-gc-border-radius);
-  font-size: var(--mdc-theme-gc-font-size);
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.metadataConfirm .formControl::placeholder {
-  color: var(--mdc-theme-gc-disabled-background);
-}
-
-.metadataConfirm .formControl:focus {
-  outline: none;
-  border-color: var(--mdc-theme-gc-primary);
-  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
-}
-
 .metadataConfirm .formHeader {
-  border-left: 4px solid var(--mdc-theme-gc-primary);
+  border-left: 4px solid var(--mdc-theme-primary);
   background-color: rgba(255, 255, 255, 0.05);
   padding: 16px;
   margin: 20px 20px 60px;
@@ -61,11 +40,11 @@
 
 body[dir='rtl'] .metadataConfirm .formHeader {
   border-left: none;
-  border-right: 4px solid var(--mdc-theme-gc-primary);
+  border-right: 4px solid var(--mdc-theme-primary);
 }
 
 .metadataConfirm .formHeader .title {
-  color: var(--mdc-theme-gc-primary);
+  color: var(--mdc-theme-primary);
   font-size: var(--mdc-theme-gc-title-font-size);
   font-weight: 700;
   margin-bottom: 12px;

@@ -54,7 +54,7 @@
   cursor: pointer;
 }
 
-.Layout .stretchTextField.mdc-text-field {
+.dark-theme .textField.mdc-text-field {
   height: 34px;
   width: 100%;
 }

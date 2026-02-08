@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
-import { Typography } from '@map-colonies/react-core';
+import { TextField, Typography } from '@map-colonies/react-core';
 import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
 
 import './MetadataConfirm.css';
@@ -17,7 +17,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
     setIsNextBtnDisabled(true);
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -62,14 +62,14 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
             <label htmlFor="password">
               <FormattedMessage id="form.password.label" />
             </label>
-            <input
+            <TextField
               type="text"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               required
-              className="formControl"
+              className="textField"
               placeholder={intl.formatMessage({ id: 'form.password.placeholder' })}
             />
           </Box>
