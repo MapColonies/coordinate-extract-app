@@ -21,7 +21,7 @@
 
   "panel.footprint.title": "תיחום גאוגרפי",
   "panel.history.title": "היסטוריית אישורים",
-  "panel.updater.title": "פרטי מבצע",
+  "panel.updater.title": "פרטי מבצע הפעולה",
   "panel.confirm.title": "אימות זהות",
 
   "details.placeholder": "בחר פריט קטלוגי כדי לצפות בו",
@@ -31,10 +31,10 @@
   "form.message.confirm.title": "סיכום הפעולה:",
   "form.message.confirm.model": "מודל: {value}",
   "form.message.confirm.action": "פעולה: {value}",
-  "form.message.confirm.approver": "מבצע: {value}",
+  "form.message.confirm.approver": "מבצע הפעולה: {value}",
   "form.message.confirm.approve": "אישור לחילוץ נ.צ.",
   "form.message.confirm.reject": "ביטול אישור",
-  "form.approver.label": "שם מלא של המבצע *",
+  "form.approver.label": "שם מלא של מבצע הפעולה *",
   "form.approver.placeholder": "הזן את שמך המלא",
   "form.additionalInfo.label": "הערות (אופציונלי)",
   "form.additionalInfo.placeholder": "הוסף הערות לתיעוד...",
