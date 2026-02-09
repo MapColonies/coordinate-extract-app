@@ -12,6 +12,7 @@ import { SelectionSVGIcon } from '../../common/Icons/Svg/selection';
 import { DetaisSVGIcon } from '../../common/Icons/Svg/details';
 import { UpdateSVGIcon } from '../../common/Icons/Svg/update';
 import { ConfirmSVGIcon } from '../../common/Icons/Svg/confirm';
+import { ISummary } from '../common/Tree/hooks/treeCatalogData.hook';
 
 import 'react-form-wizard-component/dist/style.css';
 import './Wizard.css';
@@ -19,6 +20,7 @@ import './Wizard.css';
 export const Wizard: React.FC = () => {
   const [catalogTree, setCatalogTree] = useState<CatalogTreeNode[] | undefined>(undefined);
   const [selectedItem, setSelectedItem] = useState<CatalogTreeNode | undefined>(undefined);
+  const [itemsSummary, setItemsSummary] = useState<ISummary | undefined>(undefined);
   const [disabled, setDisabled] = useState<boolean>(true);
   const intl = useIntl();
 
@@ -38,16 +40,18 @@ export const Wizard: React.FC = () => {
         finishButtonText={intl.formatMessage({ id: 'button.finish' })}
         onComplete={handleComplete}
       >
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.selection' })} icon={<SelectionSVGIcon color="currentColor"/>}>
+        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.selection' })} icon={<SelectionSVGIcon color="currentColor" />}>
           <ModelSelection
             catalogTreeData={catalogTree}
-            setCatalogTreeData={(treeData) => { setCatalogTree(treeData); }}
+            setCatalogTreeData={setCatalogTree}
             selectedItem={selectedItem}
-            setSelectedItem={(treeNode) => { setSelectedItem(treeNode); }}
-            setIsNextBtnDisabled={(val) => { setDisabled(val); }}
+            setSelectedItem={setSelectedItem}
+            setIsNextBtnDisabled={setDisabled}
+            itemsSummary={itemsSummary}
+            setItemsSummary={setItemsSummary}
           />
         </FormWizard.TabContent>
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.details' })} icon={<DetaisSVGIcon color="currentColor"/>}>
+        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.details' })} icon={<DetaisSVGIcon color="currentColor" />}>
           <Step selectedItem={selectedItem} title="panel.history.title">
             <MetadataHistory
               setIsNextBtnDisabled={(val) => { setDisabled(val) }}
@@ -55,7 +59,7 @@ export const Wizard: React.FC = () => {
             />
           </Step>
         </FormWizard.TabContent>
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.update' })} icon={<UpdateSVGIcon color="currentColor"/>}>
+        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.update' })} icon={<UpdateSVGIcon color="currentColor" />}>
           <Step selectedItem={selectedItem} title="panel.updater.title">
             <MetadataForm
               setIsNextBtnDisabled={(val) => { setDisabled(val) }}
@@ -64,7 +68,7 @@ export const Wizard: React.FC = () => {
             />
           </Step>
         </FormWizard.TabContent>
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.confirm' })} icon={<ConfirmSVGIcon color="currentColor"/>}>
+        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.confirm' })} icon={<ConfirmSVGIcon color="currentColor" />}>
           <Step selectedItem={selectedItem} title="panel.confirm.title">
             {
               selectedItem &&

@@ -1,76 +1,76 @@
 import { useEffect } from 'react';
-import SortableTree, { ReactSortableTreeProps } from 'react-sortable-tree';
+import SortableTree, { ExtendedNodeData, ReactSortableTreeProps } from 'react-sortable-tree';
+import { ApprovedSVGIcon } from '../../../../common/Icons/Svg/approved';
+import { NotApprovedSVGIcon } from '../../../../common/Icons/Svg/notApproved';
 import { useI18n } from '../../../../i18n/I18nProvider';
 import { CatalogTreeNode } from '../../../Wizard/Wizard.types';
 import { LayerImageIconRenderer } from '../../LayerImageIconRenderer/LayerImageIconRenderer';
 import CatalogTheme from '../renderers/index';
-import { useTree } from '../hooks/tree.hook';
 
 interface CatalogTreeProps extends ReactSortableTreeProps {
   treeData: CatalogTreeNode[];
+  setTreeData: (treeData: CatalogTreeNode[]) => void;
+  selectedNode: CatalogTreeNode;
+  setSelectedNode: (node: CatalogTreeNode) => void;
   onSelectedNode: (selectedNode: CatalogTreeNode | null) => void;
+  // updateFieldInAllNodes: (treeData: CatalogTreeNode[], fields: [fieldName: string, value: unknown][]) => void;
+  updateNodeByProductName: (productName: string, newNode: CatalogTreeNode) => void;
+  // handleRowClick: (evt: MouseEvent, rowInfo: ExtendedNodeData, additionalFields: Record<string, unknown>) => void;
+  handleRowClick: (evt: MouseEvent, rowInfo: ExtendedNodeData, isSelected: boolean, isShown?: boolean) => void;
 }
 
 export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props) => {
-  const {
-    treeData,
-    setTreeData,
-    selectedNode,
-    hoveredNode,
-    setHoveredNode,
-    handleRowClick
-  } = useTree({ treeData: props.treeData });
   const { locale } = useI18n();
 
   useEffect(() => {
-    props.onSelectedNode(selectedNode);
-  }, [selectedNode]);
-
-  useEffect(() => {
-    setTreeData(props.treeData);
-  }, [props.treeData]);
+    props.onSelectedNode(props.selectedNode);
+    console.log(props.treeData)
+  }, [props.selectedNode]);
 
   return (
     <SortableTree
       //@ts-ignore
       theme={CatalogTheme}
       rowDirection={locale === 'he' ? 'rtl' : 'ltr'}
-      treeData={treeData}
+      treeData={props.treeData}
       canDrag={false}
       onChange={(treeData) =>
-        setTreeData(treeData as CatalogTreeNode[])
+        props.setTreeData(treeData as CatalogTreeNode[])
       }
       generateNodeProps={(rowInfo) => {
         const node = rowInfo.node as CatalogTreeNode;
-        const isSelected = node.title === selectedNode?.title;
+        const isSelected = node.title === props.selectedNode?.title;
 
         return {
           onClick: (e: MouseEvent) => {
-            handleRowClick(e, rowInfo)
-          },
-          onMouseOver: (evt: MouseEvent) => {
-            if (!rowInfo.node.isGroup) {
-              if (rowInfo.node.id !== hoveredNode?.id) {
-                setHoveredNode({
-                  ...rowInfo.node,
-                  parentPath: rowInfo.path.slice(0, -1).toString(),
-                });
-              }
-            } else {
-              setHoveredNode(undefined);
-            }
+            props.handleRowClick(e, rowInfo, !rowInfo.node.isSelected);
           },
           className: isSelected ? 'selected-row' : '',
           icons: node.isGroup ?
             [] :
             [
               <LayerImageIconRenderer
-                data={(rowInfo.node as any)}
-                onClick={() => {
-                  console.log('clicked');
+                data={(rowInfo.node)}
+                onClick={(evt: MouseEvent, isShown) => {
+                  props.setSelectedNode(rowInfo.node);
+
+                  let isSelected = false;
+                  if (isShown) {
+                    isSelected = true;
+                  } else if (rowInfo.node.isSelected) {
+                    isSelected = rowInfo.node.isSelected;
+                  }
+
+                  props.handleRowClick(evt, rowInfo, isSelected, isShown);
                 }}
-              />
+              />,
             ],
+          buttons: [
+            rowInfo.node?.isApproved ?
+              <ApprovedSVGIcon color='var(--mdc-theme-gc-success)' />
+              :
+              <NotApprovedSVGIcon color='var(--mdc-theme-gc-warning)' />
+          ]
         };
       }}
     />
