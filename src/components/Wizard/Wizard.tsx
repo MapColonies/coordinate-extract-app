@@ -8,10 +8,10 @@ import { MetadataConfirm } from './MetadataConfirm/MetadataConfirm';
 import { MetadataForm } from './MetadataForm/MetadataForm';
 import { ModelSelection } from './ModelSelection/ModelSelection';
 import { CatalogTreeNode } from './Wizard.types';
-import { SelectionSVGIcon } from '../../common/Icons/Svg/selection';
-import { DetaisSVGIcon } from '../../common/Icons/Svg/details';
-import { UpdateSVGIcon } from '../../common/Icons/Svg/update';
-import { ConfirmSVGIcon } from '../../common/Icons/Svg/confirm';
+import { SelectionSVGIcon } from '../../common/icons/SelectionSVGIcon';
+import { DetailsSVGIcon } from '../../common/icons/DetailsSVGIcon';
+import { UpdateSVGIcon } from '../../common/icons/UpdateSVGIcon';
+import { ConfirmSVGIcon } from '../../common/icons/ConfirmSVGIcon';
 
 import 'react-form-wizard-component/dist/style.css';
 import './Wizard.css';
@@ -47,7 +47,7 @@ export const Wizard: React.FC = () => {
             setIsNextBtnDisabled={(val) => { setDisabled(val); }}
           />
         </FormWizard.TabContent>
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.details' })} icon={<DetaisSVGIcon color="currentColor"/>}>
+        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.details' })} icon={<DetailsSVGIcon color="currentColor"/>}>
           <Step selectedItem={selectedItem} title="panel.history.title">
             <MetadataHistory
               setIsNextBtnDisabled={(val) => { setDisabled(val) }}

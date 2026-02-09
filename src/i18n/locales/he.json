@@ -26,6 +26,9 @@
 
   "details.placeholder": "בחר פריט קטלוגי כדי לצפות בו",
 
+  "history.action.create": " · אושר · על-ידי {value}",
+  "history.action.delete": " · בוטל · על-ידי {value}",
+
   "form.message.approve": "אישור המודל יחשוף אותו לגורמים מבצעיים לחילוץ קואורדינטות",
   "form.message.reject": "ביטול האישור יסיר את המודל מחשיפה לגורמים מבצעיים",
   "form.message.confirm.title": "סיכום הפעולה:",

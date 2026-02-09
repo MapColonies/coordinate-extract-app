@@ -3,6 +3,7 @@
   box-sizing: border-box;
   background-color: var(--mdc-theme-background);
   color: var(--mdc-theme-on-primary);
+  font-size: var(--mdc-theme-gc-font-size);
 }
 
 .Layout > header {
@@ -18,6 +19,7 @@
   height: calc(100% - 60px - 10px);
   overflow-y: auto;
 }
+
 .dark-theme .mdc-dialog .mdc-dialog__surface {
   background-color: var(--mdc-theme-gc-alternative-surface);
   border-radius: var(--mdc-theme-gc-border-radius);
@@ -57,4 +59,16 @@
 .dark-theme .textField.mdc-text-field {
   height: 34px;
   width: 100%;
+}
+
+.dark-theme .green {
+  color: var(--mdc-theme-gc-success);
+}
+
+.dark-theme .orange {
+  color: var(--mdc-theme-gc-warning);
+}
+
+.dark-theme .red {
+  color: var(--mdc-theme-gc-error);
 }

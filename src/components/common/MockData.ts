@@ -404,3 +404,54 @@ export const mockExtractableRecords = [
     }
   }
 ];
+
+export const mockHistory = [
+  {
+    "id": "1",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "CREATE",
+    "authorizedAt": "2026-02-04T16:26:18.055Z"
+  },
+  {
+    "id": "2",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "DELETE",
+    "authorizedAt": "2026-02-05T16:26:18.055Z"
+  },
+  {
+    "id": "3",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "CREATE",
+    "authorizedAt": "2026-01-04T16:26:18.055Z"
+  },
+  {
+    "id": "4",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "DELETE",
+    "authorizedAt": "2026-01-05T16:26:18.055Z"
+  },
+  {
+    "id": "5",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "CREATE",
+    "authorizedAt": "2025-12-04T16:26:18.055Z"
+  },
+  {
+    "id": "6",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "DELETE",
+    "authorizedAt": "2025-12-05T16:26:18.055Z"
+  }
+];
