@@ -16,19 +16,11 @@
   padding: 20px;
   border: 1px solid var(--mdc-theme-border);
   border-radius: var(--mdc-theme-gc-border-radius);
-  margin: 0 20px 20px;
+  margin: 0 20px 16px;
   font-size: var(--mdc-theme-gc-font-size);
   display: flex;
   align-items: center;
   gap: var(--mdc-theme-gc-gap);
-}
-
-.metadataForm .approve {
-  color: var(--mdc-theme-gc-success);
-}
-
-.metadataForm .reject {
-  color: var(--mdc-theme-gc-warning);
 }
 
 .metadataForm .form {

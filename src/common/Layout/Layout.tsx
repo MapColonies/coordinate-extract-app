@@ -37,7 +37,7 @@ const Layout: React.FC = (): JSX.Element => {
       GC_HOVERED_BACKGROUND: 'rgba(33, 150, 243, 0.1)',
       GC_DISABLED_BACKGROUND: '#45557080',
 
-      GC_SUCCESS: 'green',
+      GC_SUCCESS: '#00B45A',
       GC_WARNING: '#FFA032',
       GC_ERROR: '#CC1616',
 

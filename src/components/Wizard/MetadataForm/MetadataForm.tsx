@@ -50,7 +50,7 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
   return (
     <Box className="metadataForm">
       <Box className="formContainer">
-        <Box className={`formHeader ${selectedItem?.isApproved ? 'reject' : 'approve'}`}>
+        <Box className={`formHeader ${selectedItem?.isApproved ? 'orange' : 'green'}`}>
           <Typography tag="span">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
