@@ -40,9 +40,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     setCatalogTreeData: props.setCatalogTreeData,
     setSelectedNode: (node) => props.setSelectedItem?.(node),
     filter: filterOptions,
-    setSummaryCount: (sum) => {
-      props.setItemsSummary?.(sum);
-    }
+    setSummaryCount: (sum) => props.setItemsSummary?.(sum)
   });
 
   useEffect(() => {
