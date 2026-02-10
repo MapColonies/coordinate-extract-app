@@ -4,12 +4,12 @@ import { Box } from '@map-colonies/react-components';
 
 import './LayerImageIconRenderer.css';
 
-interface ILayerImageCellRendererParams {
+interface ILayerImageIconRendererParams {
   data: Record<string, unknown>;
   onClick: (evt: MouseEvent, isShown: boolean) => void;
 }
 
-export const LayerImageIconRenderer: React.FC<ILayerImageCellRendererParams> = (props) => {
+export const LayerImageIconRenderer: React.FC<ILayerImageIconRendererParams> = (props) => {
 
   return (
     <Box id='LayerImageIconRenderer'>

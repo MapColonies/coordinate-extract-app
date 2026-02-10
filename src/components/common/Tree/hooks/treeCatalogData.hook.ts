@@ -101,10 +101,6 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
     }
   }, [props.catalogTreeData, props.filter]);
 
-  useEffect(() => {
-    console.log(props.catalogTreeData)
-  }, [props.catalogTreeData])
-
   const handleRowClick = useCallback((evt: MouseEvent, rowInfo: ExtendedNodeData, isSelected: boolean, isShown?: boolean) => {
     if (!rowInfo.node.isGroup && props.catalogTreeData) {
       let newTreeData: TreeItem[] = [...props.catalogTreeData];
