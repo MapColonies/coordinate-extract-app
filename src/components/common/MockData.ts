@@ -381,14 +381,6 @@ export const mockExtractableRecords = [
   },
   {
     "id": "3",
-    "recordName": "srtm100",
-    "authorizedBy": "User123",
-    "data": {
-      "description": "Metadata for record C"
-    }
-  },
-  {
-    "id": "4",
     "recordName": "SR_South_20022025_draco_elbit",
     "authorizedBy": "ServiceAccount",
     "data": {
@@ -396,7 +388,7 @@ export const mockExtractableRecords = [
     }
   },
   {
-    "id": "5",
+    "id": "4",
     "recordName": "מעגן_דגניה_בית זרע_אפיקים 23_06",
     "authorizedBy": "Admin",
     "data": {

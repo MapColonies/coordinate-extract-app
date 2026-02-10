@@ -47,7 +47,7 @@ export const Wizard: React.FC = () => {
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
             setIsNextBtnDisabled={setDisabled}
-            itemsSummary={itemsSummary}
+            itemsSummary={itemsSummary as ISummary}
             setItemsSummary={setItemsSummary}
           />
         </FormWizard.TabContent>

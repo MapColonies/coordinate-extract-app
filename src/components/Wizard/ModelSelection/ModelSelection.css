@@ -36,10 +36,10 @@
   border-radius: var(--mdc-theme-gc-border-radius);
 }
 
-.modelSelection .tree {
+.modelSelection .treeContainer {
   height: 100%;
   padding: 10px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .modelSelection .mapPanel {
