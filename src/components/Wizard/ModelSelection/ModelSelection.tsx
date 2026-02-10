@@ -69,11 +69,6 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     "--rst-expander-size": '30px',
   };
 
-  const {
-    "mc:footprint": footprint,
-    "mc:links": links
-  } = (selectedItem || {}) as CatalogTreeNode;
-
   return (
     <Box className="modelSelection">
       <Box className="viewArea">
@@ -136,17 +131,17 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
             showActiveLayersTool={false}
           >
             {
-              links &&
+              props.selectedItem?.['mc:links'] && (props.selectedItem?.isShown as boolean) &&
               <Cesium3DTileset
-                url={getTokenResource(links["#text"] as string)}
+                url={getTokenResource(props.selectedItem?.['mc:links']["#text"] as string)}
                 isZoomTo={true}
               />
             }
             {
-              footprint &&
+              props.selectedItem?.['mc:footprint'] &&
               <CesiumGeojsonLayer
                 clampToGround={true}
-                data={JSON.parse(footprint) as Geometry}
+                data={JSON.parse(props.selectedItem?.['mc:footprint']) as Geometry}
                 onLoad={(geojsonDataSource) => {
                   geojsonDataSource.entities.values.forEach((item) => {
                     if (item.polyline) {
