@@ -1,6 +1,6 @@
 import SortableTree, { ExtendedNodeData, ReactSortableTreeProps } from 'react-sortable-tree';
-import { ApprovedSVGIcon } from '../../../../common/Icons/Svg/approved';
-import { NotApprovedSVGIcon } from '../../../../common/Icons/Svg/notApproved';
+import { ApprovedSVGIcon } from '../../../../common/icons/approved';
+import { NotApprovedSVGIcon } from '../../../../common/icons/notApproved';
 import { useI18n } from '../../../../i18n/I18nProvider';
 import { CatalogTreeNode } from '../../../Wizard/Wizard.types';
 import { LayerImageIconRenderer } from '../../LayerImageIconRenderer/LayerImageIconRenderer';

@@ -1,7 +1,7 @@
 import React from 'react';
-import { IconSVGProps } from './icon-svg.interface';
+import { SVGIconProps } from './SVGIconProps';
 
-export const ApprovedSVGIcon: React.FC<IconSVGProps> = ({ color, className }) => {
+export const ApprovedSVGIcon: React.FC<SVGIconProps> = ({ color, className }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       width="20"
