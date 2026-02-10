@@ -1,4 +1,4 @@
-export interface IconSVGProps {
+export interface SVGIconProps {
   color: string;
   className?: string
 }

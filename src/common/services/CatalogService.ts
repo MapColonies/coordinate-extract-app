@@ -1,4 +1,4 @@
-import { mockExtractableRecords } from '../../components/common/CatalogMockData';
+import { mockExtractableRecords } from '../../components/common/MockData';
 import { createCatalogTree } from '../../components/common/Tree/TreeGroup';
 import { IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
 import appConfig from '../../utils/Config';

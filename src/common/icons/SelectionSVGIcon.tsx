@@ -1,7 +1,7 @@
 import React from 'react';
-import { IconSVGProps } from './icon-svg.interface';
+import { SVGIconProps } from './SVGIconProps';
 
-export const SelectionSVGIcon: React.FC<IconSVGProps> = ({ color, className }) => {
+export const SelectionSVGIcon: React.FC<SVGIconProps> = ({ color, className }) => {
   return (
     <svg
       width="24"

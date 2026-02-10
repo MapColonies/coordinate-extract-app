@@ -1,45 +1,46 @@
 .historyContainer {
-  padding: 20px;
+  padding: 0 12px;
   height: 100%;
-}
-
-.cardList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
-.historyCard {
-  background-color: var(--mdc-theme-surface, #1e1e1e);
-  border: 1px solid var(--mdc-theme-text-hint-on-background, #444);
+.historyContainer .cardList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mdc-theme-gc-gap);
+  max-height: 412px;
+  overflow-y: auto;
+  padding: var(--mdc-theme-gc-gap);
+}
+
+.historyContainer .historyCard {
+  background-color: var(--mdc-theme-gc-alternative-surface);
+  border: 1px solid var(--mdc-theme-text-hint-on-background);
   border-radius: 8px;
-  padding: 16px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 6px;
+  opacity: 0.55;
 }
 
-.historyCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  border-color: var(--mdc-theme-primary);
+.historyContainer .historyCard.active {
+  opacity: 1;
+  border-width: 2px;
 }
 
-.cardHeader {
+.historyContainer .cardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--mdc-theme-border);
 }
 
-.recordName {
+.historyContainer .cardTitle {
   font-weight: bold;
-  color: #ffffff;
-  font-size: 16px;
+  font-size: var(--mdc-theme-gc-font-size);
 }
 
-.authorizedBy {
-  background-color: rgba(33, 150, 243, 0.15);
+.historyContainer .cardSecondary {
   color: var(--mdc-theme-primary);
   padding: 2px 8px;
   border-radius: 4px;
@@ -47,24 +48,13 @@
   font-weight: 500;
 }
 
-.cardContent .description {
-  color: var(--mdc-theme-text-secondary-on-background, #b0b0b0);
-  font-size: 14px;
-  margin: 8px 0;
+.historyContainer .cardContent {
+  font-size: var(--mdc-theme-gc-title-font-size);
+  margin: 6px 0;
 }
 
-.cardFooter {
-  margin-top: 12px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.recordId {
-  color: var(--mdc-theme-text-hint-on-background, #757575);
-  font-size: 11px;
-}
-
-.historyLoading, .noData {
+.historyContainer .historyLoading,
+.historyContainer .noData {
   text-align: center;
   padding: 40px;
   color: var(--mdc-theme-text-secondary-on-background);

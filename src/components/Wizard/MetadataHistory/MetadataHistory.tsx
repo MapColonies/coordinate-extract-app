@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
-import { FormattedMessage } from 'react-intl';
+import { AutoDirectionBox } from '../../../common/AutoDirectionBox/AutoDirectionBox';
 import appConfig from '../../../utils/Config';
 import { requestExecutor } from '../../../utils/requestHandler';
-import { mockExtractableRecords } from '../../common/CatalogMockData';
+import { mockHistory } from '../../common/MockData';
 import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
 
 import './MetadataHistory.css';
@@ -12,10 +13,10 @@ import './MetadataHistory.css';
 interface HistoryRecord {
   id: string;
   recordName: string;
+  username: string;
   authorizedBy: string;
-  data: {
-    description: string;
-  };
+  action: string;
+  authorizedAt: string;
 }
 
 export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
@@ -24,59 +25,80 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
 
   useEffect(() => {
     setIsNextBtnDisabled(false);
-    const fetchData = async () => {
+
+    const fetchData = async (): Promise<void> => {
       try {
         setIsLoading(true);
-        const response = await requestExecutor({
-          url: `${appConfig.extractableManagerUrl}/${selectedItem?.[IDENTIFIER_FIELD]}`,
-          injectToken: true
-        }, 'GET', {});
-        setHistoryItems(response?.data || mockExtractableRecords);
+        const response = await requestExecutor(
+          {
+            url: `${appConfig.extractableManagerUrl}/audit/${selectedItem?.[IDENTIFIER_FIELD]}`,
+            injectToken: true
+          },
+          'GET',
+          {}
+        );
+
+        setHistoryItems(response?.data ?? mockHistory);
       } catch (error) {
         console.error('Failed to fetch history:', error);
       } finally {
         setIsLoading(false);
       }
     };
+
     fetchData();
   }, []);
 
-  if (isLoading) {
-    return <Box className="historyLoading"><FormattedMessage id="general.loading" /></Box>;
-  }
+  const sortedHistoryItems = [...historyItems].sort((a, b) =>
+    b.authorizedAt.localeCompare(a.authorizedAt)
+  );
 
   return (
     <Box className="historyContainer">
       <Box className="cardList">
         {
-          historyItems.map((item) => (
-            <Box key={item.id} className="historyCard">
+          !isLoading &&
+          sortedHistoryItems.map((item, index) => (
+            <Box key={item.id} className={`historyCard ${index === 0 ? 'active' : ''}`}>
               <Box className="cardHeader">
-                <Typography tag="span" className="recordName">
-                  {item.recordName}
+                <Typography tag="span" className="cardTitle">
+                  <AutoDirectionBox>
+                    {
+                      new Date(item.authorizedAt).toLocaleString('he-IL', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })
+                    }
+                  </AutoDirectionBox>
                 </Typography>
-                <Typography tag="span" className="authorizedBy">
-                  {item.authorizedBy}
+                <Typography tag="span" className="cardSecondary">
+                  {item.username}
                 </Typography>
               </Box>
-              <Box className="cardContent">
-                <Typography tag="p" className="description">
-                  {item.data.description}
-                </Typography>
-              </Box>
-              <Box className="cardFooter">
-                <Typography tag="small" className="recordId">
-                  ID: {item.id}
-                </Typography>
+              <Box className={`cardContent ${item.action.toLowerCase() === 'create' ? 'green' : 'orange'}`}>
+                <FormattedMessage
+                  id={`history.action.${item.action.toLowerCase()}`}
+                  values={{ value: item.authorizedBy }}
+                />
               </Box>
             </Box>
           ))
         }
         {
+          !isLoading &&
           historyItems.length === 0 &&
-          <Typography tag="p" className="noData">
+          <Box className="noData">
             <FormattedMessage id="general.noData" />
-          </Typography>
+          </Box>
+        }
+        {
+          isLoading &&
+          <Box className="historyLoading">
+            <FormattedMessage id="general.loading" />
+          </Box>
         }
       </Box>
     </Box>
