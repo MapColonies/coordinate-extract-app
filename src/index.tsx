@@ -8,6 +8,9 @@ import { AuthProvider } from './common/Routing/Login/AuthContext';
 
 import '@map-colonies/react-core/dist/button/styles';
 import '@map-colonies/react-core/dist/textfield/styles';
+import '@map-colonies/react-core/dist/avatar/styles';
+import '@map-colonies/react-core/dist/circular-progress/styles';
+import '@map-colonies/react-core/dist/snackbar/styles';
 import './dark-theme.css';
 import './index.css';
 

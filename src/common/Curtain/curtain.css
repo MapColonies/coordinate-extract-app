@@ -1,0 +1,21 @@
+.curtainContainer {
+  position: relative;
+}
+
+.curtain {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.6;
+  border-radius: 10px;
+  z-index: 4;
+  top: 0;
+  left: 0;
+}
+
+.curtain .progress {
+   position: absolute;
+   top: 30%;
+   left: 40%;
+} 

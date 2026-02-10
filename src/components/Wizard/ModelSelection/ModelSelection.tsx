@@ -95,10 +95,12 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
             />
             <Box className="filterBtnsContainer">
               <Button className="filterBtn"
+                outlined
                 onClick={() => setFilterBy({ type: 'none' })}>
                 <FormattedMessage id="tree.filter.all" values={{ sum: summary?.all }} />
               </Button>
               <Button className="filterBtn"
+                outlined
                 onClick={() => setFilterBy({
                   type: 'field',
                   fieldName: QUICK_FILTER_BY_DATA_FIELD,
@@ -107,6 +109,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = ({
                 <FormattedMessage id="tree.filter.approved" values={{ sum: summary?.extractable }} />
               </Button>
               <Button className="filterBtn"
+                outlined
                 onClick={() => setFilterBy({
                   type: 'field',
                   fieldName: QUICK_FILTER_BY_DATA_FIELD,

@@ -404,3 +404,9 @@ export const mockExtractableRecords = [
     }
   }
 ];
+
+export const mockLogin = {
+  "isValid": true,
+  "message": "User credentials are valid",
+  "code": "SUCCESS"
+};

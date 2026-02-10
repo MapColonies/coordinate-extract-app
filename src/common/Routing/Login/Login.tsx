@@ -1,9 +1,13 @@
 // login.tsx
-import React from 'react';
+import React, { useState } from 'react';
+import { isEmpty } from 'lodash';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Box } from '@map-colonies/react-components';
-import { Button, TextField } from '@map-colonies/react-core';
+import { Button, Icon, TextField, Typography } from '@map-colonies/react-core';
+import { Curtain } from '../../Curtain/curtain';
+import { LogoSVGIcon } from '../../Icons/Svg/logo';
+import { loginAPI } from '../../services/LoginService';
 import { useAuth } from './AuthContext';
 
 import './Login.css';
@@ -14,55 +18,93 @@ const Login: React.FC = () => {
   const location = useLocation<{ from?: string }>();
   const intl = useIntl();
   const from = location.state?.from || "/";
+  const [userName, setUserName] = useState<string|undefined>(undefined);
+  const [userPassword, setUserPassword] = useState<string|undefined>(undefined);
+  const [error, setError] = useState<string|undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = () => {
-    login({ id: "1", email: "user@example.com" });
-    history.replace(from);
+  const handleLogin = async () => {
+    try {
+      const loginData = await loginAPI(userName as string, userPassword as string, setIsLoading, false);
+      login({ username: userName as string });
+      history.replace(from);
+    }
+    catch (e) {
+      setError((e as any).message);
+    }
   };
 
-  //   return <button onClick={handleLogin}>Login</button>;
+  const isLoginInfo = ():boolean => {
+    return (!isEmpty(userName) && !isEmpty(userPassword));
+  };
+
   return (
     <Box className="centerContainer">
-      <Box className="loginContainer">
+      <Box className="loginContainer LoginHeader curtainContainer">
+        {
+          isLoading && <Curtain showProgress={true}/>
+        }
+        <Box className="Title">
+          <Icon
+            icon={{
+              strategy: 'component',
+              icon: (
+                <Box className="Logo">
+                  <LogoSVGIcon color="#000" />
+                </Box>
+              )
+            }}
+          />
+          <FormattedMessage id="app.title" />
+        </Box>
         <TextField
-          // invalid={!isPasswordValid}
           className="loginControl"
           label={intl.formatMessage({
             id: 'auth.fields.user-name.label',
           })}
           type="text"
-          // onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-          //   setPassword(e.currentTarget.value.trim());
-          // }}
-          // onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
-          //   const SUBMIT_KEY = 'Enter'
-          //   if (password && e.key === SUBMIT_KEY) {
-          //     validatePassword();
-          //   }
-          // }}
-          // value={password}
+          required
+          onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+            setUserName(e.currentTarget.value.trim());
+            setError(undefined);
+          }}
+          value={userName}
         />
         <TextField
-          // invalid={!isPasswordValid}
           className="loginControl"
           label={intl.formatMessage({
             id: 'auth.fields.user-pwd.label',
           })}
           type="password"
-          // onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-          //   setPassword(e.currentTarget.value.trim());
-          // }}
+          required
+          onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+            setUserPassword(e.currentTarget.value.trim());
+            setError(undefined);
+          }}
           // onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
           //   const SUBMIT_KEY = 'Enter'
           //   if (password && e.key === SUBMIT_KEY) {
           //     validatePassword();
           //   }
           // }}
-          // value={password}
+          value={userPassword}
+          autocomplete="off"
         />
-        <Button raised onClick={handleLogin} style={{width: '100%'}}>
+        <Button 
+          raised 
+          onClick={handleLogin} 
+          style={{width: '85%', marginRight: '20px'}}
+          disabled={!isLoginInfo()}
+        >
           <FormattedMessage id="auth.login.btn"/>
         </Button>
+        <Typography tag="div" className='error' >
+          {
+            error && isLoginInfo() && <>
+              Error: {error}
+            </>
+          }
+        </Typography>
       </Box>
     </Box>
   );

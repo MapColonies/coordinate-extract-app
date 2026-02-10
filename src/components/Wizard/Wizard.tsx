@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import FormWizard from 'react-form-wizard-component';
+import { FormWizardMethods } from 'react-form-wizard-component/dist/types/types/FormWizard';
 import { useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
+import { Button, SnackbarQueue } from '@map-colonies/react-core';
 import { MetadataHistory } from './MetadataHistory/MetadataHistory';
 import { Step } from '../common/Step/Step';
 import { MetadataConfirm } from './MetadataConfirm/MetadataConfirm';
@@ -12,6 +14,7 @@ import { SelectionSVGIcon } from '../../common/Icons/Svg/selection';
 import { DetaisSVGIcon } from '../../common/Icons/Svg/details';
 import { UpdateSVGIcon } from '../../common/Icons/Svg/update';
 import { ConfirmSVGIcon } from '../../common/Icons/Svg/confirm';
+import { SnackbarManager } from '../common/SnackBar/SnackbarManager';
 
 import 'react-form-wizard-component/dist/style.css';
 import './Wizard.css';
@@ -21,21 +24,41 @@ export const Wizard: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<CatalogTreeNode | undefined>(undefined);
   const [disabled, setDisabled] = useState<boolean>(true);
   const intl = useIntl();
-
+  const wizardRef = useRef<FormWizardMethods>(null);
+  
   const handleComplete = () => {
     setCatalogTree(undefined);
     setSelectedItem(undefined);
     setDisabled(true);
+    wizardRef.current?.goToTab(0);
   };
 
   return (
-    <Box className={`wizardWrapper ${disabled ? 'wizardDisabledNext' : ''}`}>
+    <Box className={`wizardWrapper`}>
+      <SnackbarQueue
+        messages={SnackbarManager.messages}
+        leading
+        stacked
+      />
       <FormWizard
+        ref={wizardRef}
         stepSize='xs'
         color='var(--mdc-theme-primary)'
-        backButtonText={intl.formatMessage({ id: 'button.back' })}
-        nextButtonText={intl.formatMessage({ id: 'button.next' })}
-        finishButtonText={intl.formatMessage({ id: 'button.finish' })}
+        backButtonTemplate={(handlePrevious) => (
+          <Button raised onClick={handlePrevious} className='wizard-footer-right'>
+            {intl.formatMessage({ id: 'button.back' })}
+          </Button>
+        )}
+        nextButtonTemplate={(handleNext) => (
+          <Button raised disabled={disabled} onClick={handleNext} className='wizard-footer-left'>
+            {intl.formatMessage({ id: 'button.next' })}
+          </Button>
+        )}
+        finishButtonTemplate={(handleComplete) => (
+          <Button raised onClick={handleComplete} className='wizard-footer-left'>
+            {intl.formatMessage({ id: 'button.finish' })}
+          </Button>
+        )}
         onComplete={handleComplete}
       >
         <FormWizard.TabContent title={intl.formatMessage({ id: 'step.selection' })} icon={<SelectionSVGIcon color="currentColor"/>}>
