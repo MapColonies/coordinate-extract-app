@@ -5,13 +5,10 @@ import {
   find,
   getNodeAtPath,
   GetNodeKeyFunction,
-  NodeData,
-  TreeItem,
-  TreePath
+  TreeItem
 } from 'react-sortable-tree';
 import { fetchCatalog } from '../../../../common/services/CatalogService';
-import { CatalogTreeNode, IDENTIFIER_FIELD } from '../../../Wizard/Wizard.types';
-import { get } from 'lodash';
+import { CatalogTreeNode } from '../../../Wizard/Wizard.types';
 
 export type FilterOpt =
   | {
@@ -26,11 +23,6 @@ export interface ISummary {
   all: number;
   extractable: number;
   notExtractable: number;
-}
-
-interface IGetParentNode {
-  parentNode: NodeData | undefined;
-  path: (string | number)[];
 }
 
 interface UseTreeCatalogDataProps {
