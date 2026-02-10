@@ -14,16 +14,20 @@
   "general.noData": "Empty",
 
   "tree.title": "Catalog Tree",
+  "tree.filter.placeholder": "Filter by model name...",
   "tree.filter.all": "All ({sum})",
   "tree.filter.approved": "Approved ({sum})",
   "tree.filter.not-approved": "Not Approved ({sum})",
 
   "panel.footprint.title": "Footprint",
   "panel.history.title": "History",
-  "panel.updater.title": "Updater",
-  "panel.confirm.title": "Confirm",
+  "panel.updater.title": "Approver Details",
+  "panel.confirm.title": "Confirmation",
 
   "details.placeholder": "Select a catalog item to view its footprint and details",
+
+  "history.action.create": " · Approved · by {value}",
+  "history.action.delete": " · Rejected · by {value}",
 
   "form.message.approve": "Approval of the model will expose it to operational factors for coordinates extraction",
   "form.message.reject": "Rejecting the approval will remove the model from exposure to operational factors",

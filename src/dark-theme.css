@@ -27,6 +27,7 @@
 .dark-theme .mdc-text-field__input::placeholder {
   color: var(--mdc-theme-text-hint-on-dark) !important;
   opacity: 0.5;
+  font-size: var(--mdc-theme-gc-font-size);
 }
 
 .dark-theme .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {

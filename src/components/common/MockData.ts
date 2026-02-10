@@ -366,7 +366,9 @@ export const mockExtractableRecords = [
   {
     "id": "1",
     "recordName": "e051n36_S",
-    "authorizedBy": "Admin",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "authorizedAt": "2026-02-10T16:26:18.055Z",
     "data": {
       "description": "Metadata for record A"
     }
@@ -374,7 +376,9 @@ export const mockExtractableRecords = [
   {
     "id": "2",
     "recordName": "srtm100",
-    "authorizedBy": "System",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "authorizedAt": "2026-02-09T16:26:18.055Z",
     "data": {
       "description": "Metadata for record B"
     }
@@ -382,7 +386,9 @@ export const mockExtractableRecords = [
   {
     "id": "3",
     "recordName": "srtm100",
-    "authorizedBy": "User123",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "authorizedAt": "2026-02-08T16:26:18.055Z",
     "data": {
       "description": "Metadata for record C"
     }
@@ -390,7 +396,9 @@ export const mockExtractableRecords = [
   {
     "id": "4",
     "recordName": "SR_South_20022025_draco_elbit",
-    "authorizedBy": "ServiceAccount",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "authorizedAt": "2026-02-07T16:26:18.055Z",
     "data": {
       "description": "Metadata for record D"
     }
@@ -398,7 +406,9 @@ export const mockExtractableRecords = [
   {
     "id": "5",
     "recordName": "מעגן_דגניה_בית זרע_אפיקים 23_06",
-    "authorizedBy": "Admin",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "authorizedAt": "2026-02-06T16:26:18.055Z",
     "data": {
       "description": "Metadata for record E"
     }
@@ -410,3 +420,53 @@ export const mockLogin = {
   "message": "User credentials are valid",
   "code": "SUCCESS"
 };
+export const mockHistory = [
+  {
+    "id": "1",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "CREATE",
+    "authorizedAt": "2026-02-04T16:26:18.055Z"
+  },
+  {
+    "id": "2",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "DELETE",
+    "authorizedAt": "2026-02-05T16:26:18.055Z"
+  },
+  {
+    "id": "3",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "CREATE",
+    "authorizedAt": "2026-01-04T16:26:18.055Z"
+  },
+  {
+    "id": "4",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "DELETE",
+    "authorizedAt": "2026-01-05T16:26:18.055Z"
+  },
+  {
+    "id": "5",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "CREATE",
+    "authorizedAt": "2025-12-04T16:26:18.055Z"
+  },
+  {
+    "id": "6",
+    "recordName": "e051n36_S",
+    "username": "admin",
+    "authorizedBy": "שזירי",
+    "action": "DELETE",
+    "authorizedAt": "2025-12-05T16:26:18.055Z"
+  }
+];

@@ -1,11 +1,7 @@
-import { mockLogin } from '../../components/common/CatalogMockData';
+import { mockLogin } from '../../components/common/MockData';
 import appConfig from '../../utils/Config';
 import { requestExecutor } from '../../utils/requestHandler';
 import { SnackbarManager } from '../../components/common/SnackBar/SnackbarManager';
-import { Icon } from '@map-colonies/react-core';
-import { Box } from '@map-colonies/react-components';
-import { LogoSVGIcon } from '../Icons/Svg/logo';
-import { FormattedMessage } from 'react-intl';
 import { getSnackbarErrorMessage } from './SnackError';
 
 type loadingUpdater = (value: boolean) => void;

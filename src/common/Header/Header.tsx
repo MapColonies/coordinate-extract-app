@@ -3,8 +3,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Avatar, Button, Icon, Typography } from '@map-colonies/react-core';
 import { useAuth } from '../Routing/Login/AuthContext';
-import { ExitSVGIcon } from '../Icons/Svg/exit';
-import { LogoSVGIcon } from '../Icons/Svg/logo';
+import { ExitSVGIcon } from '../icons/ExitSVGIcon';
+import { LogoSVGIcon } from '../icons/LogoSVGIcon';
 
 import './Header.css';
 
