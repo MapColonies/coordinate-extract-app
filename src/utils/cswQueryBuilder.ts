@@ -15,7 +15,7 @@ export const getRecordsXML = () => {
       resultType="results"
       outputSchema="http://schema.mapcolonies.com/3d">
         <csw:Query typeNames="csw:Record">
-            <csw:ElementSetName>full</csw:ElementSetName>
+          <csw:ElementSetName>full</csw:ElementSetName>
         </csw:Query>
     </csw:GetRecords>`;
 };
