@@ -34,11 +34,11 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
 
   const {
     treeData,
-    handleRowClick,
-    updateNodeByProductName
+    handleRowClick
   } = useTreeCatalogData({
     catalogTreeData: props.catalogTreeData,
     setCatalogTreeData: props.setCatalogTreeData,
+    setSelectedNode: (node) => props.setSelectedItem?.(node),
     filter: filterOptions,
     setSummaryCount: (sum) => {
       props.setItemsSummary?.(sum);
@@ -53,14 +53,13 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     }
   }, []);
 
-  const handleSelectedItem = (node: CatalogTreeNode | null) => {
-    if (node) {
-      props.setSelectedItem?.(node);
+  useEffect(() => {
+    if (props.selectedItem?.isSelected) {
       props.setIsNextBtnDisabled(false);
     } else {
       props.setIsNextBtnDisabled(true);
     }
-  };
+  }, [props.catalogTreeData]);
 
   const treeTheme = {
     "--rst-selected-background-color": '#f8fafc33',
@@ -124,10 +123,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
               treeData={treeData as CatalogTreeNode[]}
               setTreeData={props.setCatalogTreeData}
               selectedNode={props.selectedItem as CatalogTreeNode}
-              setSelectedNode={(item) => props.setSelectedItem?.(item)}
-              updateNodeByProductName={updateNodeByProductName}
               handleRowClick={handleRowClick}
-              onSelectedNode={handleSelectedItem}
             />
           </Box>
         </Box>

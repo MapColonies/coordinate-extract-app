@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import SortableTree, { ExtendedNodeData, ReactSortableTreeProps } from 'react-sortable-tree';
 import { ApprovedSVGIcon } from '../../../../common/Icons/Svg/approved';
 import { NotApprovedSVGIcon } from '../../../../common/Icons/Svg/notApproved';
@@ -11,21 +10,11 @@ interface CatalogTreeProps extends ReactSortableTreeProps {
   treeData: CatalogTreeNode[];
   setTreeData: (treeData: CatalogTreeNode[]) => void;
   selectedNode: CatalogTreeNode;
-  setSelectedNode: (node: CatalogTreeNode) => void;
-  onSelectedNode: (selectedNode: CatalogTreeNode | null) => void;
-  // updateFieldInAllNodes: (treeData: CatalogTreeNode[], fields: [fieldName: string, value: unknown][]) => void;
-  updateNodeByProductName: (productName: string, newNode: CatalogTreeNode) => void;
-  // handleRowClick: (evt: MouseEvent, rowInfo: ExtendedNodeData, additionalFields: Record<string, unknown>) => void;
   handleRowClick: (evt: MouseEvent, rowInfo: ExtendedNodeData, isSelected: boolean, isShown?: boolean) => void;
 }
 
 export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props) => {
   const { locale } = useI18n();
-
-  useEffect(() => {
-    props.onSelectedNode(props.selectedNode);
-    console.log(props.treeData)
-  }, [props.selectedNode]);
 
   return (
     <SortableTree
@@ -52,8 +41,6 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
               <LayerImageIconRenderer
                 data={(rowInfo.node)}
                 onClick={(evt: MouseEvent, isShown) => {
-                  props.setSelectedNode(rowInfo.node);
-
                   let isSelected = false;
                   if (isShown) {
                     isSelected = true;
