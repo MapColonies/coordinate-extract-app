@@ -4,22 +4,23 @@ import { Box } from '@map-colonies/react-components';
 
 import './LayerImageIconRenderer.css';
 
-interface ILayerImageCellRendererParams {
+interface ILayerImageIconRendererParams {
   data: Record<string, unknown>;
-  onClick: (data: Record<string, unknown>, isShown: boolean) => void;
+  onClick: (evt: MouseEvent, isShown: boolean) => void;
 }
 
-export const LayerImageIconRenderer: React.FC<ILayerImageCellRendererParams> = (props) => {
+export const LayerImageIconRenderer: React.FC<ILayerImageIconRendererParams> = (props) => {
+
   return (
     <Box id='LayerImageIconRenderer'>
       <IconButton
         className={props.data.isShown ? 'icon mc-icon-Show' : 'icon mc-icon-Hide'}
         label="LAYER IMAGE SHOWN ICON"
         onClick={
-          (evt: React.MouseEvent<HTMLButtonElement>): void => {
-            const val = !props.data.isShown;
+          (evt): void => {
             evt.stopPropagation();
-            props.onClick(props.data, val);
+
+            props.onClick(evt as unknown as MouseEvent, !props.data.isShown);
           }
         }
       />

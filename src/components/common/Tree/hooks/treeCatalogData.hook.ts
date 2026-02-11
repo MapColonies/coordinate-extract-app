@@ -1,6 +1,12 @@
-import { useEffect, useMemo } from 'react';
-import { TreeItem } from 'react-sortable-tree';
-import { fetchCatalog } from '../../../../common/services/CatalogService';
+import { useEffect, useState } from 'react';
+import {
+  changeNodeAtPath,
+  ExtendedNodeData,
+  find,
+  getNodeAtPath,
+  GetNodeKeyFunction,
+  TreeItem
+} from 'react-sortable-tree';
 import { CatalogTreeNode } from '../../../Wizard/Wizard.types';
 
 export type FilterOpt =
@@ -14,43 +20,22 @@ export type FilterOpt =
 
 export interface ISummary {
   all: number;
-  extractable:number;
+  extractable: number;
   notExtractable: number;
 }
 
-interface UseTreeCatalogDataProps {
-  setCatalogTreeData: (data: CatalogTreeNode[]) => void;
-  catalogTreeData?: CatalogTreeNode[];
+interface UseTreeCatalogDataParams {
+  catalogTreeData: CatalogTreeNode[];
+  setSelectedNode: (node: CatalogTreeNode | undefined) => void;
+  handleRowClick?: (evt: MouseEvent, rowInfo: ExtendedNodeData, additionalFields: Record<string, unknown>) => void;
   filter?: FilterOpt;
   setSummaryCount?: (summary: ISummary) => void;
 }
 
-export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
-  useEffect(() => {
-    // if (!catalogTreeData) {
-    //   setTimeout(() => {
-    //     setCatalogTreeData(mockCatalogData as unknown as CatalogTreeNode[]);
-    //   }, 500);
-    // }
+const keyFromTreeIndex: GetNodeKeyFunction = ({ treeIndex }) => treeIndex;
 
-    if (props.catalogTreeData) {
-      return;
-    }
-
-    (async () => {
-      try {
-        const treeData = await fetchCatalog();
-        props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
-        props.setSummaryCount?.({
-          all: treeData.sumAll,
-          extractable: treeData.sumExt,
-          notExtractable: treeData.sumNExt
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    })();
-  }, []);
+export const useTreeCatalogData = (params: UseTreeCatalogDataParams) => {
+  const [filteredTreeData, setFilteredTreeData] = useState(params.catalogTreeData);
 
   const filterByPredicate = (catalogTreeData: CatalogTreeNode[], filterBy: (treeItem: TreeItem) => boolean) => {
     const filteredCatalog = catalogTreeData?.map((tree) => {
@@ -72,25 +57,80 @@ export const useTreeCatalogData = (props: UseTreeCatalogDataProps) => {
   };
 
   const filterByField = (fieldName: string, fieldValue: unknown) => {
-    if (!props.catalogTreeData) {
-      return;
-    }
-    return filterByPredicate(props.catalogTreeData, (treeItem) => {
+    return filterByPredicate(params.catalogTreeData, (treeItem) => {
       return treeItem[fieldName]?.toString().includes(String(fieldValue));
     });
   };
 
-  const treeData = useMemo(() => {
-    if (!props.catalogTreeData) {
-      return [];
+  useEffect(() => {
+    switch (params.filter?.type) {
+      case "field": {
+        const filteredData = filterByField(params.filter.fieldName, params.filter.fieldValue);
+        setFilteredTreeData(filteredData as CatalogTreeNode[]);
+        params.setSelectedNode(undefined);
+        break;
+      }
+      case "none": {
+        setFilteredTreeData([...params.catalogTreeData]);
+        params.setSelectedNode(undefined);
+        break;
+      }
     }
-    switch (props.filter?.type) {
-      case "field": return filterByField(props.filter.fieldName, props.filter.fieldValue);
-      case "none": return props.catalogTreeData;
+  }, [params.filter]);
+
+  const handleRowClick = (evt: MouseEvent, rowInfo: ExtendedNodeData, isSelected: boolean, isShown?: boolean) => {
+    if (!rowInfo.node.isGroup && params.catalogTreeData) {
+      let newTreeData: TreeItem[] = [...filteredTreeData as CatalogTreeNode[]];
+      if (!evt.ctrlKey) {
+        // Remove prev selection
+        const selection = find({
+          treeData: newTreeData,
+          getNodeKey: keyFromTreeIndex,
+          searchMethod: (data) => data.node.isSelected,
+        });
+
+        selection.matches.forEach(match => {
+          const selRowInfo = getNodeAtPath({
+            treeData: newTreeData,
+            path: match.path,
+            getNodeKey: keyFromTreeIndex,
+            // ignoreCollapsed: false,
+          });
+
+          newTreeData = changeNodeAtPath({
+            treeData: newTreeData,
+            path: match.path,
+            newNode: {
+              ...selRowInfo?.node,
+              isSelected: false,
+              isShown: false
+            },
+            getNodeKey: keyFromTreeIndex
+          });
+        });
+      }
+
+      const newNode = {
+        ...rowInfo.node,
+        isSelected,
+        isShown
+      };
+
+      newTreeData = changeNodeAtPath({
+        treeData: newTreeData,
+        path: rowInfo.path,
+        newNode,
+        getNodeKey: keyFromTreeIndex
+      });
+
+      setFilteredTreeData(newTreeData);
+      params.setSelectedNode(newNode);
     }
-  }, [props.catalogTreeData, props.filter]);
+  };
 
   return {
-    treeData
+    treeData: filteredTreeData,
+    setTreeData: setFilteredTreeData,
+    handleRowClick
   };
 };

@@ -1,0 +1,19 @@
+#catalogTree {
+  height: 100%;
+  padding: 10px;
+}
+
+#catalogTree .filterBtnsContainer {
+  padding: 15px;
+  display: flex;
+  justify-content: space-around
+}
+
+#catalogTree .filterBtn {
+  border: 1px solid var(--mdc-theme-border);
+  color: var(--mdc-theme-on-surface);
+}
+
+#catalogTree .sortableTree {
+  overflow: auto;
+}
