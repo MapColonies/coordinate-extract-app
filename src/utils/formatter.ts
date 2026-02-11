@@ -1,8 +1,8 @@
-export const formatDate = (dateString: string, locale: string): string => {
+export const formatDate = (dateString: string, locale: string, isTextual: boolean = false): string => {
   if (locale === 'he') {
     return new Date(dateString).toLocaleString('he-IL', {
       day: '2-digit',
-      month: 'short',
+      month: isTextual ? 'short' : '2-digit',
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
