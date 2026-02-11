@@ -3,21 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
 import { AutoDirectionBox } from '../../../common/AutoDirectionBox/AutoDirectionBox';
-import appConfig from '../../../utils/Config';
-import { requestExecutor } from '../../../utils/requestHandler';
-import { mockHistory } from '../../common/MockData';
+import { historyAPI, HistoryRecord } from '../../../common/services/HistoryService';
 import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
 
 import './MetadataHistory.css';
-
-interface HistoryRecord {
-  id: string;
-  recordName: string;
-  username: string;
-  authorizedBy: string;
-  action: string;
-  authorizedAt: string;
-}
+import { Curtain } from '../../../common/Curtain/curtain';
 
 export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
   const [historyItems, setHistoryItems] = useState<HistoryRecord[]>([]);
@@ -26,27 +16,16 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
   useEffect(() => {
     setIsNextBtnDisabled(false);
 
-    const fetchData = async (): Promise<void> => {
+    (async () => {
       try {
-        setIsLoading(true);
-        const response = await requestExecutor(
-          {
-            url: `${appConfig.extractableManagerUrl}/audit/${selectedItem?.[IDENTIFIER_FIELD]}`,
-            injectToken: true
-          },
-          'GET',
-          {}
-        );
-
-        setHistoryItems(response?.data ?? mockHistory);
-      } catch (error) {
-        console.error('Failed to fetch history:', error);
-      } finally {
-        setIsLoading(false);
+        const historyData = await historyAPI(selectedItem?.[IDENTIFIER_FIELD] as string, setIsLoading, true);
+        setHistoryItems(historyData as HistoryRecord[]);
       }
-    };
+      catch (e) {
+        setIsNextBtnDisabled(true);
+      }
 
-    fetchData();
+    })();
   }, []);
 
   const sortedHistoryItems = [...historyItems].sort((a, b) =>
@@ -54,7 +33,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
   );
 
   return (
-    <Box className="historyContainer">
+    <Box className="historyContainer curtainContainer">
       <Box className="cardList">
         {
           !isLoading &&
@@ -98,6 +77,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
           isLoading &&
           <Box className="historyLoading">
             <FormattedMessage id="general.loading" />
+            <Curtain showProgress={true}/>
           </Box>
         }
       </Box>

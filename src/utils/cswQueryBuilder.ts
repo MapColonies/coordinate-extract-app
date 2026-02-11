@@ -1,6 +1,6 @@
 import { XMLParser } from 'fast-xml-parser';
 
-export const getRecordsXML = () => {
+export const get3DRecordsXML = () => {
   return `
     <csw:GetRecords
       xmlns="http://www.opengis.net/cat/csw/2.0.2"
@@ -20,17 +20,22 @@ export const getRecordsXML = () => {
     </csw:GetRecords>`;
 };
 
-export const parseQueryResults = (xml: string, recordType: string): Record<string, unknown>[] | null => {
+export const parse3DQueryResults = (xml: string): Record<string, unknown>[] | null => {
+  let retValue = null; 
   const parser = new XMLParser({ ignoreAttributes: false });
   const parsedQuery = parser.parse(xml);
   const recordsResult = parsedQuery['csw:GetRecordsResponse']['csw:SearchResults'];
   if (recordsResult['@_numberOfRecordsMatched'] === '0') {
     console.error(`Didn't find matched IDs!`);
-    return null;
+    return retValue;
   }
-  const records = parsedQuery['csw:GetRecordsResponse']['csw:SearchResults'][recordType];
+  const records = parsedQuery['csw:GetRecordsResponse']['csw:SearchResults']['mc:MC3DRecord'];
   if (Array.isArray(records)) {
-    return records;
+    retValue = records;
   }
-  return [records];
+  else {
+    retValue =  [records];
+  }
+
+  return retValue.filter((record) =>  ['3DPhotoRealistic','PointCloud'].includes(record['mc:productType']));
 };

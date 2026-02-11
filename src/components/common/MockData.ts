@@ -374,26 +374,6 @@ export const mockExtractableRecords = [
     }
   },
   {
-    "id": "2",
-    "recordName": "srtm100",
-    "username": "admin",
-    "authorizedBy": "שזירי",
-    "authorizedAt": "2026-02-09T16:26:18.055Z",
-    "data": {
-      "description": "Metadata for record B"
-    }
-  },
-  {
-    "id": "3",
-    "recordName": "srtm100",
-    "username": "admin",
-    "authorizedBy": "שזירי",
-    "authorizedAt": "2026-02-08T16:26:18.055Z",
-    "data": {
-      "description": "Metadata for record C"
-    }
-  },
-  {
     "id": "4",
     "recordName": "SR_South_20022025_draco_elbit",
     "username": "admin",
