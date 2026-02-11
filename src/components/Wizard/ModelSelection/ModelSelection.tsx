@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Geometry } from 'geojson';
 import {
@@ -8,7 +8,8 @@ import {
   CesiumConstantProperty,
   CesiumGeojsonLayer,
   CesiumMap,
-  CesiumSceneMode
+  CesiumSceneMode,
+  useCesiumMap
 } from '@map-colonies/react-components';
 import { fetchCatalog } from '../../../common/services/CatalogService';
 import { getTokenResource } from '../../../utils/cesium';
@@ -18,15 +19,9 @@ import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelection.css';
+import { CesiumGeojsonFootprint } from './CesiumGeojsonLayer';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
-  useEffect(() => {
-    if (!props.selectedItem) {
-      props.setIsNextBtnDisabled(true);
-    } else {
-      props.setIsNextBtnDisabled(false);
-    }
-  }, []);
 
   useEffect(() => {
     if (props.selectedItem?.isSelected) {
@@ -67,6 +62,17 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     })();
   }, []);
 
+  const centerCesiumView = useMemo(() => {
+    return JSON.parse(appConfig.mapCenter);
+  }, [appConfig.mapCenter]);
+
+  const selectedItemFootprint = useMemo(() => {
+    if (!props.selectedItem?.['mc:footprint']) {
+      return;
+    }
+    return JSON.parse(props.selectedItem?.['mc:footprint']) as Geometry;
+  }, [props.selectedItem]);
+
   return (
     <Box className="modelSelection">
       <Box className="viewArea">
@@ -90,11 +96,12 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
         </Box>
         <Box className="mapPanel">
           <CesiumMap
-            center={JSON.parse(appConfig.mapCenter)}
+            center={centerCesiumView}
             zoom={+appConfig.mapZoom}
             sceneMode={CesiumSceneMode.SCENE3D}
             baseMaps={appConfig.baseMaps}
             showActiveLayersTool={false}
+            infoBox={false}
           >
             {
               props.selectedItem?.['mc:links'] && (props.selectedItem?.isShown as boolean) &&
@@ -104,20 +111,10 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
               />
             }
             {
-              props.selectedItem?.['mc:footprint'] &&
-              <CesiumGeojsonLayer
+              props.selectedItem?.isSelected as boolean && props.selectedItem?.['mc:footprint'] &&
+              <CesiumGeojsonFootprint
                 clampToGround={true}
-                data={JSON.parse(props.selectedItem?.['mc:footprint']) as Geometry}
-                onLoad={(geojsonDataSource) => {
-                  geojsonDataSource.entities.values.forEach((item) => {
-                    if (item.polyline) {
-                      const color = CesiumColor.CYAN;
-                      (item.polyline.width as CesiumConstantProperty).setValue(5);
-                      // @ts-ignore
-                      item.polyline.material = color;
-                    }
-                  });
-                }}
+                data={selectedItemFootprint}
               />
             }
             <Terrain />
