@@ -45,7 +45,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
               <Box className="cardHeader">
                 <Typography tag="span" className="cardTitle">
                   <AutoDirectionBox>
-                    {formatDate(item.authorizedAt, locale)}
+                    {formatDate(item.authorizedAt, locale, true)}
                   </AutoDirectionBox>
                 </Typography>
                 <Typography tag="span" className="cardSecondary">

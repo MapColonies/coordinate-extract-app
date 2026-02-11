@@ -26,6 +26,7 @@
 
   "details.noData": "Select a catalog item to view its footprint and details",
   "details.extractable.approved": "Approved by {name} on {value}",
+  "details.extractable.notApproved": "Not approved",
   "details.field.id": "ID",
   "details.field.productId": "Ext. ID",
   "details.field.productName": "Name",

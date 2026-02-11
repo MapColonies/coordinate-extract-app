@@ -28,6 +28,7 @@
 
   "details.noData": "בחר פריט קטלוגי כדי לצפות בו",
   "details.extractable.approved": "אושר על-ידי {name} בתאריך {value}",
+  "details.extractable.notApproved": "לא מאושר",
   "details.field.id": "מזהה",
   "details.field.productId": "מזהה חיצוני",
   "details.field.productName": "שם",

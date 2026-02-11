@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { isEmpty } from 'lodash';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
 import { AutoDirectionBox } from '../../../common/AutoDirectionBox/AutoDirectionBox';
 import { ApprovedSVGIcon } from '../../../common/icons/ApprovedSVGIcon';
+import { NotApprovedSVGIcon } from '../../../common/icons/NotApprovedSVGIcon';
 import { useI18n } from '../../../i18n/I18nProvider';
 import { formatDate } from '../../../utils/formatter';
 
 import './ModelDetails.css';
+
+const PRIORITY_FIELDS = [
+  'mc:id',
+  'mc:productStatus',
+  'mc:imagingTimeBeginUTC',
+  'mc:imagingTimeEndUTC',
+  'mc:insertDate',
+  'mc:productVersion',
+  'mc:maxHorizontalAccuracyCE90',
+  'mc:accuracyLE90',
+  'mc:typeName',
+  'mc:classification',
+  'mc:productSource',
+  'mc:description',
+];
 
 interface Extractable {
   authorizedBy: string;
@@ -36,19 +52,50 @@ export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
 
   const { locale } = useI18n();
 
+  const orderedMetadataEntries = useMemo(() => {
+    if (!metadata) {
+      return [];
+    }
+    const entries = Object.entries(metadata);
+    return entries.sort((a, b) => {
+      const aIndex = PRIORITY_FIELDS.indexOf(a[0]);
+      const bIndex = PRIORITY_FIELDS.indexOf(b[0]);
+      if (aIndex === -1 && bIndex === -1) return 0;
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    });
+  }, [metadata]);
+
   const normalizeLabel = (label: string): string => {
     return label.includes(':') ? label.split(':')[1] : label;
   };
 
+  const isValidDateString = (value: unknown): value is string => {
+    if (typeof value !== 'string') {
+      return false;
+    }
+    if (value.length < 8) {
+      return false;
+    }
+    const date = new Date(value);
+    return !isNaN(date.getTime());
+  };
+
   const TruncatedValue: React.FC<{ value: unknown }> = ({ value }) => {
-    const stringValue = String(value);
+    let displayValue: string;
+    if (isValidDateString(value)) {
+      displayValue = formatDate(value, locale).replace(/\./g, '/');
+    } else {
+      displayValue = String(value);
+    }
     return (
       <Typography
         tag="span"
-        title={stringValue}
+        title={displayValue}
         className="metadataValue"
       >
-        {stringValue}
+        {displayValue}
       </Typography>
     );
   };
@@ -62,7 +109,7 @@ export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
         sx={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          padding: "8px 12px",
+          padding: "10px 6px",
         }}
       >
         <AutoDirectionBox className="metadataLabel">
@@ -96,30 +143,41 @@ export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
     <Box className="detailsContainer">
       {
         !!productName &&
-        <Box className="detailsTitle">{String(productName)}</Box>
+        <Box className="detailsHeader">
+          <Box className="title">
+            {String(productName)}
+          </Box>
+          <Box className="extractable">
+            {
+              !isApproved ?
+                <>
+                  <NotApprovedSVGIcon color="var(--mdc-theme-gc-warning)" />
+                  <FormattedMessage id="details.extractable.notApproved" />
+                </> :
+                !!typedExtractable ?
+                  <>
+                    <ApprovedSVGIcon color="var(--mdc-theme-gc-success)" />
+                    <FormattedMessage
+                      id="details.extractable.approved"
+                      values={{
+                        name: typedExtractable.authorizedBy,
+                        value: formatDate(typedExtractable.authorizedAt, locale, true)
+                      }}
+                    />
+                  </> :
+                  <></>
+            }
+          </Box>
+        </Box>
       }
       <Box className="metadata">
         {
           metadata &&
-          Object.entries(metadata).map(([key, value]) => (
+          orderedMetadataEntries.map(([key, value]) => (
             <MetadataItem key={key} label={key} value={value} />
           ))
         }
       </Box>
-      {
-        metadata &&
-        !!typedExtractable &&
-        <Box className="extractable">
-          <ApprovedSVGIcon color="var(--mdc-theme-gc-success)" />
-          <FormattedMessage
-            id="details.extractable.approved"
-            values={{
-              name: typedExtractable.authorizedBy,
-              value: formatDate(typedExtractable.authorizedAt, locale)
-            }}
-          />
-        </Box>
-      }
       {
         isEmpty(metadata) &&
         <Box className="noData">
