@@ -1,5 +1,7 @@
 {
   "app.title": "אישור מודל לחילוץ נ.צ.",
+  "app.error": "שגיאה",
+  "app.close": "סגור",
 
   "step.selection": "בחירה",
   "step.details": "פרטים",

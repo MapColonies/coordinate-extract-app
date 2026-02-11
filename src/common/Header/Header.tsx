@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
-import { Button, Icon } from '@map-colonies/react-core';
+import { Avatar, Button, Icon, Typography } from '@map-colonies/react-core';
 import { useAuth } from '../Routing/Login/AuthContext';
 import { ExitSVGIcon } from '../icons/ExitSVGIcon';
 import { LogoSVGIcon } from '../icons/LogoSVGIcon';
@@ -19,7 +19,7 @@ const Header: React.FC = (): JSX.Element => {
       <>
         <Box className="Header">
           <Box className="Title">
-          <Icon
+            <Icon
               icon={{
                 strategy: 'component',
                 icon: (
@@ -32,10 +32,16 @@ const Header: React.FC = (): JSX.Element => {
             <FormattedMessage id="app.title" />
           </Box>
           <Box className="userInfo">
-            <span>{user.email}</span>
+            <Box className='userName'> 
+              <Typography tag="span">
+                {user.username}
+              </Typography>
+            </Box>
+            <Avatar className="avatar" name={user.username} size="large" />
             <Button 
+              outlined
               label={intl.formatMessage({ id: 'auth.logout.btn' })}
-              icon={<ExitSVGIcon color="red" />}
+              icon={<ExitSVGIcon color="currentColor" />}
               onClick={(): void => { logout(); }}
             />
           </Box>
