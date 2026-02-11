@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, { useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Geometry } from 'geojson';
 import {
   Box,
@@ -10,12 +10,12 @@ import {
   CesiumMap,
   CesiumSceneMode
 } from '@map-colonies/react-components';
+import { fetchCatalog } from '../../../common/services/CatalogService';
 import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
-import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
+import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
-import { fetchCatalog } from '../../../common/services/CatalogService';
 
 import './ModelSelection.css';
 

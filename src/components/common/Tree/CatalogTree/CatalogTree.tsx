@@ -1,15 +1,15 @@
-import SortableTree, { ExtendedNodeData, ReactSortableTreeProps } from 'react-sortable-tree';
+import { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import SortableTree, { ReactSortableTreeProps } from 'react-sortable-tree';
+import { Box } from '@map-colonies/react-components';
+import { Button, TextField } from '@map-colonies/react-core';
 import { ApprovedSVGIcon } from '../../../../common/icons/approved';
 import { NotApprovedSVGIcon } from '../../../../common/icons/notApproved';
+import { useDebounce } from '../../../../hooks/useDebounce';
 import { useI18n } from '../../../../i18n/I18nProvider';
 import { CatalogTreeNode, IDENTIFIER_FIELD, MAIN_FIELD } from '../../../Wizard/Wizard.types';
 import { LayerImageIconRenderer } from '../../LayerImageIconRenderer/LayerImageIconRenderer';
 import CatalogTheme from '../renderers/index';
-import { useEffect, useState } from 'react';
-import { Box } from '@map-colonies/react-components';
-import { Button, TextField } from '@map-colonies/react-core';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { useDebounce } from '../../../../hooks/useDebounce';
 import { FilterOpt, ISummary, useTreeCatalogData } from '../hooks/treeCatalogData.hook';
 
 import './CatalogTree.css';
