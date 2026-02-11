@@ -1,4 +1,4 @@
-FROM node:16.13.0-alpine3.12 AS prepare
+FROM node:18-alpine AS prepare
 # Download confd 
 RUN apk add --no-cache wget
 RUN mkdir /confd
@@ -12,15 +12,15 @@ COPY . .
 RUN yarn build
 
 
-FROM nginx:1.19.1-alpine AS production
+FROM nginx:1.25-alpine AS production
 # Install Node for running confd
-RUN set -eux & apk add --no-cache nodejs
+RUN apk add --no-cache nodejs npm
 # Change nginx config to work without root
-RUN sed -i 's/listen       80;/listen       8080;/g' /etc/nginx/conf.d/default.conf  && \
-  sed -i '/index  index.html index.htm;/a \        proxy_intercept_errors on;\n        error_page 404 = /index.html;'  /etc/nginx/conf.d/default.conf  && \
-  sed -i '/user  nginx;/d' /etc/nginx/nginx.conf && \
-  sed -i 's,/var/run/nginx.pid,/tmp/nginx.pid,' /etc/nginx/nginx.conf && \ 
-  sed -i "/^http {/a \    server_tokens off;\n    proxy_temp_path /tmp/proxy_temp;\n    client_body_temp_path /tmp/client_temp;\n    fastcgi_temp_path /tmp/fastcgi_temp;\n    uwsgi_temp_path /tmp/uwsgi_temp;\n    scgi_temp_path /tmp/scgi_temp;\n" /etc/nginx/nginx.conf
+RUN sed -i 's/listen       80;/listen       8080;/g' /etc/nginx/conf.d/default.conf && \
+    sed -i '/index  index.html index.htm;/a \        proxy_intercept_errors on;\n        error_page 404 = /index.html;'  /etc/nginx/conf.d/default.conf && \
+    sed -i '/user  nginx;/d' /etc/nginx/nginx.conf && \
+    sed -i 's,/var/run/nginx.pid,/tmp/nginx.pid,' /etc/nginx/nginx.conf && \
+    sed -i "/^http {/a \    server_tokens off;\n    proxy_temp_path /tmp/proxy_temp;\n    client_body_temp_path /tmp/client_temp;\n    fastcgi_temp_path /tmp/fastcgi_temp;\n    uwsgi_temp_path /tmp/uwsgi_temp;\n    scgi_temp_path /tmp/scgi_temp;\n" /etc/nginx/nginx.conf
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
@@ -34,8 +34,8 @@ COPY --from=prepare /confd/confd ../confd/
 RUN chgrp -R 0 /var/cache/nginx/ && \
   chmod -R g=u /var/cache/nginx/ && chmod -R g=u /usr/share/nginx/
 
-# create new user 
-RUN adduser -S user -G root  
+# Create non-root user
+RUN adduser -S user -G root
 USER user
 
 ENTRYPOINT ["/entrypoint.sh"]
