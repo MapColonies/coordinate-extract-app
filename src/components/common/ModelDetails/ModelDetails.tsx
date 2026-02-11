@@ -108,7 +108,7 @@ export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
         metadata &&
         !!typedExtractable &&
         <Box className="extractable">
-          <ApprovedSVGIcon color="green" />
+          <ApprovedSVGIcon color="var(--mdc-theme-gc-success)" />
           <FormattedMessage
             id="details.extractable.approved"
             values={{
