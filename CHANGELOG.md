@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.0...v1.1.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* node ver 18 ([7467ef8](https://github.com/MapColonies/coordinate-extract-app/commit/7467ef84ab36e146b41afb211801448b37426ff0))
+* not found ([589c40e](https://github.com/MapColonies/coordinate-extract-app/commit/589c40e866a49e72e6a2bae786b60fd6e8ba7d25))
+* release please ([9944b0c](https://github.com/MapColonies/coordinate-extract-app/commit/9944b0ca728d085e64880d10ae48c8035b30b9d9))
+
 ## [1.1.0](https://github.com/MapColonies/coordinate-extract-app/compare/v1.0.0...v1.1.0) (2026-02-11)
 
 
