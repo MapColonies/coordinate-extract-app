@@ -3,7 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
 import { AutoDirectionBox } from '../../../common/AutoDirectionBox/AutoDirectionBox';
+import { useI18n } from '../../../i18n/I18nProvider';
 import appConfig from '../../../utils/Config';
+import { formatDate } from '../../../utils/formatter';
 import { requestExecutor } from '../../../utils/requestHandler';
 import { mockHistory } from '../../common/MockData';
 import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
@@ -22,6 +24,7 @@ interface HistoryRecord {
 export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
   const [historyItems, setHistoryItems] = useState<HistoryRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { locale } = useI18n();
 
   useEffect(() => {
     setIsNextBtnDisabled(false);
@@ -37,7 +40,6 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
           'GET',
           {}
         );
-
         setHistoryItems(response?.data ?? mockHistory);
       } catch (error) {
         console.error('Failed to fetch history:', error);
@@ -63,15 +65,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
               <Box className="cardHeader">
                 <Typography tag="span" className="cardTitle">
                   <AutoDirectionBox>
-                    {
-                      new Date(item.authorizedAt).toLocaleString('he-IL', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })
-                    }
+                    {formatDate(item.authorizedAt, locale)}
                   </AutoDirectionBox>
                 </Typography>
                 <Typography tag="span" className="cardSecondary">

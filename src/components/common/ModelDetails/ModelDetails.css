@@ -1,20 +1,49 @@
 .detailsContainer {
   height: 30%;
   padding: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: var(--mdc-theme-background);
+  overflow: hidden;
   border: 1px solid var(--mdc-theme-border);
   border-radius: var(--mdc-theme-gc-border-radius);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-  column-gap: 200px;
-  row-gap: var(--mdc-theme-gc-gap);
+  display: flex;
+  flex-direction: column;
 }
 
-.detailsContainer .metadataRow {
+.detailsContainer .detailsTitle {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0 12px 8px;
+  border-bottom: 1px solid var(--mdc-theme-border);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.detailsContainer .metadata {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+
+.detailsContainer .extractable {
+  border-top: 1px solid var(--mdc-theme-border);
+  padding: 12px 0 4px;
+  font-weight: 500;
+  opacity: 0.8;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.detailsContainer .metadataItem {
   width: 400px;
+}
+
+.detailsContainer .metadataItem span {
+  word-break: break-word;
 }
 
 .detailsContainer .metadataLabel {
@@ -22,23 +51,22 @@
   font-weight: bold;
   padding-right: 10px;
   opacity: 0.7;
+  cursor: default;
 }
 
-.detailsContainer .metadataRow span {
-  word-break: break-word;
-}
-
-.metadataValue {
+.detailsContainer .metadataValue {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
+  cursor: default;
 }
 
-.detailsContainer .detailsPlaceholder {
+.detailsContainer .noData {
   width: 100%;
-  height: 200px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--mdc-theme-gc-font-size);
-  text-align: center;
-  background-color: var(--mdc-theme-background);
 }
