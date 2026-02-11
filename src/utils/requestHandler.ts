@@ -30,7 +30,6 @@ export const requestHandler = async (url: string, method: string, params: AxiosR
     headers: {
       ...{
         ...(params.headers ?? {}),
-        ...(typeof origin === 'string' && { origin }),
       },
     } as Record<string, unknown>,
   };

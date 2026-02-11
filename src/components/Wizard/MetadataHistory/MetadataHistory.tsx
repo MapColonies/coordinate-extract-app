@@ -5,13 +5,16 @@ import { Typography } from '@map-colonies/react-core';
 import { AutoDirectionBox } from '../../../common/AutoDirectionBox/AutoDirectionBox';
 import { historyAPI, HistoryRecord } from '../../../common/services/HistoryService';
 import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
+import { Curtain } from '../../../common/Curtain/curtain';
+import { formatDate } from '../../../utils/formatter';
+import { useI18n } from '../../../i18n/I18nProvider';
 
 import './MetadataHistory.css';
-import { Curtain } from '../../../common/Curtain/curtain';
 
 export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
   const [historyItems, setHistoryItems] = useState<HistoryRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { locale } = useI18n();
 
   useEffect(() => {
     setIsNextBtnDisabled(false);
@@ -42,15 +45,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
               <Box className="cardHeader">
                 <Typography tag="span" className="cardTitle">
                   <AutoDirectionBox>
-                    {
-                      new Date(item.authorizedAt).toLocaleString('he-IL', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })
-                    }
+                    {formatDate(item.authorizedAt, locale)}
                   </AutoDirectionBox>
                 </Typography>
                 <Typography tag="span" className="cardSecondary">

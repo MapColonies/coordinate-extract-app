@@ -1,4 +1,5 @@
 import { TreeItem } from 'react-sortable-tree';
+import { ISummary } from '../common/Tree/hooks/treeCatalogData.hook';
 
 export interface CatalogTreeNode extends TreeItem {
   isGroup?: boolean;
@@ -16,7 +17,8 @@ export interface WizardStepProps {
 export interface WizardSelectionProps extends WizardStepProps {
   setCatalogTreeData: (data: CatalogTreeNode[]) => void;
   catalogTreeData?: CatalogTreeNode[];
-  setSelectedItem?: (item?: CatalogTreeNode) => void;
+  itemsSummary: ISummary;
+  setItemsSummary: (summary: ISummary) => void;
 }
 
 export const IDENTIFIER_FIELD = 'mc:productName';
