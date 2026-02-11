@@ -6,10 +6,56 @@
 }
 
 .loginContainer {
-  border: 2px solid red;
+  border: 1px solid var(--mdc-theme-border);
+  border-radius: var(--mdc-theme-gc-border-radius);
 }
 
 .loginControl {
   display: block;
   margin: 20px;
+}
+
+.LoginHeader {
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.LoginHeader .Title {
+  text-align: center;
+  color: var(--mdc-theme-on-primary);
+  font-size: 1.325rem;
+  line-height: 2.7rem;
+  font-weight: 600;
+  display: flex;
+  gap: 8px;
+}
+
+.LoginHeader .Title .Logo {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--mdc-theme-text-icon-on-background);
+  border-radius: 0.5rem;
+}
+
+.loginContainer .error {
+  width: 85%;
+  height: 40px;
+  margin-right: 20px;
+  color: var(--mdc-theme-gc-error);
+  direction: ltr;
+}
+
+.curtain {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.5;
+  z-index: 4;
+  background-color: var(--mdc-theme-gc-disabled-background);
 }
