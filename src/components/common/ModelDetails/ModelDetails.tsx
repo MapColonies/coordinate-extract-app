@@ -94,6 +94,7 @@ export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
         tag="span"
         title={displayValue}
         className="metadataValue"
+        dir="auto"
       >
         {displayValue}
       </Typography>
