@@ -7,11 +7,13 @@
 }
 
 body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-right {
-  float: left;
+  float: right;
+  min-width: 140px;
 }
 
 body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left {
-  float: right;
+  float: left;
+  min-width: 140px;
 }
 
 .wizardWrapper.wizardDisabledNext .wizard-footer-right button {

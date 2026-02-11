@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Geometry } from 'geojson';
 import {
@@ -11,6 +11,7 @@ import {
   CesiumSceneMode
 } from '@map-colonies/react-components';
 import { fetchCatalog } from '../../../common/services/CatalogService';
+import { Curtain } from '../../../common/Curtain/curtain';
 import { getTokenResource } from '../../../utils/cesium';
 import appConfig from '../../../utils/Config';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
@@ -20,6 +21,15 @@ import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
 import './ModelSelection.css';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const treeTheme = {
+    "--rst-selected-background-color": '#f8fafc33',
+    "--rst-hover-background-color": '#1e293b80',
+    "--rst-highlight-line-size": '6px',
+    "--rst-node-label-width": '280px',
+    "--rst-expander-size": '30px',
+  };
+
   useEffect(() => {
     if (!props.selectedItem) {
       props.setIsNextBtnDisabled(true);
@@ -36,34 +46,25 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     }
   }, [props.selectedItem]);
 
-  const treeTheme = {
-    "--rst-selected-background-color": '#f8fafc33',
-    "--rst-hover-background-color": '#1e293b80',
-    "--rst-highlight-line-size": '6px',
-    "--rst-node-label-width": '280px',
-    "--rst-expander-size": '30px',
-  };
-
   useEffect(() => {
     if (props.catalogTreeData) {
+      setIsLoading(false);
       return;
     }
 
     (async () => {
-      try {
-        const treeData = await fetchCatalog();
+      const treeData = await fetchCatalog((value: boolean)=>{
+        setTimeout( () => setIsLoading(value), 2000);
+      });
 
-        props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
+      props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
 
-        props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
-        props.setItemsSummary({
-          all: treeData.sumAll,
-          extractable: treeData.sumExt,
-          notExtractable: treeData.sumNExt
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
+      props.setItemsSummary({
+        all: treeData.sumAll,
+        extractable: treeData.sumExt,
+        notExtractable: treeData.sumNExt
+      });
     })();
   }, []);
 
@@ -74,7 +75,10 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
           <Box className="panelHeader">
             <FormattedMessage id="tree.title" />
           </Box>
-          <Box style={treeTheme as React.CSSProperties} className="treeContainer">
+          <Box style={treeTheme as React.CSSProperties} className="treeContainer curtainContainer">
+            {
+              isLoading && <Curtain showProgress={true}/>
+            }
             {
               props.catalogTreeData &&
               <CatalogTree

@@ -30,3 +30,16 @@
   display: flex;
   gap: var(--mdc-theme-gc-gap);
 }
+
+.Header .userInfo .userName {
+  align-content: center;
+}
+
+.Header .userInfo .avatar {
+  margin-left: 20px;
+}
+
+[dir=rtl] .Header .mdc-button--outlined .mdc-button__icon
+{
+  margin-left: 16px;
+}

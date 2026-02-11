@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export type User = {
-  id: string;
-  email: string;
+  username: string;
   role?: "admin" | "user";
 };
 
