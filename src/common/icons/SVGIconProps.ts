@@ -1,4 +1,4 @@
 export interface SVGIconProps {
-  color?: string;
+  color: string;
   className?: string
 }

@@ -26,7 +26,9 @@ export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
     isSelected,
     isShown,
     title,
+    // eslint-disable-next-line no-useless-computed-key
     ['mc:productName']: productName,
+    // eslint-disable-next-line no-useless-computed-key
     ['ows:BoundingBox']: boundingBox,
     ...metadata
   } = item || {};
