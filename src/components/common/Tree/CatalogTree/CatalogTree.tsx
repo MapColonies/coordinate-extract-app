@@ -3,8 +3,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import SortableTree, { ReactSortableTreeProps } from 'react-sortable-tree';
 import { Box } from '@map-colonies/react-components';
 import { Button, TextField } from '@map-colonies/react-core';
-import { ApprovedSVGIcon } from '../../../../common/icons/approved';
-import { NotApprovedSVGIcon } from '../../../../common/icons/notApproved';
+import { ApprovedSVGIcon } from '../../../../common/icons/ApprovedSVGIcon';
+import { NotApprovedSVGIcon } from '../../../../common/icons/NotApprovedSVGIcon';
 import { useDebounce } from '../../../../hooks/useDebounce';
 import { useI18n } from '../../../../i18n/I18nProvider';
 import { CatalogTreeNode, IDENTIFIER_FIELD, MAIN_FIELD } from '../../../Wizard/Wizard.types';
@@ -123,9 +123,9 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
               ],
             buttons: [
               rowInfo.node?.isApproved ?
-                <ApprovedSVGIcon color='var(--mdc-theme-gc-success)' />
+                <ApprovedSVGIcon color="var(--mdc-theme-gc-success)" />
                 :
-                <NotApprovedSVGIcon color='var(--mdc-theme-gc-warning)' />
+                <NotApprovedSVGIcon color="var(--mdc-theme-gc-warning)" />
             ]
           };
         }}
