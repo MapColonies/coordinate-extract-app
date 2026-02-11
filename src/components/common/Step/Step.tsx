@@ -23,7 +23,7 @@ export const Step: React.FC<PropsWithChildren<StepProps>> = ({ children, selecte
 
   return (
     <Box className="step">
-      <ModelDetails metadata={metadata} />
+      <ModelDetails item={metadata} />
       <Box className="viewArea">
         <Box className="panel">
           {
