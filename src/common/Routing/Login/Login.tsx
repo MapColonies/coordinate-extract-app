@@ -81,12 +81,12 @@ const Login: React.FC = () => {
             setUserPassword(e.currentTarget.value.trim());
             setError(undefined);
           }}
-          // onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
-          //   const SUBMIT_KEY = 'Enter'
-          //   if (password && e.key === SUBMIT_KEY) {
-          //     validatePassword();
-          //   }
-          // }}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
+            const SUBMIT_KEY = 'Enter'
+            if (isLoginInfo() && e.key === SUBMIT_KEY) {
+              handleLogin();
+            }
+          }}
           value={userPassword}
           autoComplete="off"
         />
