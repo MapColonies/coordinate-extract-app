@@ -124,7 +124,7 @@ route:
       path: /
       suffix:
   targetPort: http
-  tls: 
+  tls:
     enabled: true
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
