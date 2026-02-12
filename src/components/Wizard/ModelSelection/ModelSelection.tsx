@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Geometry } from 'geojson';
 import {
   Box,
   Cesium3DTileset,
-  CesiumColor,
-  CesiumConstantProperty,
-  CesiumGeojsonLayer,
   CesiumMap,
   CesiumSceneMode
 } from '@map-colonies/react-components';
 import { fetchCatalog } from '../../../common/services/CatalogService';
 import { Curtain } from '../../../common/Curtain/curtain';
-import { getTokenResource } from '../../../utils/cesium';
+import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
 import appConfig from '../../../utils/Config';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { Terrain } from '../../common/Terrain/Terrain';
-import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
+import { CatalogTreeNode, IDENTIFIER_FIELD, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelection.css';
+import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [finishedFlying, setFinishedFlying] = useState(false);
+
   const treeTheme = {
     "--rst-selected-background-color": '#f8fafc33',
     "--rst-hover-background-color": '#1e293b80',
@@ -68,6 +68,17 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     })();
   }, []);
 
+  const centerCesiumView = useMemo(() => {
+    return JSON.parse(appConfig.mapCenter);
+  }, [appConfig.mapCenter]);
+
+  const selectedItemFootprint = useMemo(() => {
+    if (!props.selectedItem?.['mc:footprint']) {
+      return;
+    }
+    return JSON.parse(props.selectedItem?.['mc:footprint']) as Geometry;
+  }, [props.selectedItem]);
+
   return (
     <Box className="modelSelection">
       <Box className="viewArea">
@@ -94,34 +105,27 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
         </Box>
         <Box className="mapPanel">
           <CesiumMap
-            center={JSON.parse(appConfig.mapCenter)}
+            center={centerCesiumView}
             zoom={+appConfig.mapZoom}
             sceneMode={CesiumSceneMode.SCENE3D}
             baseMaps={appConfig.baseMaps}
             showActiveLayersTool={false}
+            infoBox={false}
           >
             {
-              props.selectedItem?.['mc:links'] && (props.selectedItem?.isShown as boolean) &&
-              <Cesium3DTileset
-                url={getTokenResource(props.selectedItem?.['mc:links']["#text"] as string)}
-                isZoomTo={true}
+              props.selectedItem?.isSelected as boolean && props.selectedItem?.['mc:footprint'] &&
+              <CesiumGeojsonFootprint
+                id={props.selectedItem[IDENTIFIER_FIELD] as string}
+                clampToGround={true}
+                data={selectedItemFootprint}
+                setFinishedFlying={setFinishedFlying}
               />
             }
             {
-              props.selectedItem?.['mc:footprint'] &&
-              <CesiumGeojsonLayer
-                clampToGround={true}
-                data={JSON.parse(props.selectedItem?.['mc:footprint']) as Geometry}
-                onLoad={(geojsonDataSource) => {
-                  geojsonDataSource.entities.values.forEach((item) => {
-                    if (item.polyline) {
-                      const color = CesiumColor.CYAN;
-                      (item.polyline.width as CesiumConstantProperty).setValue(5);
-                      // @ts-ignore
-                      item.polyline.material = color;
-                    }
-                  });
-                }}
+              props.selectedItem?.['mc:links'] && (props.selectedItem?.isShown as boolean) && finishedFlying &&
+              <Cesium3DTileset
+                url={getTokenResource(props.selectedItem?.['mc:links']["#text"] as string)}
+                isZoomTo={true}
               />
             }
             <Terrain />

@@ -5,7 +5,7 @@ import {
   CesiumEllipsoidTerrainProvider,
   useCesiumMap,
 } from '@map-colonies/react-components';
-import { getTokenResource } from '../../../utils/cesium';
+import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
 import appConfig from '../../../utils/Config';
 
 const NONE = 0;
