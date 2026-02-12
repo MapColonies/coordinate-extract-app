@@ -33,9 +33,11 @@ const enrichBaseMaps = (baseMaps: IBaseMaps): IBaseMaps => {
 };
 
 class Config {
-  public tokenInjectionType = ACCESS_TOKEN_INJECTION_TYPE;
-  public tokenAttributeName = ACCESS_TOKEN_ATTRIBUTE_NAME;
-  public tokenValue = ACCESS_TOKEN_VALUE;
+  public accessToken = {
+    injectionType: ACCESS_TOKEN_INJECTION_TYPE,
+    attributeName: ACCESS_TOKEN_ATTRIBUTE_NAME,
+    tokenValue: ACCESS_TOKEN_VALUE
+  };
   public publicUrl = PUBLIC_URL || '.';
   public language = LANGUAGE || 'he';
   public mapCenter = MAP_CENTER || '[34.817, 31.911]';
