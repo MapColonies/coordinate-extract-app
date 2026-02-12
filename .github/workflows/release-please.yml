@@ -1,19 +1,18 @@
-name: Release Please
-
 on:
   push:
     branches:
-      - main
       - master
-
 permissions:
   contents: write
   pull-requests: write
-
+name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         with:
-          release-type: node
+          # this assumes that you have created a personal access token
+          # (PAT) and configured it as a GitHub action secret named
+          # `MY_RELEASE_PLEASE_TOKEN` (this secret name is not important).
+          token: ${{ secrets.GH_PAT }}
