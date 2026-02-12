@@ -18,8 +18,8 @@ const Login: React.FC = () => {
   const location = useLocation<{ from?: string }>();
   const intl = useIntl();
   const from = location.state?.from || "/";
-  const [userName, setUserName] = useState<string|undefined>(undefined);
-  const [userPassword, setUserPassword] = useState<string|undefined>(undefined);
+  const [userName, setUserName] = useState<string>('');
+  const [userPassword, setUserPassword] = useState<string>('');
   const [error, setError] = useState<string|undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -88,7 +88,7 @@ const Login: React.FC = () => {
           //   }
           // }}
           value={userPassword}
-          autocomplete="off"
+          autoComplete="off"
         />
         <Button 
           raised 
