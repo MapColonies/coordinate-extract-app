@@ -17,10 +17,14 @@ import { CatalogTreeNode, IDENTIFIER_FIELD, WizardSelectionProps } from '../Wiza
 
 import './ModelSelection.css';
 import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
+import { LocationMarker } from '../../../utils/Cesium/LocationMarker';
+import { CesiumPOI } from '../../../utils/Cesium/CesiumPOI/CesiumPOI';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [finishedFlying, setFinishedFlying] = useState(false);
+  // const [poi, setPoi] = useState<IPOI | undefined>(undefined);
+  // const [poi, setPoi] = useState<IPOI | undefined>(undefined);
 
   const treeTheme = {
     "--rst-selected-background-color": '#f8fafc33',
@@ -53,8 +57,8 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     }
 
     (async () => {
-      const treeData = await fetchCatalog((value: boolean)=>{
-        setTimeout( () => setIsLoading(value), 2000);
+      const treeData = await fetchCatalog((value: boolean) => {
+        setTimeout(() => setIsLoading(value), 2000);
       });
 
       props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
@@ -88,7 +92,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
           </Box>
           <Box style={treeTheme as React.CSSProperties} className="treeContainer curtainContainer">
             {
-              isLoading && <Curtain showProgress={true}/>
+              isLoading && <Curtain showProgress={true} />
             }
             {
               props.catalogTreeData &&
@@ -128,6 +132,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
                 isZoomTo={true}
               />
             }
+            <CesiumPOI />
             <Terrain />
           </CesiumMap>
         </Box>

@@ -1,0 +1,11 @@
+#CesiumPOI {
+  position: absolute;
+  border: solid 1px red;
+  right: 20px;
+  background-color: black;
+}
+
+#CesiumPOI .small {
+  height: 50px;
+  width: 50px;
+}
