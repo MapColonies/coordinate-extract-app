@@ -71,6 +71,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
               required
               className="textField"
               placeholder={intl.formatMessage({ id: 'form.password.placeholder' })}
+              autoComplete="off"
             />
           </Box>
         </form>

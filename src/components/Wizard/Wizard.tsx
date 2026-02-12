@@ -57,7 +57,7 @@ export const Wizard: React.FC = () => {
           </Button>
         )}
         finishButtonTemplate={(handleComplete) => (
-          <Button raised onClick={handleComplete} className='wizard-footer-left'>
+          <Button raised disabled={disabled} onClick={handleComplete} className='wizard-footer-left'>
             {intl.formatMessage({ id: 'button.finish' })}
           </Button>
         )}
