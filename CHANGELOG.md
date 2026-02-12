@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.8](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.7...v1.1.8) (2026-02-12)
+
+
+### Bug Fixes
+
+* env-config ([1850ad6](https://github.com/MapColonies/coordinate-extract-app/commit/1850ad6403abc9c32950f2f189084e39659b6a6a))
+* env-config ([b94b012](https://github.com/MapColonies/coordinate-extract-app/commit/b94b012a30b97d01fc9d0f4ab6c97792340586e5))
+
 ## [1.1.7](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.6...v1.1.7) (2026-02-12)
 
 
