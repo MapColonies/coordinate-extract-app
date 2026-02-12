@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.6](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.5...v1.1.6) (2026-02-12)
+
+
+### Bug Fixes
+
+* flyTo feature on row selected ([08ea8df](https://github.com/MapColonies/coordinate-extract-app/commit/08ea8dfd53da11c42e6152655ce7694087f01dbd))
+* layer image shown only after flyTo is completed ([f3bb371](https://github.com/MapColonies/coordinate-extract-app/commit/f3bb371c7c140c4b7e87985d5c421f40c83c5a91))
+
 ## [1.1.5](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.4...v1.1.5) (2026-02-12)
 
 
