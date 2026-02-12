@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.9](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.8...v1.1.9) (2026-02-12)
+
+
+### Bug Fixes
+
+* disable finish btn and autocomplete ([222a05a](https://github.com/MapColonies/coordinate-extract-app/commit/222a05adfe1833bdc943486d2b7e0d05b26cdb4d))
+* disable finish btn and autocomplete ([d72aa56](https://github.com/MapColonies/coordinate-extract-app/commit/d72aa56851bdf3d027e8cb4b4a0ee24ae908da4f))
+
 ## [1.1.8](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.7...v1.1.8) (2026-02-12)
 
 
