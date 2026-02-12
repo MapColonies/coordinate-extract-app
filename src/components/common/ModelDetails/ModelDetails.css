@@ -34,33 +34,41 @@
 
 .detailsContainer .metadata {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 50px;
+  grid-template-columns: repeat(3, 1fr);
   overflow-y: auto;
   overflow-x: hidden;
-  flex: 1;
-  position: relative;
-  background-image: 
-    linear-gradient(to bottom, var(--mdc-theme-border), var(--mdc-theme-border)),
-    linear-gradient(to bottom, var(--mdc-theme-border), var(--mdc-theme-border));
-  background-size: 1px 100%, 1px 100%;
-  background-repeat: no-repeat;
-  background-position: 
-    calc(33.333% + 25px) 0,
-    calc(66.666% + 25px) 0;
 }
 
-
 .detailsContainer .metadataItem {
-  width: 360px;
+  width: 100%;
+  border-right: 1px solid var(--mdc-theme-border);
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+body[dir="rtl"] .detailsContainer .metadataItem {
+  border-right: none;
+  border-left: 1px solid var(--mdc-theme-border);
+}
+
+.detailsContainer .metadataItem:nth-child(3n) {
+  border-right: none;
+}
+
+body[dir="rtl"] .detailsContainer .metadataItem:nth-child(3n) {
+  border-left: none;
 }
 
 .detailsContainer .metadataLabel {
-  text-align: right;
+  text-align: left;
   font-weight: bold;
   padding-right: 10px;
   opacity: 0.7;
   cursor: default;
+}
+
+body[dir="rtl"] .detailsContainer .metadataLabel {
+  text-align: right;
 }
 
 .detailsContainer .metadataValue {
@@ -70,6 +78,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: default;
+  text-align: right;
+  justify-self: start;
 }
 
 .detailsContainer .noData {

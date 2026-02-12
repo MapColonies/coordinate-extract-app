@@ -10,9 +10,7 @@ interface CurtainProps {
 export const Curtain: React.FC<CurtainProps> = ({showProgress}) => {
   return (
     <Box className="curtain">
-      {
-        showProgress && <CircularProgress className="progress" size='xlarge' />
-      }
+      {showProgress && <CircularProgress className="progress" size='xlarge' />}
     </Box>
   );
 };

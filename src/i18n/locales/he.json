@@ -14,6 +14,7 @@
 
   "general.loading": "בטעינה...",
   "general.noData": "אין נתונים להצגה",
+  "general.pageNotFound.description": "לא קיים",
 
   "tree.title": "בחירת מודל",
   "tree.filter.placeholder": "סינון לפי שם מודל...",
@@ -79,7 +80,7 @@
   "details.field.productStatus": "סטטוס",
 
   "history.action.create": " · אושר · על-ידי {value}",
-  "history.action.delete": " · בוטל · על-ידי {value}",
+  "history.action.delete": " · הוסר · על-ידי {value}",
 
   "form.message.approve": "אישור המודל יחשוף אותו לגורמים מבצעיים לחילוץ קואורדינטות",
   "form.message.reject": "ביטול האישור יסיר את המודל מחשיפה לגורמים מבצעיים",

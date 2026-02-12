@@ -12,6 +12,7 @@
 
   "general.loading": "Loading...",
   "general.noData": "No data is available",
+  "general.pageNotFound.description": "The page you are looking for does not exist",
 
   "tree.title": "Catalog Tree",
   "tree.filter.placeholder": "Filter by model name...",

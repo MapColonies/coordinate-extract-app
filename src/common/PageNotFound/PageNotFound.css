@@ -1,12 +1,13 @@
 .PageNotFound {
   position: absolute;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 20%);
   color: var(--mdc-theme-on-primary);
 }
 
 .PageNotFound .Description {
   font-size: 24px;
+  text-align: center;
 }
 
 .PageNotFound .Title {
