@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.5](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.4...v1.1.5) (2026-02-12)
+
+
+### Bug Fixes
+
+* dockerfile and node ver 20 ([d708519](https://github.com/MapColonies/coordinate-extract-app/commit/d708519ed87825d077a8579751c0b90dc15aeeb9))
+* dockerfile and node ver 20 ([e03d233](https://github.com/MapColonies/coordinate-extract-app/commit/e03d23363fa165ace2f205ac9674aa63e31b88c6))
+* react runtime error in console and enter ([870cf8e](https://github.com/MapColonies/coordinate-extract-app/commit/870cf8ecc15c9b0d10e8ef56c910a85651bb1712))
+
 ## [1.1.4](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.3...v1.1.4) (2026-02-12)
 
 
