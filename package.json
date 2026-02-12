@@ -68,7 +68,7 @@
       "jsx-a11y/alt-text": "off"
     },
     "parserOptions": {
-      "project": "./tsconfig.json"
+      "project": "./tsconfig.eslint.json"
     }
   },
   "private": true,
