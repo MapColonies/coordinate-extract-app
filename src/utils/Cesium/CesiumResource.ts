@@ -1,5 +1,5 @@
 import { CesiumResource } from '@map-colonies/react-components';
-import appConfig from './Config';
+import appConfig from '../Config';
 
 export const getTokenResource = (url: string): CesiumResource => {
   const tokenProps: any = { url };

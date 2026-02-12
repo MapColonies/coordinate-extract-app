@@ -4,26 +4,24 @@ import { Geometry } from 'geojson';
 import {
   Box,
   Cesium3DTileset,
-  CesiumColor,
-  CesiumConstantProperty,
-  CesiumGeojsonLayer,
   CesiumMap,
-  CesiumSceneMode,
-  useCesiumMap
+  CesiumSceneMode
 } from '@map-colonies/react-components';
 import { fetchCatalog } from '../../../common/services/CatalogService';
 import { Curtain } from '../../../common/Curtain/curtain';
-import { getTokenResource } from '../../../utils/cesium';
+import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
 import appConfig from '../../../utils/Config';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { Terrain } from '../../common/Terrain/Terrain';
-import { CatalogTreeNode, WizardSelectionProps } from '../Wizard.types';
+import { CatalogTreeNode, IDENTIFIER_FIELD, WizardSelectionProps } from '../Wizard.types';
 
 import './ModelSelection.css';
-import { CesiumGeojsonFootprint } from './CesiumGeojsonLayer';
+import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [finishedFlying, setFinishedFlying] = useState(false);
+
   const treeTheme = {
     "--rst-selected-background-color": '#f8fafc33',
     "--rst-hover-background-color": '#1e293b80',
@@ -115,17 +113,19 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
             infoBox={false}
           >
             {
-              props.selectedItem?.['mc:links'] && (props.selectedItem?.isShown as boolean) &&
-              <Cesium3DTileset
-                url={getTokenResource(props.selectedItem?.['mc:links']["#text"] as string)}
-                isZoomTo={true}
+              props.selectedItem?.isSelected as boolean && props.selectedItem?.['mc:footprint'] &&
+              <CesiumGeojsonFootprint
+                id={props.selectedItem[IDENTIFIER_FIELD] as string}
+                clampToGround={true}
+                data={selectedItemFootprint}
+                setFinishedFlying={setFinishedFlying}
               />
             }
             {
-              props.selectedItem?.isSelected as boolean && props.selectedItem?.['mc:footprint'] &&
-              <CesiumGeojsonFootprint
-                clampToGround={true}
-                data={selectedItemFootprint}
+              props.selectedItem?.['mc:links'] && (props.selectedItem?.isShown as boolean) && finishedFlying &&
+              <Cesium3DTileset
+                url={getTokenResource(props.selectedItem?.['mc:links']["#text"] as string)}
+                isZoomTo={true}
               />
             }
             <Terrain />

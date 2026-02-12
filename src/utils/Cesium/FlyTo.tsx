@@ -9,14 +9,14 @@ interface FlyToProps {
   setRect: (rect: CesiumRectangle | undefined) => void;
   geometry: Geometry;
   tilt?: boolean;
+  setFinishedFlying?: (finished: boolean) => void;
 }
 
 export const generateLayerRectangle = (geometry: Geometry): CesiumRectangle => {
-  // eslint-disable-next-line
   return CesiumRectangle.fromDegrees(...bbox(geometry)) as CesiumRectangle;
 };
 
-export const FlyTo: React.FC<FlyToProps> = ({ setRect, geometry, tilt = false }): JSX.Element => {
+export const FlyTo: React.FC<FlyToProps> = ({ setRect, geometry, setFinishedFlying, tilt = false }): JSX.Element => {
   const mapViewer = useCesiumMap();
   let rect;
 
@@ -30,6 +30,7 @@ export const FlyTo: React.FC<FlyToProps> = ({ setRect, geometry, tilt = false })
       },
     });
 
+    setFinishedFlying?.(false);
     void mapViewer.flyTo(
       rectangle, !tilt ? {
         offset: {
@@ -39,6 +40,7 @@ export const FlyTo: React.FC<FlyToProps> = ({ setRect, geometry, tilt = false })
         }
       } : {}
     ).then(() => {
+      setFinishedFlying?.(true);
       mapViewer.entities.remove(rectangle);
     });
 

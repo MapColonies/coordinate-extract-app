@@ -5,7 +5,6 @@ import bbox from '@turf/bbox';
 import bboxPolygon from '@turf/bbox-polygon';
 import convex from '@turf/convex';
 
-
 const shrinkExtremeCoordinatesInOuterRing = (geometry: Geometry, factor = 0.99) => {
   const LAT_THRESHOLD = 84.9;
   const LON_THRESHOLD = 179;
