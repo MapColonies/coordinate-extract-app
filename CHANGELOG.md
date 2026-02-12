@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.2...v1.1.3) (2026-02-12)
+
+
+### Bug Fixes
+
+* ci eslint ([4cb85c3](https://github.com/MapColonies/coordinate-extract-app/commit/4cb85c3263cf723112e26a5345370381c912b41e))
+
 ## [1.1.2](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.1...v1.1.2) (2026-02-11)
 
 
