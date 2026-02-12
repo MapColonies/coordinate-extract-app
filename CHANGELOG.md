@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.7](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.6...v1.1.7) (2026-02-12)
+
+
+### Bug Fixes
+
+* helm ([e25a5b0](https://github.com/MapColonies/coordinate-extract-app/commit/e25a5b0d9570fd688088e8b9958611542f91b8eb))
+* helm ([8d9efdd](https://github.com/MapColonies/coordinate-extract-app/commit/8d9efdd8e7d18445b3ba85b1d1be4e45115a1926))
+
 ## [1.1.6](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.5...v1.1.6) (2026-02-12)
 
 
