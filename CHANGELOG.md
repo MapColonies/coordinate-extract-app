@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.9](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.8...v1.1.9) (2026-02-16)
+
+
+### Bug Fixes
+
+* cesium and ol synch and more ([980bfb5](https://github.com/MapColonies/coordinate-extract-app/commit/980bfb5a89fc2d8b22f730ec5a4e5c1ae980a336))
+* cesium and ol synch and more ([1f04408](https://github.com/MapColonies/coordinate-extract-app/commit/1f04408395be6ca5d13209f5f8914b7dff8a4f0c))
+* disable finish btn and autocomplete ([222a05a](https://github.com/MapColonies/coordinate-extract-app/commit/222a05adfe1833bdc943486d2b7e0d05b26cdb4d))
+* disable finish btn and autocomplete ([d72aa56](https://github.com/MapColonies/coordinate-extract-app/commit/d72aa56851bdf3d027e8cb4b4a0ee24ae908da4f))
+
 ## [1.1.8](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.7...v1.1.8) (2026-02-12)
 
 
