@@ -88,6 +88,7 @@
   "form.message.confirm.model": "מודל: {value}",
   "form.message.confirm.action": "פעולה: {value}",
   "form.message.confirm.approver": "מבצע הפעולה: {value}",
+  "form.message.confirm.additionalInfo": "הערות: {value}",
   "form.message.confirm.approve": "אישור לחילוץ נ.צ.",
   "form.message.confirm.reject": "ביטול אישור",
   "form.approver.label": "שם מלא של מבצע הפעולה *",

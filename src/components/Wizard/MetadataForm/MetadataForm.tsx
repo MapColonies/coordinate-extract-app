@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { TextField, Typography } from '@map-colonies/react-core';
 import { WizardStepProps } from '../Wizard.types';
+import { ExclamationSVGIcon } from '../../../common/icons/ExclamationSVGIcon';
 
 import './MetadataForm.css';
 
@@ -10,12 +11,12 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
   const intl = useIntl();
 
   const [formData, setFormData] = useState({
-    approver: '',
-    additionalInfo: ''
+    approver: selectedItem?.approver as string,
+    additionalInfo: selectedItem?.additionalInfo as string
   });
 
   useEffect(() => {
-    setIsNextBtnDisabled(true);
+    setIsNextBtnDisabled(selectedItem?.approver ? false : true);
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,26 +42,16 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Metadata saved successfully!');
-  };
-
   return (
     <Box className="metadataForm">
       <Box className="formContainer">
         <Box className={`formHeader ${selectedItem?.isApproved ? 'orange' : 'green'}`}>
           <Typography tag="span">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
-              <path d="M12 9v4"></path>
-              <path d="M12 17h.01"></path>
-            </svg>
+            <ExclamationSVGIcon color="currentColor" />
           </Typography>
           <FormattedMessage id={`${selectedItem?.isApproved ? 'form.message.reject' : 'form.message.approve'}`} />
         </Box>
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={()=>{}} className="form">
           <Box className="formGroup">
             <label htmlFor="approver">
               <FormattedMessage id="form.approver.label" />
