@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CesiumGeojsonLayer, CesiumRectangle, RCesiumGeojsonLayerProps } from "@map-colonies/react-components";
+import { CesiumGeojsonLayer, RCesiumGeojsonLayerProps } from "@map-colonies/react-components";
 import { FeatureCollection } from "geojson";
 import { getLayerFootprint } from "../../../utils/Cesium/GetLayerFootprint";
 import { FlyTo } from "../../../utils/Cesium/FlyTo";
@@ -11,7 +11,7 @@ interface CesiumGeojsonFootprintProps extends RCesiumGeojsonLayerProps {
 
 export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumGeojsonFootprintProps> = (props) => {
   const [layersFootprints, setlayersFootprints] = useState<FeatureCollection>();
-  const [rect, setRect] = useState<CesiumRectangle | undefined>(undefined);
+  const [flyTo, setFlyTo] = useState<boolean>(false);
 
   useEffect(() => {
     let footprintsCollection: FeatureCollection = {
@@ -28,7 +28,7 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
       }
     }
     setlayersFootprints(footprintsCollection);
-    setRect(new CesiumRectangle());
+    setFlyTo(true);
   }, [props.id]);
 
   return (
@@ -38,10 +38,9 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
         data={layersFootprints}
       />
       {
-        rect &&
+        flyTo &&
         <FlyTo
           key={props.id}
-          setRect={setRect}
           geometry={props.data}
           setFinishedFlying={props.setFinishedFlying}
         />

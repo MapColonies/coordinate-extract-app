@@ -9,22 +9,19 @@ import {
 } from '@map-colonies/react-components';
 import { fetchCatalog } from '../../../common/services/CatalogService';
 import { Curtain } from '../../../common/Curtain/curtain';
+import { CesiumPOI } from '../../../utils/Cesium/CesiumPOI/CesiumPOI';
 import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
 import appConfig from '../../../utils/Config';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTreeNode, IDENTIFIER_FIELD, WizardSelectionProps } from '../Wizard.types';
+import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
 
 import './ModelSelection.css';
-import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
-import { LocationMarker } from '../../../utils/Cesium/LocationMarker';
-import { CesiumPOI } from '../../../utils/Cesium/CesiumPOI/CesiumPOI';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [finishedFlying, setFinishedFlying] = useState(false);
-  // const [poi, setPoi] = useState<IPOI | undefined>(undefined);
-  // const [poi, setPoi] = useState<IPOI | undefined>(undefined);
 
   const treeTheme = {
     "--rst-selected-background-color": '#f8fafc33',

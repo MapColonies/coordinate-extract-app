@@ -1,11 +1,25 @@
 #CesiumPOI {
+  display: flex;
   position: absolute;
-  border: solid 1px red;
+  top: 15px;
   right: 20px;
-  background-color: black;
+  z-index: 1000;
+  gap: 5px;
 }
 
-#CesiumPOI .small {
-  height: 50px;
-  width: 50px;
+/* Search icon */
+.search-icon {
+  color: #5f6368;
+  margin-right: 8px;
+  font-size: 22px;
+}
+
+.height-badge {
+  margin-top: 8px;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 16px;
+  /* font-size: 14px; */
+  color: #202124;
+  width: fit-content;
 }
