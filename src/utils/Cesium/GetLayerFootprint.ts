@@ -50,7 +50,7 @@ const shrinkExtremeCoordinatesInOuterRing = (geometry: Geometry, factor = 0.99) 
   }
 
   throw new Error("[shrinkExtremeCoordinatesInOuterRing] Unsupported geometry type: " + geometry.type);
-}
+};
 
 export const getLayerFootprint = (layerFootprint: Geometry, isBbox: boolean, isPolylined = true, isConvexHull = false): Feature | FeatureCollection => {
   if (layerFootprint === undefined) {
@@ -112,4 +112,4 @@ export const getLayerFootprint = (layerFootprint: Geometry, isBbox: boolean, isP
       }
     }
   }
-}
+};

@@ -400,6 +400,7 @@ export const mockLogin = {
   "message": "User credentials are valid",
   "code": "SUCCESS"
 };
+
 export const mockHistory = [
   {
     "id": "1",
