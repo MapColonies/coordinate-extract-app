@@ -1,6 +1,6 @@
 import React from 'react';
-import { IconButton } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
+import { IconButton } from '@map-colonies/react-core';
 
 import './LayerImageIconRenderer.css';
 
@@ -16,13 +16,10 @@ export const LayerImageIconRenderer: React.FC<ILayerImageIconRendererParams> = (
       <IconButton
         className={props.data.isShown ? 'icon mc-icon-Show' : 'icon mc-icon-Hide'}
         label="LAYER IMAGE SHOWN ICON"
-        onClick={
-          (evt): void => {
-            evt.stopPropagation();
-
-            props.onClick(evt as unknown as MouseEvent, !props.data.isShown);
-          }
-        }
+        onClick={(evt): void => {
+          evt.stopPropagation();
+          props.onClick(evt as unknown as MouseEvent, !props.data.isShown);
+        }}
       />
     </Box>
   );

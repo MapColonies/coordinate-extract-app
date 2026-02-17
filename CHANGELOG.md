@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.1.8](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.7...v1.1.8) (2026-02-12)
+
+
+### Bug Fixes
+
+* env-config ([1850ad6](https://github.com/MapColonies/coordinate-extract-app/commit/1850ad6403abc9c32950f2f189084e39659b6a6a))
+* env-config ([b94b012](https://github.com/MapColonies/coordinate-extract-app/commit/b94b012a30b97d01fc9d0f4ab6c97792340586e5))
+
+## [1.1.7](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.6...v1.1.7) (2026-02-12)
+
+
+### Bug Fixes
+
+* helm ([e25a5b0](https://github.com/MapColonies/coordinate-extract-app/commit/e25a5b0d9570fd688088e8b9958611542f91b8eb))
+* helm ([8d9efdd](https://github.com/MapColonies/coordinate-extract-app/commit/8d9efdd8e7d18445b3ba85b1d1be4e45115a1926))
+
+## [1.1.6](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.5...v1.1.6) (2026-02-12)
+
+
+### Bug Fixes
+
+* access token ([7ed6b2b](https://github.com/MapColonies/coordinate-extract-app/commit/7ed6b2bf604fc22b1f3a39c469ff03eb8aa9f013))
+* access token ([eb2ee95](https://github.com/MapColonies/coordinate-extract-app/commit/eb2ee9582114e0d6c35cad8ad03a88ec07ceba92))
+* flyTo feature on row selected ([08ea8df](https://github.com/MapColonies/coordinate-extract-app/commit/08ea8dfd53da11c42e6152655ce7694087f01dbd))
+* layer image shown only after flyTo is completed ([f3bb371](https://github.com/MapColonies/coordinate-extract-app/commit/f3bb371c7c140c4b7e87985d5c421f40c83c5a91))
+
 ## [1.1.5](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.4...v1.1.5) (2026-02-12)
 
 

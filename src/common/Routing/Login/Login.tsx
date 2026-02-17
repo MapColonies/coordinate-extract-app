@@ -1,8 +1,8 @@
 // login.tsx
 import React, { useState } from 'react';
-import { isEmpty } from 'lodash';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
+import { isEmpty } from 'lodash';
 import { Box } from '@map-colonies/react-components';
 import { Button, Icon, TextField, Typography } from '@map-colonies/react-core';
 import { LogoSVGIcon } from '../../icons/LogoSVGIcon';
@@ -50,7 +50,7 @@ const Login: React.FC = () => {
               strategy: 'component',
               icon: (
                 <Box className="Logo">
-                  <LogoSVGIcon color="#000" />
+                  <LogoSVGIcon color="var(--mdc-theme-background)" />
                 </Box>
               )
             }}
@@ -92,13 +92,13 @@ const Login: React.FC = () => {
         />
         <Button 
           raised 
-          onClick={handleLogin} 
-          style={{width: '85%', marginRight: '20px'}}
+          className="loginAction"
+          onClick={handleLogin}
           disabled={!isLoginInfo()}
         >
           <FormattedMessage id="auth.login.btn"/>
         </Button>
-        <Typography tag="div" className='error' >
+        <Typography tag="div" className="error" >
           {
             error && isLoginInfo() && <>
               Error: {error}

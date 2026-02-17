@@ -42,10 +42,11 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
         <Box className="formHeader">
           {
             [
-              intl.formatMessage({ id: "form.message.confirm.title" }),
-              intl.formatMessage({ id: "form.message.confirm.model" }, { value: selectedItem?.[IDENTIFIER_FIELD] as unknown as string }),
-              intl.formatMessage({ id: "form.message.confirm.action" }, { value: selectedItem?.isApproved ? intl.formatMessage({ id: 'form.message.confirm.reject' }) : intl.formatMessage({ id: 'form.message.confirm.approve' }) }),
-              intl.formatMessage({ id: "form.message.confirm.approver" }, { value: selectedItem?.approver as string })
+              intl.formatMessage({ id: 'form.message.confirm.title' }),
+              intl.formatMessage({ id: 'form.message.confirm.model' }, { value: selectedItem?.[IDENTIFIER_FIELD] as unknown as string }),
+              intl.formatMessage({ id: 'form.message.confirm.action' }, { value: selectedItem?.isApproved ? intl.formatMessage({ id: 'form.message.confirm.reject' }) : intl.formatMessage({ id: 'form.message.confirm.approve' }) }),
+              intl.formatMessage({ id: 'form.message.confirm.approver' }, { value: selectedItem?.approver as string }),
+              intl.formatMessage({ id: 'form.message.confirm.additionalInfo' }, { value: selectedItem?.additionalInfo as string })
             ].map((line, index) => (
               <Typography 
                 tag="div" 
@@ -63,7 +64,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
               <FormattedMessage id="form.password.label" />
             </label>
             <TextField
-              type="text"
+              type="password"
               id="password"
               name="password"
               value={formData.password}
@@ -71,6 +72,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
               required
               className="textField"
               placeholder={intl.formatMessage({ id: 'form.password.placeholder' })}
+              autoComplete="off"
             />
           </Box>
         </form>

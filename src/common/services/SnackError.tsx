@@ -1,23 +1,12 @@
-import { FormattedMessage } from "react-intl"
-// import { Box } from "@map-colonies/react-components"
-// import { Icon } from "@map-colonies/react-core"
-// import { LogoSVGIcon } from "../Icons/Svg/logo"
+import { FormattedMessage } from 'react-intl';
+import { ExclamationSVGIcon } from '../icons/ExclamationSVGIcon';
 
 export const getSnackbarErrorMessage = (body: string) => {
   return {
-    title: <b><FormattedMessage id="app.error" /></b>,
+    title: <b><FormattedMessage id="general.error" /></b>,
     body: body,
     dismissesOnAction: true,
-    // icon: <Icon
-    //   icon={{
-    //     strategy: 'component',
-    //     icon: (
-    //       <Box className="Logo">
-    //         <LogoSVGIcon color="#000" />
-    //       </Box>
-    //     )
-    //   }}
-    // />,
+    icon: <ExclamationSVGIcon color="var(--mdc-theme-gc-error)" />,
     leading: false,
     timeout: -1,
     actions: [
@@ -25,5 +14,5 @@ export const getSnackbarErrorMessage = (body: string) => {
         title: 'סגור'
       }
     ]
-  }
-}
+  };
+};

@@ -1,8 +1,7 @@
-import React, { CSSProperties, useMemo } from 'react';
-import { Feature } from 'geojson';
+import React, { CSSProperties, useEffect, useMemo, useState } from 'react';
+import { Feature, Geometry as GeoJsonGeometry } from 'geojson';
 import { get } from 'lodash';
-import { Style, Icon } from 'ol/style';
-import type { Geometry as GeoJsonGeometry } from 'geojson';
+import { Style, Icon, Stroke, Fill } from 'ol/style';
 import {
   Box,
   GeoJSONFeature,
@@ -17,7 +16,9 @@ import {
   VectorLayer,
   VectorSource
 } from '@map-colonies/react-components';
+import { Curtain } from '../../../common/Curtain/curtain';
 import appConfig from '../../../utils/Config';
+import { FOOTPRINT_BORDER_COLOR, FOOTPRINT_BORDER_WIDTH } from '../../../utils/Const';
 import { getMarker } from '../../../utils/geojson';
 
 import './GeojsonMap.css';
@@ -34,7 +35,8 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
 }) => {
 
   const DEFAULT_PROJECTION = 'EPSG:4326';
-
+  const [isLoading, setIsLoading] = useState(true);
+  
   const previewBaseMap = useMemo(() => {
     const olBaseMap: JSX.Element[] = [];
     let baseMap = appConfig.baseMaps.maps.find((map: IBaseMap) => map.isCurrent);
@@ -85,6 +87,16 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
     }
   }, [geometry]);
 
+  const [fit, setFit] = useState<boolean>();
+
+  useEffect(() => {
+    // setTimeout is used to give proper UI/UX experience
+    setTimeout(()=>{
+      setFit(true);
+      setIsLoading(false);
+    }, 1000);
+  }, [geometry]);
+
   const renderFootprintInfo = () => {
     return (
       <Map>
@@ -92,10 +104,21 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
         {
           <VectorLayer>
             <VectorSource>
-              {geometry &&
+              {
+                geometry &&
                 <GeoJSONFeature
                   geometry={geometry as unknown as GeoJsonGeometry}
-                  fit={false}
+                  fit={fit}
+                  fitOptions={{ padding: [80, 160, 80, 160] }}
+                  featureStyle={new Style({
+                    stroke: new Stroke({
+                      width: FOOTPRINT_BORDER_WIDTH,
+                      color: FOOTPRINT_BORDER_COLOR
+                    }),
+                    fill: new Fill({
+                      color: 'rgba(255,255,255,0.3)',
+                    })
+                  })}
                 />
               }
               {
@@ -120,7 +143,8 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
   };
 
   return (
-    <Box className="geojsonMap" style={style}>
+    <Box className="geojsonMap curtainContainer" style={style}>
+      {isLoading && <Curtain showProgress={true}/>}
       {renderFootprintInfo()}
     </Box>
   );

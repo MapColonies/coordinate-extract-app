@@ -101,6 +101,10 @@ env:
   requestPayloadLimit: 1mb
   publicUrl: ''
   language: he
+  accessToken:
+    attributeName: token
+    injectionType: queryParam
+    tokenValue: TOKEN
   map:
     center: '[34.811, 31.908]'
     zoom: 7
@@ -120,7 +124,7 @@ route:
       path: /
       suffix:
   targetPort: http
-  tls: 
+  tls:
     enabled: true
     termination: edge
     insecureEdgeTerminationPolicy: Redirect

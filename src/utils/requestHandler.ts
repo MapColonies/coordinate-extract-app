@@ -44,9 +44,7 @@ export const requestHandler = async (url: string, method: string, params: AxiosR
 };
 
 export const requestHandlerWithToken = async (url: string, method: string, params: AxiosRequestConfig): Promise<AxiosResponse> => {
-  const injectionType = appConfig.tokenInjectionType;
-  const attributeName = appConfig.tokenAttributeName;
-  const tokenValue = appConfig.tokenValue;
+  const { injectionType, attributeName, tokenValue } = appConfig.accessToken;
   const reqConfig = { ...params };
 
   if (isHeader(injectionType)) {

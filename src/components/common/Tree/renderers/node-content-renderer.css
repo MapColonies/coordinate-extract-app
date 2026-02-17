@@ -102,7 +102,7 @@
   text-overflow: ellipsis;
 }
 
-body[dir='rtl'] .rowLabel {
+body[dir="rtl"] .rowLabel {
   padding-left: 20px;
   padding-right: 8px;
 }
@@ -283,6 +283,6 @@ body[dir='rtl'] .rowLabel {
   border-left: 7px solid var(--rst-hover-background-color);
 }
 
-body[dir='rtl'] .rst__virtualScrollOverride {
+body[dir="rtl"] .rst__virtualScrollOverride {
   direction: rtl !important;
 }

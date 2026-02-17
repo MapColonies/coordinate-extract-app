@@ -15,6 +15,11 @@
   margin: 20px;
 }
 
+.loginAction {
+  width: 85%;
+  margin: 0 20px;
+}
+
 .LoginHeader {
   align-items: center;
   justify-content: space-between;

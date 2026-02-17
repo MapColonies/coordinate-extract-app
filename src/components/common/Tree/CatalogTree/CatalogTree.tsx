@@ -88,7 +88,7 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
       <SortableTree
         //@ts-ignore
         theme={CatalogTheme}
-        className='sortableTree'
+        className="sortableTree"
         rowDirection={locale === 'he' ? 'rtl' : 'ltr'}
         treeData={treeData as CatalogTreeNode[]}
         canDrag={false}
