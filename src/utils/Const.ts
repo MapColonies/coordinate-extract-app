@@ -16,5 +16,5 @@ export enum LinkType {
   LEGEND = 'LEGEND'
 }
 
-export const FOOTPRINT_BORDER_COLOR =  '#1E90FF';
+export const FOOTPRINT_BORDER_COLOR = '#1E90FF';
 export const FOOTPRINT_BORDER_WIDTH = 6.0;

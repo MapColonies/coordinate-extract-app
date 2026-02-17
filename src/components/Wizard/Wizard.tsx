@@ -9,7 +9,7 @@ import { DetailsSVGIcon } from '../../common/icons/DetailsSVGIcon';
 import { SelectionSVGIcon } from '../../common/icons/SelectionSVGIcon';
 import { UpdateSVGIcon } from '../../common/icons/UpdateSVGIcon';
 import { useI18n } from '../../i18n/I18nProvider';
-import { SnackbarManager } from '../common/SnackBar/SnackbarManager';
+import { SnackbarManager } from '../common/Snackbar/SnackbarManager';
 import { Step } from '../common/Step/Step';
 import { ISummary } from '../common/Tree/hooks/treeCatalogData.hook';
 import { MetadataConfirm } from './MetadataConfirm/MetadataConfirm';

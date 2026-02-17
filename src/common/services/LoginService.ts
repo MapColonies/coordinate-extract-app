@@ -1,17 +1,22 @@
 import { mockLogin } from '../../components/common/MockData';
+import { SnackbarManager } from '../../components/common/Snackbar/SnackbarManager';
 import appConfig from '../../utils/Config';
+import { loadingUpdater } from '../../utils/loadingUpdater';
 import { requestExecutor } from '../../utils/requestHandler';
-import { SnackbarManager } from '../../components/common/SnackBar/SnackbarManager';
-import { getSnackbarErrorMessage } from './SnackError';
-import { loadingUpdater } from './loadingUpdater';
+import { getSnackbarErrorMessage } from '../../utils/snackbarError';
 
-type loginResponse = {
-  isValid: boolean,
-  message: string,
-  code: string
+interface LoginResponse {
+  isValid: boolean;
+  message: string;
+  code: string;
 }
 
-export const loginAPI = async (username: string, password: string, setLoading?: loadingUpdater, submitErrorToSnackbarQueue = true ): Promise<loginResponse | undefined> => {
+export const loginAPI = async (
+  username: string,
+  password: string,
+  setLoading?: loadingUpdater,
+  submitErrorToSnackbarQueue = true
+): Promise<LoginResponse | undefined> => {
   try {
     setLoading?.(true);
     const response = await requestExecutor(
@@ -44,4 +49,3 @@ export const loginAPI = async (username: string, password: string, setLoading?: 
     setLoading?.(false);
   }
 };
-

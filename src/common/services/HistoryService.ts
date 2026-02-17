@@ -1,9 +1,9 @@
 import { mockHistory } from '../../components/common/MockData';
+import { SnackbarManager } from '../../components/common/Snackbar/SnackbarManager';
 import appConfig from '../../utils/Config';
+import { loadingUpdater } from '../../utils/loadingUpdater';
 import { requestExecutor } from '../../utils/requestHandler';
-import { SnackbarManager } from '../../components/common/SnackBar/SnackbarManager';
-import { getSnackbarErrorMessage } from './SnackError';
-import { loadingUpdater } from './loadingUpdater';
+import { getSnackbarErrorMessage } from '../../utils/snackbarError';
 
 export interface HistoryRecord {
   id: string;
@@ -14,7 +14,11 @@ export interface HistoryRecord {
   authorizedAt: string;
 }
 
-export const historyAPI = async (recordName: string, setLoading?: loadingUpdater, submitErrorToSnackbarQueue = true ): Promise<HistoryRecord[] | undefined> => {
+export const historyAPI = async (
+  recordName: string,
+  setLoading?: loadingUpdater,
+  submitErrorToSnackbarQueue = true
+): Promise<HistoryRecord[] | undefined> => {
   try {
     setLoading?.(true);
     const response = await requestExecutor(
@@ -44,4 +48,3 @@ export const historyAPI = async (recordName: string, setLoading?: loadingUpdater
     setLoading?.(false);
   }
 };
-
