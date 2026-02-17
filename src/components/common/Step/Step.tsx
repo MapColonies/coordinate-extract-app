@@ -42,10 +42,7 @@ export const Step: React.FC<PropsWithChildren<StepProps>> = ({ children, selecte
           </Typography>
           {
             footprint &&
-            <GeojsonMap
-              geometry={JSON.parse(footprint) as Geometry}
-              style={{ width: '100%', height: '100%' }}
-            />
+            <GeojsonMap geometry={JSON.parse(footprint) as Geometry} />
           }
         </Box>
       </Box>

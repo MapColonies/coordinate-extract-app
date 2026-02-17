@@ -1,8 +1,7 @@
 import React, { CSSProperties, useEffect, useMemo, useState } from 'react';
-import { Feature } from 'geojson';
+import { Feature, Geometry as GeoJsonGeometry } from 'geojson';
 import { get } from 'lodash';
 import { Style, Icon, Stroke, Fill } from 'ol/style';
-import type { Geometry as GeoJsonGeometry } from 'geojson';
 import {
   Box,
   GeoJSONFeature,
@@ -17,10 +16,10 @@ import {
   VectorLayer,
   VectorSource
 } from '@map-colonies/react-components';
-import appConfig from '../../../utils/Config';
-import { getMarker } from '../../../utils/geojson';
 import { Curtain } from '../../../common/Curtain/curtain';
+import appConfig from '../../../utils/Config';
 import { FOOTPRINT_BORDER_COLOR, FOOTPRINT_BORDER_WIDTH } from '../../../utils/Const';
+import { getMarker } from '../../../utils/geojson';
 
 import './GeojsonMap.css';
 
@@ -91,13 +90,12 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
   const [fit, setFit] = useState<boolean>();
 
   useEffect(() => {
-    // setTimeout is used to give proper UI/UX expirience
+    // setTimeout is used to give proper UI/UX experience
     setTimeout(()=>{
       setFit(true);
       setIsLoading(false);
-    },1000);
+    }, 1000);
   }, [geometry]);
-
 
   const renderFootprintInfo = () => {
     return (
@@ -106,7 +104,8 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
         {
           <VectorLayer>
             <VectorSource>
-              {geometry &&
+              {
+                geometry &&
                 <GeoJSONFeature
                   geometry={geometry as unknown as GeoJsonGeometry}
                   fit={fit}
@@ -145,10 +144,8 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
 
   return (
     <Box className="geojsonMap curtainContainer" style={style}>
-        {
-          isLoading && <Curtain showProgress={true}/>
-        }
-       {renderFootprintInfo()}
+      {isLoading && <Curtain showProgress={true}/>}
+      {renderFootprintInfo()}
     </Box>
   );
 };

@@ -4,18 +4,19 @@ import { FormWizardMethods } from 'react-form-wizard-component/dist/types/types/
 import { useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Button, SnackbarQueue } from '@map-colonies/react-core';
-import { MetadataHistory } from './MetadataHistory/MetadataHistory';
+import { ConfirmSVGIcon } from '../../common/icons/ConfirmSVGIcon';
+import { DetailsSVGIcon } from '../../common/icons/DetailsSVGIcon';
+import { SelectionSVGIcon } from '../../common/icons/SelectionSVGIcon';
+import { UpdateSVGIcon } from '../../common/icons/UpdateSVGIcon';
+import { useI18n } from '../../i18n/I18nProvider';
+import { SnackbarManager } from '../common/SnackBar/SnackbarManager';
 import { Step } from '../common/Step/Step';
+import { ISummary } from '../common/Tree/hooks/treeCatalogData.hook';
 import { MetadataConfirm } from './MetadataConfirm/MetadataConfirm';
 import { MetadataForm } from './MetadataForm/MetadataForm';
+import { MetadataHistory } from './MetadataHistory/MetadataHistory';
 import { ModelSelection } from './ModelSelection/ModelSelection';
 import { CatalogTreeNode } from './Wizard.types';
-import { SnackbarManager } from '../common/SnackBar/SnackbarManager';
-import { SelectionSVGIcon } from '../../common/icons/SelectionSVGIcon';
-import { DetailsSVGIcon } from '../../common/icons/DetailsSVGIcon';
-import { UpdateSVGIcon } from '../../common/icons/UpdateSVGIcon';
-import { ConfirmSVGIcon } from '../../common/icons/ConfirmSVGIcon';
-import { ISummary } from '../common/Tree/hooks/treeCatalogData.hook';
 
 import 'react-form-wizard-component/dist/style.css';
 import './Wizard.css';
@@ -27,6 +28,7 @@ export const Wizard: React.FC = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
   const intl = useIntl();
   const wizardRef = useRef<FormWizardMethods>(null);
+  const { locale } = useI18n();
   
   const handleComplete = () => {
     setCatalogTree(undefined);
@@ -36,7 +38,7 @@ export const Wizard: React.FC = () => {
   };
 
   return (
-    <Box className={`wizardWrapper`}>
+    <Box className="wizardWrapper">
       <SnackbarQueue
         messages={SnackbarManager.messages}
         leading
@@ -47,17 +49,17 @@ export const Wizard: React.FC = () => {
         stepSize='xs'
         color='var(--mdc-theme-primary)'
         backButtonTemplate={(handlePrevious) => (
-          <Button raised onClick={handlePrevious} className='wizard-footer-right'>
+          <Button raised onClick={handlePrevious} className={`${locale === 'he' ? 'wizard-footer-right' : 'wizard-footer-left'}`}>
             {intl.formatMessage({ id: 'button.back' })}
           </Button>
         )}
         nextButtonTemplate={(handleNext) => (
-          <Button raised disabled={disabled} onClick={handleNext} className='wizard-footer-left'>
+          <Button raised disabled={disabled} onClick={handleNext} className={`${locale === 'he' ? 'wizard-footer-left' : 'wizard-footer-right'}`}>
             {intl.formatMessage({ id: 'button.next' })}
           </Button>
         )}
         finishButtonTemplate={(handleComplete) => (
-          <Button raised disabled={disabled} onClick={handleComplete} className='wizard-footer-left'>
+          <Button raised disabled={disabled} onClick={handleComplete} className={`${locale === 'he' ? 'wizard-footer-left' : 'wizard-footer-right'}`}>
             {intl.formatMessage({ id: 'button.finish' })}
           </Button>
         )}

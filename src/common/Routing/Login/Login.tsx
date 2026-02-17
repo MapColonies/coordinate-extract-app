@@ -1,8 +1,8 @@
 // login.tsx
 import React, { useState } from 'react';
-import { isEmpty } from 'lodash';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
+import { isEmpty } from 'lodash';
 import { Box } from '@map-colonies/react-components';
 import { Button, Icon, TextField, Typography } from '@map-colonies/react-core';
 import { LogoSVGIcon } from '../../icons/LogoSVGIcon';
@@ -98,7 +98,7 @@ const Login: React.FC = () => {
         >
           <FormattedMessage id="auth.login.btn"/>
         </Button>
-        <Typography tag="div" className='error' >
+        <Typography tag="div" className="error" >
           {
             error && isLoginInfo() && <>
               Error: {error}
