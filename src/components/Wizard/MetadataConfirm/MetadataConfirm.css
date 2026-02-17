@@ -38,7 +38,7 @@
   margin: 20px 20px 60px;
 }
 
-body[dir='rtl'] .metadataConfirm .formHeader {
+body[dir="rtl"] .metadataConfirm .formHeader {
   border-left: none;
   border-right: 4px solid var(--mdc-theme-primary);
 }

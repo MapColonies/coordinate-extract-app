@@ -30,13 +30,12 @@ export const loginAPI = async (username: string, password: string, setLoading?: 
     return response?.data;
   } catch (error) {
     console.error('Failed to perform POST login:', error);
-    if(submitErrorToSnackbarQueue){
+    if (submitErrorToSnackbarQueue) {
       SnackbarManager.notify(
         getSnackbarErrorMessage((error as any).message as string)
       );
       throw error;
-    }
-    else{
+    } else {
       //TODO: REMOVE MOCK
       return mockLogin;
       // throw error;

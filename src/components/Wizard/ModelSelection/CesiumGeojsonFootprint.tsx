@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
-import { CesiumColor, CesiumConstantProperty, CesiumGeojsonLayer, CesiumRectangle, RCesiumGeojsonLayerProps } from "@map-colonies/react-components";
-import { FeatureCollection } from "geojson";
-import { getLayerFootprint } from "../../../utils/Cesium/GetLayerFootprint";
-import { FlyTo } from "../../../utils/Cesium/FlyTo";
-import { FOOTPRINT_BORDER_WIDTH } from "../../../utils/Const";
+import { useEffect, useState } from 'react';
+import { FeatureCollection } from 'geojson';
+import {
+  CesiumColor,
+  CesiumConstantProperty,
+  CesiumGeojsonLayer,
+  CesiumRectangle,
+  RCesiumGeojsonLayerProps
+} from '@map-colonies/react-components';
+import { FlyTo } from '../../../utils/Cesium/FlyTo';
+import { getLayerFootprint } from '../../../utils/Cesium/GetLayerFootprint';
+import { FOOTPRINT_BORDER_WIDTH } from '../../../utils/Const';
 
 interface CesiumGeojsonFootprintProps extends RCesiumGeojsonLayerProps {
   id: string;
@@ -69,4 +75,4 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
       }
     </>
   );
-}
+};

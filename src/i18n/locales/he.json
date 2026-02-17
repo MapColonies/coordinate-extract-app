@@ -1,7 +1,5 @@
 {
   "app.title": "אישור מודל לחילוץ נ.צ.",
-  "app.error": "שגיאה",
-  "app.close": "סגור",
 
   "step.selection": "בחירה",
   "step.details": "פרטים",
@@ -15,6 +13,8 @@
   "general.loading": "בטעינה...",
   "general.noData": "אין נתונים להצגה",
   "general.pageNotFound.description": "לא קיים",
+  "general.error": "שגיאה",
+  "general.close": "סגור",
 
   "tree.title": "בחירת מודל",
   "tree.filter.placeholder": "סינון לפי שם מודל...",

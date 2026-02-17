@@ -28,15 +28,14 @@ export const historyAPI = async (recordName: string, setLoading?: loadingUpdater
     return response?.data;
   } catch (error) {
     console.error('Failed to perform GET history:', error);
-    if(submitErrorToSnackbarQueue){
+    if (submitErrorToSnackbarQueue) {
       SnackbarManager.notify(
         getSnackbarErrorMessage((error as any).message as string)
       );
       //TODO: REMOVE MOCK
       return mockHistory;
       // throw error;
-    }
-    else{
+    } else {
       //TODO: REMOVE MOCK
       return mockHistory;
       // throw error;

@@ -50,7 +50,7 @@ const Login: React.FC = () => {
               strategy: 'component',
               icon: (
                 <Box className="Logo">
-                  <LogoSVGIcon color="#000" />
+                  <LogoSVGIcon color="var(--mdc-theme-background)" />
                 </Box>
               )
             }}
@@ -92,8 +92,8 @@ const Login: React.FC = () => {
         />
         <Button 
           raised 
-          onClick={handleLogin} 
-          style={{width: '85%', marginRight: '20px'}}
+          className="loginAction"
+          onClick={handleLogin}
           disabled={!isLoginInfo()}
         >
           <FormattedMessage id="auth.login.btn"/>

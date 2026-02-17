@@ -6,5 +6,5 @@
 }
 
 .geojsonMap.curtainContainer .curtain{
-  background-color: #000;
+  background-color: var(--mdc-theme-background);
 }

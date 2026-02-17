@@ -6,7 +6,7 @@
   height: 52px;
 }
 
-body[dir='rtl'] .Footer {
+body[dir="rtl"] .Footer {
   flex-direction: row-reverse;
 }
 

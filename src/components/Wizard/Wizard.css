@@ -6,12 +6,12 @@
   overflow: hidden;
 }
 
-body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-right {
+body[dir="rtl"] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-right {
   float: right;
   min-width: 140px;
 }
 
-body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left {
+body[dir="rtl"] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left {
   float: left;
   min-width: 140px;
 }

@@ -24,7 +24,7 @@ const Header: React.FC = (): JSX.Element => {
                 strategy: 'component',
                 icon: (
                   <Box className="Logo">
-                    <LogoSVGIcon color="#000" />
+                    <LogoSVGIcon color="var(--mdc-theme-background)" />
                   </Box>
                 )
               }}
@@ -32,7 +32,7 @@ const Header: React.FC = (): JSX.Element => {
             <FormattedMessage id="app.title" />
           </Box>
           <Box className="userInfo">
-            <Box className='userName'> 
+            <Box className="userName"> 
               <Typography tag="span">
                 {user.username}
               </Typography>

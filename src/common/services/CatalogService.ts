@@ -23,7 +23,7 @@ const fetchData = async (url: string, method: 'GET' | 'POST', data?: Record<stri
     return response?.data;
   } catch (error) {
     console.error('Failed to FETCH 3D catalog:', error);
-    if(submitErrorToSnackbarQueue){
+    if (submitErrorToSnackbarQueue) {
       SnackbarManager.notify(
         getSnackbarErrorMessage((error as any).message as string)
       );

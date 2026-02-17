@@ -13,6 +13,8 @@
   "general.loading": "Loading...",
   "general.noData": "No data is available",
   "general.pageNotFound.description": "The page you are looking for does not exist",
+  "general.error": "Error",
+  "general.close": "Close",
 
   "tree.title": "Catalog Tree",
   "tree.filter.placeholder": "Filter by model name...",
@@ -86,6 +88,7 @@
   "form.message.confirm.model": "Model: {value}",
   "form.message.confirm.action": "Action: {value}",
   "form.message.confirm.approver": "Approver: {value}",
+  "form.message.confirm.additionalInfo": "Comments: {value}",
   "form.message.confirm.approve": "Approve for coordinates extraction",
   "form.message.confirm.reject": "Reject approval",
   "form.approver.label": "Approver full name *",
