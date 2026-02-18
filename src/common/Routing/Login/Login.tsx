@@ -26,7 +26,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      await loginAPI(userName as string, userPassword as string, setIsLoading, false);
+      await loginAPI(userName as string, userPassword as string, setIsLoading);
       login({ username: userName as string });
       history.replace(from);
     } catch (e) {

@@ -1,14 +1,6 @@
-import { SnackbarManager } from '../../components/common/Snackbar/SnackbarManager';
 import appConfig from '../../utils/Config';
 import { loadingUpdater } from '../../utils/loadingUpdater';
-import { requestExecutor } from '../../utils/requestHandler';
-import { getSnackbarErrorMessage } from '../../utils/snackbarError';
-
-type ExtractableResponse = {
-  isValid: boolean,
-  message: string,
-  code: string
-}
+import { execute } from '../../utils/requestHandler';
 
 export interface ExtractableRecord {
   id: string;
@@ -25,16 +17,12 @@ export const extractableCreateAPI = async (
   password: string,
   authorizedBy: string,
   data: Record<string, unknown>,
-  setLoading?: loadingUpdater,
-  submitErrorToSnackbarQueue = true
+  setLoading: loadingUpdater
 ): Promise<ExtractableRecord | undefined> => {
   try {
-    setLoading?.(true);
-    const response = await requestExecutor(
-      {
-        url: `${appConfig.extractableManagerUrl}/records/${recordName}`,
-        injectToken: true
-      },
+    setLoading(true);
+    const response = await execute(
+      `${appConfig.extractableManagerUrl}/records/${recordName}`,
       'POST',
       {
         data: {
@@ -45,17 +33,11 @@ export const extractableCreateAPI = async (
         }
       }
     );
-    return response?.data;
+    return response as unknown as ExtractableRecord;
   } catch (error) {
     console.error('Failed to CREATE extractable record:', error);
-    if (submitErrorToSnackbarQueue) {
-      SnackbarManager.notify(
-        getSnackbarErrorMessage((error as any).message as string)
-      );
-      throw error;
-    }
   } finally {
-    setLoading?.(false);
+    setLoading(false);
   }
 };
 
@@ -65,16 +47,12 @@ export const extractableDeleteAPI = async (
   password: string,
   authorizedBy: string,
   data: Record<string, unknown>,
-  setLoading?: loadingUpdater,
-  submitErrorToSnackbarQueue = true
+  setLoading: loadingUpdater
 ): Promise<void> => {
   try {
-    setLoading?.(true);
-    await requestExecutor(
-      {
-        url: `${appConfig.extractableManagerUrl}/records/${recordName}`,
-        injectToken: true
-      },
+    setLoading(true);
+    await execute(
+      `${appConfig.extractableManagerUrl}/records/${recordName}`,
       'DELETE',
       {
         data: {
@@ -87,13 +65,7 @@ export const extractableDeleteAPI = async (
     );
   } catch (error) {
     console.error('Failed to DELETE extractable record:', error);
-    if (submitErrorToSnackbarQueue) {
-      SnackbarManager.notify(
-        getSnackbarErrorMessage((error as any).message as string)
-      );
-      throw error;
-    }
   } finally {
-    setLoading?.(false);
+    setLoading(false);
   }
 };

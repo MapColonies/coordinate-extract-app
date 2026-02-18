@@ -91,7 +91,7 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
 
   useEffect(() => {
     // setTimeout is used to give proper UI/UX experience
-    setTimeout(()=>{
+    setTimeout(() => {
       setFit(true);
       setIsLoading(false);
     }, 1000);

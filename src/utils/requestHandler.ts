@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
-import { loadingUpdater } from './loadingUpdater';
 import { SnackbarManager } from '../components/common/Snackbar/SnackbarManager';
 import appConfig from './Config';
 import { getSnackbarErrorMessage } from './snackbarError';
@@ -67,9 +66,8 @@ export const requestHandlerWithToken = async (url: string, method: string, param
 
 export const execute = async (
   url: string,
-  method: 'GET' | 'POST',
+  method: 'GET' | 'POST' | 'DELETE',
   data?: Record<string, unknown>,
-  setLoading?: loadingUpdater,
   submitErrorToSnackbarQueue = true
 ): Promise<Record<string, unknown>[] | string | undefined> => {
   try {
@@ -83,14 +81,12 @@ export const execute = async (
         ...(data ?? {})
       }
     );
-    return response?.data;
+    return response?.status === 204 ? 'OK' : response?.data;
   } catch (error) {
     console.error('API execution failed:', error);
     if (submitErrorToSnackbarQueue) {
       SnackbarManager.notify(getSnackbarErrorMessage((error as any).message as string));
     }
     throw error;
-  } finally {
-    setLoading?.(false);
   }
 };

@@ -6,56 +6,53 @@ import { get3DRecordsXML, parse3DQueryResults } from '../../utils/cswQueryBuilde
 import { loadingUpdater } from '../../utils/loadingUpdater';
 import { execute } from '../../utils/requestHandler';
 
-export const fetchCatalog = async (setLoading?: loadingUpdater, submitErrorToSnackbarQueue = true) => {
-  const data = get3DRecordsXML();
-  const records = await execute(
-    `${appConfig.csw3dUrl}`,
-    'POST',
-    { data },
-    setLoading,
-    submitErrorToSnackbarQueue
-  );
-  const parsed = parse3DQueryResults(records as string) as Record<string, unknown>[];
-
-  let extractableRecordsData, extractableRecords;
+export const fetchCatalog = async (setLoading: loadingUpdater) => {
+  let parsed, extractables;
   try {
-    extractableRecordsData = await execute(
-      `${appConfig.extractableManagerUrl}/records}`,
-      'GET',
-      undefined,
-      setLoading,
-      submitErrorToSnackbarQueue
+    setLoading(true);
+    const data = get3DRecordsXML();
+    const records = await execute(
+      `${appConfig.csw3dUrl}`,
+      'POST',
+      { data }
+    );
+    parsed = parse3DQueryResults(records as string) as Record<string, unknown>[];
+    extractables = await execute(
+      `${appConfig.extractableManagerUrl}/records`,
+      'GET'
     );
   } catch (error) {
+    console.error('Failed to fetch catalog/extractable data:', error);
   } finally {
-    //TODO: REMOVE MOCK data and handle the case when extractableRecordsData is undefined or not an array
-    extractableRecords = Array.isArray(extractableRecordsData) ? extractableRecordsData : mockExtractableRecords;
-
-    const enriched = enrichRecords(parsed, extractableRecords);
+    const catalogRecords = Array.isArray(parsed) ? parsed : [];
+    // TODO: REMOVE MOCK
+    const extractableRecords = Array.isArray(extractables) ? extractables : mockExtractableRecords;// [];
+    const enriched = enrichRecords(catalogRecords, extractableRecords);
+    setLoading(false);
     return {
       data: createCatalogTree(enriched),
-      sumAll: parsed.length,
-      sumExt: extractableRecords.length,
-      sumNExt: parsed.length - extractableRecords.length
+      sumAll: catalogRecords.length,
+      sumExtractable: extractableRecords.length,
+      sumNotExtractable: catalogRecords.length - extractableRecords.length
     };
   }
 };
 
 const enrichRecords = (
   records: Record<string, unknown>[],
-  extractableFields: Record<string, unknown>[]
+  extractables: Record<string, unknown>[]
 ): Record<string, unknown>[] => {
-  const extractableFieldsByName = new Map(
-    extractableFields.map((e) => [e.recordName as string, e])
+  const extractableById = new Map(
+    extractables.map((e) => [e.recordName as string, e])
   );
   return records.map((record) => {
-    const recordName = record[IDENTIFIER_FIELD] as string;
-    const matchedExtraField = extractableFieldsByName.get(recordName);
+    const id = record[IDENTIFIER_FIELD] as string;
+    const matched = extractableById.get(id);
     return {
       ...record,
-      isApproved: Boolean(matchedExtraField),
+      isApproved: Boolean(matched),
       isShown: false,
-      extractable: matchedExtraField ?? null
+      extractable: matched
     };
   });
 };
