@@ -5,8 +5,9 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 import { Box } from '@map-colonies/react-components';
 import { Button, Icon, TextField, Typography } from '@map-colonies/react-core';
-import { LogoSVGIcon } from '../../icons/LogoSVGIcon';
+import { AutoDirectionBox } from '../../AutoDirectionBox/AutoDirectionBox';
 import { Curtain } from '../../Curtain/curtain';
+import { LogoSVGIcon } from '../../icons/LogoSVGIcon';
 import { loginAPI } from '../../services/LoginService';
 import { useAuth } from './AuthContext';
 
@@ -20,7 +21,7 @@ const Login: React.FC = () => {
   const from = location.state?.from || "/";
   const [userName, setUserName] = useState<string>('');
   const [userPassword, setUserPassword] = useState<string>('');
-  const [error, setError] = useState<string|undefined>(undefined);
+  const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
@@ -34,12 +35,12 @@ const Login: React.FC = () => {
     }
   };
 
-  const isLoginInfo = ():boolean => {
+  const isLoginInfo = (): boolean => {
     return (!isEmpty(userName) && !isEmpty(userPassword));
   };
 
   return (
-    <Box className="centerContainer">
+    <Box className="login">
       <Box className="loginContainer LoginHeader curtainContainer">
         {
           isLoading && <Curtain showProgress={true}/>
@@ -59,22 +60,24 @@ const Login: React.FC = () => {
         </Box>
         <TextField
           className="loginControl"
-          label={intl.formatMessage({
-            id: 'auth.fields.user-name.label',
-          })}
+          label={intl.formatMessage({ id: 'auth.fields.username.label' })}
           type="text"
           required
           onChange={(e: React.FormEvent<HTMLInputElement>): void => {
             setUserName(e.currentTarget.value.trim());
             setError(undefined);
           }}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
+            const SUBMIT_KEY = 'Enter'
+            if (isLoginInfo() && e.key === SUBMIT_KEY) {
+              handleLogin();
+            }
+          }}
           value={userName}
         />
         <TextField
           className="loginControl"
-          label={intl.formatMessage({
-            id: 'auth.fields.user-pwd.label',
-          })}
+          label={intl.formatMessage({ id: 'auth.fields.password.label' })}
           type="password"
           required
           onChange={(e: React.FormEvent<HTMLInputElement>): void => {
@@ -100,9 +103,10 @@ const Login: React.FC = () => {
         </Button>
         <Typography tag="div" className="error" >
           {
-            error && isLoginInfo() && <>
-              Error: {error}
-            </>
+            error && isLoginInfo() &&
+            <AutoDirectionBox>
+              {intl.formatMessage({ id: 'auth.error' }, { value: error })}
+            </AutoDirectionBox>
           }
         </Typography>
       </Box>

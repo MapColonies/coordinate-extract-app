@@ -145,7 +145,7 @@ export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
       {
         !!productName &&
         <Box className="detailsHeader">
-          <Box className="title" color={!isApproved ? 'var(--mdc-theme-gc-warning)' : 'var(--mdc-theme-gc-success)'}> 
+          <Box className={`title ${!isApproved ? 'orange' : 'green'}`}> 
             {String(productName)}
           </Box>
           <Box className="extractable">
