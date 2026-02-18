@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.10](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.9...v1.1.10) (2026-02-18)
+
+
+### Bug Fixes
+
+* css ([fb2897f](https://github.com/MapColonies/coordinate-extract-app/commit/fb2897f949bdc05c0aa8b5ad42942962fbfed617))
+* css ([220337e](https://github.com/MapColonies/coordinate-extract-app/commit/220337e595ca6145b117175f864acbc5a9ae8745))
+
 ## [1.1.9](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.8...v1.1.9) (2026-02-17)
 
 
