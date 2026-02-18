@@ -17,15 +17,11 @@ const Routing: React.FC = (): JSX.Element => {
 
         <Route path="/login" component={Login} />
 
-        <ProtectedRoute  path="/" exact component={Main}>
-        </ProtectedRoute >
+        <ProtectedRoute  path="/" exact component={Main}></ProtectedRoute >
 
-        <ProtectedRoute path="/index" component={Main}>
-        </ProtectedRoute>
+        <ProtectedRoute path="/index" component={Main}></ProtectedRoute>
 
-        <Route path="*">
-          <PageNotFound />
-        </Route>
+        <Route path="*"><PageNotFound /></Route>
         
       </Switch>
       

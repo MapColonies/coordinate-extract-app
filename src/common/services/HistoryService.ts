@@ -1,9 +1,7 @@
 import { mockHistory } from '../../components/common/MockData';
-import { SnackbarManager } from '../../components/common/Snackbar/SnackbarManager';
 import appConfig from '../../utils/Config';
 import { loadingUpdater } from '../../utils/loadingUpdater';
-import { requestExecutor } from '../../utils/requestHandler';
-import { getSnackbarErrorMessage } from '../../utils/snackbarError';
+import { execute } from '../../utils/requestHandler';
 
 export interface HistoryRecord {
   id: string;
@@ -16,35 +14,20 @@ export interface HistoryRecord {
 
 export const historyAPI = async (
   recordName: string,
-  setLoading?: loadingUpdater,
-  submitErrorToSnackbarQueue = true
+  setLoading: loadingUpdater
 ): Promise<HistoryRecord[] | undefined> => {
   try {
-    setLoading?.(true);
-    const response = await requestExecutor(
-      {
-        url: `${appConfig.extractableManagerUrl}/audit/${recordName}`,
-        injectToken: true
-      },
-      'GET',
-      {}
+    setLoading(true);
+    const response = await execute(
+      `${appConfig.extractableManagerUrl}/audit/${recordName}`,
+      'GET'
     );
-    return response?.data;
+    return response as unknown as HistoryRecord[];
   } catch (error) {
     console.error('Failed to perform GET history:', error);
-    if (submitErrorToSnackbarQueue) {
-      SnackbarManager.notify(
-        getSnackbarErrorMessage((error as any).message as string)
-      );
-      //TODO: REMOVE MOCK
-      return mockHistory;
-      // throw error;
-    } else {
-      //TODO: REMOVE MOCK
-      return mockHistory;
-      // throw error;
-    }
   } finally {
-    setLoading?.(false);
+    setLoading(false);
+    // TODO: REMOVE MOCK
+    return mockHistory;
   }
 };

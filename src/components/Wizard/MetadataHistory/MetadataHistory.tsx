@@ -20,7 +20,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
     setIsNextBtnDisabled(false);
     (async () => {
       try {
-        const historyData = await historyAPI(selectedItem?.[IDENTIFIER_FIELD] as string, setIsLoading, true);
+        const historyData = await historyAPI(selectedItem?.[IDENTIFIER_FIELD] as string, setIsLoading);
         setHistoryItems(historyData as HistoryRecord[]);
       } catch (e) {
         setIsNextBtnDisabled(true);

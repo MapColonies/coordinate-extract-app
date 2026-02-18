@@ -1,9 +1,7 @@
 import { mockLogin } from '../../components/common/MockData';
-import { SnackbarManager } from '../../components/common/Snackbar/SnackbarManager';
 import appConfig from '../../utils/Config';
 import { loadingUpdater } from '../../utils/loadingUpdater';
-import { requestExecutor } from '../../utils/requestHandler';
-import { getSnackbarErrorMessage } from '../../utils/snackbarError';
+import { execute } from '../../utils/requestHandler';
 
 interface LoginResponse {
   isValid: boolean;
@@ -14,38 +12,27 @@ interface LoginResponse {
 export const loginAPI = async (
   username: string,
   password: string,
-  setLoading?: loadingUpdater,
-  submitErrorToSnackbarQueue = true
+  setLoading: loadingUpdater
 ): Promise<LoginResponse | undefined> => {
   try {
-    setLoading?.(true);
-    const response = await requestExecutor(
-      {
-        url: `${appConfig.extractableManagerUrl}/users/validate`,
-        injectToken: true
-      },
+    setLoading(true);
+    const response = await execute(
+      `${appConfig.extractableManagerUrl}/users/validate`,
       'POST',
       {
         data: {
-          username: username,
-          password: password
+          username,
+          password
         }
-      }
+      },
+      false
     );
-    return response?.data;
+    return response as unknown as LoginResponse;
   } catch (error) {
     console.error('Failed to perform POST login:', error);
-    if (submitErrorToSnackbarQueue) {
-      SnackbarManager.notify(
-        getSnackbarErrorMessage((error as any).message as string)
-      );
-      throw error;
-    } else {
-      //TODO: REMOVE MOCK
-      return mockLogin;
-      // throw error;
-    }
   } finally {
-    setLoading?.(false);
+    setLoading(false);
+    // TODO: REMOVE MOCK
+    return mockLogin;
   }
 };

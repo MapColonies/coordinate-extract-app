@@ -1,4 +1,3 @@
-// login.tsx
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -26,7 +25,10 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      await loginAPI(userName as string, userPassword as string, setIsLoading, false);
+      const loginData = await loginAPI(userName as string, userPassword as string, setIsLoading);
+      if (loginData?.code !== 'SUCCESS') {
+        throw new Error(loginData?.message || 'Login failed');
+      }
       login({ username: userName as string });
       history.replace(from);
     } catch (e) {
@@ -42,7 +44,8 @@ const Login: React.FC = () => {
     <Box className="login">
       <Box className="loginContainer LoginHeader curtainContainer">
         {
-          isLoading && <Curtain showProgress={true}/>
+          isLoading &&
+          <Curtain showProgress={true}/>
         }
         <Box className="Title">
           <Icon
@@ -96,7 +99,7 @@ const Login: React.FC = () => {
           raised 
           className="loginAction"
           onClick={handleLogin}
-          disabled={!isLoginInfo()}
+          disabled={!isLoginInfo() || !!error}
         >
           <FormattedMessage id="auth.login.btn"/>
         </Button>

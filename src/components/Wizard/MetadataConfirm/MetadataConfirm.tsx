@@ -2,20 +2,67 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { TextField, Typography } from '@map-colonies/react-core';
+import { Curtain } from '../../../common/Curtain/curtain';
+import { useAuth } from '../../../common/Routing/Login/AuthContext';
+import { extractableCreateAPI, extractableDeleteAPI } from '../../../common/services/ExtractableService';
 import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
 
 import './MetadataConfirm.css';
 
-export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
+export const MetadataConfirm: React.FC<WizardStepProps> = ({
+  setIsNextBtnDisabled,
+  selectedItem,
+  shouldSubmit,
+  setShouldSubmit,
+  setIsCompleted
+}) => {
+  const [formData, setFormData] = useState({ password: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
   const intl = useIntl();
-
-  const [formData, setFormData] = useState({
-    password: ''
-  });
 
   useEffect(() => {
     setIsNextBtnDisabled(true);
   }, []);
+
+  useEffect(() => {
+    if (!shouldSubmit) {
+      return;
+    }
+    let isMounted = true;
+    const submit = async (): Promise<void> => {
+      if (
+        !selectedItem ||
+        !user?.username ||
+        !formData.password ||
+        !selectedItem.approver
+      ) {
+        return;
+      }
+      const id = selectedItem[IDENTIFIER_FIELD] as string;
+      const apiCall = selectedItem.isApproved
+        ? extractableDeleteAPI
+        : extractableCreateAPI;
+      const response = await apiCall(
+        id,
+        user.username,
+        formData.password,
+        selectedItem.approver as string,
+        { additionalInfo: selectedItem.additionalInfo },
+        setIsLoading
+      );
+      if (response && isMounted) {
+        setIsCompleted?.(true);
+      } else {
+        setShouldSubmit?.(false);
+        setIsNextBtnDisabled(true);
+      }
+    };
+    void submit();
+    return () => {
+      isMounted = false;
+    };
+  }, [shouldSubmit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,15 +77,13 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Metadata committed successfully!');
-  };
-
   return (
     <Box className="metadataConfirm">
-      <Box className="formContainer">
+      <Box className="formContainer curtainContainer">
+        {
+          isLoading &&
+          <Curtain showProgress={true}/>
+        }
         <Box className="formHeader">
           {
             [
@@ -58,7 +103,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
             ))
           }
         </Box>
-        <form onSubmit={handleSubmit} className="form">
+        <form className="form">
           <Box className="formGroup">
             <label htmlFor="password">
               <FormattedMessage id="form.password.label" />

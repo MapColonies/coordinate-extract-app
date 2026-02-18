@@ -16,5 +16,6 @@ export enum LinkType {
   LEGEND = 'LEGEND'
 }
 
+export const DEFAULT_PROJECTION = 'EPSG:4326';
 export const FOOTPRINT_BORDER_COLOR = '#1E90FF';
 export const FOOTPRINT_BORDER_WIDTH = 6.0;
