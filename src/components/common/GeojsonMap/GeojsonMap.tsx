@@ -1,5 +1,5 @@
 import React, { CSSProperties, useEffect, useMemo, useState } from 'react';
-import { Feature, Geometry as GeoJsonGeometry } from 'geojson';
+import { Geometry as GeoJsonGeometry } from 'geojson';
 import { get } from 'lodash';
 import { Style, Icon, Stroke, Fill } from 'ol/style';
 import {
@@ -18,24 +18,23 @@ import {
 } from '@map-colonies/react-components';
 import { Curtain } from '../../../common/Curtain/curtain';
 import appConfig from '../../../utils/Config';
-import { FOOTPRINT_BORDER_COLOR, FOOTPRINT_BORDER_WIDTH } from '../../../utils/Const';
+import {
+  DEFAULT_PROJECTION,
+  FOOTPRINT_BORDER_COLOR,
+  FOOTPRINT_BORDER_WIDTH
+} from '../../../utils/Const';
 import { getMarker } from '../../../utils/geojson';
 
 import './GeojsonMap.css';
 
 interface GeoFeaturesPresentorProps {
-  geoFeatures?: Feature[];
   geometry?: GeoJsonGeometry;
   style?: CSSProperties | undefined;
 }
 
-export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
-  geometry,
-  style
-}) => {
-
-  const DEFAULT_PROJECTION = 'EPSG:4326';
+export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({ geometry, style }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [fit, setFit] = useState<boolean>();
   
   const previewBaseMap = useMemo(() => {
     const olBaseMap: JSX.Element[] = [];
@@ -86,8 +85,6 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({
       return getMarker(geometry);
     }
   }, [geometry]);
-
-  const [fit, setFit] = useState<boolean>();
 
   useEffect(() => {
     // setTimeout is used to give proper UI/UX experience

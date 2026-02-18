@@ -48,7 +48,7 @@ export const extractableDeleteAPI = async (
   authorizedBy: string,
   data: Record<string, unknown>,
   setLoading: loadingUpdater
-): Promise<void> => {
+): Promise<string | undefined> => {
   try {
     setLoading(true);
     await execute(
@@ -67,5 +67,7 @@ export const extractableDeleteAPI = async (
     console.error('Failed to DELETE extractable record:', error);
   } finally {
     setLoading(false);
+    // TODO: REMOVE MOCK
+    return 'OK';
   }
 };

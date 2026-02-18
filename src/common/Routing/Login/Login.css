@@ -42,15 +42,23 @@
 }
 
 .login .loginAction {
-  width: 85%;
+  width: 88%;
   margin: 0 20px;
 }
 
-.login .error {
+body[dir="rtl"] .login .loginAction {
   width: 85%;
+}
+
+.login .error {
+  width: 88%;
   height: 40px;
   margin: 0 20px;
   color: var(--mdc-theme-gc-error);
+}
+
+body[dir="rtl"] .login .error {
+  width: 85%;
 }
 
 .login .curtain {

@@ -82,7 +82,8 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
           </Box>
           <Box style={treeTheme as React.CSSProperties} className="treeContainer curtainContainer">
             {
-              isLoading && <Curtain showProgress={true}/>
+              isLoading &&
+              <Curtain showProgress={true}/>
             }
             {
               props.catalogTreeData &&

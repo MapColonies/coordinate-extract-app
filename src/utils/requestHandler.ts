@@ -83,7 +83,6 @@ export const execute = async (
     );
     return response?.status === 204 ? 'OK' : response?.data;
   } catch (error) {
-    console.error('API execution failed:', error);
     if (submitErrorToSnackbarQueue) {
       SnackbarManager.notify(getSnackbarErrorMessage((error as any).message as string));
     }

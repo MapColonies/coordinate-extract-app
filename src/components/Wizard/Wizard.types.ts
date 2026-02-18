@@ -12,6 +12,9 @@ export interface WizardStepProps {
   setIsNextBtnDisabled: (val: boolean) => void;
   selectedItem?: CatalogTreeNode;
   setSelectedItem?: (item?: CatalogTreeNode) => void;
+  shouldSubmit?: boolean;
+  setShouldSubmit?: (val: boolean) => void;
+  setIsCompleted?: (val: boolean) => void;
 }
 
 export interface WizardSelectionProps extends WizardStepProps {

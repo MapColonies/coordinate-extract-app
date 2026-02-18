@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FormWizard from 'react-form-wizard-component';
 import { FormWizardMethods } from 'react-form-wizard-component/dist/types/types/FormWizard';
 import { useIntl } from 'react-intl';
@@ -26,15 +26,23 @@ export const Wizard: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<CatalogTreeNode | undefined>(undefined);
   const [itemsSummary, setItemsSummary] = useState<ISummary | undefined>(undefined);
   const [disabled, setDisabled] = useState<boolean>(true);
+  const [shouldSubmit, setShouldSubmit] = useState<boolean>(false);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const intl = useIntl();
-  const wizardRef = useRef<FormWizardMethods>(null);
   const { locale } = useI18n();
+  const wizardRef = useRef<FormWizardMethods>(null);
+
+  useEffect(() => {
+    if (isCompleted) {
+      setCatalogTree(undefined);
+      setSelectedItem(undefined);
+      setDisabled(true);
+      wizardRef.current?.goToTab(0);
+    }
+  }, [isCompleted]);
   
-  const handleComplete = () => {
-    setCatalogTree(undefined);
-    setSelectedItem(undefined);
-    setDisabled(true);
-    wizardRef.current?.goToTab(0);
+  const handleComplete = async () => {
+    setShouldSubmit(true);
   };
 
   return (
@@ -100,6 +108,9 @@ export const Wizard: React.FC = () => {
               <MetadataConfirm
                 setIsNextBtnDisabled={(val) => { setDisabled(val) }}
                 selectedItem={selectedItem}
+                shouldSubmit={shouldSubmit}
+                setShouldSubmit={setShouldSubmit}
+                setIsCompleted={setIsCompleted}
               />
             }
           </Step>
