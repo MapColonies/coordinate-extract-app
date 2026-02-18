@@ -7,16 +7,16 @@ import {
   CesiumMap,
   CesiumSceneMode
 } from '@map-colonies/react-components';
-import { fetchCatalog } from '../../../common/services/CatalogService';
 import { Curtain } from '../../../common/Curtain/curtain';
+import { fetchCatalog } from '../../../common/services/CatalogService';
 import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
 import appConfig from '../../../utils/Config';
-import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { Terrain } from '../../common/Terrain/Terrain';
+import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { CatalogTreeNode, IDENTIFIER_FIELD, WizardSelectionProps } from '../Wizard.types';
+import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
 
 import './ModelSelection.css';
-import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +53,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     }
 
     (async () => {
-      const treeData = await fetchCatalog((value: boolean)=>{
+      const treeData = await fetchCatalog((value: boolean) => {
         setTimeout( () => setIsLoading(value), 2000);
       });
 
@@ -113,7 +113,8 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
             infoBox={false}
           >
             {
-              props.selectedItem?.isSelected as boolean && props.selectedItem?.['mc:footprint'] &&
+              props.selectedItem?.isSelected as boolean &&
+              props.selectedItem?.['mc:footprint'] &&
               <CesiumGeojsonFootprint
                 id={props.selectedItem[IDENTIFIER_FIELD] as string}
                 clampToGround={true}
@@ -122,7 +123,9 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
               />
             }
             {
-              props.selectedItem?.['mc:links'] && (props.selectedItem?.isShown as boolean) && finishedFlying &&
+              props.selectedItem?.isShown as boolean &&
+              props.selectedItem?.['mc:links'] &&
+              finishedFlying &&
               <Cesium3DTileset
                 url={getTokenResource(props.selectedItem?.['mc:links']["#text"] as string)}
                 isZoomTo={true}

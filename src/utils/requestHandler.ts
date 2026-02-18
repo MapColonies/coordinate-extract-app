@@ -65,7 +65,13 @@ export const requestHandlerWithToken = async (url: string, method: string, param
   return requestHandler(url, method, reqConfig);
 };
 
-export const execute = async (url: string, method: 'GET' | 'POST', data?: Record<string, unknown>, setLoading?: loadingUpdater, submitErrorToSnackbarQueue = true): Promise<Record<string, unknown>[] | string | undefined> => {
+export const execute = async (
+  url: string,
+  method: 'GET' | 'POST',
+  data?: Record<string, unknown>,
+  setLoading?: loadingUpdater,
+  submitErrorToSnackbarQueue = true
+): Promise<Record<string, unknown>[] | string | undefined> => {
   try {
     const response = await requestExecutor(
       {
@@ -74,7 +80,7 @@ export const execute = async (url: string, method: 'GET' | 'POST', data?: Record
       },
       method,
       {
-        ...(data ?? {}),
+        ...(data ?? {})
       }
     );
     return response?.data;

@@ -29,8 +29,7 @@ const Login: React.FC = () => {
       await loginAPI(userName as string, userPassword as string, setIsLoading, false);
       login({ username: userName as string });
       history.replace(from);
-    }
-    catch (e) {
+    } catch (e) {
       setError((e as any).message);
     }
   };

@@ -3,8 +3,8 @@ import { createCatalogTree } from '../../components/common/Tree/TreeGroup';
 import { IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
 import appConfig from '../../utils/Config';
 import { get3DRecordsXML, parse3DQueryResults } from '../../utils/cswQueryBuilder';
-import { execute } from '../../utils/requestHandler';
 import { loadingUpdater } from '../../utils/loadingUpdater';
+import { execute } from '../../utils/requestHandler';
 
 export const fetchCatalog = async (setLoading?: loadingUpdater, submitErrorToSnackbarQueue = true) => {
   const data = get3DRecordsXML();
@@ -26,8 +26,8 @@ export const fetchCatalog = async (setLoading?: loadingUpdater, submitErrorToSna
       setLoading,
       submitErrorToSnackbarQueue
     );
-  } catch (error) { }
-  finally {
+  } catch (error) {
+  } finally {
     //TODO: REMOVE MOCK data and handle the case when extractableRecordsData is undefined or not an array
     extractableRecords = Array.isArray(extractableRecordsData) ? extractableRecordsData : mockExtractableRecords;
 
