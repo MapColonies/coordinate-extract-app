@@ -37,6 +37,7 @@ export const Wizard: React.FC = () => {
       setCatalogTree(undefined);
       setSelectedItem(undefined);
       setDisabled(true);
+      setShouldSubmit(false);
       wizardRef.current?.goToTab(0);
     }
   }, [isCompleted]);
