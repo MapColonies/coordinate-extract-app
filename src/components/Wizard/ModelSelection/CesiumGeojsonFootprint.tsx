@@ -13,7 +13,7 @@ import { FOOTPRINT_BORDER_WIDTH } from '../../../utils/Const';
 
 interface CesiumGeojsonFootprintProps extends RCesiumGeojsonLayerProps {
   id: string;
-  setFinishedFlying?: (finished: boolean) => void;
+  setIsInProgress?: (val: boolean) => void;
 }
 
 const FOOTPRINT_BORDER_COLOR = CesiumColor.DODGERBLUE;
@@ -69,7 +69,9 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
         <FlyTo
           key={props.id}
           geometry={props.data}
-          setFinishedFlying={props.setFinishedFlying}
+          setFinishedFlying={(val) => {
+            props.setIsInProgress?.(!val);
+          }}
         />
       }
     </>

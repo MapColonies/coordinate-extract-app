@@ -5,12 +5,11 @@ import {
   CesiumVerticalOrigin,
   useCesiumMap
 } from '@map-colonies/react-components';
-import { cartesian2geometry, FlyTo } from './FlyTo';
 
 interface IPOI {
   longitude: number;
   latitude: number;
-  height?: number;
+  height: number;
 }
 
 export const LocationMarker: React.FC<IPOI> = (props) => {
@@ -34,13 +33,6 @@ export const LocationMarker: React.FC<IPOI> = (props) => {
             scale: 0.5,
             image: 'assets/img/map-marker.gif',
           }}
-        />
-      }
-      {
-        position !== undefined &&
-        <FlyTo
-          geometry={cartesian2geometry(position)}
-          animation={false}
         />
       }
     </>

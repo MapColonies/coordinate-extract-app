@@ -18,9 +18,20 @@ export const cartesian2geometry = (cartesian: CesiumCartesian3): Geometry => {
   const latitude = CesiumMath.toDegrees(cartographic.latitude);
   const height = cartographic.height;
 
+  return coordinate2cartesian(longitude, latitude, height);
+}
+
+export const coordinate2cartesian = (longitude: number, latitude: number, height: number): Geometry => {
   return {
     type: 'Point',
     coordinates: [longitude, latitude, height]
+  };
+}
+
+export const lonLat2cartesian = (longitude: number, latitude: number): Geometry => {
+  return {
+    type: 'Point',
+    coordinates: [longitude, latitude]
   };
 }
 
@@ -43,8 +54,10 @@ export const FlyTo: React.FC<FlyToProps> = ({ geometry, setFinishedFlying, anima
     });
 
     setFinishedFlying?.(false);
-    void mapViewer.flyTo(
-      rectangle, !tilt ? {
+
+    mapViewer.flyTo(
+      rectangle,
+      !tilt ? {
         offset: {
           heading: 0,
           pitch: -Math.PI / 2,
@@ -54,9 +67,8 @@ export const FlyTo: React.FC<FlyToProps> = ({ geometry, setFinishedFlying, anima
       } : {}
     ).then(() => {
       setFinishedFlying?.(true);
-      mapViewer.entities.remove(rectangle);
     });
-  }, []);
+  }, [geometry]);
 
   return <></>;
 };
