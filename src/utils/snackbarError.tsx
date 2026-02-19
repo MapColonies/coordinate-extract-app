@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { ExclamationSVGIcon } from '../icons/ExclamationSVGIcon';
+import { ExclamationSVGIcon } from '../common/icons/ExclamationSVGIcon';
 
 export const getSnackbarErrorMessage = (body: string) => {
   return {

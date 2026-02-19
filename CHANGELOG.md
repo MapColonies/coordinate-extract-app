@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.1.10](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.9...v1.1.10) (2026-02-18)
+
+
+### Bug Fixes
+
+* css ([fb2897f](https://github.com/MapColonies/coordinate-extract-app/commit/fb2897f949bdc05c0aa8b5ad42942962fbfed617))
+* css ([220337e](https://github.com/MapColonies/coordinate-extract-app/commit/220337e595ca6145b117175f864acbc5a9ae8745))
+* execute ([226207d](https://github.com/MapColonies/coordinate-extract-app/commit/226207d56f16b2633c9198f9021a4cb46d49b8ab))
+* execute and submit ([4a92adb](https://github.com/MapColonies/coordinate-extract-app/commit/4a92adba30a5968d1b48c198db164354d89703a7))
+* submit ([b098108](https://github.com/MapColonies/coordinate-extract-app/commit/b09810840f8ab777954901c84f63235b3d6d3156))
+
+## [1.1.9](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.8...v1.1.9) (2026-02-17)
+
+
+### Bug Fixes
+
+* cesium and ol synch and more ([980bfb5](https://github.com/MapColonies/coordinate-extract-app/commit/980bfb5a89fc2d8b22f730ec5a4e5c1ae980a336))
+* cesium and ol synch and more ([1f04408](https://github.com/MapColonies/coordinate-extract-app/commit/1f04408395be6ca5d13209f5f8914b7dff8a4f0c))
+* css ([de1afe3](https://github.com/MapColonies/coordinate-extract-app/commit/de1afe3a8f36061ff05a37b2743fc2d88eb6c9fc))
+* css ([d4ab31f](https://github.com/MapColonies/coordinate-extract-app/commit/d4ab31f9fb30f1adbad7cf2758f5faf20304c387))
+* disable finish btn and autocomplete ([222a05a](https://github.com/MapColonies/coordinate-extract-app/commit/222a05adfe1833bdc943486d2b7e0d05b26cdb4d))
+* disable finish btn and autocomplete ([d72aa56](https://github.com/MapColonies/coordinate-extract-app/commit/d72aa56851bdf3d027e8cb4b4a0ee24ae908da4f))
+* extractable APIs ([8e71196](https://github.com/MapColonies/coordinate-extract-app/commit/8e711960e71e636e1f20640b2b7ae95088f5fff2))
+* extractable APIs ([f81ee34](https://github.com/MapColonies/coordinate-extract-app/commit/f81ee34878f93a5afad6fbbdcb43c05192ef1443))
+
 ## [1.1.8](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.7...v1.1.8) (2026-02-12)
 
 

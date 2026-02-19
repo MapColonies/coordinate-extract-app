@@ -3,11 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { Typography } from '@map-colonies/react-core';
 import { AutoDirectionBox } from '../../../common/AutoDirectionBox/AutoDirectionBox';
-import { historyAPI, HistoryRecord } from '../../../common/services/HistoryService';
-import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
 import { Curtain } from '../../../common/Curtain/curtain';
-import { formatDate } from '../../../utils/formatter';
+import { historyAPI, HistoryRecord } from '../../../common/services/HistoryService';
 import { useI18n } from '../../../i18n/I18nProvider';
+import { formatDate } from '../../../utils/formatter';
+import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
 
 import './MetadataHistory.css';
 
@@ -18,16 +18,13 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
 
   useEffect(() => {
     setIsNextBtnDisabled(false);
-
     (async () => {
       try {
-        const historyData = await historyAPI(selectedItem?.[IDENTIFIER_FIELD] as string, setIsLoading, true);
+        const historyData = await historyAPI(selectedItem?.[IDENTIFIER_FIELD] as string, setIsLoading);
         setHistoryItems(historyData as HistoryRecord[]);
-      }
-      catch (e) {
+      } catch (e) {
         setIsNextBtnDisabled(true);
       }
-
     })();
   }, []);
 
@@ -38,6 +35,20 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
   return (
     <Box className="historyContainer curtainContainer">
       <Box className="cardList">
+        {
+          isLoading &&
+          <Box className="historyLoading">
+            <FormattedMessage id="general.loading" />
+            <Curtain showProgress={true}/>
+          </Box>
+        }
+        {
+          !isLoading &&
+          historyItems.length === 0 &&
+          <Box className="noData">
+            <FormattedMessage id="general.noData" />
+          </Box>
+        }
         {
           !isLoading &&
           sortedHistoryItems.map((item, index) => (
@@ -60,20 +71,6 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
               </Box>
             </Box>
           ))
-        }
-        {
-          !isLoading &&
-          historyItems.length === 0 &&
-          <Box className="noData">
-            <FormattedMessage id="general.noData" />
-          </Box>
-        }
-        {
-          isLoading &&
-          <Box className="historyLoading">
-            <FormattedMessage id="general.loading" />
-            <Curtain showProgress={true}/>
-          </Box>
         }
       </Box>
     </Box>

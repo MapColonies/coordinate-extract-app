@@ -51,7 +51,6 @@ const Layout: React.FC = (): JSX.Element => {
       GC_GAP: '12px',
       GC_FONT_SIZE: '14px',
       GC_TITLE_FONT_SIZE: '15px',
-
       GC_STEP_HEIGHT: '690px',
     },
   };
@@ -82,7 +81,6 @@ const Layout: React.FC = (): JSX.Element => {
       }}
     >
       <RMWCThemeProvider className={`${theme.type}-theme`} options={theme}>
-
         <Box className="Layout">
           <header>
             <Header />
@@ -91,7 +89,6 @@ const Layout: React.FC = (): JSX.Element => {
             <Routing />
           </main>
         </Box>
-
       </RMWCThemeProvider>
     </RMWCProvider>
   );

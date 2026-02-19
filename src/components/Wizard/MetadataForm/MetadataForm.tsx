@@ -10,9 +10,9 @@ import './MetadataForm.css';
 export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem, setSelectedItem }) => {
   const intl = useIntl();
 
-  const [formData, setFormData] = useState({
-    approver: selectedItem?.approver as string,
-    additionalInfo: selectedItem?.additionalInfo as string
+  const [formData, setFormData] = useState<{ approver: string; additionalInfo: string }>({
+    approver: typeof selectedItem?.approver === 'string' ? selectedItem.approver : '',
+    additionalInfo: typeof selectedItem?.additionalInfo === 'string' ? selectedItem.additionalInfo : ''
   });
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
           </Typography>
           <FormattedMessage id={`${selectedItem?.isApproved ? 'form.message.reject' : 'form.message.approve'}`} />
         </Box>
-        <form onSubmit={()=>{}} className="form">
+        <form className="form">
           <Box className="formGroup">
             <label htmlFor="approver">
               <FormattedMessage id="form.approver.label" />

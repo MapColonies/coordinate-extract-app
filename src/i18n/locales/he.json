@@ -1,6 +1,12 @@
 {
   "app.title": "אישור מודל לחילוץ נ.צ.",
 
+  "auth.login.btn": "התחבר",
+  "auth.logout.btn": "התנתק",
+  "auth.fields.username.label": "שם משתמש",
+  "auth.fields.password.label": "סיסמה",
+  "auth.error": "שגיאה: {value}",
+
   "step.selection": "בחירה",
   "step.details": "פרטים",
   "step.update": "עדכון",
@@ -96,11 +102,5 @@
   "form.additionalInfo.label": "הערות (אופציונלי)",
   "form.additionalInfo.placeholder": "הוסף הערות לתיעוד...",
   "form.password.label": "סיסמה",
-  "form.password.placeholder": "הזן סיסמה שנית לאימות וביצוע הפעולה",
-
-  "auth.login.btn": "התחבר",
-  "auth.logout.btn": "התנתק",
-
-  "auth.fields.user-name.label": "שם משתמש",
-  "auth.fields.user-pwd.label": "סיסמה"
+  "form.password.placeholder": "הזן סיסמה שנית לאימות וביצוע הפעולה"
 }

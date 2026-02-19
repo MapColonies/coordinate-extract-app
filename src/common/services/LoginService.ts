@@ -1,47 +1,38 @@
 import { mockLogin } from '../../components/common/MockData';
 import appConfig from '../../utils/Config';
-import { requestExecutor } from '../../utils/requestHandler';
-import { SnackbarManager } from '../../components/common/SnackBar/SnackbarManager';
-import { getSnackbarErrorMessage } from './SnackError';
-import { loadingUpdater } from './loadingUpdater';
+import { loadingUpdater } from '../../utils/loadingUpdater';
+import { execute } from '../../utils/requestHandler';
 
-type loginResponse = {
-  isValid: boolean,
-  message: string,
-  code: string
+interface LoginResponse {
+  isValid: boolean;
+  message: string;
+  code: string;
 }
 
-export const loginAPI = async (username: string, password: string, setLoading?: loadingUpdater, submitErrorToSnackbarQueue = true ): Promise<loginResponse | undefined> => {
+export const loginAPI = async (
+  username: string,
+  password: string,
+  setLoading: loadingUpdater
+): Promise<LoginResponse | undefined> => {
   try {
-    setLoading?.(true);
-    const response = await requestExecutor(
-      {
-        url: `${appConfig.extractableManagerUrl}/users/validate`,
-        injectToken: true
-      },
+    setLoading(true);
+    const response = await execute(
+      `${appConfig.extractableManagerUrl}/users/validate`,
       'POST',
       {
         data: {
-          username: username,
-          password: password
+          username,
+          password
         }
-      }
+      },
+      false
     );
-    return response?.data;
+    return response as unknown as LoginResponse;
   } catch (error) {
     console.error('Failed to perform POST login:', error);
-    if (submitErrorToSnackbarQueue) {
-      SnackbarManager.notify(
-        getSnackbarErrorMessage((error as any).message as string)
-      );
-      throw error;
-    } else {
-      //TODO: REMOVE MOCK
-      return mockLogin;
-      // throw error;
-    }
   } finally {
-    setLoading?.(false);
+    setLoading(false);
+    // TODO: REMOVE MOCK
+    return mockLogin;
   }
 };
-

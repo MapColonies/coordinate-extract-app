@@ -16,7 +16,7 @@
 
 .historyContainer .historyCard {
   background-color: var(--mdc-theme-gc-alternative-surface);
-  border: 1px solid var(--mdc-theme-text-hint-on-background);
+  border: 1px solid var(--mdc-theme-gc-selection-background);
   border-radius: 8px;
   padding: 6px;
   opacity: 0.55;

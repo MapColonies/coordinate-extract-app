@@ -1,5 +1,11 @@
 {
-  "app.title": "Coordinate Extract App",
+  "app.title": "Coordinate Extract Approval",
+
+  "auth.login.btn": "Login",
+  "auth.logout.btn": "Logout",
+  "auth.fields.username.label": "Username",
+  "auth.fields.password.label": "Password",
+  "auth.error": "Error: {value}",
 
   "step.selection": "Selection",
   "step.details": "Details",
@@ -96,11 +102,5 @@
   "form.additionalInfo.label": "Comments (optional)",
   "form.additionalInfo.placeholder": "Add comments here...",
   "form.password.label": "Password",
-  "form.password.placeholder": "Re-enter password for confirmation to proceed with the action",
-
-  "auth.login.btn": "Login",
-  "auth.logout.btn": "Logout",
-
-  "auth.fields.user-name.label": "User name",
-  "auth.fields.user-pwd.label": "Password"
+  "form.password.placeholder": "Re-enter password for confirmation to proceed with the action"
 }

@@ -7,20 +7,20 @@ import {
   CesiumMap,
   CesiumSceneMode
 } from '@map-colonies/react-components';
-import { fetchCatalog } from '../../../common/services/CatalogService';
 import { Curtain } from '../../../common/Curtain/curtain';
+import { fetchCatalog } from '../../../common/services/CatalogService';
 import { CesiumPOI } from '../../../utils/Cesium/CesiumPOI/CesiumPOI';
 import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
 import appConfig from '../../../utils/Config';
-import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { Terrain } from '../../common/Terrain/Terrain';
+import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
 import { CatalogTreeNode, IDENTIFIER_FIELD, WizardSelectionProps } from '../Wizard.types';
 import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
 
 import './ModelSelection.css';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [finishedFlying, setFinishedFlying] = useState(false);
 
   const treeTheme = {
@@ -52,19 +52,13 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
       setIsLoading(false);
       return;
     }
-
     (async () => {
-      const treeData = await fetchCatalog((value: boolean) => {
-        setTimeout(() => setIsLoading(value), 2000);
-      });
-
-      props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
-
+      const treeData = await fetchCatalog(setIsLoading);
       props.setCatalogTreeData(treeData.data.children as CatalogTreeNode[]);
       props.setItemsSummary({
         all: treeData.sumAll,
-        extractable: treeData.sumExt,
-        notExtractable: treeData.sumNExt
+        extractable: treeData.sumExtractable,
+        notExtractable: treeData.sumNotExtractable
       });
     })();
   }, []);
@@ -139,7 +133,8 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
             infoBox={false}
           >
             {
-              props.selectedItem?.isSelected as boolean && props.selectedItem?.['mc:footprint'] &&
+              props.selectedItem?.isSelected as boolean &&
+              props.selectedItem?.['mc:footprint'] &&
               <CesiumGeojsonFootprint
                 id={props.selectedItem[IDENTIFIER_FIELD] as string}
                 clampToGround={true}

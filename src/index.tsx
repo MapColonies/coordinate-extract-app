@@ -1,10 +1,10 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import Layout from './common/Layout/Layout';
+import { AuthProvider } from './common/Routing/Login/AuthContext';
 import { I18nProvider } from './i18n/I18nProvider';
 import reportWebVitals from './reportWebVitals';
 import appConfig from './utils/Config';
-import { AuthProvider } from './common/Routing/Login/AuthContext';
 
 import '@map-colonies/react-core/dist/button/styles';
 import '@map-colonies/react-core/dist/textfield/styles';
