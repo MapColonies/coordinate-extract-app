@@ -32,8 +32,8 @@ export const fetchCatalog = async (setLoading: loadingUpdater) => {
     return {
       data: createCatalogTree(enriched),
       sumAll: catalogRecords.length,
-      sumExtractable: extractableRecords.length,
-      sumNotExtractable: catalogRecords.length - extractableRecords.length
+      sumExtractable: catalogRecords.length > 0 ? extractableRecords.length : catalogRecords.length,
+      sumNotExtractable: catalogRecords.length > 0 ? catalogRecords.length - extractableRecords.length : catalogRecords.length
     };
   }
 };

@@ -36,6 +36,7 @@ export const extractableCreateAPI = async (
     return response as unknown as ExtractableRecord;
   } catch (error) {
     console.error('Failed to CREATE extractable record:', error);
+    return undefined;
   } finally {
     setLoading(false);
   }
@@ -51,7 +52,7 @@ export const extractableDeleteAPI = async (
 ): Promise<string | undefined> => {
   try {
     setLoading(true);
-    await execute(
+    const response = await execute(
       `${appConfig.extractableManagerUrl}/records/${recordName}`,
       'DELETE',
       {
@@ -63,11 +64,19 @@ export const extractableDeleteAPI = async (
         }
       }
     );
+    if (
+      response &&
+      typeof response === 'object' &&
+      'status' in response &&
+      (response as { status?: number }).status === 204
+    ) {
+      return 'OK';
+    }
+    return undefined;
   } catch (error) {
     console.error('Failed to DELETE extractable record:', error);
+    return undefined;
   } finally {
     setLoading(false);
-    // TODO: REMOVE MOCK
-    return 'OK';
   }
 };
