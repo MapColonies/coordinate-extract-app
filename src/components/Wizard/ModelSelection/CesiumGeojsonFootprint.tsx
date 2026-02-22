@@ -13,14 +13,14 @@ import { FOOTPRINT_BORDER_WIDTH } from '../../../utils/Const';
 
 interface CesiumGeojsonFootprintProps extends RCesiumGeojsonLayerProps {
   id: string;
-  setFinishedFlying?: (finished: boolean) => void;
+  setIsInProgress?: (val: boolean) => void;
 }
 
 const FOOTPRINT_BORDER_COLOR = CesiumColor.DODGERBLUE;
 
 export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumGeojsonFootprintProps> = (props) => {
   const [layersFootprints, setlayersFootprints] = useState<FeatureCollection>();
-  const [rect, setRect] = useState<CesiumRectangle | undefined>(undefined);
+  const [flyTo, setFlyTo] = useState<boolean>(false);
 
   useEffect(() => {
     let footprintsCollection: FeatureCollection = {
@@ -37,7 +37,7 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
       }
     }
     setlayersFootprints(footprintsCollection);
-    setRect(new CesiumRectangle());
+    setFlyTo(true);
   }, [props.id]);
 
   return (
@@ -65,12 +65,13 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
         }}
       />
       {
-        rect &&
+        flyTo &&
         <FlyTo
           key={props.id}
-          setRect={setRect}
           geometry={props.data}
-          setFinishedFlying={props.setFinishedFlying}
+          setFinishedFlying={(val) => {
+            props.setIsInProgress?.(!val);
+          }}
         />
       }
     </>

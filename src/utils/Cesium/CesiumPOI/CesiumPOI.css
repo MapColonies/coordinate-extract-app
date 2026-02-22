@@ -1,0 +1,52 @@
+#CesiumPOI {
+  display: flex;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  /* gap: 5px; */
+}
+
+.search-icon {
+  color: #5f6368;
+  margin-right: 8px;
+  font-size: 22px;
+}
+
+.heightContainer {
+  position: relative;
+  left: 64px;
+  display: flex;
+  width: 60px;
+  align-items: center;
+}
+
+.height-badge {
+  width: 52px;
+}
+
+#CesiumPOI .seperator {
+  height: 99%;
+  border-left: 2px solid;
+  opacity: 1;
+  margin-left: 10px;
+}
+
+#CesiumPOI .cesium-geocoder-input {
+  background-color: #262626bf !important;
+}
+
+#CesiumPOI .blink {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 14px #2b08c7) drop-shadow(0 0 8px #040b95);
+    opacity: 0.3;
+  }
+
+  to {
+    /* filter: drop-shadow(0 0 8px #2261f3) drop-shadow(0 0 16px #2224a8); */
+    opacity: 1;
+  }
+}
