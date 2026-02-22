@@ -6,7 +6,6 @@
   /* gap: 5px; */
 }
 
-/* Search icon */
 .search-icon {
   color: #5f6368;
   margin-right: 8px;
@@ -17,29 +16,16 @@
   position: relative;
   left: 64px;
   display: flex;
-  /* background-color: #262626bf; */
   width: 60px;
+  align-items: center;
 }
 
-
 .height-badge {
-  /* margin-top: 8px;
-  background: white;
-  padding: 6px 12px;
-  border-radius: 16px; */
-  /* color: #202124;
-  width: fit-content; */
-  /* position: absolute; */
-  /* position: static; */
   width: 52px;
-  /* left: 10px; */
 }
 
 #CesiumPOI .seperator {
-  /* position: absolute; */
-  /* width: 55px; */
   height: 99%;
-  /* border-left: 2px solid blue; */
   border-left: 2px solid;
   opacity: 1;
   margin-left: 10px;
@@ -47,4 +33,20 @@
 
 #CesiumPOI .cesium-geocoder-input {
   background-color: #262626bf !important;
+}
+
+#CesiumPOI .blink {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 14px #2b08c7) drop-shadow(0 0 8px #040b95);
+    opacity: 0.3;
+  }
+
+  to {
+    /* filter: drop-shadow(0 0 8px #2261f3) drop-shadow(0 0 16px #2224a8); */
+    opacity: 1;
+  }
 }

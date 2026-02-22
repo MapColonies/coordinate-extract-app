@@ -14,6 +14,7 @@ const LATITUDE_INDEX = 2;
 
 interface CesiumPOIProps {
   setIsInProgress?: (val: boolean) => void;
+  glowDependencies?: Record<string, unknown>;
 }
 
 export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
@@ -26,6 +27,8 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [finishedFlying, setFinishedFlying] = useState(false);
   const [geometry, setGeometry] = useState<Geometry>();
+
+  const [isNeedRefreshHeight, setIsNeedRefreshHeight] = useState(true);
 
   const regex =
     /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?)),\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))/;
@@ -41,7 +44,12 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     } else {
       setGeometry(undefined);
     }
+    setIsNeedRefreshHeight(false);
   }, [longitude, latitude]);
+
+  useEffect(() => {
+    setIsNeedRefreshHeight(true);
+  }, [props.glowDependencies])
 
   useEffect(() => {
     if (!isValid || !mapViewer || !finishedFlying) {
@@ -55,8 +63,6 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       let height: number | undefined;
 
       const tileset = mapViewer.scene.primitives.get(1);
-
-      console.log('tileset', tileset);
 
       if (tileset) {
         // Wait for tileset to finish loading/refining
@@ -91,6 +97,8 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       if (height !== undefined) {
         setHeight(height);
       }
+
+      setIsNeedRefreshHeight(false);
     };
 
     updateHeight();
@@ -98,42 +106,43 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
 
   return (
     <Box id="CesiumPOI">
-      <Box className="google-search-wrapper">
-        <Button
-          className="icon"
-          icon={<PlaceCoordinateSVGIcon color="currentColor" />}
-          onClick={() => {
-            if (geometry) {
-              setGeometry({ ...geometry });
-            }
-          }}
-        />
+      <Button
+        className={`icon ${isNeedRefreshHeight ? 'blink' : ''}`}
+        icon={
+          <PlaceCoordinateSVGIcon color="currentColor" />
+        }
+        onClick={() => {
+          if (geometry) {
+            setGeometry({ ...geometry });
+          }
+          setIsNeedRefreshHeight(false);
+        }}
+      />
 
-        <TextField
-          className="cesium-geocoder-input"
-          placeholder="lat, lon"
-          helpText="Use ENTER to pin location"
-          value={inputValue}
-          onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-            const val = e.currentTarget.value;
-            setInputValue(val);
+      <TextField
+        className="cesium-geocoder-input"
+        placeholder="lat, lon"
+        // helpText="Use ENTER to pin location"
+        value={inputValue}
+        onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+          const val = e.currentTarget.value;
+          setInputValue(val);
 
-            const matches = val.match(regex);
+          const matches = val.match(regex);
 
-            if (matches) {
-              const lat = parseFloat(matches[LATITUDE_INDEX]);
-              const lon = parseFloat(matches[LONGITUDE_INDEX]);
+          if (matches) {
+            const lat = parseFloat(matches[LATITUDE_INDEX]);
+            const lon = parseFloat(matches[LONGITUDE_INDEX]);
 
-              setLatitude(lat);
-              setLongitude(lon);
-            } else {
-              setLatitude(undefined);
-              setLongitude(undefined);
-            }
-          }}
-        />
-      </Box>
-      <Box className="heightContainer">
+            setLatitude(lat);
+            setLongitude(lon);
+          } else {
+            setLatitude(undefined);
+            setLongitude(undefined);
+          }
+        }}
+      />
+      <Box className={`heightContainer ${isNeedRefreshHeight ? 'blink' : ''}`}>
 
         <Box className="seperator"></Box>
 
