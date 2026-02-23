@@ -4,35 +4,38 @@
   top: 15px;
   right: 20px;
   /* gap: 5px; */
+  background-color: rgba(38, 38, 38, 0.75);
+  width: 280px;
+  border-radius: 15px;
 }
 
-.search-icon {
-  color: #5f6368;
-  margin-right: 8px;
-  font-size: 22px;
+#CesiumPOI .icon {
+  padding: unset;
+  margin-right: 4px;
+  margin-left: 8px;
 }
 
-.heightContainer {
-  position: relative;
-  left: 64px;
-  display: flex;
-  width: 60px;
-  align-items: center;
+#CesiumPOI .input {
+  border: unset;
+  padding: unset;
 }
 
-.height-badge {
-  width: 52px;
+#CesiumPOI .withoutRipple.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom-color: transparent !important;
 }
 
 #CesiumPOI .seperator {
-  height: 99%;
-  border-left: 2px solid;
+  width: 1px;
+  height: 56px;
+  border-left: 2px solid var(--mdc-theme-border);
   opacity: 1;
-  margin-left: 10px;
 }
 
-#CesiumPOI .cesium-geocoder-input {
-  background-color: #262626bf !important;
+#CesiumPOI .height {
+  align-self: center;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 80px
 }
 
 #CesiumPOI .blink {
@@ -41,7 +44,7 @@
 
 @keyframes glow {
   from {
-    filter: drop-shadow(0 0 14px #2b08c7) drop-shadow(0 0 8px #040b95);
+    filter: drop-shadow(0 0 14px var(--mdc-theme-primary)) drop-shadow(0 0 8px var(--mdc-theme-primary));
     opacity: 0.3;
   }
 

@@ -4,7 +4,6 @@ import {
   CesiumColor,
   CesiumConstantProperty,
   CesiumGeojsonLayer,
-  CesiumRectangle,
   RCesiumGeojsonLayerProps
 } from '@map-colonies/react-components';
 import { FlyTo } from '../../../utils/Cesium/FlyTo';

@@ -148,16 +148,19 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
             {
               tileset
             }
-            <CesiumPOI
-              setIsInProgress={(val) => {
-                setIsLoading(val);
-              }}
-              glowDependencies={{
-                isShown: props.selectedItem?.isShown,
-                selectedItem: props.selectedItem,
-                isSelected: props.selectedItem?.isSelected,
-              }}
-            />
+            {
+              appConfig.showPOITool &&
+              <CesiumPOI
+                setIsInProgress={(val) => {
+                  setIsLoading(val);
+                }}
+                glowDependencies={{
+                  isShown: props.selectedItem?.isShown,
+                  selectedItem: props.selectedItem,
+                  isSelected: props.selectedItem?.isSelected,
+                }}
+              />
+            }
             <Terrain />
           </CesiumMap>
         </Box>

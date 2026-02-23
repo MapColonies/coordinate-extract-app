@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Box, CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from "@map-colonies/react-components";
-import { TextField, Button } from "@map-colonies/react-core";
+import { TextField, IconButton } from "@map-colonies/react-core";
 import { Geometry } from "geojson";
 import { isEmpty } from "lodash";
 import { PlaceCoordinateSVGIcon } from "../../../common/icons/PlaceCoordinateSVGIcon";
@@ -17,50 +17,61 @@ interface CesiumPOIProps {
   glowDependencies?: Record<string, unknown>;
 }
 
+const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?)),\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))/;
+const MAX_HEIGHT = 9999;
+
 export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
   const mapViewer = useCesiumMap();
-
-  const [longitude, setLongitude] = useState<number>();
-  const [latitude, setLatitude] = useState<number>();
   const [height, setHeight] = useState<number>();
-
-  const [inputValue, setInputValue] = useState<string>("");
   const [finishedFlying, setFinishedFlying] = useState(false);
   const [geometry, setGeometry] = useState<Geometry>();
+  const [searchText, setSearchText] = useState('');
 
   const [isNeedRefreshHeight, setIsNeedRefreshHeight] = useState(true);
 
-  const regex =
-    /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?)),\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))/;
+  const parsedCoords = useMemo(() => {
+    const matches = searchText.match(COORD_REGEX);
+    if (!matches) return;
 
-  const isValid =
-    typeof longitude === "number" &&
-    typeof latitude === "number";
+    return {
+      lon: parseFloat(matches[LONGITUDE_INDEX]),
+      lat: parseFloat(matches[LATITUDE_INDEX]),
+    };
+  }, [searchText]);
 
-  useEffect(() => {
+  // const isValidLonLat = typeof longitude === "number" && typeof latitude === "number" && regex.test(searchText);
+  // const isValidLonLat = parsedCoords !== undefined;
+
+  const handleClick = () => {
     setHeight(undefined);
-    if (isValid) {
-      setGeometry(coordinate2cartesian(longitude, latitude, 0));
-    } else {
+
+    if (!parsedCoords) {
       setGeometry(undefined);
-    }
-    setIsNeedRefreshHeight(false);
-  }, [longitude, latitude]);
-
-  useEffect(() => {
-    setIsNeedRefreshHeight(true);
-  }, [props.glowDependencies])
-
-  useEffect(() => {
-    if (!isValid || !mapViewer || !finishedFlying) {
       return;
     }
+
+    setGeometry(coordinate2cartesian(parsedCoords.lon, parsedCoords.lat, 0));
+    setIsNeedRefreshHeight(false);
+  }
+
+  useEffect(() => {
+    if (geometry) {
+      setIsNeedRefreshHeight(true);
+    }
+  }, [props.glowDependencies]);
+
+  useEffect(() => {
+    if (!parsedCoords || !mapViewer || !finishedFlying) {
+      return;
+    }
+
+    let cancelled = false;
 
     const scene = mapViewer.scene;
 
     const updateHeight = async () => {
-      const cartographic = CesiumCartographic.fromDegrees(longitude, latitude);
-      let height: number | undefined;
+      const cartographic = CesiumCartographic.fromDegrees(parsedCoords.lon, parsedCoords.lat);
+      let sampledHeight: number | undefined;
 
       const tileset = mapViewer.scene.primitives.get(1);
 
@@ -79,7 +90,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
         });
         // sampleHeightMostDetailed works on RENDERED materials, here we are waiting only on the 3DTileset to be fully loaded
         const updated = await scene.sampleHeightMostDetailed([cartographic]);
-        height = updated[0].height;
+        sampledHeight = updated[0].height;
       } else {
         // cesiumSampleTerrainMostDetailed makes EXTRA REQUEST if needed
         const updatedPositions = await cesiumSampleTerrainMostDetailed(
@@ -88,84 +99,67 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
         );
 
         if (!isEmpty(updatedPositions)) {
-          height = updatedPositions[0].height;
+          sampledHeight = updatedPositions[0].height;
         } else {
-          height = undefined;
+          sampledHeight = undefined;
         }
       }
 
-      if (height !== undefined) {
-        setHeight(height);
+      if (!cancelled && sampledHeight !== undefined) {
+        setHeight(sampledHeight);
       }
 
       setIsNeedRefreshHeight(false);
     };
 
     updateHeight();
-  }, [finishedFlying, mapViewer]);
+
+    return () => {
+      cancelled = true;
+    };
+
+  }, [parsedCoords, finishedFlying, mapViewer]);
 
   return (
     <Box id="CesiumPOI">
-      <Button
+      <IconButton
         className={`icon ${isNeedRefreshHeight ? 'blink' : ''}`}
         icon={
           <PlaceCoordinateSVGIcon color="currentColor" />
         }
         onClick={() => {
-          if (geometry) {
-            setGeometry({ ...geometry });
-          }
-          setIsNeedRefreshHeight(false);
+          handleClick();
         }}
       />
 
       <TextField
-        className="cesium-geocoder-input"
-        placeholder="lat, lon"
-        // helpText="Use ENTER to pin location"
-        value={inputValue}
+        className="input"
+        label="lat, lon"
+        invalid={searchText !== '' && !parsedCoords}
         onChange={(e: React.FormEvent<HTMLInputElement>): void => {
           const val = e.currentTarget.value;
-          setInputValue(val);
-
-          const matches = val.match(regex);
-
-          if (matches) {
-            const lat = parseFloat(matches[LATITUDE_INDEX]);
-            const lon = parseFloat(matches[LONGITUDE_INDEX]);
-
-            setLatitude(lat);
-            setLongitude(lon);
-          } else {
-            setLatitude(undefined);
-            setLongitude(undefined);
-          }
+          setSearchText(val);
         }}
       />
-      <Box className={`heightContainer ${isNeedRefreshHeight ? 'blink' : ''}`}>
 
-        <Box className="seperator"></Box>
+      <Box className="seperator" />
 
-        {isValid && height !== undefined && (
-          <Box className="height-badge">
-            {
-              <bdi>
-                {height.toFixed(2)}
-              </bdi>
-            } m
-          </Box>
-        )}
-      </Box>
+      <TextField
+        className={`input height withoutRipple ${isNeedRefreshHeight ? 'blink' : ''}`}
+        value={height !== undefined && height <= MAX_HEIGHT ? height.toFixed(2) : '-'}
+        label='(m)'
+        readOnly
+      />
 
-      {isValid && height !== undefined && (
+      {parsedCoords && height !== undefined && (
         <LocationMarker
-          longitude={longitude}
-          latitude={latitude}
+          longitude={parsedCoords.lon}
+          latitude={parsedCoords.lat}
           height={height}
         />
       )}
       {
-        isValid && geometry &&
+        parsedCoords && geometry &&
         <FlyTo
           geometry={geometry}
           setFinishedFlying={(val) => {
