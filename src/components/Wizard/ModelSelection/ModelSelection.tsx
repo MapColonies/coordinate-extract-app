@@ -96,6 +96,14 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
     finishedFlying
   ]);
 
+  const blinkDependencies = useMemo(() => {
+    return {
+      selectedItem: props.selectedItem,
+      isSelected: props.selectedItem?.isSelected,
+      isShown: props.selectedItem?.isShown
+    }
+  }, [props.selectedItem, props.selectedItem?.isSelected, props.selectedItem?.isShown])
+
   return (
     <Box className="modelSelection">
       <Box className="viewArea">
@@ -154,11 +162,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
                 setIsInProgress={(val) => {
                   setIsLoading(val);
                 }}
-                glowDependencies={{
-                  isShown: props.selectedItem?.isShown,
-                  selectedItem: props.selectedItem,
-                  isSelected: props.selectedItem?.isSelected,
-                }}
+                blinkDependencies={blinkDependencies}
               />
             }
             <Terrain />

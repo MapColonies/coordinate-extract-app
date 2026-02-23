@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Box, CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from "@map-colonies/react-components";
 import { TextField, IconButton } from "@map-colonies/react-core";
-import { Geometry } from "geojson";
 import { isEmpty } from "lodash";
 import { PlaceCoordinateSVGIcon } from "../../../common/icons/PlaceCoordinateSVGIcon";
 import { LocationMarker } from "../LocationMarker";
@@ -14,20 +13,22 @@ const LATITUDE_INDEX = 2;
 
 interface CesiumPOIProps {
   setIsInProgress?: (val: boolean) => void;
-  glowDependencies?: Record<string, unknown>;
+  blinkDependencies?: Record<string, unknown>;
 }
 
 const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?)),\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))/;
-const MAX_HEIGHT = 9999;
+const MAX_HEIGHT = 8850; // Everest
+const MIN_HEIGHT = -450; // Dead Sea
+const NOT_AVAILABLE_TEXT = 'N/A';
 
 export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
   const mapViewer = useCesiumMap();
   const [height, setHeight] = useState<number>();
   const [finishedFlying, setFinishedFlying] = useState(false);
-  const [geometry, setGeometry] = useState<Geometry>();
+  const [flyToGeometry, setFlyToGeometry] = useState<boolean>(false);
   const [searchText, setSearchText] = useState('');
 
-  const [isNeedRefreshHeight, setIsNeedRefreshHeight] = useState(true);
+  const [isNeedRefreshHeight, setIsNeedRefreshHeight] = useState(false);
 
   const parsedCoords = useMemo(() => {
     const matches = searchText.match(COORD_REGEX);
@@ -46,19 +47,26 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     setHeight(undefined);
 
     if (!parsedCoords) {
-      setGeometry(undefined);
       return;
     }
 
-    setGeometry(coordinate2cartesian(parsedCoords.lon, parsedCoords.lat, 0));
+    setFlyToGeometry(true);
     setIsNeedRefreshHeight(false);
-  }
+  };
 
   useEffect(() => {
-    if (geometry) {
+    setHeight(undefined);
+
+    if (searchText === '') {
+      setIsNeedRefreshHeight(false);
+    }
+  }, [searchText]);
+
+  useEffect(() => {
+    if (parsedCoords) {
       setIsNeedRefreshHeight(true);
     }
-  }, [props.glowDependencies]);
+  }, [props.blinkDependencies]);
 
   useEffect(() => {
     if (!parsedCoords || !mapViewer || !finishedFlying) {
@@ -73,6 +81,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       const cartographic = CesiumCartographic.fromDegrees(parsedCoords.lon, parsedCoords.lat);
       let sampledHeight: number | undefined;
 
+      // TODO: ONLY ONE model on scene
       const tileset = mapViewer.scene.primitives.get(1);
 
       if (tileset) {
@@ -82,6 +91,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
         // Extra wait until refinement stabilizes
         await new Promise(resolve => {
           scene.postRender.addEventListener(function check() {
+            // TODO: Private access
             if (!tileset._statistics.numberOfPendingRequests) {
               scene.postRender.removeEventListener(check);
               resolve(0);
@@ -108,8 +118,6 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       if (!cancelled && sampledHeight !== undefined) {
         setHeight(sampledHeight);
       }
-
-      setIsNeedRefreshHeight(false);
     };
 
     updateHeight();
@@ -118,7 +126,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       cancelled = true;
     };
 
-  }, [parsedCoords, finishedFlying, mapViewer]);
+  }, [finishedFlying, mapViewer]);
 
   return (
     <Box id="CesiumPOI">
@@ -140,14 +148,20 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
           const val = e.currentTarget.value;
           setSearchText(val);
         }}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          if (e.key === 'Enter') {
+            handleClick();
+          }
+        }}
       />
 
       <Box className="seperator" />
 
       <TextField
         className={`input height withoutRipple ${isNeedRefreshHeight ? 'blink' : ''}`}
-        value={height !== undefined && height <= MAX_HEIGHT ? height.toFixed(2) : '-'}
+        value={height !== undefined && height <= MAX_HEIGHT && height >= MIN_HEIGHT ? height.toFixed(2) : NOT_AVAILABLE_TEXT}
         label='(m)'
+        dir="ltr"
         readOnly
       />
 
@@ -159,12 +173,13 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
         />
       )}
       {
-        parsedCoords && geometry &&
+        parsedCoords && flyToGeometry &&
         <FlyTo
-          geometry={geometry}
-          setFinishedFlying={(val) => {
+          geometry={coordinate2cartesian(parsedCoords.lon, parsedCoords.lat, 0)}
+          onFinishedFlying={(val) => {
             props.setIsInProgress?.(!val);
             setFinishedFlying(val);
+            setFlyToGeometry(false);
           }}
         />
       }

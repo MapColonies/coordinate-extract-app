@@ -68,7 +68,7 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
         <FlyTo
           key={props.id}
           geometry={props.data}
-          setFinishedFlying={(val) => {
+          onFinishedFlying={(val) => {
             props.setIsInProgress?.(!val);
           }}
         />
