@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CesiumCartographic, cesiumSampleTerrainMostDetailed, CesiumViewer, useCesiumMap } from '@map-colonies/react-components';
+import { CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from '@map-colonies/react-components';
 import { isEmpty } from 'lodash';
 
 interface UseCesiumHeightParams {
