@@ -112,7 +112,7 @@ env:
   defaultTerrainProviderUrl: ''
   csw3DUrl: ''
   extractableManagerUrl: ''
-  showPOITool: false
+  showPOITool: true
 route:
   enabled: true
   annotations:
