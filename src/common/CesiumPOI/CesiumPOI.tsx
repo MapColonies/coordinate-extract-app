@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Box, CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from '@map-colonies/react-components';
+import { Box } from '@map-colonies/react-components';
 import { TextField, IconButton } from '@map-colonies/react-core';
-import { isEmpty } from 'lodash';
-import { CoordinateSVGIcon } from '../../../common/icons/CoordinateSVGIcon';
-import { lonLatToGeoJsonPoint, FlyTo } from '../FlyTo';
-import { LocationMarker } from '../LocationMarker';
+import { CoordinateSVGIcon } from '../icons/CoordinateSVGIcon';
+import { lonLatToGeoJsonPoint, FlyTo } from '../../utils/Cesium/FlyTo';
+import { LocationMarker } from '../../utils/Cesium/LocationMarker';
+import { useCesiumHeight } from '../../utils/Cesium/useCesiumHeight.hook';
 
 import './CesiumPOI.css';
 
@@ -21,8 +21,6 @@ interface CesiumPOIProps {
 }
 
 export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
-  const mapViewer = useCesiumMap();
-  const [height, setHeight] = useState<number>();
   const [finishedFlying, setFinishedFlying] = useState(false);
   const [flyToGeometry, setFlyToGeometry] = useState<boolean>(false);
   const [searchText, setSearchText] = useState('');
@@ -41,19 +39,14 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     };
   }, [searchText]);
 
-  const handleClick = () => {
-    setHeight(undefined);
-
-    if (!parsedCoords) {
-      return;
-    }
-
-    setFlyToGeometry(true);
-    setIsNeedRefreshHeight(false);
-  };
+  const { height, resetHeight } = useCesiumHeight({
+    lon: parsedCoords?.lon,
+    lat: parsedCoords?.lat,
+    enabled: finishedFlying,
+  });
 
   useEffect(() => {
-    setHeight(undefined);
+    resetHeight();
 
     if (searchText === '') {
       setIsNeedRefreshHeight(false);
@@ -66,65 +59,16 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     }
   }, [props.blinkDependencies]);
 
-  useEffect(() => {
-    if (!parsedCoords || !mapViewer || !finishedFlying) {
+  const handleClick = () => {
+    resetHeight();
+
+    if (!parsedCoords) {
       return;
     }
 
-    let cancelled = false;
-
-    const scene = mapViewer.scene;
-
-    const updateHeight = async () => {
-      const cartographic = CesiumCartographic.fromDegrees(parsedCoords.lon, parsedCoords.lat);
-      let sampledHeight: number | undefined;
-
-      // TODO: ONLY ONE model on scene
-      const tileset = mapViewer.scene.primitives.get(1);
-
-      if (tileset) {
-        // Wait for tileset to finish loading/refining
-        await tileset.readyPromise;
-
-        // Extra wait until refinement stabilizes
-        await new Promise(resolve => {
-          scene.postRender.addEventListener(function check() {
-            // TODO: Private access
-            if (!tileset._statistics.numberOfPendingRequests) {
-              scene.postRender.removeEventListener(check);
-              resolve(0);
-            }
-          });
-        });
-        // sampleHeightMostDetailed works on RENDERED materials, here we are waiting only on the 3DTileset to be fully loaded
-        const updated = await scene.sampleHeightMostDetailed([cartographic]);
-        sampledHeight = updated[0].height;
-      } else {
-        // cesiumSampleTerrainMostDetailed makes EXTRA REQUEST if needed
-        const updatedPositions = await cesiumSampleTerrainMostDetailed(
-          mapViewer.terrainProvider,
-          [cartographic]
-        );
-
-        if (!isEmpty(updatedPositions)) {
-          sampledHeight = updatedPositions[0].height;
-        } else {
-          sampledHeight = undefined;
-        }
-      }
-
-      if (!cancelled && sampledHeight !== undefined) {
-        setHeight(sampledHeight);
-      }
-    };
-
-    updateHeight();
-
-    return () => {
-      cancelled = true;
-    };
-
-  }, [finishedFlying, mapViewer]);
+    setFlyToGeometry(true);
+    setIsNeedRefreshHeight(false);
+  };
 
   return (
     <Box id="CesiumPOI">

@@ -9,7 +9,7 @@ import {
 } from '@map-colonies/react-components';
 import { Curtain } from '../../../common/Curtain/curtain';
 import { fetchCatalog } from '../../../common/services/CatalogService';
-import { CesiumPOI } from '../../../utils/Cesium/CesiumPOI/CesiumPOI';
+import { CesiumPOI } from '../../../common/CesiumPOI/CesiumPOI';
 import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
 import appConfig from '../../../utils/Config';
 import { Terrain } from '../../common/Terrain/Terrain';
