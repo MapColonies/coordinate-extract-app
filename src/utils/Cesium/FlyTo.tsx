@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { CesiumCartesian3, CesiumCartographic, CesiumColor, CesiumMath, CesiumRectangle, useCesiumMap } from '@map-colonies/react-components';
+import { CesiumColor, CesiumRectangle, useCesiumMap } from '@map-colonies/react-components';
 import bbox from '@turf/bbox';
 import { Geometry } from 'geojson';
 
@@ -12,30 +12,14 @@ interface FlyToProps {
   animation?: boolean;
 }
 
-export const cartesian2geometry = (cartesian: CesiumCartesian3): Geometry => {
-  const cartographic = CesiumCartographic.fromCartesian(cartesian);
-  const longitude = CesiumMath.toDegrees(cartographic.longitude);
-  const latitude = CesiumMath.toDegrees(cartographic.latitude);
-  const height = cartographic.height;
-
-  return coordinate2cartesian(longitude, latitude, height);
-}
-
-export const coordinate2cartesian = (longitude: number, latitude: number, height: number): Geometry => {
+export const lonLatToGeoJsonPoint = (longitude: number, latitude: number, height: number): Geometry => {
   return {
     type: 'Point',
     coordinates: [longitude, latitude, height]
   };
 }
 
-export const lonLat2cartesian = (longitude: number, latitude: number): Geometry => {
-  return {
-    type: 'Point',
-    coordinates: [longitude, latitude]
-  };
-}
-
-export const generateLayerRectangle = (geometry: Geometry): CesiumRectangle => {
+export const generateRectangle = (geometry: Geometry): CesiumRectangle => {
   return CesiumRectangle.fromDegrees(...bbox(geometry)) as CesiumRectangle;
 };
 
@@ -44,7 +28,7 @@ export const FlyTo: React.FC<FlyToProps> = ({ geometry, onFinishedFlying, animat
   let rect;
 
   useEffect(() => {
-    rect = generateLayerRectangle(geometry);
+    rect = generateRectangle(geometry);
 
     const rectangle = mapViewer.entities.add({
       rectangle: {

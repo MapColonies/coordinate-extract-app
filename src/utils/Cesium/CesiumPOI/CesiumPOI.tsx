@@ -4,7 +4,7 @@ import { TextField, IconButton } from "@map-colonies/react-core";
 import { isEmpty } from "lodash";
 import { PlaceCoordinateSVGIcon } from "../../../common/icons/PlaceCoordinateSVGIcon";
 import { LocationMarker } from "../LocationMarker";
-import { coordinate2cartesian, FlyTo } from "../FlyTo";
+import { lonLatToGeoJsonPoint, FlyTo } from "../FlyTo";
 
 import "./CesiumPOI.css";
 
@@ -16,7 +16,7 @@ interface CesiumPOIProps {
   blinkDependencies?: Record<string, unknown>;
 }
 
-const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?))\s*,\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))/;
+const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?))\s*,\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))$/;
 const MAX_HEIGHT = 8850; // Everest
 const MIN_HEIGHT = -450; // Dead Sea
 const NOT_AVAILABLE_TEXT = 'N/A';
@@ -176,7 +176,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       {
         parsedCoords && flyToGeometry &&
         <FlyTo
-          geometry={coordinate2cartesian(parsedCoords.lon, parsedCoords.lat, 0)}
+          geometry={lonLatToGeoJsonPoint(parsedCoords.lon, parsedCoords.lat, 0)}
           onFinishedFlying={(val) => {
             props.setIsInProgress?.(!val);
             setFinishedFlying(val);
