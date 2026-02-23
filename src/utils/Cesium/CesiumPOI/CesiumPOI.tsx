@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Box, CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from '@map-colonies/react-components';
 import { TextField, IconButton } from '@map-colonies/react-core';
 import { isEmpty } from 'lodash';
-import { CoordinateSVGIcon } from '../../../common/icons/PlaceCoordinateSVGIcon';
+import { CoordinateSVGIcon } from '../../../common/icons/CoordinateSVGIcon';
 import { lonLatToGeoJsonPoint, FlyTo } from '../FlyTo';
 import { LocationMarker } from '../LocationMarker';
 
