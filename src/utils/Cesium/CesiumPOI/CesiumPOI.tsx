@@ -8,7 +8,7 @@ import { coordinate2cartesian, FlyTo } from "../FlyTo";
 
 import "./CesiumPOI.css";
 
-const LONGITUDE_INDEX = 0;
+const LONGITUDE_INDEX = 1;
 const LATITUDE_INDEX = 2;
 
 interface CesiumPOIProps {
@@ -16,7 +16,7 @@ interface CesiumPOIProps {
   blinkDependencies?: Record<string, unknown>;
 }
 
-const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?)),\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))/;
+const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?))\s*,\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))/;
 const MAX_HEIGHT = 8850; // Everest
 const MIN_HEIGHT = -450; // Dead Sea
 const NOT_AVAILABLE_TEXT = 'N/A';
@@ -31,17 +31,17 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
   const [isNeedRefreshHeight, setIsNeedRefreshHeight] = useState(false);
 
   const parsedCoords = useMemo(() => {
-    const matches = searchText.match(COORD_REGEX);
-    if (!matches) return;
+    const trimmed = searchText.trim();
+    const matches = trimmed.match(COORD_REGEX);
+    if (!matches) {
+      return;
+    }
 
     return {
       lon: parseFloat(matches[LONGITUDE_INDEX]),
       lat: parseFloat(matches[LATITUDE_INDEX]),
     };
   }, [searchText]);
-
-  // const isValidLonLat = typeof longitude === "number" && typeof latitude === "number" && regex.test(searchText);
-  // const isValidLonLat = parsedCoords !== undefined;
 
   const handleClick = () => {
     setHeight(undefined);
@@ -133,7 +133,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       <IconButton
         className={`icon ${isNeedRefreshHeight ? 'blink' : ''}`}
         icon={
-          <PlaceCoordinateSVGIcon color="currentColor" />
+          <PlaceCoordinateSVGIcon color="var(--mdc-theme-on-surface)" />
         }
         onClick={() => {
           handleClick();
@@ -142,7 +142,8 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
 
       <TextField
         className="input"
-        label="lat, lon"
+        label="lon, lat"
+        dir="ltr"
         invalid={searchText !== '' && !parsedCoords}
         onChange={(e: React.FormEvent<HTMLInputElement>): void => {
           const val = e.currentTarget.value;

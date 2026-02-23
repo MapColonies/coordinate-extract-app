@@ -3,10 +3,9 @@
   position: absolute;
   top: 15px;
   right: 20px;
-  /* gap: 5px; */
   background-color: rgba(38, 38, 38, 0.75);
-  width: 280px;
-  border-radius: 15px;
+  width: 288px;
+  border-radius: var(--mdc-theme-gc-border-radius);
 }
 
 #CesiumPOI .icon {
@@ -17,7 +16,9 @@
 
 #CesiumPOI .input {
   border: unset;
-  padding: unset;
+  padding-left: 5px;
+  padding-right: 4px;
+  border-radius: unset;
 }
 
 #CesiumPOI .withoutRipple.mdc-text-field--filled .mdc-line-ripple::after {
@@ -33,7 +34,7 @@
 
 #CesiumPOI .height {
   align-self: center;
-  width: 80px
+  width: 88px
 }
 
 #CesiumPOI .input.height input {
