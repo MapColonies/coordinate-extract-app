@@ -23,8 +23,12 @@ export const loginAPI = async (
         data: {
           username,
           password
+        },
+        headers: {
+          'Content-Type': 'application/json'
         }
       },
+      false,
       false
     );
     return response as unknown as LoginResponse;

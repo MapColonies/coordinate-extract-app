@@ -68,13 +68,14 @@ export const execute = async (
   url: string,
   method: 'GET' | 'POST' | 'DELETE',
   data?: Record<string, unknown>,
+  injectToken = true,
   submitErrorToSnackbarQueue = true
 ): Promise<Record<string, unknown>[] | string | undefined> => {
   try {
     const response = await requestExecutor(
       {
         url,
-        injectToken: true
+        injectToken
       },
       method,
       {

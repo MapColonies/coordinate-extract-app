@@ -31,7 +31,8 @@ export const extractableCreateAPI = async (
           authorizedBy,
           data
         }
-      }
+      },
+      false // TODO: REMOVE when token handling is implemented
     );
     return response as unknown as ExtractableRecord;
   } catch (error) {
@@ -62,7 +63,8 @@ export const extractableDeleteAPI = async (
           authorizedBy,
           data
         }
-      }
+      },
+      false // TODO: REMOVE when token handling is implemented
     );
     if (
       response &&

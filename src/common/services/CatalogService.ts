@@ -18,8 +18,9 @@ export const fetchCatalog = async (setLoading: loadingUpdater) => {
     );
     parsed = parse3DQueryResults(records as string) as Record<string, unknown>[];
     extractables = await execute(
-      `${appConfig.extractableManagerUrl}/records`,
-      'GET'
+      `${appConfig.extractableManagerUrl}/records?startPosition=1&maxRecords=1000`,
+      'GET',
+      undefined, false // TODO: REMOVE when token handling is implemented
     );
   } catch (error) {
     console.error('Failed to fetch catalog/extractable data:', error);
