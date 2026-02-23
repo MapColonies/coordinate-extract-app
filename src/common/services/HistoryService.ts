@@ -20,7 +20,8 @@ export const historyAPI = async (
     setLoading(true);
     const response = await execute(
       `${appConfig.extractableManagerUrl}/audit/${recordName}`,
-      'GET'
+      'GET',
+      undefined, false // TODO: REMOVE when token handling is implemented
     );
     return response as unknown as HistoryRecord[];
   } catch (error) {
