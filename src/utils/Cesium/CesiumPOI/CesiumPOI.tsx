@@ -1,25 +1,24 @@
-import { useEffect, useMemo, useState } from "react";
-import { Box, CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from "@map-colonies/react-components";
-import { TextField, IconButton } from "@map-colonies/react-core";
-import { isEmpty } from "lodash";
-import { PlaceCoordinateSVGIcon } from "../../../common/icons/PlaceCoordinateSVGIcon";
-import { LocationMarker } from "../LocationMarker";
-import { lonLatToGeoJsonPoint, FlyTo } from "../FlyTo";
+import { useEffect, useMemo, useState } from 'react';
+import { Box, CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from '@map-colonies/react-components';
+import { TextField, IconButton } from '@map-colonies/react-core';
+import { isEmpty } from 'lodash';
+import { CoordinateSVGIcon } from '../../../common/icons/PlaceCoordinateSVGIcon';
+import { lonLatToGeoJsonPoint, FlyTo } from '../FlyTo';
+import { LocationMarker } from '../LocationMarker';
 
-import "./CesiumPOI.css";
+import './CesiumPOI.css';
 
 const LONGITUDE_INDEX = 1;
 const LATITUDE_INDEX = 2;
+const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?))\s*,\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))$/;
+const MAX_HEIGHT = 8850; // Everest
+const MIN_HEIGHT = -450; // Dead Sea
+const NOT_AVAILABLE_TEXT = 'N/A';
 
 interface CesiumPOIProps {
   setIsInProgress?: (val: boolean) => void;
   blinkDependencies?: Record<string, unknown>;
 }
-
-const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?))\s*,\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))$/;
-const MAX_HEIGHT = 8850; // Everest
-const MIN_HEIGHT = -450; // Dead Sea
-const NOT_AVAILABLE_TEXT = 'N/A';
 
 export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
   const mapViewer = useCesiumMap();
@@ -27,7 +26,6 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
   const [finishedFlying, setFinishedFlying] = useState(false);
   const [flyToGeometry, setFlyToGeometry] = useState<boolean>(false);
   const [searchText, setSearchText] = useState('');
-
   const [isNeedRefreshHeight, setIsNeedRefreshHeight] = useState(false);
 
   const parsedCoords = useMemo(() => {
@@ -133,7 +131,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       <IconButton
         className={`icon ${isNeedRefreshHeight ? 'blink' : ''}`}
         icon={
-          <PlaceCoordinateSVGIcon color="var(--mdc-theme-on-surface)" />
+          <CoordinateSVGIcon color="var(--mdc-theme-on-surface)" />
         }
         onClick={() => {
           handleClick();
