@@ -1,7 +1,7 @@
 import React from 'react';
 import { SVGIconProps } from './SVGIconProps';
 
-export const PlaceCoordinateSVGIcon: React.FC<SVGIconProps> = ({ color, className }) => {
+export const CoordinateSVGIcon: React.FC<SVGIconProps> = ({ color, className }) => {
   return (
     <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
       <circle cx="12" cy="12" r="9" stroke={color} strokeWidth="1.4" />
