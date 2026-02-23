@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.11](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.10...v1.1.11) (2026-02-23)
+
+
+### Bug Fixes
+
+* create delete ([d537c09](https://github.com/MapColonies/coordinate-extract-app/commit/d537c096405b58dfdcb60a6e3f7b02432a59f5c1))
+* create delete ([f227b3a](https://github.com/MapColonies/coordinate-extract-app/commit/f227b3a1ca290451e21825fefaef479ebb73ca27))
+* work with and without token ([23cb74f](https://github.com/MapColonies/coordinate-extract-app/commit/23cb74f5d77623215f35c805a7be1666b7222843))
+* work with and without token ([b393fc1](https://github.com/MapColonies/coordinate-extract-app/commit/b393fc10ec578ff3e07b045a52470fada7686662))
+
 ## [1.1.10](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.9...v1.1.10) (2026-02-18)
 
 
