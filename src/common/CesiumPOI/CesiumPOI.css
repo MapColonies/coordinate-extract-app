@@ -22,7 +22,7 @@
 }
 
 #CesiumPOI .withoutRipple.mdc-text-field--filled .mdc-line-ripple::after {
-  border-bottom-color: transparent !important;
+  border-bottom-color: transparent;
 }
 
 #CesiumPOI .seperator {
