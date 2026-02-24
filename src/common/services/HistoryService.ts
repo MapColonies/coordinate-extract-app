@@ -19,8 +19,7 @@ export const historyAPI = async (
     setLoading(true);
     const response = await execute(
       `${appConfig.extractableManagerUrl}/audit/${recordName}`,
-      'GET',
-      undefined, false // TODO: REMOVE when token handling is implemented
+      'GET'
     );
     const payload = response as { records?: HistoryRecord[] } | undefined;
     const recordsList = payload?.records;

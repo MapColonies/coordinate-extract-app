@@ -27,7 +27,7 @@ export const loginAPI = async (
           'Content-Type': 'application/json'
         }
       },
-      false,
+      true,
       false
     );
     return response as unknown as LoginResponse;
