@@ -106,7 +106,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       <Box className="seperator" />
 
       <TextField
-        className={`input height withoutRipple ${isNeedRefreshHeight ? 'blink' : ''}`}
+        className='input height withoutRipple'
         value={height !== undefined && height <= MAX_HEIGHT && height >= MIN_HEIGHT ? height.toFixed(2) : NOT_AVAILABLE_TEXT}
         label={<FormattedMessage id="panel.poi.label.meter" />}
         dir="ltr"

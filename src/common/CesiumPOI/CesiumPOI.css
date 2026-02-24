@@ -46,7 +46,7 @@
 }
 
 #CesiumPOI .blink {
-  animation: blink 1.5s ease-in-out infinite alternate;
+  animation: blink 0.75s ease-in-out infinite alternate;
 }
 
 @keyframes blink {
