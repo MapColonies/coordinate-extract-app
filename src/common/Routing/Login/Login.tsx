@@ -76,6 +76,7 @@ const Login: React.FC = () => {
             }
           }}
           value={userName}
+          autoComplete="off"
         />
         <TextField
           className="loginControl"
