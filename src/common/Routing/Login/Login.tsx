@@ -29,7 +29,7 @@ const Login: React.FC = () => {
       if (loginData?.isValid !== true) {
         let message = loginData?.message || 'Login failed';
         if(loginData?.isValid === false){
-          message = intl.formatMessage({ id: `err.codecode.${loginData?.code}` })
+          message = intl.formatMessage({ id: `err.code.${loginData?.code}` })
         }
         throw new Error(message);
       }
