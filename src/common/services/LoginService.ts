@@ -1,4 +1,3 @@
-import { mockLogin } from '../../components/common/MockData';
 import appConfig from '../../utils/Config';
 import { loadingUpdater } from '../../utils/loadingUpdater';
 import { execute } from '../../utils/requestHandler';
@@ -36,7 +35,5 @@ export const loginAPI = async (
     console.error('Failed to perform POST login:', error);
   } finally {
     setLoading(false);
-    // TODO: REMOVE MOCK
-    return mockLogin;
   }
 };

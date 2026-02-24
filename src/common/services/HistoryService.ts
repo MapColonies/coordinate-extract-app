@@ -1,4 +1,3 @@
-import { mockHistory } from '../../components/common/MockData';
 import appConfig from '../../utils/Config';
 import { loadingUpdater } from '../../utils/loadingUpdater';
 import { execute } from '../../utils/requestHandler';
@@ -23,12 +22,13 @@ export const historyAPI = async (
       'GET',
       undefined, false // TODO: REMOVE when token handling is implemented
     );
-    return response as unknown as HistoryRecord[];
+    const payload = response as { records?: HistoryRecord[] } | undefined;
+    const recordsList = payload?.records;
+    const historyRecords: HistoryRecord[] = Array.isArray(recordsList) ? recordsList : [];
+    return historyRecords;
   } catch (error) {
     console.error('Failed to perform GET history:', error);
   } finally {
     setLoading(false);
-    // TODO: REMOVE MOCK
-    return mockHistory;
   }
 };

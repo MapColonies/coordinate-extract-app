@@ -26,7 +26,7 @@ const Login: React.FC = () => {
   const handleLogin = async () => {
     try {
       const loginData = await loginAPI(userName as string, userPassword as string, setIsLoading);
-      if (loginData?.code !== 'SUCCESS') {
+      if (loginData?.isValid !== true) {
         throw new Error(loginData?.message || 'Login failed');
       }
       login({ username: userName as string });
