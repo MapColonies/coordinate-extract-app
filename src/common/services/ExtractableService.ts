@@ -66,15 +66,7 @@ export const extractableDeleteAPI = async (
       },
       false // TODO: REMOVE when token handling is implemented
     );
-    if (
-      response &&
-      typeof response === 'object' &&
-      'status' in response &&
-      (response as { status?: number }).status === 204
-    ) {
-      return 'OK';
-    }
-    return undefined;
+    return response as string;
   } catch (error) {
     console.error('Failed to DELETE extractable record:', error);
     return undefined;
