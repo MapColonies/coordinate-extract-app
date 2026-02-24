@@ -1,8 +1,8 @@
 apiVersion: v2
 description: A Helm chart for Coordinate Extract App
 name: coordinate-extract-app
-version: 1.1.11
-appVersion: 1.1.11
+version: 1.1.12
+appVersion: 1.1.12
 dependencies:
   - name: helm-common
     version: 1.0.1

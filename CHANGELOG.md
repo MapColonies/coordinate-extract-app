@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.12](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.11...v1.1.12) (2026-02-24)
+
+
+### Bug Fixes
+
+* autoComplete ([4fa6080](https://github.com/MapColonies/coordinate-extract-app/commit/4fa60805ee8dcc28ec1688b54dc711b7281972eb))
+
 ## [1.1.11](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.10...v1.1.11) (2026-02-24)
 
 
