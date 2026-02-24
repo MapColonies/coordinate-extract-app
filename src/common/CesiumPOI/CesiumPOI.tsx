@@ -8,8 +8,8 @@ import { useCesiumHeight } from '../../utils/Cesium/useCesiumHeight.hook';
 
 import './CesiumPOI.css';
 
-const LONGITUDE_INDEX = 1;
-const LATITUDE_INDEX = 2;
+const LONGITUDE_INDEX = 2;
+const LATITUDE_INDEX = 1;
 const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?))\s*,\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))$/;
 const MAX_HEIGHT = 8850; // Everest
 const MIN_HEIGHT = -450; // Dead Sea
@@ -34,8 +34,8 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     }
 
     return {
-      lon: parseFloat(matches[LONGITUDE_INDEX]),
       lat: parseFloat(matches[LATITUDE_INDEX]),
+      lon: parseFloat(matches[LONGITUDE_INDEX])
     };
   }, [searchText]);
 
@@ -87,7 +87,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
 
       <TextField
         className="input"
-        label="lon, lat"
+        label="lat, lon"
         dir="ltr"
         invalid={searchText !== '' && !parsedCoords}
         onChange={(e: React.FormEvent<HTMLInputElement>): void => {
@@ -113,8 +113,8 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
 
       {parsedCoords && height !== undefined && (
         <LocationMarker
-          longitude={parsedCoords.lon}
           latitude={parsedCoords.lat}
+          longitude={parsedCoords.lon}
           height={height}
         />
       )}

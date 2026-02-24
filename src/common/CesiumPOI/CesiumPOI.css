@@ -41,6 +41,10 @@
   text-align: center;
 }
 
+#CesiumPOI .mdc-floating-label {
+  opacity: unset;
+}
+
 #CesiumPOI .blink {
   animation: glow 1.5s ease-in-out infinite alternate;
 }
