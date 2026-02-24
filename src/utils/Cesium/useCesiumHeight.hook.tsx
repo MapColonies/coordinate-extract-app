@@ -2,21 +2,21 @@ import { useEffect, useState } from 'react';
 import { CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from '@map-colonies/react-components';
 import { isEmpty } from 'lodash';
 
-interface UseCesiumHeightParams {
+interface CesiumPOIHeightParams {
   lon?: number;
   lat?: number;
-  enabled?: boolean;
-  setEnabled?: (val: boolean) => void;
+  recalculate?: boolean;
+  setRecalculate?: (val: boolean) => void;
 }
 
-export const useCesiumHeight = (params: UseCesiumHeightParams) => {
+export const useCesiumHeight = (params: CesiumPOIHeightParams) => {
   const mapViewer = useCesiumMap();
   const [height, setHeight] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     const { lon, lat } = params;
 
-    if (!mapViewer || lon === undefined || lat === undefined || !params.enabled) {
+    if (!mapViewer || lon === undefined || lat === undefined || !params.recalculate) {
       return;
     }
 
@@ -61,7 +61,7 @@ export const useCesiumHeight = (params: UseCesiumHeightParams) => {
 
       if (!cancelled && sampledHeight !== undefined) {
         setHeight(sampledHeight);
-        params.setEnabled?.(false);
+        params.setRecalculate?.(false);
       }
     };
 
@@ -70,7 +70,7 @@ export const useCesiumHeight = (params: UseCesiumHeightParams) => {
     return () => {
       cancelled = true;
     };
-  }, [mapViewer, params.lon, params.lat, params.enabled]);
+  }, [mapViewer, params.lon, params.lat, params.recalculate]);
 
   return {
     height,

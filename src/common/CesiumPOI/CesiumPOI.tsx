@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Box } from '@map-colonies/react-components';
 import { TextField, IconButton } from '@map-colonies/react-core';
 import { CoordinateSVGIcon } from '../icons/CoordinateSVGIcon';
@@ -42,8 +43,8 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
   const { height, resetHeight } = useCesiumHeight({
     lon: parsedCoords?.lon,
     lat: parsedCoords?.lat,
-    enabled: finishedFlying,
-    setEnabled: (val) => {
+    recalculate: finishedFlying,
+    setRecalculate: (val) => {
       setFinishedFlying(val);
     }
   });
@@ -87,7 +88,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
 
       <TextField
         className="input"
-        label="lat, lon"
+        label={<FormattedMessage id="panel.poi.label.latLon" />}
         dir="ltr"
         invalid={searchText !== '' && !parsedCoords}
         onChange={(e: React.FormEvent<HTMLInputElement>): void => {
@@ -106,7 +107,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       <TextField
         className={`input height withoutRipple ${isNeedRefreshHeight ? 'blink' : ''}`}
         value={height !== undefined && height <= MAX_HEIGHT && height >= MIN_HEIGHT ? height.toFixed(2) : NOT_AVAILABLE_TEXT}
-        label='(m)'
+        label={<FormattedMessage id="panel.poi.label.meter" />}
         dir="ltr"
         readOnly
       />
