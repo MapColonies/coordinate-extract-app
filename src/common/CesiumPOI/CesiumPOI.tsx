@@ -61,6 +61,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     if (parsedCoords) {
       setIsNeedRefreshHeight(true);
     }
+    resetHeight();
   }, [props.blinkDependencies]);
 
   const handleClick = () => {
