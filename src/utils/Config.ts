@@ -12,6 +12,7 @@ const BASE_MAPS = JSON.parse((window as any)._env_.BASE_MAPS);
 const DEFAULT_TERRAIN_PROVIDER_URL = (window as any)._env_.DEFAULT_TERRAIN_PROVIDER_URL;
 const CSW_3D_URL = (window as any)._env_.CSW_3D_URL;
 const EXTRACTABLE_MANAGER_URL = (window as any)._env_.EXTRACTABLE_MANAGER_URL;
+const SHOW_POI_TOOL = (window as any)._env_.SHOW_POI_TOOL;
 
 const enrichBaseMaps = (baseMaps: IBaseMaps): IBaseMaps => {
   return {
@@ -46,6 +47,7 @@ class Config {
   public defaultTerrainProviderUrl = DEFAULT_TERRAIN_PROVIDER_URL;
   public csw3dUrl = CSW_3D_URL;
   public extractableManagerUrl = EXTRACTABLE_MANAGER_URL;
+  public showPOITool = SHOW_POI_TOOL;
 }
 
 const appConfig = new Config(); // Singleton

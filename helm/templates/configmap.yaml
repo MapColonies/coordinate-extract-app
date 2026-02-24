@@ -21,6 +21,7 @@
   CONFIGURATION_DEFAULT_TERRAIN_PROVIDER_URL: {{ quote .Values.env.defaultTerrainProviderUrl }}
   CONFIGURATION_CSW_3D_URL: {{ quote .Values.env.csw3DUrl }}
   CONFIGURATION_EXTRACTABLE_MANAGER_URL: {{ quote .Values.env.extractableManagerUrl }}
+  CONFIGURATION_SHOW_POI_TOOL: {{ quote .Values.env.showPOITool }}
 {{- end }}
 
 {{ include "mc-chart.configmap" (dict "MAIN_OBJECT_BLOCK" $MAIN_OBJECT_BLOCK "COMPONENT_NAME" $COMPONENT_NAME "DATA" $DATA "WITH_TELEMETRY_TRACING" false "WITH_TELEMETRY_METRICS" false "context" .)}}

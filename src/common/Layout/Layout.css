@@ -72,3 +72,8 @@
 .dark-theme .red {
   color: var(--mdc-theme-gc-error);
 }
+
+.cesium-sceneModePicker-wrapper .cesium-toolbar-button {
+  pointer-events: none;
+  opacity: 0.6;
+}
