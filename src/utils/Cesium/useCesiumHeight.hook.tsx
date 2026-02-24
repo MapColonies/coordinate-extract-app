@@ -31,7 +31,6 @@ export const useCesiumHeight = (params: UseCesiumHeightParams) => {
       const tileset = scene.primitives.get(1);
 
       if (tileset) {
-        // Wait for tileset to finish loading/refining
         await tileset.readyPromise;
 
         // Extra wait until refinement stabilizes
