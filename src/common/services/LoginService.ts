@@ -1,11 +1,12 @@
+import { get } from "lodash";
 import appConfig from '../../utils/Config';
 import { loadingUpdater } from '../../utils/loadingUpdater';
 import { execute } from '../../utils/requestHandler';
 
 interface LoginResponse {
-  isValid: boolean;
   message: string;
-  code: string;
+  isValid?: boolean;
+  code?: string;
 }
 
 export const loginAPI = async (
@@ -31,8 +32,14 @@ export const loginAPI = async (
       false
     );
     return response as unknown as LoginResponse;
-  } catch (error) {
-    console.error('Failed to perform POST login:', error);
+  } catch (error: any) {
+    const respData = get(error, 'response.data');
+    if (respData) {
+      return respData;
+    } else {
+      console.error('Failed to perform POST login:', error);
+      return {message: error.message};
+    }
   } finally {
     setLoading(false);
   }

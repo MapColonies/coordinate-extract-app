@@ -17,20 +17,20 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
   const { locale } = useI18n();
 
   useEffect(() => {
-    setIsNextBtnDisabled(false);
+    setIsNextBtnDisabled(true);
     (async () => {
       try {
         const historyData = await historyAPI(selectedItem?.[IDENTIFIER_FIELD] as string, setIsLoading);
-        setHistoryItems(historyData as HistoryRecord[]);
+        if(historyData){
+          setHistoryItems([...historyData].sort((a, b) =>
+            b.authorizedAt.localeCompare(a.authorizedAt)
+          ));
+        }
+        setIsNextBtnDisabled(false);
       } catch (e) {
-        setIsNextBtnDisabled(true);
       }
     })();
   }, []);
-
-  const sortedHistoryItems = [...historyItems].sort((a, b) =>
-    b.authorizedAt.localeCompare(a.authorizedAt)
-  );
 
   return (
     <Box className="historyContainer curtainContainer">
@@ -51,7 +51,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
         }
         {
           !isLoading &&
-          sortedHistoryItems.map((item, index) => (
+          historyItems.map((item, index) => (
             <Box key={item.id} className={`historyCard ${index === 0 ? 'active' : ''}`}>
               <Box className="cardHeader">
                 <Typography tag="span" className="cardTitle">

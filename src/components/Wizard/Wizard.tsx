@@ -38,6 +38,7 @@ export const Wizard: React.FC = () => {
       setSelectedItem(undefined);
       setDisabled(true);
       setShouldSubmit(false);
+      setIsCompleted(false);
       wizardRef.current?.goToTab(0);
     }
   }, [isCompleted]);

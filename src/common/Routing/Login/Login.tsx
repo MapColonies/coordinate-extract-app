@@ -27,7 +27,11 @@ const Login: React.FC = () => {
     try {
       const loginData = await loginAPI(userName as string, userPassword as string, setIsLoading);
       if (loginData?.isValid !== true) {
-        throw new Error(loginData?.message || 'Login failed');
+        let message = loginData?.message || 'Login failed';
+        if(loginData?.isValid === false){
+          message = intl.formatMessage({ id: `err.code.${loginData?.code}` })
+        }
+        throw new Error(message);
       }
       login({ username: userName as string });
       history.replace(from);

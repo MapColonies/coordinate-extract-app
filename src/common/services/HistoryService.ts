@@ -27,6 +27,7 @@ export const historyAPI = async (
     return historyRecords;
   } catch (error) {
     console.error('Failed to perform GET history:', error);
+    throw error;
   } finally {
     setLoading(false);
   }
