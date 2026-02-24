@@ -6,14 +6,17 @@ interface UseCesiumHeightParams {
   lon?: number;
   lat?: number;
   enabled?: boolean;
+  setEnabled?: (val: boolean) => void;
 }
 
-export const useCesiumHeight = ({ lon, lat, enabled = true }: UseCesiumHeightParams) => {
+export const useCesiumHeight = (params: UseCesiumHeightParams) => {
   const mapViewer = useCesiumMap();
   const [height, setHeight] = useState<number | undefined>(undefined);
 
   useEffect(() => {
-    if (!mapViewer || lon === undefined || lat === undefined || !enabled) {
+    const { lon, lat } = params;
+
+    if (!mapViewer || lon === undefined || lat === undefined || !params.enabled) {
       return;
     }
 
@@ -57,8 +60,9 @@ export const useCesiumHeight = ({ lon, lat, enabled = true }: UseCesiumHeightPar
         }
       }
 
-      if (!cancelled) {
+      if (!cancelled && sampledHeight !== undefined) {
         setHeight(sampledHeight);
+        params.setEnabled?.(false);
       }
     };
 
@@ -67,7 +71,7 @@ export const useCesiumHeight = ({ lon, lat, enabled = true }: UseCesiumHeightPar
     return () => {
       cancelled = true;
     };
-  }, [mapViewer, lon, lat, enabled]);
+  }, [mapViewer, params.lon, params.lat, params.enabled]);
 
   return {
     height,

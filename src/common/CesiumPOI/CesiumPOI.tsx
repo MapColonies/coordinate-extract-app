@@ -43,6 +43,9 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     lon: parsedCoords?.lon,
     lat: parsedCoords?.lat,
     enabled: finishedFlying,
+    setEnabled: (val) => {
+      setFinishedFlying(val);
+    }
   });
 
   useEffect(() => {
