@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.2.0](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.11...v1.2.0) (2026-02-24)
+
+
+### Features
+
+* cesium poi ([51f31af](https://github.com/MapColonies/coordinate-extract-app/commit/51f31af59c2708a762f00ee1a44f264d08de39a4))
+
+
+### Bug Fixes
+
+* autoComplete ([4fa6080](https://github.com/MapColonies/coordinate-extract-app/commit/4fa60805ee8dcc28ec1688b54dc711b7281972eb))
+* coordinates lat lon ([3fbd9ec](https://github.com/MapColonies/coordinate-extract-app/commit/3fbd9ec13ec61485075476a05e854f5174da3e9b))
+* pr ([8b146de](https://github.com/MapColonies/coordinate-extract-app/commit/8b146de2c8d316f9d2eb0c38e95b697eec5993af))
+* pr ([f702d07](https://github.com/MapColonies/coordinate-extract-app/commit/f702d07cbfdc75415f2da09df00ace591eecce6b))
+* remove blinking from height ([91e068b](https://github.com/MapColonies/coordinate-extract-app/commit/91e068be065dc48b0343acd73c870ae311a7bc7a))
+* remove importent from css ([ed32cba](https://github.com/MapColonies/coordinate-extract-app/commit/ed32cba1cee96a64cdf43dd8f606f32286c2a745))
+* reset height on change blink dependencies ([eb03e16](https://github.com/MapColonies/coordinate-extract-app/commit/eb03e169e0cd97238767302c2729f8208a9855ea))
+* transform Cesium map mode is unavailable ([c72779e](https://github.com/MapColonies/coordinate-extract-app/commit/c72779e1f110289e39b8cb581e5fcd6188f8e954))
+* with nginx with token ([51c4433](https://github.com/MapColonies/coordinate-extract-app/commit/51c4433d938ef6749a9dd45724dde9bc5d9df35f))
+* with nginx with token (MAPCO-9889) ([c4c9f03](https://github.com/MapColonies/coordinate-extract-app/commit/c4c9f03ec786a496e2d9b140f25d7888362e1001))
+
 ## [1.1.11](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.10...v1.1.11) (2026-02-24)
 
 
