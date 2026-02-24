@@ -9,6 +9,7 @@ import {
 } from '@map-colonies/react-components';
 import { Curtain } from '../../../common/Curtain/curtain';
 import { fetchCatalog } from '../../../common/services/CatalogService';
+import { CesiumPOI } from '../../../common/CesiumPOI/CesiumPOI';
 import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
 import appConfig from '../../../utils/Config';
 import { Terrain } from '../../common/Terrain/Terrain';
@@ -71,7 +72,37 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
       return;
     }
     return JSON.parse(props.selectedItem?.['mc:footprint']) as Geometry;
-  }, [props.selectedItem]);
+  }, [props.selectedItem?.[IDENTIFIER_FIELD]]);
+
+  const tileset = useMemo(() => {
+    if (props.selectedItem?.['mc:links'] && props.selectedItem?.isShown && finishedFlying) {
+      return (
+        <Cesium3DTileset
+          url={getTokenResource(props.selectedItem?.['mc:links']["#text"] as string)}
+          isZoomTo={true}
+          maximumScreenSpaceError={5}
+          cullRequestsWhileMovingMultiplier={120}
+          preloadFlightDestinations
+          preferLeaves
+          skipLevelOfDetail
+        />
+      )
+    }
+
+    return null;
+  }, [
+    props.selectedItem?.[IDENTIFIER_FIELD],
+    props.selectedItem?.isShown,
+    finishedFlying
+  ]);
+
+  const blinkDependencies = useMemo(() => {
+    return {
+      selectedItem: props.selectedItem,
+      isSelected: props.selectedItem?.isSelected,
+      isShown: props.selectedItem?.isShown
+    }
+  }, [props.selectedItem, props.selectedItem?.isSelected, props.selectedItem?.isShown])
 
   return (
     <Box className="modelSelection">
@@ -82,8 +113,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
           </Box>
           <Box style={treeTheme as React.CSSProperties} className="treeContainer curtainContainer">
             {
-              isLoading &&
-              <Curtain showProgress={true}/>
+              isLoading && <Curtain showProgress={true} />
             }
             {
               props.catalogTreeData &&
@@ -98,7 +128,10 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
             }
           </Box>
         </Box>
-        <Box className="mapPanel">
+        <Box className="mapPanel curtainContainer">
+          {
+            isLoading && <Curtain showProgress={true} />
+          }
           <CesiumMap
             center={centerCesiumView}
             zoom={+appConfig.mapZoom}
@@ -114,16 +147,22 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
                 id={props.selectedItem[IDENTIFIER_FIELD] as string}
                 clampToGround={true}
                 data={selectedItemFootprint}
-                setFinishedFlying={setFinishedFlying}
+                setIsInProgress={(val) => {
+                  setFinishedFlying(!val);
+                  setIsLoading(val);
+                }}
               />
             }
             {
-              props.selectedItem?.isShown as boolean &&
-              props.selectedItem?.['mc:links'] &&
-              finishedFlying &&
-              <Cesium3DTileset
-                url={getTokenResource(props.selectedItem?.['mc:links']["#text"] as string)}
-                isZoomTo={true}
+              tileset
+            }
+            {
+              appConfig.showPOITool &&
+              <CesiumPOI
+                setIsInProgress={(val) => {
+                  setIsLoading(val);
+                }}
+                blinkDependencies={blinkDependencies}
               />
             }
             <Terrain />

@@ -34,6 +34,9 @@
   "panel.updater.title": "פרטי מבצע הפעולה",
   "panel.confirm.title": "אימות זהות",
 
+  "panel.poi.label.latLon": "lat, lon",
+  "panel.poi.label.meter": "(m)",
+
   "details.noData": "בחר פריט קטלוגי כדי לצפות בו",
   "details.extractable.approved": "אושר על-ידי {name} בתאריך {value}",
   "details.extractable.notApproved": "לא מאושר",
