@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.1](https://github.com/MapColonies/coordinate-extract-app/compare/v1.2.0...v1.2.1) (2026-02-25)
+
+
+### Bug Fixes
+
+* http error handling ([0918ae0](https://github.com/MapColonies/coordinate-extract-app/commit/0918ae073f8357a325a23b0ef3c0a6405429e232))
+* iscompleted management ([e0d4d4d](https://github.com/MapColonies/coordinate-extract-app/commit/e0d4d4d8b2366e28396c1ece9a5c21c2c6b11d76))
+* lint ([e2dd1f8](https://github.com/MapColonies/coordinate-extract-app/commit/e2dd1f88837a71b6bb4f3ce55895bfaa65f9cd1b))
+* login ([66abf97](https://github.com/MapColonies/coordinate-extract-app/commit/66abf9779adffca66fb96a6be483dba26ab2aba2))
+
 ## [1.2.0](https://github.com/MapColonies/coordinate-extract-app/compare/v1.1.11...v1.2.0) (2026-02-24)
 
 
