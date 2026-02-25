@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.2](https://github.com/MapColonies/coordinate-extract-app/compare/v1.2.1...v1.2.2) (2026-02-25)
+
+
+### Bug Fixes
+
+* action color on confirmation ([87ed459](https://github.com/MapColonies/coordinate-extract-app/commit/87ed45929fe61a63ff8175c8751b65b27af86a24))
+* action color on confirmation step ([99dd312](https://github.com/MapColonies/coordinate-extract-app/commit/99dd3121f8315fdd775cf919d13615bbc7aec4e2))
+
 ## [1.2.1](https://github.com/MapColonies/coordinate-extract-app/compare/v1.2.0...v1.2.1) (2026-02-25)
 
 
