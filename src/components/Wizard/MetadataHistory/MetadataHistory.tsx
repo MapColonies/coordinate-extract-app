@@ -21,7 +21,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
     (async () => {
       try {
         const historyData = await historyAPI(selectedItem?.[IDENTIFIER_FIELD] as string, setIsLoading);
-        if(historyData){
+        if (historyData) {
           setHistoryItems([...historyData].sort((a, b) =>
             b.authorizedAt.localeCompare(a.authorizedAt)
           ));

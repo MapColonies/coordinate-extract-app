@@ -1,4 +1,4 @@
-import { get } from "lodash";
+import { get } from 'lodash';
 import appConfig from '../../utils/Config';
 import { loadingUpdater } from '../../utils/loadingUpdater';
 import { execute } from '../../utils/requestHandler';
@@ -38,7 +38,7 @@ export const loginAPI = async (
       return respData;
     } else {
       console.error('Failed to perform POST login:', error);
-      return {message: error.message};
+      return { message: error.message };
     }
   } finally {
     setLoading(false);

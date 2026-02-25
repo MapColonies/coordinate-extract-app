@@ -1,5 +1,7 @@
 {
   "app.title": "Coordinate Extract Approval",
+  
+  "err.code.INVALID_CREDENTIALS": "Invalid username or password",
 
   "auth.login.btn": "Login",
   "auth.logout.btn": "Logout",
@@ -101,6 +103,6 @@
   "form.approver.placeholder": "Enter your full name",
   "form.additionalInfo.label": "Comments (optional)",
   "form.additionalInfo.placeholder": "Add comments here...",
-  "form.password.label": "Password",
+  "form.password.label": "Password *",
   "form.password.placeholder": "Re-enter password for confirmation to proceed with the action"
 }

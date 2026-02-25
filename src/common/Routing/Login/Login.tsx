@@ -28,8 +28,8 @@ const Login: React.FC = () => {
       const loginData = await loginAPI(userName as string, userPassword as string, setIsLoading);
       if (loginData?.isValid !== true) {
         let message = loginData?.message || 'Login failed';
-        if(loginData?.isValid === false){
-          message = intl.formatMessage({ id: `err.code.${loginData?.code}` })
+        if (loginData?.isValid === false) {
+          message = intl.formatMessage({ id: `err.code.${loginData?.code}` });
         }
         throw new Error(message);
       }
