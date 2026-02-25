@@ -85,19 +85,30 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
           <Curtain showProgress={true}/>
         }
         <Box className="formHeader">
+          <Typography tag="div" className="title"><FormattedMessage id="form.message.confirm.title" /></Typography>
+          <Typography tag="div" className="line"><FormattedMessage id="form.message.confirm.model" values={{ value: selectedItem?.[IDENTIFIER_FIELD] }} /></Typography>
+          <Typography tag="div" className="line">
+            <FormattedMessage
+              id="form.message.confirm.action"
+              values={{
+                value: (
+                  <Typography tag="span" className={ selectedItem?.isApproved ? 'orange' : 'green' }>
+                    {
+                      selectedItem?.isApproved
+                        ? intl.formatMessage({ id: 'form.message.confirm.reject' })
+                        : intl.formatMessage({ id: 'form.message.confirm.approve' })
+                    }
+                  </Typography>
+                )
+              }}
+            />
+          </Typography>
           {
             [
-              intl.formatMessage({ id: 'form.message.confirm.title' }),
-              intl.formatMessage({ id: 'form.message.confirm.model' }, { value: selectedItem?.[IDENTIFIER_FIELD] as unknown as string }),
-              intl.formatMessage({ id: 'form.message.confirm.action' }, { value: selectedItem?.isApproved ? intl.formatMessage({ id: 'form.message.confirm.reject' }) : intl.formatMessage({ id: 'form.message.confirm.approve' }) }),
               intl.formatMessage({ id: 'form.message.confirm.approver' }, { value: selectedItem?.approver as string }),
               intl.formatMessage({ id: 'form.message.confirm.additionalInfo' }, { value: selectedItem?.additionalInfo as string })
             ].map((line, index) => (
-              <Typography 
-                tag="div" 
-                key={index} 
-                className={index === 0 ? "title" : "line"}
-              >
+              <Typography tag="div" key={index} className="line">
                 {line}
               </Typography>
             ))
