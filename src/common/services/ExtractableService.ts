@@ -2,6 +2,13 @@ import appConfig from '../../utils/Config';
 import { loadingUpdater } from '../../utils/loadingUpdater';
 import { execute } from '../../utils/requestHandler';
 
+export interface ExtractableResponse {
+  nextRecord: number;
+  numberOfRecords: number;
+  numberOfRecordsReturned: number;
+  records: ExtractableRecord[]
+}
+
 export interface ExtractableRecord {
   id: string;
   recordName: string;

@@ -58,6 +58,7 @@ class Config {
   public extractableManagerUrl = EXTRACTABLE_MANAGER_URL;
   public showPOITool = SHOW_POI_TOOL;
   public numberOfRecordsPerPage = NUMBER_OF_RECORDS_PER_PAGE;
+  public numberOfExtractablesPerPage = 500;
 }
 
 const appConfig = new Config(); // Singleton

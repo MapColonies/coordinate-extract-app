@@ -4,11 +4,12 @@ import appConfig from '../../utils/Config';
 import { get3DRecordsXML, getNumberOfMatchedRecords, parse3DQueryResults } from '../../utils/cswQueryBuilder';
 import { loadingUpdater } from '../../utils/loadingUpdater';
 import { execute } from '../../utils/requestHandler';
-import { ExtractableRecord } from './ExtractableService';
+import { ExtractableRecord, ExtractableResponse } from './ExtractableService';
 
 const PAGE_SIZE = appConfig.numberOfRecordsPerPage;
+const EXTRACTABLE_PAGE_SIZE = appConfig.numberOfExtractablesPerPage;
 
-export const fetchAll3DRecordsParallel = async () => {
+const fetchAll3DRecordsParallel = async () => {
   const numberOfRecordsXml = get3DRecordsXML('hits', 0);
 
   const resNumberOfRecords = await execute(
@@ -45,35 +46,45 @@ export const fetchAll3DRecordsParallel = async () => {
   return allRecords;
 };
 
+const fetchExtractable = async () => {
+  let extract: ExtractableRecord[] = [];
+  let startIndex = 1;
+
+  while (startIndex > 0) {
+    const extractableResponse: ExtractableResponse = await execute(
+      `${appConfig.extractableManagerUrl}/records?startPosition=${startIndex}&maxRecords=${EXTRACTABLE_PAGE_SIZE}`,
+      'GET'
+    ) as unknown as ExtractableResponse;
+    if (Array.isArray(extractableResponse.records)) {
+      extract.push(...extractableResponse.records);
+      startIndex = extractableResponse.nextRecord as number;
+    }
+  }
+  return extract;
+}
+
 export const fetchCatalog = async (setLoading: loadingUpdater) => {
-  let records, extractables;
+  let records;
+  let extractables: ExtractableRecord[] = [];
+
   try {
     setLoading(true);
     records = await fetchAll3DRecordsParallel();
-
-    extractables = await execute(
-      `${appConfig.extractableManagerUrl}/records?startPosition=1&maxRecords=1000`,
-      'GET'
-    );
+    extractables = await fetchExtractable();
   } catch (error) {
     console.error('Failed to fetch catalog/extractable data:', error);
   } finally {
     const catalogRecords = Array.isArray(records) ? records : [];
-    const extractablesPayload = extractables as { records?: ExtractableRecord[] } | undefined;
-    const extractablesList = extractablesPayload?.records;
-    const extractablesRecords: ExtractableRecord[] = Array.isArray(extractablesList)
-      ? extractablesList
-      : [];
-    const enriched = enrichRecords(catalogRecords, extractablesRecords);
+    const enriched = enrichRecords(catalogRecords, extractables);
     setLoading(false);
     return {
       data: createCatalogTree(enriched),
       sumAll: catalogRecords.length,
       sumExtractable:
-        catalogRecords.length > 0 ? extractablesRecords.length : catalogRecords.length,
+        catalogRecords.length > 0 ? extractables.length : catalogRecords.length,
       sumNotExtractable:
         catalogRecords.length > 0
-          ? catalogRecords.length - extractablesRecords.length
+          ? catalogRecords.length - extractables.length
           : catalogRecords.length,
     };
   }
