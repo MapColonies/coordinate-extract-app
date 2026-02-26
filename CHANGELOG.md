@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/MapColonies/coordinate-extract-app/compare/v3.1.0...v3.1.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* confd ([962ea32](https://github.com/MapColonies/coordinate-extract-app/commit/962ea32bff6503ed6613440aae40d9e016140863))
+
 ## [3.1.0](https://github.com/MapColonies/coordinate-extract-app/compare/v3.0.0...v3.1.0) (2026-02-26)
 
 
