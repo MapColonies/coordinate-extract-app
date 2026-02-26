@@ -57,7 +57,7 @@ export const MetadataForm: React.FC<WizardStepProps> = ({
             id={`${selectedItem?.isApproved ? 'form.message.reject' : 'form.message.approve'}`}
           />
         </Box>
-        <form className="form">
+        <Box className="form">
           <Box className="formGroup">
             <label htmlFor="approver">
               <FormattedMessage id="form.approver.label" />
@@ -88,7 +88,7 @@ export const MetadataForm: React.FC<WizardStepProps> = ({
               placeholder={intl.formatMessage({ id: 'form.remarks.placeholder' })}
             />
           </Box>
-        </form>
+        </Box>
       </Box>
     </Box>
   );
