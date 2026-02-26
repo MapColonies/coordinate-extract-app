@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.2.0](https://github.com/MapColonies/coordinate-extract-app/compare/v3.1.4...v3.2.0) (2026-02-26)
+
+
+### Features
+
+* upgrade to nginx 27 ([2c5f83e](https://github.com/MapColonies/coordinate-extract-app/commit/2c5f83ef94c19f1104fe4f2139a3f39a69987892))
+* upgrade to nginx 27 ([9ceadfe](https://github.com/MapColonies/coordinate-extract-app/commit/9ceadfeb6a73e9c74606a30de161ab308bca4a60))
+
+
+### Bug Fixes
+
+* catalog and extractable records paginated fetch ([4cfb951](https://github.com/MapColonies/coordinate-extract-app/commit/4cfb951576284ca085770b181383e74ef5dfda08))
+* pagination fetch extractable ([207a2fd](https://github.com/MapColonies/coordinate-extract-app/commit/207a2fd04720dacfdd1e464b9c3ae9f98b31a15a))
+* prettier ([790e9a6](https://github.com/MapColonies/coordinate-extract-app/commit/790e9a6ad6f299a3a6989e079cc6233a24fec0c3))
+* remarks field and error handling ([a76335a](https://github.com/MapColonies/coordinate-extract-app/commit/a76335a430e0186af67363235ada1114acad5d2b))
+* remarks field and error handling ([68833e3](https://github.com/MapColonies/coordinate-extract-app/commit/68833e3b839c51789c9525d36b0aed2c939cb87f))
+
 ## [3.1.4](https://github.com/MapColonies/coordinate-extract-app/compare/v3.1.3...v3.1.4) (2026-02-26)
 
 
