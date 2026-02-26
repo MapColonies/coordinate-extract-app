@@ -55,22 +55,25 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({
           historyItems.map((item, index) => (
             <Box key={item.id} className={`historyCard ${index === 0 ? 'active' : ''}`}>
               <Box className="cardHeader">
-                <Typography tag="span" className="cardTitle">
+                <Box className="cardTitle">
                   <AutoDirectionBox>{formatDate(item.authorizedAt, locale, true)}</AutoDirectionBox>
-                </Typography>
-                <Typography tag="span" className="cardSecondary">
-                  {item.username}
-                </Typography>
+                  <Typography
+                    tag="span"
+                    className={`${item.action.toLowerCase() === 'create' ? 'green' : 'orange'}`}
+                  >
+                    <FormattedMessage id={`history.action.${item.action.toLowerCase()}`} />
+                  </Typography>
+                  <Typography tag="span">
+                    <FormattedMessage
+                      id={`history.action.authorizedBy`}
+                      values={{ value: item.authorizedBy }}
+                    />
+                  </Typography>
+                </Box>
+                <Box className="cardSecondary">{item.username}</Box>
               </Box>
-              <Box
-                className={`cardContent ${
-                  item.action.toLowerCase() === 'create' ? 'green' : 'orange'
-                }`}
-              >
-                <FormattedMessage
-                  id={`history.action.${item.action.toLowerCase()}`}
-                  values={{ value: item.authorizedBy }}
-                />
+              <Box className="cardContent">
+                <FormattedMessage id={`history.action.remarks`} values={{ value: item.remarks }} />
               </Box>
             </Box>
           ))}

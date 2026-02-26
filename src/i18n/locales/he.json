@@ -2,6 +2,7 @@
   "app.title": "אישור מודל לחילוץ נ.צ.",
 
   "err.code.INVALID_CREDENTIALS": "שם משתמש או סיסמה לא חוקיים",
+  "err.code.INVALID_RECORD_NAME": "מודל לא קיים",
 
   "auth.login.btn": "התחבר",
   "auth.logout.btn": "התנתק",
@@ -90,8 +91,10 @@
   "details.field.productSource": "מקור",
   "details.field.productStatus": "סטטוס",
 
-  "history.action.create": " · אושר · על-ידי {value}",
-  "history.action.delete": " · הוסר · על-ידי {value}",
+  "history.action.create": " אושר ",
+  "history.action.delete": " הוסר ",
+  "history.action.authorizedBy": " על-ידי {value}",
+  "history.action.remarks": "הערות: {value}",
 
   "form.message.approve": "אישור המודל יחשוף אותו לגורמים מבצעיים לחילוץ קואורדינטות",
   "form.message.reject": "ביטול האישור יסיר את המודל מחשיפה לגורמים מבצעיים",
@@ -99,13 +102,13 @@
   "form.message.confirm.model": "מודל: {value}",
   "form.message.confirm.action": "פעולה: {value}",
   "form.message.confirm.approver": "מבצע הפעולה: {value}",
-  "form.message.confirm.additionalInfo": "הערות: {value}",
+  "form.message.confirm.remarks": "הערות: {value}",
   "form.message.confirm.approve": "אישור לחילוץ נ.צ.",
   "form.message.confirm.reject": "ביטול אישור",
   "form.approver.label": "שם מלא של מבצע הפעולה *",
   "form.approver.placeholder": "הזן את שמך המלא",
-  "form.additionalInfo.label": "הערות (אופציונלי)",
-  "form.additionalInfo.placeholder": "הוסף הערות לתיעוד...",
+  "form.remarks.label": "הערות (אופציונלי)",
+  "form.remarks.placeholder": "הוסף הערות לתיעוד...",
   "form.password.label": "סיסמה *",
   "form.password.placeholder": "הזן סיסמה שנית לאימות וביצוע הפעולה"
 }

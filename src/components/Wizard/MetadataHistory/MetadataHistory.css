@@ -49,7 +49,6 @@
 }
 
 .historyContainer .cardContent {
-  font-size: var(--mdc-theme-gc-title-font-size);
   margin: 6px 0;
 }
 

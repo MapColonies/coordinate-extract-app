@@ -2,6 +2,7 @@
   "app.title": "Coordinate Extract Approval",
 
   "err.code.INVALID_CREDENTIALS": "Invalid username or password",
+  "err.code.INVALID_RECORD_NAME": "Model not found",
 
   "auth.login.btn": "Login",
   "auth.logout.btn": "Logout",
@@ -87,8 +88,10 @@
   "details.field.productSource": "Product Source",
   "details.field.productStatus": "Product Status",
 
-  "history.action.create": " · Approved · by {value}",
-  "history.action.delete": " · Rejected · by {value}",
+  "history.action.create": " Approved ",
+  "history.action.delete": " Rejected ",
+  "history.action.authorizedBy": " by {value} ",
+  "history.action.remarks": "Comments: {value}",
 
   "form.message.approve": "Approval of the model will expose it to operational factors for coordinates extraction",
   "form.message.reject": "Rejecting the approval will remove the model from exposure to operational factors",
@@ -96,13 +99,13 @@
   "form.message.confirm.model": "Model: {value}",
   "form.message.confirm.action": "Action: {value}",
   "form.message.confirm.approver": "Approver: {value}",
-  "form.message.confirm.additionalInfo": "Comments: {value}",
+  "form.message.confirm.remarks": "Comments: {value}",
   "form.message.confirm.approve": "Approve for coordinates extraction",
   "form.message.confirm.reject": "Reject approval",
   "form.approver.label": "Approver full name *",
   "form.approver.placeholder": "Enter your full name",
-  "form.additionalInfo.label": "Comments (optional)",
-  "form.additionalInfo.placeholder": "Add comments here...",
+  "form.remarks.label": "Comments (optional)",
+  "form.remarks.placeholder": "Add comments here...",
   "form.password.label": "Password *",
   "form.password.placeholder": "Re-enter password for confirmation to proceed with the action"
 }

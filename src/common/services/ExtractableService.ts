@@ -23,6 +23,7 @@ export const extractableCreateAPI = async (
   username: string,
   password: string,
   authorizedBy: string,
+  remarks: string,
   data: Record<string, unknown>,
   setLoading: loadingUpdater
 ): Promise<ExtractableRecord | undefined> => {
@@ -36,6 +37,7 @@ export const extractableCreateAPI = async (
           username,
           password,
           authorizedBy,
+          remarks,
           data,
         },
       }
@@ -54,6 +56,7 @@ export const extractableDeleteAPI = async (
   username: string,
   password: string,
   authorizedBy: string,
+  remarks: string,
   data: Record<string, unknown>,
   setLoading: loadingUpdater
 ): Promise<string | undefined> => {
@@ -67,6 +70,7 @@ export const extractableDeleteAPI = async (
           username,
           password,
           authorizedBy,
+          remarks,
           data,
         },
       }
