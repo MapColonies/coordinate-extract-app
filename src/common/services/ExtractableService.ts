@@ -31,7 +31,7 @@ export const extractableCreateAPI = async (
           password,
           authorizedBy,
           remarks,
-          data
+          data,
         }
       }
     );
@@ -64,8 +64,8 @@ export const extractableDeleteAPI = async (
           password,
           authorizedBy,
           remarks,
-          data
-        }
+          data,
+        },
       }
     );
     return response as string;

@@ -6,11 +6,11 @@ export const getTokenResource = (url: string): CesiumResource => {
   const { injectionType, attributeName, tokenValue } = appConfig.accessToken;
   if (injectionType && injectionType.toLowerCase() === 'header') {
     tokenProps.headers = {
-      [attributeName]: tokenValue
+      [attributeName]: tokenValue,
     };
   } else if (injectionType && injectionType.toLowerCase() === 'queryparam') {
     tokenProps.queryParameters = {
-      [attributeName]: tokenValue
+      [attributeName]: tokenValue,
     };
   }
   return new CesiumResource(tokenProps);

@@ -1,6 +1,6 @@
 {
   "app.title": "אישור מודל לחילוץ נ.צ.",
-  
+
   "err.code.INVALID_CREDENTIALS": "שם משתמש או סיסמה לא חוקיים",
   "err.code.INVALID_RECORD_NAME": "מודל לא קיים",
 

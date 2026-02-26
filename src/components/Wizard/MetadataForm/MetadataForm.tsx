@@ -7,12 +7,21 @@ import { ExclamationSVGIcon } from '../../../common/icons/ExclamationSVGIcon';
 
 import './MetadataForm.css';
 
-export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem, setSelectedItem }) => {
+export const MetadataForm: React.FC<WizardStepProps> = ({
+  setIsNextBtnDisabled,
+  selectedItem,
+  setSelectedItem,
+}) => {
   const intl = useIntl();
 
   const [formData, setFormData] = useState<{ approver: string; remarks: string }>({
     approver: typeof selectedItem?.approver === 'string' ? selectedItem.approver : '',
+<<<<<<< HEAD
     remarks: typeof selectedItem?.remarks === 'string' ? selectedItem.remarks : ''
+=======
+    additionalInfo:
+      typeof selectedItem?.additionalInfo === 'string' ? selectedItem.additionalInfo : '',
+>>>>>>> 2fe72340c3fc47d84ebd25f6ca1958421cbabf93
   });
 
   useEffect(() => {
@@ -21,13 +30,13 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target as HTMLInputElement;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     setSelectedItem?.({
       ...selectedItem,
-       [name]: value
+      [name]: value,
     });
     if (name === 'approver') {
       if (value.trim() === '') {
@@ -49,7 +58,9 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
           <Typography tag="span">
             <ExclamationSVGIcon color="currentColor" />
           </Typography>
-          <FormattedMessage id={`${selectedItem?.isApproved ? 'form.message.reject' : 'form.message.approve'}`} />
+          <FormattedMessage
+            id={`${selectedItem?.isApproved ? 'form.message.reject' : 'form.message.approve'}`}
+          />
         </Box>
         <form className="form">
           <Box className="formGroup">

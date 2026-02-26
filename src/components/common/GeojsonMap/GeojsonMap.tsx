@@ -14,14 +14,14 @@ import {
   TileWMTS,
   TileXYZ,
   VectorLayer,
-  VectorSource
+  VectorSource,
 } from '@map-colonies/react-components';
 import { Curtain } from '../../../common/Curtain/curtain';
 import appConfig from '../../../utils/Config';
 import {
   DEFAULT_PROJECTION,
   FOOTPRINT_BORDER_COLOR,
-  FOOTPRINT_BORDER_WIDTH
+  FOOTPRINT_BORDER_WIDTH,
 } from '../../../utils/Const';
 import { getMarker } from '../../../utils/geojson';
 
@@ -35,7 +35,7 @@ interface GeoFeaturesPresentorProps {
 export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({ geometry, style }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [fit, setFit] = useState<boolean>();
-  
+
   const previewBaseMap = useMemo(() => {
     const olBaseMap: JSX.Element[] = [];
     let baseMap = appConfig.baseMaps.maps.find((map: IBaseMap) => map.isCurrent);
@@ -51,16 +51,18 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({ geometry, styl
             matrixSet: get(layer.options, 'tileMatrixSetID') as string,
             format: get(layer.options, 'format') as string,
             projection: DEFAULT_PROJECTION,
-            style: get(layer.options, 'style') as string
+            style: get(layer.options, 'style') as string,
           });
           olBaseMap.push(
             <TileLayer key={layer.id} options={{ opacity: layer.opacity }}>
-              <TileWMTS options={{
-                ...wmtsOptions,
-                crossOrigin: 'anonymous'
-              }} />
+              <TileWMTS
+                options={{
+                  ...wmtsOptions,
+                  crossOrigin: 'anonymous',
+                }}
+              />
             </TileLayer>
-          )
+          );
         }
         if (layer.type === 'XYZ_LAYER') {
           const xyzOptions = getXYZOptions({
@@ -68,14 +70,16 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({ geometry, styl
           });
           olBaseMap.push(
             <TileLayer key={layer.id} options={{ opacity: layer.opacity }}>
-              <TileXYZ options={{
-                ...xyzOptions,
-                crossOrigin: 'anonymous'
-              }} />
+              <TileXYZ
+                options={{
+                  ...xyzOptions,
+                  crossOrigin: 'anonymous',
+                }}
+              />
             </TileLayer>
-          )
+          );
         }
-      })
+      });
     }
     return olBaseMap;
   }, []);
@@ -101,37 +105,39 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({ geometry, styl
         {
           <VectorLayer>
             <VectorSource>
-              {
-                geometry &&
+              {geometry && (
                 <GeoJSONFeature
                   geometry={geometry as unknown as GeoJsonGeometry}
                   fit={fit}
                   fitOptions={{ padding: [80, 160, 80, 160] }}
-                  featureStyle={new Style({
-                    stroke: new Stroke({
-                      width: FOOTPRINT_BORDER_WIDTH,
-                      color: FOOTPRINT_BORDER_COLOR
-                    }),
-                    fill: new Fill({
-                      color: 'rgba(255,255,255,0.3)',
+                  featureStyle={
+                    new Style({
+                      stroke: new Stroke({
+                        width: FOOTPRINT_BORDER_WIDTH,
+                        color: FOOTPRINT_BORDER_COLOR,
+                      }),
+                      fill: new Fill({
+                        color: 'rgba(255,255,255,0.3)',
+                      }),
                     })
-                  })}
+                  }
                 />
-              }
-              {
-                pinGeometry &&
+              )}
+              {pinGeometry && (
                 <GeoJSONFeature
                   geometry={pinGeometry as unknown as GeoJsonGeometry}
                   fit={false}
-                  featureStyle={new Style({
-                    image: new Icon({
-                      scale: 0.2,
-                      anchor: [0.5, 1],
-                      src: 'assets/img/map-marker.png'
+                  featureStyle={
+                    new Style({
+                      image: new Icon({
+                        scale: 0.2,
+                        anchor: [0.5, 1],
+                        src: 'assets/img/map-marker.png',
+                      }),
                     })
-                  })}
+                  }
                 />
-              }
+              )}
             </VectorSource>
           </VectorLayer>
         }
@@ -141,7 +147,7 @@ export const GeojsonMap: React.FC<GeoFeaturesPresentorProps> = ({ geometry, styl
 
   return (
     <Box className="geojsonMap curtainContainer" style={style}>
-      {isLoading && <Curtain showProgress={true}/>}
+      {isLoading && <Curtain showProgress={true} />}
       {renderFootprintInfo()}
     </Box>
   );

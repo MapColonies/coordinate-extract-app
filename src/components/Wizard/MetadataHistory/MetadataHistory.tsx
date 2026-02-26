@@ -11,7 +11,10 @@ import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
 
 import './MetadataHistory.css';
 
-export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem }) => {
+export const MetadataHistory: React.FC<WizardStepProps> = ({
+  setIsNextBtnDisabled,
+  selectedItem,
+}) => {
   const [historyItems, setHistoryItems] = useState<HistoryRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { locale } = useI18n();
@@ -20,37 +23,35 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
     setIsNextBtnDisabled(true);
     (async () => {
       try {
-        const historyData = await historyAPI(selectedItem?.[IDENTIFIER_FIELD] as string, setIsLoading);
+        const historyData = await historyAPI(
+          selectedItem?.[IDENTIFIER_FIELD] as string,
+          setIsLoading
+        );
         if (historyData) {
-          setHistoryItems([...historyData].sort((a, b) =>
-            b.authorizedAt.localeCompare(a.authorizedAt)
-          ));
+          setHistoryItems(
+            [...historyData].sort((a, b) => b.authorizedAt.localeCompare(a.authorizedAt))
+          );
         }
         setIsNextBtnDisabled(false);
-      } catch (e) {
-      }
+      } catch (e) {}
     })();
   }, []);
 
   return (
     <Box className="historyContainer curtainContainer">
       <Box className="cardList">
-        {
-          isLoading &&
+        {isLoading && (
           <Box className="historyLoading">
             <FormattedMessage id="general.loading" />
-            <Curtain showProgress={true}/>
+            <Curtain showProgress={true} />
           </Box>
-        }
-        {
-          !isLoading &&
-          historyItems.length === 0 &&
+        )}
+        {!isLoading && historyItems.length === 0 && (
           <Box className="noData">
             <FormattedMessage id="general.noData" />
           </Box>
-        }
-        {
-          !isLoading &&
+        )}
+        {!isLoading &&
           historyItems.map((item, index) => (
             <Box key={item.id} className={`historyCard ${index === 0 ? 'active' : ''}`}>
               <Box className="cardHeader">
@@ -81,8 +82,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({ setIsNextBtnDisable
                 />
               </Box>
             </Box>
-          ))
-        }
+          ))}
       </Box>
     </Box>
   );

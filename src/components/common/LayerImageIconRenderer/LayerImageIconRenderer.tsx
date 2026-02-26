@@ -10,9 +10,8 @@ interface ILayerImageIconRendererParams {
 }
 
 export const LayerImageIconRenderer: React.FC<ILayerImageIconRendererParams> = (props) => {
-
   return (
-    <Box id='LayerImageIconRenderer'>
+    <Box id="LayerImageIconRenderer">
       <IconButton
         className={props.data.isShown ? 'icon mc-icon-Show' : 'icon mc-icon-Hide'}
         label="LAYER IMAGE SHOWN ICON"
