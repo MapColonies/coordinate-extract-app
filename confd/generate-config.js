@@ -160,7 +160,7 @@ const help = () => {
 };
 
 const main = () => {
-  if (process.argv.indexOf('--help') != -1) {
+  if (process.argv.indexOf('--help') !== -1) {
     help();
   }
   const envIdx = process.argv.indexOf('--environment');

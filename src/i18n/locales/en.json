@@ -1,6 +1,6 @@
 {
   "app.title": "Coordinate Extract Approval",
-  
+
   "err.code.INVALID_CREDENTIALS": "Invalid username or password",
 
   "auth.login.btn": "Login",

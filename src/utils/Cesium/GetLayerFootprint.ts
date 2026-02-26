@@ -91,6 +91,7 @@ export const getLayerFootprint = (
   } else {
     let geometry: Geometry = shrinkExtremeCoordinatesInOuterRing(layerFootprint, 0.999);
     if (isConvexHull) {
+      // prettier-ignore
       // @ts-ignore
       geometry = isPolylined ? (polygonToLine(convex(geometry)) as Feature).geometry : (convex(geometry) as Feature).geometry;
       return {
