@@ -13,7 +13,7 @@ export enum LinkType {
   THUMBNAIL_L = 'THUMBNAIL_L',
   LEGEND_DOC = 'LEGEND_DOC',
   LEGEND_IMG = 'LEGEND_IMG',
-  LEGEND = 'LEGEND'
+  LEGEND = 'LEGEND',
 }
 
 export const DEFAULT_PROJECTION = 'EPSG:4326';

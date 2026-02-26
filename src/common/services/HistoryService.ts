@@ -17,10 +17,7 @@ export const historyAPI = async (
 ): Promise<HistoryRecord[] | undefined> => {
   try {
     setLoading(true);
-    const response = await execute(
-      `${appConfig.extractableManagerUrl}/audit/${recordName}`,
-      'GET'
-    );
+    const response = await execute(`${appConfig.extractableManagerUrl}/audit/${recordName}`, 'GET');
     const payload = response as { records?: HistoryRecord[] } | undefined;
     const recordsList = payload?.records;
     const historyRecords: HistoryRecord[] = Array.isArray(recordsList) ? recordsList : [];

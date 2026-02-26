@@ -46,7 +46,7 @@
   margin: 0 20px;
 }
 
-body[dir="rtl"] .login .loginAction {
+body[dir='rtl'] .login .loginAction {
   width: 85%;
 }
 
@@ -57,7 +57,7 @@ body[dir="rtl"] .login .loginAction {
   color: var(--mdc-theme-gc-error);
 }
 
-body[dir="rtl"] .login .error {
+body[dir='rtl'] .login .error {
   width: 85%;
 }
 

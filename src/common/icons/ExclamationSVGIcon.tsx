@@ -3,7 +3,8 @@ import { SVGIconProps } from './SVGIconProps';
 
 export const ExclamationSVGIcon: React.FC<SVGIconProps> = ({ color, className }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" 
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
       viewBox="0 0 24 24"

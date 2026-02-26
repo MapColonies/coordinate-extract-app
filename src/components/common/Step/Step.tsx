@@ -16,8 +16,8 @@ interface StepProps {
 
 export const Step: React.FC<PropsWithChildren<StepProps>> = ({ children, selectedItem, title }) => {
   const {
-    "mc:footprint": footprint,
-    "mc:links": links,
+    'mc:footprint': footprint,
+    'mc:links': links,
     ...metadata
   } = (selectedItem || {}) as CatalogTreeNode;
 
@@ -26,24 +26,18 @@ export const Step: React.FC<PropsWithChildren<StepProps>> = ({ children, selecte
       <ModelDetails item={metadata} />
       <Box className="viewArea">
         <Box className="panel">
-          {
-            title &&
+          {title && (
             <Typography className="panelHeader">
               <FormattedMessage id={title} />
             </Typography>
-          }
-          <Box className="children">
-            {children}
-          </Box>
+          )}
+          <Box className="children">{children}</Box>
         </Box>
         <Box className="panel">
           <Typography className="panelHeader">
             <FormattedMessage id="panel.footprint.title" />
           </Typography>
-          {
-            footprint &&
-            <GeojsonMap geometry={JSON.parse(footprint) as Geometry} />
-          }
+          {footprint && <GeojsonMap geometry={JSON.parse(footprint) as Geometry} />}
         </Box>
       </Box>
     </Box>

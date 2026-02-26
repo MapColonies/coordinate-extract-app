@@ -21,7 +21,7 @@ export const get3DRecordsXML = () => {
 };
 
 export const parse3DQueryResults = (xml: string): Record<string, unknown>[] | null => {
-  let retValue = null; 
+  let retValue = null;
   const parser = new XMLParser({ ignoreAttributes: false });
   const parsedQuery = parser.parse(xml);
   const recordsResult = parsedQuery['csw:GetRecordsResponse']['csw:SearchResults'];
@@ -32,10 +32,11 @@ export const parse3DQueryResults = (xml: string): Record<string, unknown>[] | nu
   const records = parsedQuery['csw:GetRecordsResponse']['csw:SearchResults']['mc:MC3DRecord'];
   if (Array.isArray(records)) {
     retValue = records;
-  }
-  else {
-    retValue =  [records];
+  } else {
+    retValue = [records];
   }
 
-  return retValue.filter((record) =>  ['3DPhotoRealistic','PointCloud'].includes(record['mc:productType']));
+  return retValue.filter((record) =>
+    ['3DPhotoRealistic', 'PointCloud'].includes(record['mc:productType'])
+  );
 };

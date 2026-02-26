@@ -32,7 +32,7 @@ interface Extractable {
 }
 
 interface ModelDetailsProps {
-  item: Record<string, unknown> | undefined
+  item: Record<string, unknown> | undefined;
 }
 
 export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
@@ -90,101 +90,79 @@ export const ModelDetails: React.FC<ModelDetailsProps> = ({ item }) => {
       displayValue = String(value);
     }
     return (
-      <Typography
-        tag="span"
-        title={displayValue}
-        className="metadataValue"
-        dir="auto"
-      >
+      <Typography tag="span" title={displayValue} className="metadataValue" dir="auto">
         {displayValue}
       </Typography>
     );
   };
 
   const MetadataItem = ({ label, value }: { label: string; value: unknown }) => {
-    const isObject = typeof value === "object" && value !== null;
+    const isObject = typeof value === 'object' && value !== null;
     const isArray = Array.isArray(value);
     return (
       <Box
         className="metadataItem"
         sx={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          padding: "10px 6px",
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          padding: '10px 6px',
         }}
       >
         <AutoDirectionBox className="metadataLabel">
           <FormattedMessage id={`details.field.${normalizeLabel(label)}`} defaultMessage={label} />
         </AutoDirectionBox>
-        {
-          !isObject ? (
-              <TruncatedValue value={value} />
-            ) : (
-              isObject && !isArray ?
-                Object.entries(value as Record<string, unknown>).map(
-                  ([childKey, childValue]) => (
-                    <MetadataItem
-                      key={childKey}
-                      label={childKey}
-                      value={childValue}
-                    />
-                  )
-                ) : (
-                  <>
-                    {value.join(', ')}
-                  </>
-                )
-            )
-        }
+        {!isObject ? (
+          <TruncatedValue value={value} />
+        ) : isObject && !isArray ? (
+          Object.entries(value as Record<string, unknown>).map(([childKey, childValue]) => (
+            <MetadataItem key={childKey} label={childKey} value={childValue} />
+          ))
+        ) : (
+          <>{value.join(', ')}</>
+        )}
       </Box>
     );
   };
 
   return (
     <Box className="detailsContainer">
-      {
-        !!productName &&
+      {!!productName && (
         <Box className="detailsHeader">
-          <Box className={`title ${!isApproved ? 'orange' : 'green'}`}> 
-            {String(productName)}
-          </Box>
+          <Box className={`title ${!isApproved ? 'orange' : 'green'}`}>{String(productName)}</Box>
           <Box className="extractable">
-            {
-              !isApproved ?
-                <>
-                  <NotApprovedSVGIcon color="var(--mdc-theme-gc-warning)" />
-                  <FormattedMessage id="details.extractable.notApproved" />
-                </> :
-                !!typedExtractable ?
-                  <>
-                    <ApprovedSVGIcon color="var(--mdc-theme-gc-success)" />
-                    <FormattedMessage
-                      id="details.extractable.approved"
-                      values={{
-                        name: typedExtractable.authorizedBy,
-                        value: formatDate(typedExtractable.authorizedAt, locale, true)
-                      }}
-                    />
-                  </> :
-                  <></>
-            }
+            {!isApproved ? (
+              <>
+                <NotApprovedSVGIcon color="var(--mdc-theme-gc-warning)" />
+                <FormattedMessage id="details.extractable.notApproved" />
+              </>
+            ) : !!typedExtractable ? (
+              <>
+                <ApprovedSVGIcon color="var(--mdc-theme-gc-success)" />
+                <FormattedMessage
+                  id="details.extractable.approved"
+                  values={{
+                    name: typedExtractable.authorizedBy,
+                    value: formatDate(typedExtractable.authorizedAt, locale, true),
+                  }}
+                />
+              </>
+            ) : (
+              <></>
+            )}
           </Box>
         </Box>
-      }
+      )}
       <Box className="metadata">
-        {
-          metadata &&
+        {metadata &&
           orderedMetadataEntries.map(([key, value]) => (
             <MetadataItem key={key} label={key} value={value} />
-          ))
-        }
+          ))}
       </Box>
-      {
-        isEmpty(metadata) &&
+      {isEmpty(metadata) && (
         <Box className="noData">
           <FormattedMessage id="details.noData" />
         </Box>
-      }
+      )}
     </Box>
   );
 };
