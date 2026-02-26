@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.1](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.0...v3.2.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* no unnecesary form ([0218e8b](https://github.com/MapColonies/coordinate-extract-app/commit/0218e8b7c97d00723e22e2c24b86477ea19adadc))
+* no unnecesary form ([cc1fa35](https://github.com/MapColonies/coordinate-extract-app/commit/cc1fa35be740facadaee47959d8d9f6b78db0211))
+
 ## [3.2.0](https://github.com/MapColonies/coordinate-extract-app/compare/v3.1.4...v3.2.0) (2026-02-26)
 
 
