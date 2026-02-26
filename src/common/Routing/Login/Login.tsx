@@ -17,7 +17,7 @@ const Login: React.FC = () => {
   const history = useHistory();
   const location = useLocation<{ from?: string }>();
   const intl = useIntl();
-  const from = location.state?.from || "/";
+  const from = location.state?.from || '/';
   const [userName, setUserName] = useState<string>('');
   const [userPassword, setUserPassword] = useState<string>('');
   const [error, setError] = useState<string | undefined>(undefined);
@@ -41,16 +41,13 @@ const Login: React.FC = () => {
   };
 
   const isLoginInfo = (): boolean => {
-    return (!isEmpty(userName) && !isEmpty(userPassword));
+    return !isEmpty(userName) && !isEmpty(userPassword);
   };
 
   return (
     <Box className="login">
       <Box className="loginContainer LoginHeader curtainContainer">
-        {
-          isLoading &&
-          <Curtain showProgress={true}/>
-        }
+        {isLoading && <Curtain showProgress={true} />}
         <Box className="Title">
           <Icon
             icon={{
@@ -59,7 +56,7 @@ const Login: React.FC = () => {
                 <Box className="Logo">
                   <LogoSVGIcon color="var(--mdc-theme-background)" />
                 </Box>
-              )
+              ),
             }}
           />
           <FormattedMessage id="app.title" />
@@ -74,7 +71,7 @@ const Login: React.FC = () => {
             setError(undefined);
           }}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
-            const SUBMIT_KEY = 'Enter'
+            const SUBMIT_KEY = 'Enter';
             if (isLoginInfo() && e.key === SUBMIT_KEY) {
               handleLogin();
             }
@@ -92,7 +89,7 @@ const Login: React.FC = () => {
             setError(undefined);
           }}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
-            const SUBMIT_KEY = 'Enter'
+            const SUBMIT_KEY = 'Enter';
             if (isLoginInfo() && e.key === SUBMIT_KEY) {
               handleLogin();
             }
@@ -100,21 +97,20 @@ const Login: React.FC = () => {
           value={userPassword}
           autoComplete="off"
         />
-        <Button 
-          raised 
+        <Button
+          raised
           className="loginAction"
           onClick={handleLogin}
           disabled={!isLoginInfo() || !!error}
         >
-          <FormattedMessage id="auth.login.btn"/>
+          <FormattedMessage id="auth.login.btn" />
         </Button>
-        <Typography tag="div" className="error" >
-          {
-            error && isLoginInfo() &&
+        <Typography tag="div" className="error">
+          {error && isLoginInfo() && (
             <AutoDirectionBox>
               {intl.formatMessage({ id: 'auth.error' }, { value: error })}
             </AutoDirectionBox>
-          }
+          )}
         </Typography>
       </Box>
     </Box>

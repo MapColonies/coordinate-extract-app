@@ -18,13 +18,12 @@ const Layout: React.FC = (): JSX.Element => {
   }, []);
 
   const camelize = (value: string): string => {
-    return value.toLowerCase().replace(
-      /^([A-Z])|[\s-_]+(\w)/g,
-      (match, p1: string, p2: string, offset) => {
+    return value
+      .toLowerCase()
+      .replace(/^([A-Z])|[\s-_]+(\w)/g, (match, p1: string, p2: string, offset) => {
         if (p2) return p2.toUpperCase();
         return p1.toLowerCase();
-      }
-    );
+      });
   };
 
   const CustomTheme = {
@@ -60,7 +59,9 @@ const Layout: React.FC = (): JSX.Element => {
     background: '#000',
     surface: '#000',
     border: '#1e293b',
-    ...(Object.fromEntries(Object.entries(CustomTheme.darkTheme).map(([key, value]) => [camelize(key), value])))
+    ...Object.fromEntries(
+      Object.entries(CustomTheme.darkTheme).map(([key, value]) => [camelize(key), value])
+    ),
   };
 
   ((): void => {
@@ -92,7 +93,6 @@ const Layout: React.FC = (): JSX.Element => {
       </RMWCThemeProvider>
     </RMWCProvider>
   );
-
 };
 
 export default Layout;

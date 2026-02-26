@@ -11,7 +11,8 @@ import './CesiumPOI.css';
 
 const LONGITUDE_INDEX = 2;
 const LATITUDE_INDEX = 1;
-const COORD_REGEX = /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?))\s*,\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))$/;
+const COORD_REGEX =
+  /^(-?(?:[0-8]?\d(?:\.\d+)?|90(?:\.0+)?))\s*,\s*(-?(?:1[0-7]\d(?:\.\d+)?|[0-9]?\d(?:\.\d+)?|180(?:\.0+)?))$/;
 const MAX_HEIGHT = 8850; // Everest
 const MIN_HEIGHT = -450; // Dead Sea
 const NOT_AVAILABLE_TEXT = 'N/A';
@@ -36,7 +37,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
 
     return {
       lat: parseFloat(matches[LATITUDE_INDEX]),
-      lon: parseFloat(matches[LONGITUDE_INDEX])
+      lon: parseFloat(matches[LONGITUDE_INDEX]),
     };
   }, [searchText]);
 
@@ -46,7 +47,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     recalculate: finishedFlying,
     setRecalculate: (val) => {
       setFinishedFlying(val);
-    }
+    },
   });
 
   useEffect(() => {
@@ -79,9 +80,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
     <Box id="CesiumPOI">
       <IconButton
         className={`icon ${isNeedRefreshHeight ? 'blink' : ''}`}
-        icon={
-          <CoordinateSVGIcon color="var(--mdc-theme-on-surface)" />
-        }
+        icon={<CoordinateSVGIcon color="var(--mdc-theme-on-surface)" />}
         onClick={() => {
           handleClick();
         }}
@@ -106,22 +105,21 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
       <Box className="seperator" />
 
       <TextField
-        className='input height withoutRipple'
-        value={height !== undefined && height <= MAX_HEIGHT && height >= MIN_HEIGHT ? height.toFixed(2) : NOT_AVAILABLE_TEXT}
+        className="input height withoutRipple"
+        value={
+          height !== undefined && height <= MAX_HEIGHT && height >= MIN_HEIGHT
+            ? height.toFixed(2)
+            : NOT_AVAILABLE_TEXT
+        }
         label={<FormattedMessage id="panel.poi.label.meter" />}
         dir="ltr"
         readOnly
       />
 
       {parsedCoords && height !== undefined && (
-        <LocationMarker
-          latitude={parsedCoords.lat}
-          longitude={parsedCoords.lon}
-          height={height}
-        />
+        <LocationMarker latitude={parsedCoords.lat} longitude={parsedCoords.lon} height={height} />
       )}
-      {
-        parsedCoords && flyToGeometry &&
+      {parsedCoords && flyToGeometry && (
         <FlyTo
           geometry={lonLatToGeoJsonPoint(parsedCoords.lon, parsedCoords.lat, 0)}
           onFinishedFlying={(val) => {
@@ -130,7 +128,7 @@ export const CesiumPOI: React.FC<CesiumPOIProps> = (props) => {
             setFlyToGeometry(false);
           }}
         />
-      }
+      )}
     </Box>
   );
 };

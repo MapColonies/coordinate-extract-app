@@ -3,3 +3,8 @@ dist
 build
 coverage
 .git
+confd
+helm
+public
+CHANGELOG.md
+*.json

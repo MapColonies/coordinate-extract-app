@@ -5,48 +5,49 @@ const getFirstPoint = (geojson: Geometry): Position => {
   const { type, coordinates } = geojson;
 
   switch (type) {
-    case "Point":
+    case 'Point':
       return coordinates;
 
-    case "LineString":
-    case "MultiPoint":
+    case 'LineString':
+    case 'MultiPoint':
       return coordinates[0];
 
-    case "Polygon":
-    case "MultiLineString":
+    case 'Polygon':
+    case 'MultiLineString':
       return coordinates[0][0];
 
-    case "MultiPolygon":
+    case 'MultiPolygon':
       return coordinates[0][0][0];
 
     default:
-      throw new Error("Unsupported GeoJSON geometry type");
+      throw new Error('Unsupported GeoJSON geometry type');
   }
 };
 
-export const getMarker = (
-  geometry: Geometry
-): Feature<Geometry, GeoJsonProperties> => {
+export const getMarker = (geometry: Geometry): Feature<Geometry, GeoJsonProperties> => {
   return {
-    type: "Feature",
+    type: 'Feature',
     properties: {},
     geometry: {
       coordinates: getFirstPoint(geometry),
-      type: "Point"
+      type: 'Point',
     },
   };
 };
 
 export const getFeatureAndMarker = (
   geometry: Geometry
-): { feature: Feature<Geometry, GeoJsonProperties>, marker: Feature<Geometry, GeoJsonProperties> } => {
+): {
+  feature: Feature<Geometry, GeoJsonProperties>;
+  marker: Feature<Geometry, GeoJsonProperties>;
+} => {
   const feature: Feature<Geometry> = {
-    type: "Feature",
+    type: 'Feature',
     properties: {},
-    geometry
+    geometry,
   };
   return {
     feature,
-    marker: getMarker(geometry)
+    marker: getMarker(geometry),
   };
 };

@@ -44,12 +44,13 @@ export const parse3DQueryResults = (xml: string): Record<string, unknown>[] | nu
   const records = searchResults['mc:MC3DRecord'];
   if (Array.isArray(records)) {
     retValue = records;
-  }
-  else {
+  } else {
     retValue = [records];
   }
 
-  return retValue.filter((record) => ['3DPhotoRealistic', 'PointCloud'].includes(record['mc:productType']));
+  return retValue.filter((record) =>
+    ['3DPhotoRealistic', 'PointCloud'].includes(record['mc:productType'])
+  );
 };
 
 export const getNumberOfMatchedRecords = (xml: string): number => {

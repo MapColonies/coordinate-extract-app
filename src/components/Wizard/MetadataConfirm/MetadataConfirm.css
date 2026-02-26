@@ -13,7 +13,7 @@
 }
 
 .metadataConfirm .form {
-  background-color: var(--mdc-theme-surface); 
+  background-color: var(--mdc-theme-surface);
   padding: 20px;
   border-radius: var(--mdc-theme-gc-border-radius);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -38,7 +38,7 @@
   margin: 20px 20px 60px;
 }
 
-body[dir="rtl"] .metadataConfirm .formHeader {
+body[dir='rtl'] .metadataConfirm .formHeader {
   border-left: none;
   border-right: 4px solid var(--mdc-theme-primary);
 }

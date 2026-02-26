@@ -10,8 +10,7 @@ const shrinkExtremeCoordinatesInOuterRing = (geometry: Geometry, factor = 0.99) 
   const LON_THRESHOLD = 179;
 
   function maybeShrink([lon, lat]: Position) {
-    const needsShrink =
-      Math.abs(lat) > LAT_THRESHOLD || Math.abs(lon) > LON_THRESHOLD;
+    const needsShrink = Math.abs(lat) > LAT_THRESHOLD || Math.abs(lon) > LON_THRESHOLD;
     if (needsShrink) {
       return [lon * factor, lat * factor];
     }
@@ -31,33 +30,40 @@ const shrinkExtremeCoordinatesInOuterRing = (geometry: Geometry, factor = 0.99) 
     return processed;
   }
 
-  if (geometry.type === "Polygon") {
+  if (geometry.type === 'Polygon') {
     const [outer, ...holes] = geometry.coordinates;
     return {
-      type: "Polygon",
-      coordinates: [processRing(outer), ...holes]
+      type: 'Polygon',
+      coordinates: [processRing(outer), ...holes],
     } as Geometry;
   }
 
-  if (geometry.type === "MultiPolygon") {
+  if (geometry.type === 'MultiPolygon') {
     return {
-      type: "MultiPolygon",
-      coordinates: geometry.coordinates.map(polygon => {
+      type: 'MultiPolygon',
+      coordinates: geometry.coordinates.map((polygon) => {
         const [outer, ...holes] = polygon;
         return [processRing(outer), ...holes];
-      })
+      }),
     } as Geometry;
   }
 
-  throw new Error("[shrinkExtremeCoordinatesInOuterRing] Unsupported geometry type: " + geometry.type);
+  throw new Error(
+    '[shrinkExtremeCoordinatesInOuterRing] Unsupported geometry type: ' + geometry.type
+  );
 };
 
-export const getLayerFootprint = (layerFootprint: Geometry, isBbox: boolean, isPolylined = true, isConvexHull = false): Feature | FeatureCollection => {
+export const getLayerFootprint = (
+  layerFootprint: Geometry,
+  isBbox: boolean,
+  isPolylined = true,
+  isConvexHull = false
+): Feature | FeatureCollection => {
   if (layerFootprint === undefined) {
     return {
       type: 'Feature',
       // @ts-ignore
-      geometry: null
+      geometry: null,
     };
   }
 
@@ -80,11 +86,12 @@ export const getLayerFootprint = (layerFootprint: Geometry, isBbox: boolean, isP
       geometry: {
         ...geometry,
       },
-      properties: {}
+      properties: {},
     };
   } else {
     let geometry: Geometry = shrinkExtremeCoordinatesInOuterRing(layerFootprint, 0.999);
     if (isConvexHull) {
+      // prettier-ignore
       // @ts-ignore
       geometry = isPolylined ? (polygonToLine(convex(geometry)) as Feature).geometry : (convex(geometry) as Feature).geometry;
       return {
@@ -100,7 +107,7 @@ export const getLayerFootprint = (layerFootprint: Geometry, isBbox: boolean, isP
           // @ts-ignore
           ...polygonToLine(geometry),
           properties: {},
-        } as Feature
+        } as Feature;
       } else {
         return {
           type: 'Feature',

@@ -1,4 +1,9 @@
-import { CesiumGeographicTilingScheme, IBaseMap, IBaseMaps, IRasterLayer } from '@map-colonies/react-components';
+import {
+  CesiumGeographicTilingScheme,
+  IBaseMap,
+  IBaseMaps,
+  IRasterLayer,
+} from '@map-colonies/react-components';
 import { LinkType } from './Const';
 
 const ACCESS_TOKEN_INJECTION_TYPE = (window as any)._env_.ACCESS_TOKEN_INJECTION_TYPE;
@@ -25,20 +30,23 @@ const enrichBaseMaps = (baseMaps: IBaseMaps): IBaseMaps => {
             ...rasterLayer,
             options: {
               ...rasterLayer.options,
-              tilingScheme: (rasterLayer.type === LinkType.WMTS_LAYER) ? new CesiumGeographicTilingScheme() : undefined
-            }
+              tilingScheme:
+                rasterLayer.type === LinkType.WMTS_LAYER
+                  ? new CesiumGeographicTilingScheme()
+                  : undefined,
+            },
           };
-        })
-      }
-    })
-  }
+        }),
+      };
+    }),
+  };
 };
 
 class Config {
   public accessToken = {
     injectionType: ACCESS_TOKEN_INJECTION_TYPE,
     attributeName: ACCESS_TOKEN_ATTRIBUTE_NAME,
-    tokenValue: ACCESS_TOKEN_VALUE
+    tokenValue: ACCESS_TOKEN_VALUE,
   };
   public publicUrl = PUBLIC_URL || '.';
   public language = LANGUAGE || 'he';

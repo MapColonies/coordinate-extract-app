@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { CesiumCartographic, cesiumSampleTerrainMostDetailed, useCesiumMap } from '@map-colonies/react-components';
+import {
+  CesiumCartographic,
+  cesiumSampleTerrainMostDetailed,
+  useCesiumMap,
+} from '@map-colonies/react-components';
 import { isEmpty } from 'lodash';
 
 interface CesiumPOIHeightParams {
@@ -34,7 +38,7 @@ export const useCesiumHeight = (params: CesiumPOIHeightParams) => {
         await tileset.readyPromise;
 
         // Extra wait until refinement stabilizes
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           scene.postRender.addEventListener(function check() {
             // TODO: Private access
             if (!tileset._statistics?.numberOfPendingRequests) {
@@ -49,10 +53,9 @@ export const useCesiumHeight = (params: CesiumPOIHeightParams) => {
         sampledHeight = updated[0].height;
       } else {
         // cesiumSampleTerrainMostDetailed makes EXTRA REQUEST if needed
-        const updatedPositions = await cesiumSampleTerrainMostDetailed(
-          mapViewer.terrainProvider,
-          [cartographic]
-        );
+        const updatedPositions = await cesiumSampleTerrainMostDetailed(mapViewer.terrainProvider, [
+          cartographic,
+        ]);
 
         if (!isEmpty(updatedPositions)) {
           sampledHeight = updatedPositions[0].height;
@@ -76,6 +79,6 @@ export const useCesiumHeight = (params: CesiumPOIHeightParams) => {
     height,
     resetHeight: () => {
       setHeight(undefined);
-    }
+    },
   };
 };

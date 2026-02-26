@@ -4,7 +4,7 @@ import {
   CesiumColor,
   CesiumConstantProperty,
   CesiumGeojsonLayer,
-  RCesiumGeojsonLayerProps
+  RCesiumGeojsonLayerProps,
 } from '@map-colonies/react-components';
 import { FlyTo } from '../../../utils/Cesium/FlyTo';
 import { getLayerFootprint } from '../../../utils/Cesium/GetLayerFootprint';
@@ -17,14 +17,16 @@ interface CesiumGeojsonFootprintProps extends RCesiumGeojsonLayerProps {
 
 const FOOTPRINT_BORDER_COLOR = CesiumColor.DODGERBLUE;
 
-export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumGeojsonFootprintProps> = (props) => {
+export const CesiumGeojsonFootprint: React.FC<
+  RCesiumGeojsonLayerProps & CesiumGeojsonFootprintProps
+> = (props) => {
   const [layersFootprints, setlayersFootprints] = useState<FeatureCollection>();
   const [flyTo, setFlyTo] = useState<boolean>(false);
 
   useEffect(() => {
     let footprintsCollection: FeatureCollection = {
       type: 'FeatureCollection',
-      features: []
+      features: [],
     };
     const layer = props.data;
     if (layer) {
@@ -45,7 +47,7 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
         {...props}
         data={layersFootprints}
         onLoad={(geoJsonDataSouce): void => {
-          geoJsonDataSouce.entities.values.forEach(item => {
+          geoJsonDataSouce.entities.values.forEach((item) => {
             if (item.polyline) {
               (item.polyline.width as CesiumConstantProperty).setValue(FOOTPRINT_BORDER_WIDTH);
               // typings issue in CESIUM for reference https://github.com/CesiumGS/cesium/issues/8898
@@ -54,7 +56,9 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
               item.polyline.material = FOOTPRINT_BORDER_COLOR;
             }
             if (item.polygon) {
-              (item.polygon.outlineColor as CesiumConstantProperty).setValue(FOOTPRINT_BORDER_COLOR);
+              (item.polygon.outlineColor as CesiumConstantProperty).setValue(
+                FOOTPRINT_BORDER_COLOR
+              );
               // typings issue in CESIUM for reference https://github.com/CesiumGS/cesium/issues/8898
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
@@ -63,8 +67,7 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
           });
         }}
       />
-      {
-        flyTo &&
+      {flyTo && (
         <FlyTo
           key={props.id}
           geometry={props.data}
@@ -72,7 +75,7 @@ export const CesiumGeojsonFootprint: React.FC<RCesiumGeojsonLayerProps & CesiumG
             props.setIsInProgress?.(!val);
           }}
         />
-      }
+      )}
     </>
   );
 };

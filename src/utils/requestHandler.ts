@@ -16,13 +16,21 @@ const isQueryParam = (injectionType: string): boolean => {
   return injectionType.toLowerCase() === 'queryparam';
 };
 
-export const requestExecutor = async (service: IResource, method: string, params: AxiosRequestConfig): Promise<AxiosResponse> => {
+export const requestExecutor = async (
+  service: IResource,
+  method: string,
+  params: AxiosRequestConfig
+): Promise<AxiosResponse> => {
   return service.injectToken
     ? requestHandlerWithToken(service.url, method, params)
     : requestHandler(service.url, method, params);
 };
 
-export const requestHandler = async (url: string, method: string, params: AxiosRequestConfig): Promise<AxiosResponse> => {
+export const requestHandler = async (
+  url: string,
+  method: string,
+  params: AxiosRequestConfig
+): Promise<AxiosResponse> => {
   const requestConfig: AxiosRequestConfig = {
     url,
     method: method as Method,
@@ -45,7 +53,11 @@ export const requestHandler = async (url: string, method: string, params: AxiosR
     });
 };
 
-export const requestHandlerWithToken = async (url: string, method: string, params: AxiosRequestConfig): Promise<AxiosResponse> => {
+export const requestHandlerWithToken = async (
+  url: string,
+  method: string,
+  params: AxiosRequestConfig
+): Promise<AxiosResponse> => {
   const { injectionType, attributeName, tokenValue } = appConfig.accessToken;
   const reqConfig = { ...params };
 
@@ -75,11 +87,11 @@ export const execute = async (
     const response = await requestExecutor(
       {
         url,
-        injectToken
+        injectToken,
       },
       method,
       {
-        ...(data ?? {})
+        ...(data ?? {}),
       }
     );
     return response?.status === 204 ? 'OK' : response?.data;

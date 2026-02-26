@@ -29,8 +29,8 @@ export const extractableCreateAPI = async (
           username,
           password,
           authorizedBy,
-          data
-        }
+          data,
+        },
       }
     );
     return response as unknown as ExtractableRecord;
@@ -60,8 +60,8 @@ export const extractableDeleteAPI = async (
           username,
           password,
           authorizedBy,
-          data
-        }
+          data,
+        },
       }
     );
     return response as string;

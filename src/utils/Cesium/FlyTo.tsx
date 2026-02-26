@@ -12,18 +12,27 @@ interface FlyToProps {
   animation?: boolean;
 }
 
-export const lonLatToGeoJsonPoint = (longitude: number, latitude: number, height: number): Geometry => {
+export const lonLatToGeoJsonPoint = (
+  longitude: number,
+  latitude: number,
+  height: number
+): Geometry => {
   return {
     type: 'Point',
-    coordinates: [longitude, latitude, height]
+    coordinates: [longitude, latitude, height],
   };
-}
+};
 
 export const generateRectangle = (geometry: Geometry): CesiumRectangle => {
   return CesiumRectangle.fromDegrees(...bbox(geometry)) as CesiumRectangle;
 };
 
-export const FlyTo: React.FC<FlyToProps> = ({ geometry, onFinishedFlying, animation = true, tilt = false }): JSX.Element => {
+export const FlyTo: React.FC<FlyToProps> = ({
+  geometry,
+  onFinishedFlying,
+  animation = true,
+  tilt = false,
+}): JSX.Element => {
   const mapViewer = useCesiumMap();
   let rect;
 
@@ -33,25 +42,29 @@ export const FlyTo: React.FC<FlyToProps> = ({ geometry, onFinishedFlying, animat
     const rectangle = mapViewer.entities.add({
       rectangle: {
         coordinates: rect,
-        material: CesiumColor.PURPLE.withAlpha(TRANSPARENT)
+        material: CesiumColor.PURPLE.withAlpha(TRANSPARENT),
       },
     });
 
     onFinishedFlying?.(false);
 
-    mapViewer.flyTo(
-      rectangle,
-      !tilt ? {
-        offset: {
-          heading: 0,
-          pitch: -Math.PI / 2,
-          range: 0
-        },
-        duration: animation ? undefined : 0
-      } : {}
-    ).then(() => {
-      onFinishedFlying?.(true);
-    });
+    mapViewer
+      .flyTo(
+        rectangle,
+        !tilt
+          ? {
+              offset: {
+                heading: 0,
+                pitch: -Math.PI / 2,
+                range: 0,
+              },
+              duration: animation ? undefined : 0,
+            }
+          : {}
+      )
+      .then(() => {
+        onFinishedFlying?.(true);
+      });
   }, [geometry]);
 
   return <></>;

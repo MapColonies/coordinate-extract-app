@@ -5,18 +5,19 @@ import {
   find,
   getNodeAtPath,
   GetNodeKeyFunction,
-  TreeItem
+  TreeItem,
 } from 'react-sortable-tree';
 import { CatalogTreeNode } from '../../../Wizard/Wizard.types';
 
 export type FilterOpt =
   | {
-    type: 'field'
-    fieldName: string
-    fieldValue: unknown
-  } | {
-    type: 'none'
-  };
+      type: 'field';
+      fieldName: string;
+      fieldValue: unknown;
+    }
+  | {
+      type: 'none';
+    };
 
 export interface ISummary {
   all: number;
@@ -27,7 +28,11 @@ export interface ISummary {
 interface UseTreeCatalogDataParams {
   catalogTreeData: CatalogTreeNode[];
   setSelectedNode: (node: CatalogTreeNode | undefined) => void;
-  handleRowClick?: (evt: MouseEvent, rowInfo: ExtendedNodeData, additionalFields: Record<string, unknown>) => void;
+  handleRowClick?: (
+    evt: MouseEvent,
+    rowInfo: ExtendedNodeData,
+    additionalFields: Record<string, unknown>
+  ) => void;
   filter?: FilterOpt;
   setSummaryCount?: (summary: ISummary) => void;
 }
@@ -37,21 +42,26 @@ const keyFromTreeIndex: GetNodeKeyFunction = ({ treeIndex }) => treeIndex;
 export const useTreeCatalogData = (params: UseTreeCatalogDataParams) => {
   const [filteredTreeData, setFilteredTreeData] = useState(params.catalogTreeData);
 
-  const filterByPredicate = (catalogTreeData: CatalogTreeNode[], filterBy: (treeItem: TreeItem) => boolean) => {
-    const filteredCatalog = catalogTreeData?.map((tree) => {
-      const matchedChildren = (tree.children as TreeItem[])?.filter((child) => {
-        return filterBy(child);
-      });
+  const filterByPredicate = (
+    catalogTreeData: CatalogTreeNode[],
+    filterBy: (treeItem: TreeItem) => boolean
+  ) => {
+    const filteredCatalog = catalogTreeData
+      ?.map((tree) => {
+        const matchedChildren = (tree.children as TreeItem[])?.filter((child) => {
+          return filterBy(child);
+        });
 
-      if (!matchedChildren || matchedChildren.length === 0) {
-        return null;
-      }
+        if (!matchedChildren || matchedChildren.length === 0) {
+          return null;
+        }
 
-      return {
-        ...tree,
-        children: matchedChildren,
-      };
-    }).filter(Boolean);
+        return {
+          ...tree,
+          children: matchedChildren,
+        };
+      })
+      .filter(Boolean);
 
     return filteredCatalog;
   };
@@ -64,13 +74,13 @@ export const useTreeCatalogData = (params: UseTreeCatalogDataParams) => {
 
   useEffect(() => {
     switch (params.filter?.type) {
-      case "field": {
+      case 'field': {
         const filteredData = filterByField(params.filter.fieldName, params.filter.fieldValue);
         setFilteredTreeData(filteredData as CatalogTreeNode[]);
         params.setSelectedNode(undefined);
         break;
       }
-      case "none": {
+      case 'none': {
         setFilteredTreeData([...params.catalogTreeData]);
         params.setSelectedNode(undefined);
         break;
@@ -78,9 +88,14 @@ export const useTreeCatalogData = (params: UseTreeCatalogDataParams) => {
     }
   }, [params.filter]);
 
-  const handleRowClick = (evt: MouseEvent, rowInfo: ExtendedNodeData, isSelected: boolean, isShown?: boolean) => {
+  const handleRowClick = (
+    evt: MouseEvent,
+    rowInfo: ExtendedNodeData,
+    isSelected: boolean,
+    isShown?: boolean
+  ) => {
     if (!rowInfo.node.isGroup && params.catalogTreeData) {
-      let newTreeData: TreeItem[] = [...filteredTreeData as CatalogTreeNode[]];
+      let newTreeData: TreeItem[] = [...(filteredTreeData as CatalogTreeNode[])];
       if (!evt.ctrlKey) {
         // Remove prev selection
         const selection = find({
@@ -89,7 +104,7 @@ export const useTreeCatalogData = (params: UseTreeCatalogDataParams) => {
           searchMethod: (data) => data.node.isSelected,
         });
 
-        selection.matches.forEach(match => {
+        selection.matches.forEach((match) => {
           const selRowInfo = getNodeAtPath({
             treeData: newTreeData,
             path: match.path,
@@ -103,9 +118,9 @@ export const useTreeCatalogData = (params: UseTreeCatalogDataParams) => {
             newNode: {
               ...selRowInfo?.node,
               isSelected: false,
-              isShown: false
+              isShown: false,
             },
-            getNodeKey: keyFromTreeIndex
+            getNodeKey: keyFromTreeIndex,
           });
         });
       }
@@ -113,14 +128,14 @@ export const useTreeCatalogData = (params: UseTreeCatalogDataParams) => {
       const newNode = {
         ...rowInfo.node,
         isSelected,
-        isShown
+        isShown,
       };
 
       newTreeData = changeNodeAtPath({
         treeData: newTreeData,
         path: rowInfo.path,
         newNode,
-        getNodeKey: keyFromTreeIndex
+        getNodeKey: keyFromTreeIndex,
       });
 
       setFilteredTreeData(newTreeData);
@@ -131,6 +146,6 @@ export const useTreeCatalogData = (params: UseTreeCatalogDataParams) => {
   return {
     treeData: filteredTreeData,
     setTreeData: setFilteredTreeData,
-    handleRowClick
+    handleRowClick,
   };
 };

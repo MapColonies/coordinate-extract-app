@@ -4,7 +4,10 @@ import { Box } from '@map-colonies/react-components';
 import { TextField, Typography } from '@map-colonies/react-core';
 import { Curtain } from '../../../common/Curtain/curtain';
 import { useAuth } from '../../../common/Routing/Login/AuthContext';
-import { extractableCreateAPI, extractableDeleteAPI } from '../../../common/services/ExtractableService';
+import {
+  extractableCreateAPI,
+  extractableDeleteAPI,
+} from '../../../common/services/ExtractableService';
 import { IDENTIFIER_FIELD, WizardStepProps } from '../Wizard.types';
 
 import './MetadataConfirm.css';
@@ -14,7 +17,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
   selectedItem,
   shouldSubmit,
   setShouldSubmit,
-  setIsCompleted
+  setIsCompleted,
 }) => {
   const [formData, setFormData] = useState({ password: '' });
   const [isLoading, setIsLoading] = useState(false);
@@ -31,18 +34,11 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
     }
     let isMounted = true;
     const submit = async (): Promise<void> => {
-      if (
-        !selectedItem ||
-        !user?.username ||
-        !formData.password ||
-        !selectedItem.approver
-      ) {
+      if (!selectedItem || !user?.username || !formData.password || !selectedItem.approver) {
         return;
       }
       const id = selectedItem[IDENTIFIER_FIELD] as string;
-      const apiCall = selectedItem.isApproved
-        ? extractableDeleteAPI
-        : extractableCreateAPI;
+      const apiCall = selectedItem.isApproved ? extractableDeleteAPI : extractableCreateAPI;
       const response = await apiCall(
         id,
         user.username,
@@ -66,9 +62,9 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     if (value.trim() === '') {
       setIsNextBtnDisabled(true);
@@ -80,39 +76,45 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
   return (
     <Box className="metadataConfirm">
       <Box className="formContainer curtainContainer">
-        {
-          isLoading &&
-          <Curtain showProgress={true}/>
-        }
+        {isLoading && <Curtain showProgress={true} />}
         <Box className="formHeader">
-          <Typography tag="div" className="title"><FormattedMessage id="form.message.confirm.title" /></Typography>
-          <Typography tag="div" className="line"><FormattedMessage id="form.message.confirm.model" values={{ value: selectedItem?.[IDENTIFIER_FIELD] }} /></Typography>
+          <Typography tag="div" className="title">
+            <FormattedMessage id="form.message.confirm.title" />
+          </Typography>
+          <Typography tag="div" className="line">
+            <FormattedMessage
+              id="form.message.confirm.model"
+              values={{ value: selectedItem?.[IDENTIFIER_FIELD] }}
+            />
+          </Typography>
           <Typography tag="div" className="line">
             <FormattedMessage
               id="form.message.confirm.action"
               values={{
                 value: (
-                  <Typography tag="span" className={ selectedItem?.isApproved ? 'orange' : 'green' }>
-                    {
-                      selectedItem?.isApproved
-                        ? intl.formatMessage({ id: 'form.message.confirm.reject' })
-                        : intl.formatMessage({ id: 'form.message.confirm.approve' })
-                    }
+                  <Typography tag="span" className={selectedItem?.isApproved ? 'orange' : 'green'}>
+                    {selectedItem?.isApproved
+                      ? intl.formatMessage({ id: 'form.message.confirm.reject' })
+                      : intl.formatMessage({ id: 'form.message.confirm.approve' })}
                   </Typography>
-                )
+                ),
               }}
             />
           </Typography>
-          {
-            [
-              intl.formatMessage({ id: 'form.message.confirm.approver' }, { value: selectedItem?.approver as string }),
-              intl.formatMessage({ id: 'form.message.confirm.additionalInfo' }, { value: selectedItem?.additionalInfo as string })
-            ].map((line, index) => (
-              <Typography tag="div" key={index} className="line">
-                {line}
-              </Typography>
-            ))
-          }
+          {[
+            intl.formatMessage(
+              { id: 'form.message.confirm.approver' },
+              { value: selectedItem?.approver as string }
+            ),
+            intl.formatMessage(
+              { id: 'form.message.confirm.additionalInfo' },
+              { value: selectedItem?.additionalInfo as string }
+            ),
+          ].map((line, index) => (
+            <Typography tag="div" key={index} className="line">
+              {line}
+            </Typography>
+          ))}
         </Box>
         <form className="form">
           <Box className="formGroup">

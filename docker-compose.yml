@@ -1,9 +1,7 @@
 version: '3'
 
 services:
-
-  coordinate-extract-app-service: 
-
+  coordinate-extract-app-service:
     image: coordinate-extract-app:latest
 
     build: .
