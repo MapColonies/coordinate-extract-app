@@ -13,6 +13,7 @@ const DEFAULT_TERRAIN_PROVIDER_URL = (window as any)._env_.DEFAULT_TERRAIN_PROVI
 const CSW_3D_URL = (window as any)._env_.CSW_3D_URL;
 const EXTRACTABLE_MANAGER_URL = (window as any)._env_.EXTRACTABLE_MANAGER_URL;
 const SHOW_POI_TOOL = (window as any)._env_.SHOW_POI_TOOL;
+const NUMBER_OF_RECORDS_PER_PAGE = (window as any)._env_.NUMBER_OF_RECORDS_PER_PAGE;
 
 const enrichBaseMaps = (baseMaps: IBaseMaps): IBaseMaps => {
   return {
@@ -48,6 +49,7 @@ class Config {
   public csw3dUrl = CSW_3D_URL;
   public extractableManagerUrl = EXTRACTABLE_MANAGER_URL;
   public showPOITool = SHOW_POI_TOOL;
+  public numberOfRecordsPerPage = NUMBER_OF_RECORDS_PER_PAGE;
 }
 
 const appConfig = new Config(); // Singleton

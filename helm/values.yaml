@@ -113,6 +113,7 @@ env:
   csw3DUrl: ''
   extractableManagerUrl: ''
   showPOITool: true
+  numberOfRecordsPerPage: 200
 route:
   enabled: true
   annotations:
