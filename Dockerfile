@@ -6,8 +6,8 @@ RUN wget -O '/confd/confd' 'https://github.com/kelseyhightower/confd/releases/do
 RUN chmod +x /confd/confd
 # Build app
 WORKDIR /opt/myapp
-COPY package*.json yarn.lock ./
-RUN yarn install --production
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile --production
 COPY . .
 RUN yarn build
 
