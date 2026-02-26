@@ -12,7 +12,7 @@ COPY . .
 RUN yarn build
 
 
-FROM nginx:1.27-alpine AS production
+FROM nginx:1.25-alpine AS production
 # Install Node for running confd
 RUN apk add --no-cache nodejs npm
 # Change nginx config to work without root
