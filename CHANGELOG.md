@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.2](https://github.com/MapColonies/coordinate-extract-app/compare/v3.1.1...v3.1.2) (2026-02-26)
+
+
+### Bug Fixes
+
+* dockerfile ([f77ba72](https://github.com/MapColonies/coordinate-extract-app/commit/f77ba72478381d5f413c7150fd0fc61aee77fb03))
+* dockerfile ([a6cde2a](https://github.com/MapColonies/coordinate-extract-app/commit/a6cde2a6f9cbaa162503c4ff6ed5ea693fc6a62b))
+
 ## [3.1.1](https://github.com/MapColonies/coordinate-extract-app/compare/v3.1.0...v3.1.1) (2026-02-26)
 
 
