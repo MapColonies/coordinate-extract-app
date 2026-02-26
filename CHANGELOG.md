@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.5](https://github.com/MapColonies/coordinate-extract-app/compare/v3.1.4...v3.1.5) (2026-02-26)
+
+
+### Bug Fixes
+
+* catalog and extractable records paginated fetch ([4cfb951](https://github.com/MapColonies/coordinate-extract-app/commit/4cfb951576284ca085770b181383e74ef5dfda08))
+* pagination fetch extractable ([207a2fd](https://github.com/MapColonies/coordinate-extract-app/commit/207a2fd04720dacfdd1e464b9c3ae9f98b31a15a))
+* prettier ([790e9a6](https://github.com/MapColonies/coordinate-extract-app/commit/790e9a6ad6f299a3a6989e079cc6233a24fec0c3))
+
 ## [3.1.4](https://github.com/MapColonies/coordinate-extract-app/compare/v3.1.3...v3.1.4) (2026-02-26)
 
 
