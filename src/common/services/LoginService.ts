@@ -22,11 +22,11 @@ export const loginAPI = async (
       {
         data: {
           username,
-          password
+          password,
         },
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       },
       true,
       false

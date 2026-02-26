@@ -3,7 +3,7 @@ import {
   CesiumCartesian3,
   CesiumEntity,
   CesiumVerticalOrigin,
-  useCesiumMap
+  useCesiumMap,
 } from '@map-colonies/react-components';
 
 interface IPOI {
@@ -18,14 +18,17 @@ export const LocationMarker: React.FC<IPOI> = (props) => {
 
   useEffect(() => {
     if (!mapViewer) return;
-    const finalPosition = CesiumCartesian3.fromDegrees(props.longitude, props.latitude, props.height);
+    const finalPosition = CesiumCartesian3.fromDegrees(
+      props.longitude,
+      props.latitude,
+      props.height
+    );
     setPosition(finalPosition);
   }, [mapViewer, props.latitude, props.longitude, props.height]);
 
   return (
     <>
-      {
-        position !== undefined &&
+      {position !== undefined && (
         <CesiumEntity
           position={position}
           billboard={{
@@ -34,7 +37,7 @@ export const LocationMarker: React.FC<IPOI> = (props) => {
             image: 'assets/img/map-marker.gif',
           }}
         />
-      }
+      )}
     </>
   );
 };

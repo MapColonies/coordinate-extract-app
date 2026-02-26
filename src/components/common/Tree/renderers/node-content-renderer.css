@@ -31,7 +31,7 @@
   position: relative;
 }
 
-.row>* {
+.row > * {
   box-sizing: border-box;
 }
 
@@ -102,7 +102,7 @@
   text-overflow: ellipsis;
 }
 
-body[dir="rtl"] .rowLabel {
+body[dir='rtl'] .rowLabel {
   padding-left: 20px;
   padding-right: 8px;
 }
@@ -163,7 +163,10 @@ body[dir="rtl"] .rowLabel {
   transform: translate3d(-50%, -20%, 0) rotateZ(-90deg);
 }
 
-.rst__rtl .ReactVirtualized__Grid .ReactVirtualized__Grid__innerScrollContainer .expandButton::after {
+.rst__rtl
+  .ReactVirtualized__Grid
+  .ReactVirtualized__Grid__innerScrollContainer
+  .expandButton::after {
   transform: translate3d(-50%, -20%, 0) rotateZ(90deg);
 }
 
@@ -283,6 +286,6 @@ body[dir="rtl"] .rowLabel {
   border-left: 7px solid var(--rst-hover-background-color);
 }
 
-body[dir="rtl"] .rst__virtualScrollOverride {
+body[dir='rtl'] .rst__virtualScrollOverride {
   direction: rtl !important;
 }

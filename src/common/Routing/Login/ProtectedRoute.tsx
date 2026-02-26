@@ -6,18 +6,13 @@ interface ProtectedRouteProps extends RouteProps {
   component: React.ComponentType<any>;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
-  component: Component,
-  ...rest
-}) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ component: Component, ...rest }) => {
   const { user } = useAuth();
 
   return (
     <Route
       {...rest}
-      render={(props) =>
-        user ? <Component {...props} /> : <Redirect to="/login" />
-      }
+      render={(props) => (user ? <Component {...props} /> : <Redirect to="/login" />)}
     />
   );
 };

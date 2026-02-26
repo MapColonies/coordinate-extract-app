@@ -29,25 +29,25 @@ const QUICK_FILTER_BY_DATA_FIELD = MAIN_FIELD;
 export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props) => {
   const { locale } = useI18n();
   const intl = useIntl();
-  const [filterOptions, setFilterBy] = useState<FilterOpt>({ type: 'field', fieldName: FILTER_BY_DATA_FIELD, fieldValue: '' });
+  const [filterOptions, setFilterBy] = useState<FilterOpt>({
+    type: 'field',
+    fieldName: FILTER_BY_DATA_FIELD,
+    fieldValue: '',
+  });
 
   const debouncedSearch = useDebounce((value: string) => {
     setFilterBy({ type: 'field', fieldName: FILTER_BY_DATA_FIELD, fieldValue: value });
   }, 300);
 
-  const {
-    treeData,
-    handleRowClick,
-    setTreeData
-  } = useTreeCatalogData({
+  const { treeData, handleRowClick, setTreeData } = useTreeCatalogData({
     catalogTreeData: props.treeData,
     setSelectedNode: (node) => props.setSelectedNode?.(node),
     filter: filterOptions,
-    setSummaryCount: (sum) => props.setItemsSummary?.(sum)
+    setSummaryCount: (sum) => props.setItemsSummary?.(sum),
   });
 
   return (
-    <Box id='catalogTree'>
+    <Box id="catalogTree">
       <Box className="filter">
         <TextField
           type="text"
@@ -59,29 +59,40 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
           placeholder={intl.formatMessage({ id: 'tree.filter.placeholder' })}
         />
         <Box className="filterBtnsContainer">
-          <Button className="filterBtn"
-            onClick={() => setFilterBy({ type: 'none' })}>
+          <Button className="filterBtn" onClick={() => setFilterBy({ type: 'none' })}>
             <FormattedMessage id="tree.filter.all" values={{ sum: props.itemsSummary?.all }} />
           </Button>
-          <Button className="filterBtn"
-            onClick={() => setFilterBy({
-              type: 'field',
-              fieldName: QUICK_FILTER_BY_DATA_FIELD,
-              fieldValue: true
-            })}
+          <Button
+            className="filterBtn"
+            onClick={() =>
+              setFilterBy({
+                type: 'field',
+                fieldName: QUICK_FILTER_BY_DATA_FIELD,
+                fieldValue: true,
+              })
+            }
             style={{ color: 'var(--mdc-theme-gc-success)' }}
           >
-            <FormattedMessage id="tree.filter.approved" values={{ sum: props.itemsSummary?.extractable }} />
+            <FormattedMessage
+              id="tree.filter.approved"
+              values={{ sum: props.itemsSummary?.extractable }}
+            />
           </Button>
-          <Button className="filterBtn"
-            onClick={() => setFilterBy({
-              type: 'field',
-              fieldName: QUICK_FILTER_BY_DATA_FIELD,
-              fieldValue: false
-            })}
+          <Button
+            className="filterBtn"
+            onClick={() =>
+              setFilterBy({
+                type: 'field',
+                fieldName: QUICK_FILTER_BY_DATA_FIELD,
+                fieldValue: false,
+              })
+            }
             style={{ color: 'var(--mdc-theme-gc-warning)' }}
           >
-            <FormattedMessage id="tree.filter.not-approved" values={{ sum: props.itemsSummary?.notExtractable }} />
+            <FormattedMessage
+              id="tree.filter.not-approved"
+              values={{ sum: props.itemsSummary?.notExtractable }}
+            />
           </Button>
         </Box>
       </Box>
@@ -92,9 +103,7 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
         rowDirection={locale === 'he' ? 'rtl' : 'ltr'}
         treeData={treeData as CatalogTreeNode[]}
         canDrag={false}
-        onChange={(treeData) =>
-          setTreeData(treeData as CatalogTreeNode[])
-        }
+        onChange={(treeData) => setTreeData(treeData as CatalogTreeNode[])}
         generateNodeProps={(rowInfo) => {
           const node = rowInfo.node as CatalogTreeNode;
           const isSelected = node.title === props.selectedNode?.title;
@@ -104,32 +113,33 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
               handleRowClick(e, rowInfo, !rowInfo.node.isSelected);
             },
             className: isSelected ? 'selected-row' : '',
-            icons: node.isGroup ?
-              [] :
-              [
-                <LayerImageIconRenderer
-                  data={(rowInfo.node)}
-                  onClick={(evt: MouseEvent, isShown) => {
-                    let isSelected = false;
-                    if (isShown) {
-                      isSelected = true;
-                    } else if (rowInfo.node.isSelected) {
-                      isSelected = rowInfo.node.isSelected;
-                    }
+            icons: node.isGroup
+              ? []
+              : [
+                  <LayerImageIconRenderer
+                    data={rowInfo.node}
+                    onClick={(evt: MouseEvent, isShown) => {
+                      let isSelected = false;
+                      if (isShown) {
+                        isSelected = true;
+                      } else if (rowInfo.node.isSelected) {
+                        isSelected = rowInfo.node.isSelected;
+                      }
 
-                    handleRowClick(evt, rowInfo, isSelected, isShown);
-                  }}
-                />,
-              ],
+                      handleRowClick(evt, rowInfo, isSelected, isShown);
+                    }}
+                  />,
+                ],
             buttons: [
-              rowInfo.node?.isApproved ?
+              rowInfo.node?.isApproved ? (
                 <ApprovedSVGIcon color="var(--mdc-theme-gc-success)" />
-                :
+              ) : (
                 <NotApprovedSVGIcon color="var(--mdc-theme-gc-warning)" />
-            ]
+              ),
+            ],
           };
         }}
       />
     </Box>
-  )
+  );
 };

@@ -42,40 +42,53 @@ export const Wizard: React.FC = () => {
       wizardRef.current?.goToTab(0);
     }
   }, [isCompleted]);
-  
+
   const handleComplete = async () => {
     setShouldSubmit(true);
   };
 
   return (
     <Box className="wizardWrapper">
-      <SnackbarQueue
-        messages={SnackbarManager.messages}
-        leading
-        stacked
-      />
+      <SnackbarQueue messages={SnackbarManager.messages} leading stacked />
       <FormWizard
         ref={wizardRef}
-        stepSize='xs'
-        color='var(--mdc-theme-primary)'
+        stepSize="xs"
+        color="var(--mdc-theme-primary)"
         backButtonTemplate={(handlePrevious) => (
-          <Button raised onClick={handlePrevious} className={`${locale === 'he' ? 'wizard-footer-right' : 'wizard-footer-left'}`}>
+          <Button
+            raised
+            onClick={handlePrevious}
+            className={`${locale === 'he' ? 'wizard-footer-right' : 'wizard-footer-left'}`}
+          >
             {intl.formatMessage({ id: 'button.back' })}
           </Button>
         )}
         nextButtonTemplate={(handleNext) => (
-          <Button raised disabled={disabled} onClick={handleNext} className={`${locale === 'he' ? 'wizard-footer-left' : 'wizard-footer-right'}`}>
+          <Button
+            raised
+            disabled={disabled}
+            onClick={handleNext}
+            className={`${locale === 'he' ? 'wizard-footer-left' : 'wizard-footer-right'}`}
+          >
             {intl.formatMessage({ id: 'button.next' })}
           </Button>
         )}
         finishButtonTemplate={(handleComplete) => (
-          <Button raised disabled={disabled} onClick={handleComplete} className={`${locale === 'he' ? 'wizard-footer-left' : 'wizard-footer-right'}`}>
+          <Button
+            raised
+            disabled={disabled}
+            onClick={handleComplete}
+            className={`${locale === 'he' ? 'wizard-footer-left' : 'wizard-footer-right'}`}
+          >
             {intl.formatMessage({ id: 'button.finish' })}
           </Button>
         )}
         onComplete={handleComplete}
       >
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.selection' })} icon={<SelectionSVGIcon color="currentColor" />}>
+        <FormWizard.TabContent
+          title={intl.formatMessage({ id: 'step.selection' })}
+          icon={<SelectionSVGIcon color="currentColor" />}
+        >
           <ModelSelection
             catalogTreeData={catalogTree}
             setCatalogTreeData={setCatalogTree}
@@ -86,38 +99,54 @@ export const Wizard: React.FC = () => {
             setItemsSummary={setItemsSummary}
           />
         </FormWizard.TabContent>
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.details' })} icon={<DetailsSVGIcon color="currentColor"/>}>
+        <FormWizard.TabContent
+          title={intl.formatMessage({ id: 'step.details' })}
+          icon={<DetailsSVGIcon color="currentColor" />}
+        >
           <Step selectedItem={selectedItem} title="panel.history.title">
             <MetadataHistory
-              setIsNextBtnDisabled={(val) => { setDisabled(val) }}
+              setIsNextBtnDisabled={(val) => {
+                setDisabled(val);
+              }}
               selectedItem={selectedItem}
             />
           </Step>
         </FormWizard.TabContent>
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.update' })} icon={<UpdateSVGIcon color="currentColor" />}>
+        <FormWizard.TabContent
+          title={intl.formatMessage({ id: 'step.update' })}
+          icon={<UpdateSVGIcon color="currentColor" />}
+        >
           <Step selectedItem={selectedItem} title="panel.updater.title">
             <MetadataForm
-              setIsNextBtnDisabled={(val) => { setDisabled(val) }}
+              setIsNextBtnDisabled={(val) => {
+                setDisabled(val);
+              }}
               selectedItem={selectedItem}
-              setSelectedItem={(treeNode) => { setSelectedItem(treeNode); }}
+              setSelectedItem={(treeNode) => {
+                setSelectedItem(treeNode);
+              }}
             />
           </Step>
         </FormWizard.TabContent>
-        <FormWizard.TabContent title={intl.formatMessage({ id: 'step.confirm' })} icon={<ConfirmSVGIcon color="currentColor" />}>
+        <FormWizard.TabContent
+          title={intl.formatMessage({ id: 'step.confirm' })}
+          icon={<ConfirmSVGIcon color="currentColor" />}
+        >
           <Step selectedItem={selectedItem} title="panel.confirm.title">
-            {
-              selectedItem &&
+            {selectedItem && (
               <MetadataConfirm
-                setIsNextBtnDisabled={(val) => { setDisabled(val) }}
+                setIsNextBtnDisabled={(val) => {
+                  setDisabled(val);
+                }}
                 selectedItem={selectedItem}
                 shouldSubmit={shouldSubmit}
                 setShouldSubmit={setShouldSubmit}
                 setIsCompleted={setIsCompleted}
               />
-            }
+            )}
           </Step>
         </FormWizard.TabContent>
-      </FormWizard >
+      </FormWizard>
     </Box>
   );
 };

@@ -108,21 +108,24 @@ const Component = () => {
 
 ## Deployment
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > We depend on `Red-Hat Yaml Extension` for validating the values files against the relevant schemas from helm-common.
 > That means, you should install the extension from vscode in order to be able to edit values files according to our schemas.
 
 To update helm dependencies
+
 ```bash
 yarn helm-update
 ```
 
-In order to create/renew values schemas 
+In order to create/renew values schemas
+
 ```bash
 yarn helm-assets
 ```
 
 To deploy: helm values **MUST** be combined from global.yaml and values.yaml (use npm script!)
+
 ```bash
 yarn helm-install
 ```

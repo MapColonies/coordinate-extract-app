@@ -15,10 +15,10 @@ export const Terrain: React.FC = () => {
 
   mapViewer.scene.globe.depthTestAgainstTerrain = true;
   mapViewer.scene.globe.baseColor = CesiumColor.WHITESMOKE;
-  
+
   useEffect(() => {
-    function isTerrainTileError (e: Record<string, unknown>): boolean {
-      return e.level as number > NONE;
+    function isTerrainTileError(e: Record<string, unknown>): boolean {
+      return (e.level as number) > NONE;
     }
 
     function handleTerrainError(e: unknown): void {

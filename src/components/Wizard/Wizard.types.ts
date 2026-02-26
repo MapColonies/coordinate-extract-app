@@ -3,8 +3,8 @@ import { ISummary } from '../common/Tree/hooks/treeCatalogData.hook';
 
 export interface CatalogTreeNode extends TreeItem {
   isGroup?: boolean;
-  "mc:footprint"?: string;
-  "mc:links"?: Record<string, unknown>;
+  'mc:footprint'?: string;
+  'mc:links'?: Record<string, unknown>;
   [key: string]: unknown;
 }
 

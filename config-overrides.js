@@ -13,28 +13,28 @@ module.exports = function override(config, env) {
     os: require.resolve('os-browserify/browser'),
     buffer: require.resolve('buffer'),
     stream: require.resolve('stream-browserify'),
-    zlib: require.resolve("browserify-zlib")
+    zlib: require.resolve('browserify-zlib'),
   };
 
   config.resolve.alias = {
     ...config.resolve.alias,
     'react-dnd': path.resolve(__dirname, './node_modules/react-dnd'),
     'react-dnd-html5-backend': path.resolve(__dirname, './node_modules/react-dnd-html5-backend'),
-  }
+  };
 
   config.plugins.push(
     new webpack.ProvidePlugin({
       process: 'process/browser',
       Buffer: ['buffer', 'Buffer'],
-    }),
+    })
   );
 
   config.module.rules.push({
     test: /\.m?js/,
     resolve: {
-      fullySpecified: false
-    }
-  })
+      fullySpecified: false,
+    },
+  });
 
   return config;
-}
+};
