@@ -3,6 +3,7 @@
 
   "err.code.INVALID_CREDENTIALS": "Invalid username or password",
   "err.code.INVALID_RECORD_NAME": "Model not found",
+  "err.code.INVALID_RECORD_NAME_ANOTHER_SITE": "Model not found in all site(s)",
 
   "auth.login.btn": "Login",
   "auth.logout.btn": "Logout",

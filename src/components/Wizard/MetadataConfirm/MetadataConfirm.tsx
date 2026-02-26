@@ -117,7 +117,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
             </Typography>
           ))}
         </Box>
-        <form className="form">
+        <Box className="form">
           <Box className="formGroup">
             <label htmlFor="password">
               <FormattedMessage id="form.password.label" />
@@ -128,13 +128,19 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
               name="password"
               value={formData.password}
               onChange={handleChange}
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
+                const SUBMIT_KEY = 'Enter';
+                if (formData.password && e.key === SUBMIT_KEY) {
+                  setShouldSubmit?.(true);
+                }
+              }}
               required
               className="textField"
               placeholder={intl.formatMessage({ id: 'form.password.placeholder' })}
               autoComplete="off"
             />
           </Box>
-        </form>
+        </Box>
       </Box>
     </Box>
   );

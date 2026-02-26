@@ -3,6 +3,7 @@
 
   "err.code.INVALID_CREDENTIALS": "שם משתמש או סיסמה לא חוקיים",
   "err.code.INVALID_RECORD_NAME": "מודל לא קיים",
+  "err.code.INVALID_RECORD_NAME_ANOTHER_SITE": "מודל לא קיים בכל האתרים",
 
   "auth.login.btn": "התחבר",
   "auth.logout.btn": "התנתק",
