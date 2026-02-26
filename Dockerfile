@@ -68,7 +68,7 @@ COPY --from=prepare /opt/myapp/public/ ./
 COPY --from=prepare /opt/myapp/build/ ./
 
 # Copy confd
-RUN mkdir -p ../confd
+RUN mv ./confd ../
 COPY --from=prepare /confd/confd ../confd/
 
 # Fix permissions for non-root
