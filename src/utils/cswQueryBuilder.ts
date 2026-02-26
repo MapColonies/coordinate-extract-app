@@ -1,6 +1,18 @@
 import { XMLParser } from 'fast-xml-parser';
+import appConfig from './Config';
 
-export const get3DRecordsXML = () => {
+const extractSearchResults = (xml: string) => {
+  const parser = new XMLParser({ ignoreAttributes: false });
+  const parsed = parser.parse(xml);
+
+  return parsed?.['csw:GetRecordsResponse']?.['csw:SearchResults'];
+};
+
+export const get3DRecordsXML = (
+  resultType: string = 'results',
+  maxRecords: number = appConfig.numberOfRecordsPerPage,
+  startPosition: number = 1
+) => {
   return `
     <csw:GetRecords
       xmlns="http://www.opengis.net/cat/csw/2.0.2"
@@ -12,7 +24,9 @@ export const get3DRecordsXML = () => {
       xmlns:dct="http://purl.org/dc/terms/"
       service="CSW"
       version="2.0.2"
-      resultType="results"
+      resultType="${resultType}"
+      maxRecords="${maxRecords}"
+      startPosition="${startPosition}"
       outputSchema="http://schema.mapcolonies.com/3d">
         <csw:Query typeNames="csw:Record">
           <csw:ElementSetName>full</csw:ElementSetName>
@@ -22,14 +36,12 @@ export const get3DRecordsXML = () => {
 
 export const parse3DQueryResults = (xml: string): Record<string, unknown>[] | null => {
   let retValue = null;
-  const parser = new XMLParser({ ignoreAttributes: false });
-  const parsedQuery = parser.parse(xml);
-  const recordsResult = parsedQuery['csw:GetRecordsResponse']['csw:SearchResults'];
-  if (recordsResult['@_numberOfRecordsMatched'] === '0') {
+  const searchResults = extractSearchResults(xml);
+  if (searchResults?.['@_numberOfRecordsMatched'] === '0') {
     console.error(`Didn't find matched IDs!`);
     return retValue;
   }
-  const records = parsedQuery['csw:GetRecordsResponse']['csw:SearchResults']['mc:MC3DRecord'];
+  const records = searchResults['mc:MC3DRecord'];
   if (Array.isArray(records)) {
     retValue = records;
   } else {
@@ -39,4 +51,9 @@ export const parse3DQueryResults = (xml: string): Record<string, unknown>[] | nu
   return retValue.filter((record) =>
     ['3DPhotoRealistic', 'PointCloud'].includes(record['mc:productType'])
   );
+};
+
+export const getNumberOfMatchedRecords = (xml: string): number => {
+  const searchResults = extractSearchResults(xml);
+  return Number(searchResults?.['@_numberOfRecordsMatched'] ?? 0);
 };

@@ -13,5 +13,6 @@ keys = [
   "/configuration/default/terrain/provider/url",
   "/configuration/csw/3d/url",
   "/configuration/extractable/manager/url",
-  "/configuration/show/poi/tool"
+  "/configuration/show/poi/tool",
+  "/configuration/number/of/records/per/page"
 ]

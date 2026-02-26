@@ -10,5 +10,6 @@ window._env_ = {
   DEFAULT_TERRAIN_PROVIDER_URL: '{{ getv "/configuration/default/terrain/provider/url" "" }}',
   CSW_3D_URL: '{{ getv "/configuration/csw/3d/url" ""}}',
   EXTRACTABLE_MANAGER_URL: '{{ getv "/configuration/extractable/manager/url" ""}}',
-  SHOW_POI_TOOL: {{ getv "/configuration/show/poi/tool" "true"}}
+  SHOW_POI_TOOL: {{ getv "/configuration/show/poi/tool" "true"}},
+  NUMBER_OF_RECORDS_PER_PAGE: {{ getv "/configuration/number/of/records/per/page" "200"}}
 };
