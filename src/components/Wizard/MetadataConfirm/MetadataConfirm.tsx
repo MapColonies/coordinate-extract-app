@@ -102,22 +102,20 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
               }}
             />
           </Typography>
-          {
-            [
-              intl.formatMessage(
-                { id: 'form.message.confirm.approver' },
-                { value: selectedItem?.approver as string }
-              ),
-              intl.formatMessage(
-                { id: 'form.message.confirm.remarks' },
-                { value: selectedItem?.remarks as string }
-              )
-            ].map((line, index) => (
-              <Typography tag="div" key={index} className="line">
-                {line}
-              </Typography>
-            ))
-          }
+          {[
+            intl.formatMessage(
+              { id: 'form.message.confirm.approver' },
+              { value: selectedItem?.approver as string }
+            ),
+            intl.formatMessage(
+              { id: 'form.message.confirm.remarks' },
+              { value: selectedItem?.remarks as string }
+            ),
+          ].map((line, index) => (
+            <Typography tag="div" key={index} className="line">
+              {line}
+            </Typography>
+          ))}
         </Box>
         <form className="form">
           <Box className="formGroup">

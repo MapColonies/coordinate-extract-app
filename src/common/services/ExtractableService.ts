@@ -32,7 +32,7 @@ export const extractableCreateAPI = async (
           authorizedBy,
           remarks,
           data,
-        }
+        },
       }
     );
     return response as unknown as ExtractableRecord;

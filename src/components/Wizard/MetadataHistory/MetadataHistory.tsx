@@ -56,13 +56,12 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({
             <Box key={item.id} className={`historyCard ${index === 0 ? 'active' : ''}`}>
               <Box className="cardHeader">
                 <Box className="cardTitle">
-                  <AutoDirectionBox>
-                    {formatDate(item.authorizedAt, locale, true)}
-                  </AutoDirectionBox>
-                  <Typography tag="span" className={`${item.action.toLowerCase() === 'create' ? 'green' : 'orange'}`}>
-                    <FormattedMessage
-                      id={`history.action.${item.action.toLowerCase()}`}
-                    />
+                  <AutoDirectionBox>{formatDate(item.authorizedAt, locale, true)}</AutoDirectionBox>
+                  <Typography
+                    tag="span"
+                    className={`${item.action.toLowerCase() === 'create' ? 'green' : 'orange'}`}
+                  >
+                    <FormattedMessage id={`history.action.${item.action.toLowerCase()}`} />
                   </Typography>
                   <Typography tag="span">
                     <FormattedMessage
@@ -71,15 +70,10 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({
                     />
                   </Typography>
                 </Box>
-                <Box className="cardSecondary">
-                  {item.username}
-                </Box>
+                <Box className="cardSecondary">{item.username}</Box>
               </Box>
               <Box className="cardContent">
-                <FormattedMessage
-                  id={`history.action.remarks`}
-                  values={{ value: item.remarks }}
-                />
+                <FormattedMessage id={`history.action.remarks`} values={{ value: item.remarks }} />
               </Box>
             </Box>
           ))}

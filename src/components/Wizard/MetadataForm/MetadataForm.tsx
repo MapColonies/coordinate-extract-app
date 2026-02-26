@@ -16,7 +16,7 @@ export const MetadataForm: React.FC<WizardStepProps> = ({
 
   const [formData, setFormData] = useState<{ approver: string; remarks: string }>({
     approver: typeof selectedItem?.approver === 'string' ? selectedItem.approver : '',
-    remarks: typeof selectedItem?.remarks === 'string' ? selectedItem.remarks : ''
+    remarks: typeof selectedItem?.remarks === 'string' ? selectedItem.remarks : '',
   });
 
   useEffect(() => {
