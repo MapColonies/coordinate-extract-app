@@ -28,7 +28,7 @@ RUN yarn build
 
 
 
-FROM nginx:1.25-alpine AS production
+FROM nginx:1.27-alpine AS production
 
 # Install Node 24 (needed for confd runtime if required)
 RUN apk add --no-cache nodejs
@@ -47,7 +47,7 @@ RUN sed -i 's#listen       80;#listen       8080;#g' /etc/nginx/conf.d/default.c
           add_header "Cache-Control" "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";\n\
         }' /etc/nginx/conf.d/default.conf && \
     sed -i '/user  nginx;/d' /etc/nginx/nginx.conf && \
-    sed -i 's,/var/run/nginx.pid,/tmp/nginx.pid,' /etc/nginx/nginx.conf && \
+    sed -i 's,/run/nginx.pid,/tmp/nginx.pid,' /etc/nginx/nginx.conf && \
     sed -i "/^http {/a \
     server_tokens off;\n\
     proxy_temp_path /tmp/proxy_temp;\n\
