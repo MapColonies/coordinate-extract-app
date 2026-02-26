@@ -25,9 +25,7 @@ const fetchAll3DRecordsParallel = async () => {
 
   const promises = Array.from({ length: totalPages }, (_, i) => {
     const startPosition = i * PAGE_SIZE + 1;
-
     const xml = get3DRecordsXML('results', PAGE_SIZE, startPosition);
-
     return execute(appConfig.csw3dUrl, 'POST', { data: xml });
   });
 
