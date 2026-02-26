@@ -10,9 +10,9 @@ import './MetadataForm.css';
 export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, selectedItem, setSelectedItem }) => {
   const intl = useIntl();
 
-  const [formData, setFormData] = useState<{ approver: string; additionalInfo: string }>({
+  const [formData, setFormData] = useState<{ approver: string; remarks: string }>({
     approver: typeof selectedItem?.approver === 'string' ? selectedItem.approver : '',
-    additionalInfo: typeof selectedItem?.additionalInfo === 'string' ? selectedItem.additionalInfo : ''
+    remarks: typeof selectedItem?.remarks === 'string' ? selectedItem.remarks : ''
   });
 
   useEffect(() => {
@@ -69,17 +69,17 @@ export const MetadataForm: React.FC<WizardStepProps> = ({ setIsNextBtnDisabled, 
             />
           </Box>
           <Box className="formGroup">
-            <label htmlFor="additionalInfo">
-              <FormattedMessage id="form.additionalInfo.label" />
+            <label htmlFor="remarks">
+              <FormattedMessage id="form.remarks.label" />
             </label>
             <TextField
-              id="additionalInfo"
-              name="additionalInfo"
-              value={formData.additionalInfo}
+              id="remarks"
+              name="remarks"
+              value={formData.remarks}
               onChange={handleChange}
               textarea={true}
               rows={4}
-              placeholder={intl.formatMessage({ id: 'form.additionalInfo.placeholder' })}
+              placeholder={intl.formatMessage({ id: 'form.remarks.placeholder' })}
             />
           </Box>
         </form>

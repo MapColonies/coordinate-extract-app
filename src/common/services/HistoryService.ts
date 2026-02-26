@@ -9,6 +9,7 @@ export interface HistoryRecord {
   authorizedBy: string;
   action: string;
   authorizedAt: string;
+  remarks: string;
 }
 
 export const historyAPI = async (

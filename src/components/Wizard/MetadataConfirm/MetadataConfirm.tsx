@@ -48,7 +48,8 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
         user.username,
         formData.password,
         selectedItem.approver as string,
-        { additionalInfo: selectedItem.additionalInfo },
+        selectedItem.remarks as string,
+        {},
         setIsLoading
       );
       if (response && isMounted) {
@@ -106,7 +107,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
           {
             [
               intl.formatMessage({ id: 'form.message.confirm.approver' }, { value: selectedItem?.approver as string }),
-              intl.formatMessage({ id: 'form.message.confirm.additionalInfo' }, { value: selectedItem?.additionalInfo as string })
+              intl.formatMessage({ id: 'form.message.confirm.remarks' }, { value: selectedItem?.remarks as string })
             ].map((line, index) => (
               <Typography tag="div" key={index} className="line">
                 {line}

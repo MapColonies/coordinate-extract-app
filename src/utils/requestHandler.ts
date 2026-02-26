@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 import { SnackbarManager } from '../components/common/Snackbar/SnackbarManager';
 import appConfig from './Config';
 import { getSnackbarErrorMessage } from './snackbarError';
+import { get } from 'lodash';
 
 interface IResource {
   url: string;
@@ -85,7 +86,12 @@ export const execute = async (
     return response?.status === 204 ? 'OK' : response?.data;
   } catch (error) {
     if (submitErrorToSnackbarQueue) {
-      SnackbarManager.notify(getSnackbarErrorMessage((error as any).message as string));
+      const respData = get(error, 'response.data');
+      let errText = (error as any).message;
+      if (respData) {
+        errText = `err.code.${respData.code}`;
+      }
+      SnackbarManager.notify(getSnackbarErrorMessage(errText, respData ? true : false));
     }
     throw error;
   }
