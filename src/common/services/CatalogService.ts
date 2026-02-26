@@ -1,7 +1,11 @@
 import { createCatalogTree } from '../../components/common/Tree/TreeGroup';
 import { IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
 import appConfig from '../../utils/Config';
-import { get3DRecordsXML, getNumberOfMatchedRecords, parse3DQueryResults } from '../../utils/cswQueryBuilder';
+import {
+  get3DRecordsXML,
+  getNumberOfMatchedRecords,
+  parse3DQueryResults,
+} from '../../utils/cswQueryBuilder';
 import { loadingUpdater } from '../../utils/loadingUpdater';
 import { execute } from '../../utils/requestHandler';
 import { ExtractableRecord, ExtractableResponse } from './ExtractableService';
@@ -12,11 +16,9 @@ const EXTRACTABLE_PAGE_SIZE = appConfig.numberOfExtractablesPerPage;
 const fetchAll3DRecordsParallel = async () => {
   const numberOfRecordsXml = get3DRecordsXML('hits', 0);
 
-  const resNumberOfRecords = await execute(
-    `${appConfig.csw3dUrl}`,
-    'POST',
-    { data: numberOfRecordsXml }
-  );
+  const resNumberOfRecords = await execute(`${appConfig.csw3dUrl}`, 'POST', {
+    data: numberOfRecordsXml,
+  });
 
   const totalRecords = getNumberOfMatchedRecords(resNumberOfRecords as string);
   const totalPages = Math.ceil(totalRecords / PAGE_SIZE);
@@ -24,23 +26,15 @@ const fetchAll3DRecordsParallel = async () => {
   const promises = Array.from({ length: totalPages }, (_, i) => {
     const startPosition = i * PAGE_SIZE + 1;
 
-    const xml = get3DRecordsXML(
-      'results',
-      PAGE_SIZE,
-      startPosition,
-    );
+    const xml = get3DRecordsXML('results', PAGE_SIZE, startPosition);
 
-    return execute(
-      appConfig.csw3dUrl,
-      'POST',
-      { data: xml }
-    );
+    return execute(appConfig.csw3dUrl, 'POST', { data: xml });
   });
 
   const responses = await Promise.all(promises);
 
-  const allRecords = responses.flatMap((res) =>
-    parse3DQueryResults(res as string) as Record<string, unknown>[]
+  const allRecords = responses.flatMap(
+    (res) => parse3DQueryResults(res as string) as Record<string, unknown>[]
   );
 
   return allRecords;
@@ -51,17 +45,17 @@ const fetchExtractable = async () => {
   let startIndex = 1;
 
   while (startIndex > 0) {
-    const extractableResponse: ExtractableResponse = await execute(
+    const extractableResponse: ExtractableResponse = (await execute(
       `${appConfig.extractableManagerUrl}/records?startPosition=${startIndex}&maxRecords=${EXTRACTABLE_PAGE_SIZE}`,
       'GET'
-    ) as unknown as ExtractableResponse;
+    )) as unknown as ExtractableResponse;
     if (Array.isArray(extractableResponse.records)) {
       extract.push(...extractableResponse.records);
       startIndex = extractableResponse.nextRecord as number;
     }
   }
   return extract;
-}
+};
 
 export const fetchCatalog = async (setLoading: loadingUpdater) => {
   let records;
@@ -80,8 +74,7 @@ export const fetchCatalog = async (setLoading: loadingUpdater) => {
     return {
       data: createCatalogTree(enriched),
       sumAll: catalogRecords.length,
-      sumExtractable:
-        catalogRecords.length > 0 ? extractables.length : catalogRecords.length,
+      sumExtractable: catalogRecords.length > 0 ? extractables.length : catalogRecords.length,
       sumNotExtractable:
         catalogRecords.length > 0
           ? catalogRecords.length - extractables.length

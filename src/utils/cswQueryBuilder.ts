@@ -56,4 +56,4 @@ export const parse3DQueryResults = (xml: string): Record<string, unknown>[] | nu
 export const getNumberOfMatchedRecords = (xml: string): number => {
   const searchResults = extractSearchResults(xml);
   return Number(searchResults?.['@_numberOfRecordsMatched'] ?? 0);
-}
+};

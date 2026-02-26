@@ -6,7 +6,7 @@ export interface ExtractableResponse {
   nextRecord: number;
   numberOfRecords: number;
   numberOfRecordsReturned: number;
-  records: ExtractableRecord[]
+  records: ExtractableRecord[];
 }
 
 export interface ExtractableRecord {
