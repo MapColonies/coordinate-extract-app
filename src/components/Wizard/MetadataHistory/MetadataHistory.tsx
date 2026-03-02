@@ -65,7 +65,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({
                   </Typography>
                   <Typography tag="span">
                     <FormattedMessage
-                      id={`history.action.authorizedBy`}
+                      id="history.action.authorizedBy"
                       values={{ value: item.authorizedBy }}
                     />
                   </Typography>
@@ -73,7 +73,7 @@ export const MetadataHistory: React.FC<WizardStepProps> = ({
                 <Box className="cardSecondary">{item.username}</Box>
               </Box>
               <Box className="cardContent">
-                <FormattedMessage id={`history.action.remarks`} values={{ value: item.remarks }} />
+                <FormattedMessage id="history.action.remarks" values={{ value: item.remarks }} />
               </Box>
             </Box>
           ))}

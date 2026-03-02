@@ -11,19 +11,19 @@ import { execute } from '../../utils/requestHandler';
 import { ExtractableRecord, ExtractableResponse } from './ExtractableService';
 
 const PAGE_SIZE = appConfig.numberOfRecordsPerPage;
-const EXTRACTABLE_PAGE_SIZE = appConfig.numberOfExtractablesPerPage;
+const EXTRACTABLES_PAGE_SIZE = appConfig.numberOfExtractablesPerPage;
 
-const fetchAll3DRecordsParallel = async () => {
+const fetchAll3DRecordsInParallel = async () => {
   const numberOfRecordsXml = get3DRecordsXML('hits', 0);
 
   const resNumberOfRecords = await execute(`${appConfig.csw3dUrl}`, 'POST', {
     data: numberOfRecordsXml,
   });
 
-  const totalRecords = getNumberOfMatchedRecords(resNumberOfRecords as string);
-  const totalPages = Math.ceil(totalRecords / PAGE_SIZE);
+  const numberOfRecords = getNumberOfMatchedRecords(resNumberOfRecords as string);
+  const numberOfPages = Math.ceil(numberOfRecords / PAGE_SIZE);
 
-  const promises = Array.from({ length: totalPages }, (_, i) => {
+  const promises = Array.from({ length: numberOfPages }, (_, i) => {
     const startPosition = i * PAGE_SIZE + 1;
     const xml = get3DRecordsXML('results', PAGE_SIZE, startPosition);
     return execute(appConfig.csw3dUrl, 'POST', { data: xml });
@@ -38,21 +38,21 @@ const fetchAll3DRecordsParallel = async () => {
   return allRecords;
 };
 
-const fetchExtractable = async () => {
-  let extract: ExtractableRecord[] = [];
+const fetchExtractables = async () => {
+  let extractables: ExtractableRecord[] = [];
   let startIndex = 1;
 
   while (startIndex > 0) {
     const extractableResponse: ExtractableResponse = (await execute(
-      `${appConfig.extractableManagerUrl}/records?startPosition=${startIndex}&maxRecords=${EXTRACTABLE_PAGE_SIZE}`,
+      `${appConfig.extractableManagerUrl}/records?startPosition=${startIndex}&maxRecords=${EXTRACTABLES_PAGE_SIZE}`,
       'GET'
     )) as unknown as ExtractableResponse;
     if (Array.isArray(extractableResponse.records)) {
-      extract.push(...extractableResponse.records);
+      extractables.push(...extractableResponse.records);
       startIndex = extractableResponse.nextRecord as number;
     }
   }
-  return extract;
+  return extractables;
 };
 
 export const fetchCatalog = async (setLoading: loadingUpdater) => {
@@ -61,8 +61,8 @@ export const fetchCatalog = async (setLoading: loadingUpdater) => {
 
   try {
     setLoading(true);
-    records = await fetchAll3DRecordsParallel();
-    extractables = await fetchExtractable();
+    records = await fetchAll3DRecordsInParallel();
+    extractables = await fetchExtractables();
   } catch (error) {
     console.error('Failed to fetch catalog/extractable data:', error);
   } finally {
