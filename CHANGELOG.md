@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.3](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.2...v3.2.3) (2026-03-03)
+
+
+### Bug Fixes
+
+* unsync extractables and catalog records ([f85784b](https://github.com/MapColonies/coordinate-extract-app/commit/f85784b3502330fecc4d89cf85591734ca1689df))
+
 ## [3.2.2](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.1...v3.2.2) (2026-03-03)
 
 
