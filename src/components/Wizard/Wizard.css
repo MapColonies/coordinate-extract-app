@@ -37,3 +37,23 @@ body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left 
 .wizardWrapper .react-form-wizard .wizard-tab-content {
   padding: 10px 20px;
 }
+
+.wizardWrapper .buttonDisabled button {
+  opacity: 0.5;
+}
+
+.wizardWrapper .buttonDisabled button.mdc-button {
+  cursor: text;
+}
+
+.wizardWrapper .buttonDisabled button.mdc-button.mdc-ripple-upgraded--background-focused .mdc-button__ripple::before, .mdc-button:not(.mdc-ripple-upgraded):focus .mdc-button__ripple::before {
+  opacity: 0;
+}
+
+.wizardWrapper .buttonDisabled button.mdc-snackbar__action.mdc-ripple-upgraded {
+  --mdc-ripple-fg-opacity: 0;
+}
+
+.wizardWrapper .buttonDisabled button.mdc-button:hover .mdc-button__ripple::before{
+  opacity: 0;
+}

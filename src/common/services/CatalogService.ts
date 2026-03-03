@@ -1,5 +1,5 @@
 import { createCatalogTree } from '../../components/common/Tree/TreeGroup';
-import { IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
+import { CatalogTreeNode, IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
 import appConfig from '../../utils/Config';
 import {
   get3DRecordsXML,
@@ -12,6 +12,16 @@ import { ExtractableRecord, ExtractableResponse } from './ExtractableService';
 
 const PAGE_SIZE = appConfig.numberOfRecordsPerPage;
 const EXTRACTABLE_PAGE_SIZE = appConfig.numberOfExtractablesPerPage;
+const EMPTY = 0;
+const NOT_EXIST_TREE_NAME = '!!NOT_EXIST!!'
+
+export const isCatalogRecordValid = (record: CatalogTreeNode) => {
+  if (record['mc:footprint'] === undefined) {
+    return false;
+  }
+
+  return true;
+}
 
 const fetchAll3DRecordsParallel = async () => {
   const numberOfRecordsXml = get3DRecordsXML('hits', 0);
@@ -38,7 +48,7 @@ const fetchAll3DRecordsParallel = async () => {
   return allRecords;
 };
 
-const fetchExtractable = async () => {
+const fetchExtractables = async () => {
   let extract: ExtractableRecord[] = [];
   let startIndex = 1;
 
@@ -56,39 +66,54 @@ const fetchExtractable = async () => {
 };
 
 export const fetchCatalog = async (setLoading: loadingUpdater) => {
-  let records;
+  let catalogRecords = [];
   let extractables: ExtractableRecord[] = [];
+  let enriched: Record<string, unknown>[] = [];
+  let mismatchedExtractables: ExtractableRecord[] | null = null;
 
   try {
     setLoading(true);
-    records = await fetchAll3DRecordsParallel();
-    extractables = await fetchExtractable();
-  } catch (error) {
-    console.error('Failed to fetch catalog/extractable data:', error);
+    catalogRecords = await fetchAll3DRecordsParallel();
+    extractables = await fetchExtractables();
+    const res = enrichRecords(catalogRecords, extractables);
+    enriched = res.enrichedRecords;
+    mismatchedExtractables = res.mismatchedExtractables;
+  } catch (err) {
+    console.error(err);
   } finally {
-    const catalogRecords = Array.isArray(records) ? records : [];
-    const enriched = enrichRecords(catalogRecords, extractables);
     setLoading(false);
-    return {
-      data: createCatalogTree(enriched),
-      sumAll: catalogRecords.length,
-      sumExtractable: catalogRecords.length > 0 ? extractables.length : catalogRecords.length,
-      sumNotExtractable:
-        catalogRecords.length > 0
-          ? catalogRecords.length - extractables.length
-          : catalogRecords.length,
-    };
   }
+
+  const allRecordsLength = catalogRecords.length + (mismatchedExtractables?.length || 0);
+
+  return {
+    data: createCatalogTree(enriched),
+    sumAll: allRecordsLength,
+    sumExtractable: extractables.length,
+    sumNotExtractable:
+      catalogRecords.length > EMPTY
+        ? allRecordsLength - extractables.length
+        : EMPTY,
+    mismatchedExtractables
+  };
 };
 
 const enrichRecords = (
   records: Record<string, unknown>[],
   extractables: ExtractableRecord[]
-): Record<string, unknown>[] => {
-  const extractableById = new Map(extractables.map((e) => [e.recordName as string, e]));
-  return records.map((record) => {
+): {
+  enrichedRecords: Record<string, unknown>[];
+  mismatchedExtractables: ExtractableRecord[];
+} => {
+  const extractableById = new Map(extractables.map((e) => [e.recordName, e]));
+  const enrichedRecords = records.map((record) => {
     const id = record[IDENTIFIER_FIELD] as string;
     const matched = extractableById.get(id);
+
+    if (matched) {
+      extractableById.delete(id);
+    }
+
     return {
       ...record,
       isApproved: Boolean(matched),
@@ -96,4 +121,21 @@ const enrichRecords = (
       extractable: matched,
     };
   });
+
+  if (extractableById.size > EMPTY) {
+    extractableById.forEach((e) => {
+
+      enrichedRecords.push({
+        //@ts-ignore
+        [IDENTIFIER_FIELD]: e.recordName,
+        isApproved: true,
+        "mc:region": NOT_EXIST_TREE_NAME
+      });
+    });
+  }
+
+  return {
+    enrichedRecords,
+    mismatchedExtractables: Array.from(extractableById.values()),
+  };
 };
