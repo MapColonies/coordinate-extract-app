@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.2](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.1...v3.2.2) (2026-03-03)
+
+
+### Bug Fixes
+
+* autocomplete newpassord ([022d0cf](https://github.com/MapColonies/coordinate-extract-app/commit/022d0cf68775219d847b262be8873ad54f442553))
+* autocomplete newpassword ([3df003c](https://github.com/MapColonies/coordinate-extract-app/commit/3df003c628f6271e67ad679edd5b2a8365d70d41))
+
 ## [3.2.1](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.0...v3.2.1) (2026-03-02)
 
 
