@@ -95,7 +95,7 @@ const Login: React.FC = () => {
             }
           }}
           value={userPassword}
-          autoComplete="off"
+          autoComplete="new-password"
         />
         <Button
           raised
