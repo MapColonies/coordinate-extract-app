@@ -1,20 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Geometry } from 'geojson';
 import { Box, Cesium3DTileset, CesiumMap, CesiumSceneMode } from '@map-colonies/react-components';
 import { Curtain } from '../../../common/Curtain/curtain';
-import { fetchCatalog } from '../../../common/services/CatalogService';
+import { fetchCatalog, isCatalogRecordValid } from '../../../common/services/CatalogService';
 import { CesiumPOI } from '../../../common/CesiumPOI/CesiumPOI';
 import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
+import { getSnackbarErrorMessage } from '../../../utils/snackbarError';
 import appConfig from '../../../utils/Config';
 import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
+import { SnackbarManager } from '../../common/Snackbar/SnackbarManager';
 import { CatalogTreeNode, IDENTIFIER_FIELD, WizardSelectionProps } from '../Wizard.types';
 import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
 
 import './ModelSelection.css';
 
 export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
+  const intl = useIntl();
   const [isLoading, setIsLoading] = useState(false);
   const [finishedFlying, setFinishedFlying] = useState(false);
 
@@ -55,6 +58,15 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
         extractable: treeData.sumExtractable,
         notExtractable: treeData.sumNotExtractable,
       });
+
+      if (treeData.mismatchedExtractables) {
+        const joinedNames = treeData.mismatchedExtractables.map((r) => r.recordName).join(', ');
+        const errorText = intl.formatMessage(
+          { id: 'err.code.extractables.not-found-in-catalog' },
+          { value: joinedNames }
+        );
+        SnackbarManager.notify(getSnackbarErrorMessage(errorText, false, 'buttonDisabled', false));
+      }
     })();
   }, []);
 
@@ -108,7 +120,13 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
               <CatalogTree
                 treeData={props.catalogTreeData}
                 setTreeData={props.setCatalogTreeData}
-                setSelectedNode={props.setSelectedItem as (item?: CatalogTreeNode) => void}
+                setSelectedNode={(node) => {
+                  if (node && isCatalogRecordValid(node as CatalogTreeNode)) {
+                    props.setSelectedItem?.(node);
+                  } else {
+                    props.setSelectedItem?.(undefined);
+                  }
+                }}
                 selectedNode={props.selectedItem}
                 itemsSummary={props.itemsSummary}
                 setItemsSummary={props.setItemsSummary}
