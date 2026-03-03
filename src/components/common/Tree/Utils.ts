@@ -1,4 +1,4 @@
-import { CatalogTreeNode } from "../../Wizard/Wizard.types";
+import { CatalogTreeNode } from '../../Wizard/Wizard.types';
 
 const ERROR_COLOR = 'var(--mdc-theme-error)';
 

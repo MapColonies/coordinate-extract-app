@@ -60,8 +60,11 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
       });
 
       if (treeData.mismatchedExtractables) {
-        const joinedNames = treeData.mismatchedExtractables.map(r => r.recordName).join(", ");
-        const errorText = intl.formatMessage({ id: 'err.code.extractables.not-found-in-catalog' }, { value: joinedNames })
+        const joinedNames = treeData.mismatchedExtractables.map((r) => r.recordName).join(', ');
+        const errorText = intl.formatMessage(
+          { id: 'err.code.extractables.not-found-in-catalog' },
+          { value: joinedNames }
+        );
         SnackbarManager.notify(getSnackbarErrorMessage(errorText, false, 'buttonDisabled', false));
       }
     })();

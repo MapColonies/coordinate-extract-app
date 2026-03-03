@@ -15,9 +15,9 @@ export const LayerImageIconRenderer: React.FC<ILayerImageIconRendererParams> = (
     <Box id="LayerImageIconRenderer">
       <IconButton
         className={
-          props.data.isShown ?
-            'icon mc-icon-Show' :
-            `icon mc-icon-Hide ${!isCatalogRecordValid(props.data) && 'iconNotAllowed'}`
+          props.data.isShown
+            ? 'icon mc-icon-Show'
+            : `icon mc-icon-Hide ${!isCatalogRecordValid(props.data) && 'iconNotAllowed'}`
         }
         label="LAYER IMAGE SHOWN ICON"
         onClick={(evt): void => {

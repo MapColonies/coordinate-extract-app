@@ -114,23 +114,27 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
               handleRowClick(e, rowInfo, !rowInfo.node.isSelected);
             },
             className: isSelected ? 'selected-row' : '',
-            style: rowInfo.node.isGroup ? (() => {
-              const children = rowInfo?.node.children as CatalogTreeNode[];
-              const boldStyle = children?.some((child) => child.isSelected || child.isShown)
-                ? { fontWeight: '600' }
-                : {};
+            style: rowInfo.node.isGroup
+              ? (() => {
+                  const children = rowInfo?.node.children as CatalogTreeNode[];
+                  const boldStyle = children?.some((child) => child.isSelected || child.isShown)
+                    ? { fontWeight: '600' }
+                    : {};
 
-              const childWithColor = children?.find((child) => {
-                const style = getNodeTextStyle(child, 'color');
-                return style?.color !== undefined;
-              });
-              const colorStyle = childWithColor ? { color: getNodeTextStyle(childWithColor, 'color')?.color } : {};
+                  const childWithColor = children?.find((child) => {
+                    const style = getNodeTextStyle(child, 'color');
+                    return style?.color !== undefined;
+                  });
+                  const colorStyle = childWithColor
+                    ? { color: getNodeTextStyle(childWithColor, 'color')?.color }
+                    : {};
 
-              return {
-                ...boldStyle,
-                ...colorStyle,
-              };
-            })() : getNodeTextStyle(rowInfo.node, 'color'),
+                  return {
+                    ...boldStyle,
+                    ...colorStyle,
+                  };
+                })()
+              : getNodeTextStyle(rowInfo.node, 'color'),
             icons: node.isGroup
               ? []
               : [

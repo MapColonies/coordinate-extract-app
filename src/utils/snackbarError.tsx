@@ -1,7 +1,12 @@
 import { FormattedMessage } from 'react-intl';
 import { ExclamationSVGIcon } from '../common/icons/ExclamationSVGIcon';
 
-export const getSnackbarErrorMessage = (body: string, isTranslate: boolean, className?: string, dismissesOnAction = true) => {
+export const getSnackbarErrorMessage = (
+  body: string,
+  isTranslate: boolean,
+  className?: string,
+  dismissesOnAction = true
+) => {
   return {
     title: (
       <b>

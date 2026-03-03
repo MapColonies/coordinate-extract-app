@@ -13,7 +13,7 @@ import { ExtractableRecord, ExtractableResponse } from './ExtractableService';
 const PAGE_SIZE = appConfig.numberOfRecordsPerPage;
 const EXTRACTABLES_PAGE_SIZE = appConfig.numberOfExtractablesPerPage;
 const EMPTY = 0;
-const NOT_EXIST_TREE_NAME = '!!NOT_EXIST!!'
+const NOT_EXIST_TREE_NAME = '!!NOT_EXIST!!';
 
 export const isCatalogRecordValid = (record: CatalogTreeNode) => {
   if (record['mc:footprint'] === undefined) {
@@ -21,7 +21,7 @@ export const isCatalogRecordValid = (record: CatalogTreeNode) => {
   }
 
   return true;
-}
+};
 
 const fetchAll3DRecordsInParallel = async () => {
   const numberOfRecordsXml = get3DRecordsXML('hits', 0);
@@ -91,10 +91,8 @@ export const fetchCatalog = async (setLoading: loadingUpdater) => {
     sumAll: allRecordsLength,
     sumExtractable: extractables.length,
     sumNotExtractable:
-      catalogRecords.length > EMPTY
-        ? allRecordsLength - extractables.length
-        : EMPTY,
-    mismatchedExtractables
+      catalogRecords.length > EMPTY ? allRecordsLength - extractables.length : EMPTY,
+    mismatchedExtractables,
   };
 };
 
@@ -124,12 +122,11 @@ const enrichRecords = (
 
   if (extractableById.size > EMPTY) {
     extractableById.forEach((e) => {
-
       enrichedRecords.push({
         //@ts-ignore
         [IDENTIFIER_FIELD]: e.recordName,
         isApproved: true,
-        "mc:region": NOT_EXIST_TREE_NAME
+        'mc:region': NOT_EXIST_TREE_NAME,
       });
     });
   }
