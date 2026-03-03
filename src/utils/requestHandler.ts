@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+import { get } from 'lodash';
 import { SnackbarManager } from '../components/common/Snackbar/SnackbarManager';
 import appConfig from './Config';
 import { getSnackbarErrorMessage } from './snackbarError';
-import { get } from 'lodash';
 
 interface IResource {
   url: string;
@@ -100,10 +100,10 @@ export const execute = async (
     if (submitErrorToSnackbarQueue) {
       const respData = get(error, 'response.data');
       let errText = (error as any).message;
-      if (respData) {
+      if (respData?.code) {
         errText = `err.code.${respData.code}`;
       }
-      SnackbarManager.notify(getSnackbarErrorMessage(errText, respData ? true : false));
+      SnackbarManager.notify(getSnackbarErrorMessage(errText, respData?.code ? true : false));
     }
     throw error;
   }
