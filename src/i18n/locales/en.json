@@ -5,6 +5,8 @@
   "err.code.INVALID_RECORD_NAME": "Model not found",
   "err.code.INVALID_RECORD_NAME_ANOTHER_SITE": "Model not found in all sites",
 
+  "err.code.not-found-in-catalog": "Approved extractable model(s) not found in catalog: {value}",
+
   "auth.login.btn": "Login",
   "auth.logout.btn": "Logout",
   "auth.fields.username.label": "Username",

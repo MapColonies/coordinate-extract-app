@@ -2,15 +2,16 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Geometry } from 'geojson';
 import { Box, Cesium3DTileset, CesiumMap, CesiumSceneMode } from '@map-colonies/react-components';
-import { Curtain } from '../../../common/Curtain/curtain';
-import { fetchCatalog, isCatalogRecordValid } from '../../../common/services/CatalogService';
 import { CesiumPOI } from '../../../common/CesiumPOI/CesiumPOI';
+import { Curtain } from '../../../common/Curtain/curtain';
+import { fetchCatalog } from '../../../common/services/CatalogService';
 import { getTokenResource } from '../../../utils/Cesium/CesiumResource';
-import { getSnackbarErrorMessage } from '../../../utils/snackbarError';
 import appConfig from '../../../utils/Config';
+import { getSnackbarErrorMessage } from '../../../utils/snackbarError';
+import { isCatalogRecordValid } from '../../../utils/tree';
+import { SnackbarManager } from '../../common/Snackbar/SnackbarManager';
 import { Terrain } from '../../common/Terrain/Terrain';
 import { CatalogTree } from '../../common/Tree/CatalogTree/CatalogTree';
-import { SnackbarManager } from '../../common/Snackbar/SnackbarManager';
 import { CatalogTreeNode, IDENTIFIER_FIELD, WizardSelectionProps } from '../Wizard.types';
 import { CesiumGeojsonFootprint } from './CesiumGeojsonFootprint';
 
@@ -60,10 +61,12 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
       });
 
       if (treeData.mismatchedExtractables) {
-        const joinedNames = treeData.mismatchedExtractables.map((r) => r.recordName).join(', ');
+        const namesList = treeData.mismatchedExtractables
+          .map((extractable) => extractable.recordName)
+          .join(', ');
         const errorText = intl.formatMessage(
-          { id: 'err.code.extractables.not-found-in-catalog' },
-          { value: joinedNames }
+          { id: 'err.code.not-found-in-catalog' },
+          { value: namesList }
         );
         SnackbarManager.notify(getSnackbarErrorMessage(errorText, false, 'buttonDisabled', false));
       }
@@ -150,7 +153,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
                   id={props.selectedItem[IDENTIFIER_FIELD] as string}
                   clampToGround={true}
                   data={selectedItemFootprint}
-                  setIsInProgress={(val) => {
+                  setIsInProgress={(val: boolean) => {
                     setFinishedFlying(!val);
                     setIsLoading(val);
                   }}
