@@ -3,5 +3,5 @@
 }
 
 #LayerImageIconRenderer .iconNotAllowed {
-  color: var(--mdc-theme-gc-error-high) !important;
+  color: var(--mdc-theme-gc-error);
 }

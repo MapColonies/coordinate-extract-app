@@ -7,11 +7,11 @@ import { ApprovedSVGIcon } from '../../../../common/icons/ApprovedSVGIcon';
 import { NotApprovedSVGIcon } from '../../../../common/icons/NotApprovedSVGIcon';
 import { useDebounce } from '../../../../hooks/useDebounce';
 import { useI18n } from '../../../../i18n/I18nProvider';
+import { getNodeTextStyle, isCatalogRecordValid } from '../../../../utils/tree';
 import { CatalogTreeNode, IDENTIFIER_FIELD, MAIN_FIELD } from '../../../Wizard/Wizard.types';
 import { LayerImageIconRenderer } from '../../LayerImageIconRenderer/LayerImageIconRenderer';
 import CatalogTheme from '../renderers/index';
 import { FilterOpt, ISummary, useTreeCatalogData } from '../hooks/treeCatalogData.hook';
-import { getNodeTextStyle } from '../Utils';
 
 import './CatalogTree.css';
 
@@ -117,7 +117,9 @@ export const CatalogTree: React.FC<Omit<CatalogTreeProps, 'onChange'>> = (props)
             style: rowInfo.node.isGroup
               ? (() => {
                   const children = rowInfo?.node.children as CatalogTreeNode[];
-                  const boldStyle = children?.some((child) => child.isSelected || child.isShown)
+                  const boldStyle = children?.some(
+                    (child) => (child.isSelected || child.isShown) && isCatalogRecordValid(child)
+                  )
                     ? { fontWeight: '600' }
                     : {};
 

@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.2.5](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.4...v3.2.5) (2026-03-04)
+
+
+### Bug Fixes
+
+* integration ([c1b5393](https://github.com/MapColonies/coordinate-extract-app/commit/c1b53933aab6fa183ba7e4decb55c8ab08e0f6e3))
+* integration ([828023a](https://github.com/MapColonies/coordinate-extract-app/commit/828023a87bdccc8f1ff40335c46d24d95493cfa0))
+
+## [3.2.4](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.3...v3.2.4) (2026-03-04)
+
+
+### Bug Fixes
+
+* bold ([262e868](https://github.com/MapColonies/coordinate-extract-app/commit/262e868eab2937b32b06e69559afed06c808d221))
+* bold ([a36ce7d](https://github.com/MapColonies/coordinate-extract-app/commit/a36ce7dfdece2d8ace824b0cb875713858be8672))
+
 ## [3.2.3](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.2...v3.2.3) (2026-03-03)
 
 

@@ -1,5 +1,5 @@
 import { createCatalogTree } from '../../components/common/Tree/TreeGroup';
-import { CatalogTreeNode, IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
+import { IDENTIFIER_FIELD } from '../../components/Wizard/Wizard.types';
 import appConfig from '../../utils/Config';
 import {
   get3DRecordsXML,
@@ -15,43 +15,28 @@ const EXTRACTABLES_PAGE_SIZE = appConfig.numberOfExtractablesPerPage;
 const EMPTY = 0;
 const NOT_EXIST_TREE_NAME = '!!NOT_EXIST!!';
 
-export const isCatalogRecordValid = (record: CatalogTreeNode) => {
-  if (record['mc:footprint'] === undefined) {
-    return false;
-  }
-
-  return true;
-};
-
 const fetchAll3DRecordsInParallel = async () => {
   const numberOfRecordsXml = get3DRecordsXML('hits', 0);
-
   const resNumberOfRecords = await execute(`${appConfig.csw3dUrl}`, 'POST', {
     data: numberOfRecordsXml,
   });
-
   const numberOfRecords = getNumberOfMatchedRecords(resNumberOfRecords as string);
   const numberOfPages = Math.ceil(numberOfRecords / PAGE_SIZE);
-
   const promises = Array.from({ length: numberOfPages }, (_, i) => {
     const startPosition = i * PAGE_SIZE + 1;
-    const xml = get3DRecordsXML('results', PAGE_SIZE, startPosition);
-    return execute(appConfig.csw3dUrl, 'POST', { data: xml });
+    const pageXml = get3DRecordsXML('results', PAGE_SIZE, startPosition);
+    return execute(appConfig.csw3dUrl, 'POST', { data: pageXml });
   });
-
   const responses = await Promise.all(promises);
-
   const allRecords = responses.flatMap(
     (res) => parse3DQueryResults(res as string) as Record<string, unknown>[]
   );
-
   return allRecords;
 };
 
 const fetchExtractables = async () => {
   let extractables: ExtractableRecord[] = [];
   let startIndex = 1;
-
   while (startIndex > 0) {
     const extractableResponse: ExtractableResponse = (await execute(
       `${appConfig.extractableManagerUrl}/records?startPosition=${startIndex}&maxRecords=${EXTRACTABLES_PAGE_SIZE}`,
@@ -73,13 +58,15 @@ export const fetchCatalog = async (setLoading: loadingUpdater) => {
 
   try {
     setLoading(true);
-    [catalogRecords, extractables] = await Promise.all([fetchAll3DRecordsInParallel(), fetchExtractables()]);
-
+    [catalogRecords, extractables] = await Promise.all([
+      fetchAll3DRecordsInParallel(),
+      fetchExtractables(),
+    ]);
     const res = enrichRecords(catalogRecords, extractables);
     enriched = res.enrichedRecords;
     mismatchedExtractables = res.mismatchedExtractables;
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
   } finally {
     setLoading(false);
   }
@@ -103,15 +90,15 @@ const enrichRecords = (
   enrichedRecords: Record<string, unknown>[];
   mismatchedExtractables: ExtractableRecord[];
 } => {
-  const extractableById = new Map(extractables.map((e) => [e.recordName, e]));
+  const extractableById = new Map(
+    extractables.map((extractable) => [extractable.recordName, extractable])
+  );
   const enrichedRecords = records.map((record) => {
     const id = record[IDENTIFIER_FIELD] as string;
     const matched = extractableById.get(id);
-
     if (matched) {
       extractableById.delete(id);
     }
-
     return {
       ...record,
       isApproved: Boolean(matched),
@@ -119,18 +106,16 @@ const enrichRecords = (
       extractable: matched,
     };
   });
-
   if (extractableById.size > EMPTY) {
-    extractableById.forEach((e) => {
+    extractableById.forEach((extractable) => {
       enrichedRecords.push({
         //@ts-ignore
-        [IDENTIFIER_FIELD]: e.recordName,
+        [IDENTIFIER_FIELD]: extractable.recordName,
         isApproved: true,
         'mc:region': NOT_EXIST_TREE_NAME,
       });
     });
   }
-
   return {
     enrichedRecords,
     mismatchedExtractables: Array.from(extractableById.values()),
