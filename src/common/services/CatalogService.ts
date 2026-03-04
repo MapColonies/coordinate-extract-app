@@ -66,15 +66,15 @@ const fetchExtractables = async () => {
 };
 
 export const fetchCatalog = async (setLoading: loadingUpdater) => {
-  let catalogRecords = [];
+  let catalogRecords: Record<string, unknown>[] = [];
   let extractables: ExtractableRecord[] = [];
   let enriched: Record<string, unknown>[] = [];
   let mismatchedExtractables: ExtractableRecord[] | null = null;
 
   try {
     setLoading(true);
-    catalogRecords = await fetchAll3DRecordsInParallel();
-    extractables = await fetchExtractables();
+    [catalogRecords, extractables] = await Promise.all([fetchAll3DRecordsInParallel(), fetchExtractables()]);
+
     const res = enrichRecords(catalogRecords, extractables);
     enriched = res.enrichedRecords;
     mismatchedExtractables = res.mismatchedExtractables;
