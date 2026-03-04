@@ -60,7 +60,7 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
         notExtractable: treeData.sumNotExtractable,
       });
 
-      if (treeData.mismatchedExtractables) {
+      if (treeData.mismatchedExtractables && treeData.mismatchedExtractables.length > 0) {
         const namesList = treeData.mismatchedExtractables
           .map((extractable) => extractable.recordName)
           .join(', ');
