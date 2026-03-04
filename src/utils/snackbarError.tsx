@@ -1,7 +1,12 @@
 import { FormattedMessage } from 'react-intl';
 import { ExclamationSVGIcon } from '../common/icons/ExclamationSVGIcon';
 
-export const getSnackbarErrorMessage = (body: string, isTranslate: boolean) => {
+export const getSnackbarErrorMessage = (
+  body: string,
+  isTranslate: boolean,
+  className?: string,
+  dismissesOnAction = true
+) => {
   return {
     title: (
       <b>
@@ -9,10 +14,11 @@ export const getSnackbarErrorMessage = (body: string, isTranslate: boolean) => {
       </b>
     ),
     body: !isTranslate ? body : <FormattedMessage id={body} />,
-    dismissesOnAction: true,
+    dismissesOnAction,
     icon: <ExclamationSVGIcon color="var(--mdc-theme-gc-error)" />,
     leading: false,
     timeout: -1,
+    className,
     actions: [
       {
         title: 'סגור',

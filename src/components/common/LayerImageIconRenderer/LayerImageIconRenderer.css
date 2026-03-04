@@ -1,3 +1,7 @@
 #LayerImageIconRenderer .icon {
   font-size: x-large;
 }
+
+#LayerImageIconRenderer .iconNotAllowed {
+  color: var(--mdc-theme-gc-error-high) !important;
+}
