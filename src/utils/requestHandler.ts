@@ -14,19 +14,11 @@ interface IResource {
 }
 
 //Axios Instance (Global)
-const api = axios.create({
+const axiosInstance = axios.create({
   timeout: 30000,
   maxBodyLength: Infinity,
   maxContentLength: Infinity,
 });
-
-//response interceptor for centralized logging
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    return Promise.reject(error);
-  }
-);
 
 const isHeader = (injectionType: string): boolean => {
   return injectionType.toLowerCase() === 'header';
@@ -51,32 +43,19 @@ export const requestHandler = async (
   method: string,
   params: AxiosRequestConfig
 ): Promise<AxiosResponse> => {
-  const controller = new AbortController();
-
-  const timeoutId = setTimeout(() => {
-    controller.abort();
-  }, 30000);
-
   const requestConfig: AxiosRequestConfig = {
     url,
     method: method as Method,
     ...params,
-    //@ts-ignore
-    signal: controller.signal,
-    headers: {
-      ...(params.headers ?? {}),
-    },
   };
 
-  try {
-    const response = await api.request(requestConfig);
-    return response;
-  } catch (error) {
-    //TODO: Create custom ERROR object
-    throw error;
-  } finally {
-    clearTimeout(timeoutId);
-  }
+  return axiosInstance
+    .request(requestConfig)
+    .then((res) => res)
+    .catch((error) => {
+      //TODO: Create custom ERROR object
+      throw error;
+    });
 };
 
 export const requestHandlerWithToken = async (
