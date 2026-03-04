@@ -4,7 +4,6 @@ import appConfig from './Config';
 const extractSearchResults = (xml: string) => {
   const parser = new XMLParser({ ignoreAttributes: false });
   const parsed = parser.parse(xml);
-
   return parsed?.['csw:GetRecordsResponse']?.['csw:SearchResults'];
 };
 

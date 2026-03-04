@@ -39,7 +39,7 @@ body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left 
 }
 
 .wizardWrapper .buttonDisabled button {
-  opacity: 0.5;
+  color: var(--mdc-theme-text-primary-on-light) !important;
 }
 
 .wizardWrapper .buttonDisabled button.mdc-button {

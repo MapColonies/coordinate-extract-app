@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@map-colonies/react-components';
 import { IconButton } from '@map-colonies/react-core';
-import { isCatalogRecordValid } from '../../../common/services/CatalogService';
+import { isCatalogRecordValid } from '../../../utils/tree';
 
 import './LayerImageIconRenderer.css';
 
@@ -20,7 +20,7 @@ export const LayerImageIconRenderer: React.FC<ILayerImageIconRendererParams> = (
             : `icon mc-icon-Hide ${!isCatalogRecordValid(props.data) && 'iconNotAllowed'}`
         }
         label="LAYER IMAGE SHOWN ICON"
-        onClick={(evt): void => {
+        onClick={(evt: React.MouseEvent<HTMLButtonElement>): void => {
           if (isCatalogRecordValid(props.data)) {
             evt.stopPropagation();
             props.onClick(evt as unknown as MouseEvent, !props.data.isShown);

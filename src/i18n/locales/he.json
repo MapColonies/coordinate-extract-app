@@ -5,7 +5,7 @@
   "err.code.INVALID_RECORD_NAME": "מודל לא קיים",
   "err.code.INVALID_RECORD_NAME_ANOTHER_SITE": "מודל לא קיים בכל האתרים",
 
-  "err.code.extractables.not-found-in-catalog": "שכבה/ות מאושרת/ות לחילוץ לא נמצאה/ו בקטלוג: {value}",
+  "err.code.not-found-in-catalog": "מודל/ים מאושר/ים לחילוץ לא נמצא/ו בקטלוג: {value}",
 
   "auth.login.btn": "התחבר",
   "auth.logout.btn": "התנתק",

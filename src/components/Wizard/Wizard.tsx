@@ -54,7 +54,7 @@ export const Wizard: React.FC = () => {
         ref={wizardRef}
         stepSize="xs"
         color="var(--mdc-theme-primary)"
-        backButtonTemplate={(handlePrevious) => (
+        backButtonTemplate={(handlePrevious: () => void) => (
           <Button
             raised
             onClick={handlePrevious}
@@ -63,7 +63,7 @@ export const Wizard: React.FC = () => {
             {intl.formatMessage({ id: 'button.back' })}
           </Button>
         )}
-        nextButtonTemplate={(handleNext) => (
+        nextButtonTemplate={(handleNext: () => void) => (
           <Button
             raised
             disabled={disabled}
@@ -73,7 +73,7 @@ export const Wizard: React.FC = () => {
             {intl.formatMessage({ id: 'button.next' })}
           </Button>
         )}
-        finishButtonTemplate={(handleComplete) => (
+        finishButtonTemplate={(handleComplete: () => void) => (
           <Button
             raised
             disabled={disabled}
@@ -105,7 +105,7 @@ export const Wizard: React.FC = () => {
         >
           <Step selectedItem={selectedItem} title="panel.history.title">
             <MetadataHistory
-              setIsNextBtnDisabled={(val) => {
+              setIsNextBtnDisabled={(val: boolean) => {
                 setDisabled(val);
               }}
               selectedItem={selectedItem}
