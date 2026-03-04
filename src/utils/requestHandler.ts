@@ -9,6 +9,13 @@ interface IResource {
   injectToken: boolean;
 }
 
+//Axios Instance (Global)
+const axiosInstance = axios.create({
+  timeout: 30000,
+  maxBodyLength: Infinity,
+  maxContentLength: Infinity,
+});
+
 const isHeader = (injectionType: string): boolean => {
   return injectionType.toLowerCase() === 'header';
 };
@@ -35,17 +42,10 @@ export const requestHandler = async (
   const requestConfig: AxiosRequestConfig = {
     url,
     method: method as Method,
-    maxBodyLength: Infinity,
-    maxContentLength: Infinity,
     ...params,
-    headers: {
-      ...{
-        ...(params.headers ?? {}),
-      },
-    } as Record<string, unknown>,
   };
 
-  return axios
+  return axiosInstance
     .request(requestConfig)
     .then((res) => res)
     .catch((error) => {
