@@ -1,8 +1,4 @@
-import axios, {
-  AxiosRequestConfig,
-  AxiosResponse,
-  Method,
-} from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 import { get } from 'lodash';
 import { SnackbarManager } from '../components/common/Snackbar/SnackbarManager';
 import appConfig from './Config';
