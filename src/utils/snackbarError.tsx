@@ -17,7 +17,7 @@ export const getSnackbarErrorMessage = (
     dismissesOnAction,
     icon: <ExclamationSVGIcon color="var(--mdc-theme-gc-error)" />,
     leading: false,
-    timeout: -1,
+    timeout: 20000,
     className,
     actions: [
       {

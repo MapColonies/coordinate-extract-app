@@ -103,6 +103,7 @@ export const execute = async (
       if (respData?.code) {
         errText = `err.code.${respData.code}`;
       }
+      SnackbarManager.clearAll();
       SnackbarManager.notify(getSnackbarErrorMessage(errText, respData?.code ? true : false));
     }
     throw error;

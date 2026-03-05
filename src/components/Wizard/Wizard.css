@@ -38,7 +38,7 @@ body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left 
   padding: 10px 20px;
 }
 
-.wizardWrapper .buttonDisabled button {
+/* .wizardWrapper .buttonDisabled button {
   color: var(--mdc-theme-text-primary-on-light) !important;
 }
 
@@ -60,4 +60,4 @@ body[dir='rtl'] .wizardWrapper .wizard-card-footer.clearfix .wizard-footer-left 
 
 .wizardWrapper .buttonDisabled button.mdc-button:hover .mdc-button__ripple::before {
   opacity: 0;
-}
+} */
