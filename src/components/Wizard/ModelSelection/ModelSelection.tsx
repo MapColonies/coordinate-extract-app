@@ -68,7 +68,8 @@ export const ModelSelection: React.FC<WizardSelectionProps> = (props) => {
           { id: 'err.code.not-found-in-catalog' },
           { value: namesList }
         );
-        SnackbarManager.notify(getSnackbarErrorMessage(errorText, false, 'buttonDisabled', false));
+        SnackbarManager.clearAll();
+        SnackbarManager.notify(getSnackbarErrorMessage(errorText, false, '', true));
       }
     })();
   }, []);
