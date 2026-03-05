@@ -39,6 +39,7 @@ export const Wizard: React.FC = () => {
       setDisabled(true);
       setShouldSubmit(false);
       setIsCompleted(false);
+      SnackbarManager.clearAll();
       wizardRef.current?.goToTab(0);
     }
   }, [isCompleted]);
