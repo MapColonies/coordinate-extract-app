@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.6](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.5...v3.2.6) (2026-03-05)
+
+
+### Bug Fixes
+
+* snackbar error one at time ([bacd844](https://github.com/MapColonies/coordinate-extract-app/commit/bacd844f3e20a83ec2323f7f87b50e52f1b75951))
+* snackbar error one at time ([bee9933](https://github.com/MapColonies/coordinate-extract-app/commit/bee9933c23fc2a0e907abc90a3d5a5b78d117434))
+* when going to first tab clear snacks ([4ca6ade](https://github.com/MapColonies/coordinate-extract-app/commit/4ca6ade2469038819461eb8f7553d65820bfd2e3))
+
 ## [3.2.5](https://github.com/MapColonies/coordinate-extract-app/compare/v3.2.4...v3.2.5) (2026-03-04)
 
 
