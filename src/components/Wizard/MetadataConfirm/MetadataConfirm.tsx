@@ -137,7 +137,7 @@ export const MetadataConfirm: React.FC<WizardStepProps> = ({
               required
               className="textField"
               placeholder={intl.formatMessage({ id: 'form.password.placeholder' })}
-              autoComplete="off"
+              autoComplete="new-password"
             />
           </Box>
         </Box>
