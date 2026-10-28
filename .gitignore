@@ -46,6 +46,7 @@ public/fonts/*
 # Build artifacts
 build/
 coverage/
+*.tgz
 
 # OS files
 .DS_Store
